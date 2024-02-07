@@ -4,7 +4,6 @@ import "../css/Navbar.css";
 import logo from "../images/logo.png";
 import SearchBar from "./SearchBar";
 import { VscAccount } from "react-icons/vsc";
-import Button from "./Button";
 
 const Navbar = () => {
   return (
