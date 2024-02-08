@@ -27,16 +27,16 @@ const LoginPage = () => {
           <form>
             <h1>Create Account</h1>
             <div className="social-icons">
-              <a href="#" className="icon">
+              <a href="#!" className="icon">
                 <FontAwesomeIcon icon={faGooglePlusG} />
               </a>
-              <a href="#" className="icon">
+              <a href="#!" className="icon">
                 <FontAwesomeIcon icon={faFacebookF} />
               </a>
-              <a href="#" className="icon">
+              <a href="#!" className="icon">
                 <FontAwesomeIcon icon={faGithub} />
               </a>
-              <a href="#" className="icon">
+              <a href="#!" className="icon">
                 <FontAwesomeIcon icon={faLinkedinIn} />
               </a>
             </div>
