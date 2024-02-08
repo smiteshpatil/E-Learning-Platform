@@ -22,7 +22,7 @@ const LoginPage = () => {
 
   return (
     <div className="main">
-      <div className={`container ${isActive ? "active" : ""}`}>
+      <div className={`login-container ${isActive ? "active" : ""}`}>
         <div className="form-container sign-up">
           <form>
             <h1>Create Account</h1>
