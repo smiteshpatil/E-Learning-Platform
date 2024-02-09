@@ -4,9 +4,21 @@ import "../css/Navbar.css";
 import logo from "../images/logo.png";
 import SearchBar from "./SearchBar";
 import { VscAccount } from "react-icons/vsc";
+import { TbLogout2 } from "react-icons/tb";
+import { useAuth } from "../context/AuthContext";
+import { useNavigate } from "react-router-dom";
 
 const Navbar = () => {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const { isLoggedIn, setIsLoggedIn, setAuthUser } = useAuth();
+  const navigate = useNavigate();
+
+  //log out
+  const logOut = (e) => {
+    e.preventDefault();
+    setIsLoggedIn(false);
+    setAuthUser(null);
+    navigate("/");
+  };
 
   return (
     <nav className="topnav">
@@ -23,7 +35,7 @@ const Navbar = () => {
           <SearchBar />
         </li>
         {isLoggedIn ? (
-          <></>
+          <TbLogout2 size={40} onClick={logOut} className="logout" />
         ) : (
           <li className="right login-link">
             <NavLink to="/login">LogIn/Register</NavLink>
