@@ -27,7 +27,7 @@ const Navbar = () => {
           <NavLink to="/signup">Sign Up</NavLink>
         </li>
         <li className="right">
-          <NavLink to="/account">
+          <NavLink to="/profile">
             <VscAccount size={45} />
           </NavLink>
         </li>
