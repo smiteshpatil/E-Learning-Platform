@@ -1,7 +1,6 @@
 import React from "react";
-import { Row, Col, Image, Button } from "react-bootstrap";
-import { Route, Routes, NavLink } from "react-router-dom";
-
+import { Row, Col, Image } from "react-bootstrap";
+import { NavLink } from "react-router-dom";
 
 const ProfilePage = () => {
   return (
@@ -30,14 +29,14 @@ const ProfilePage = () => {
                 <NavLink to="/profile/security">Account Security</NavLink>
               </li>
               <li>
-              <NavLink to="/profile/closeAccount">Close Account</NavLink>
+                <NavLink to="/profile/closeAccount">Close Account</NavLink>
               </li>
             </ul>
           </div>
         </Col>
         {/* Right Partition */}
         <Col md={8}>
-          <div >
+          <div>
             <h2>Profile Content</h2>
             {/* Content for profile editing */}
           </div>
