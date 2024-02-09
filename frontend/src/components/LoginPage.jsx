@@ -1,14 +1,9 @@
 import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faGooglePlusG,
-  faFacebookF,
-  faGithub,
-  faLinkedinIn,
-} from "@fortawesome/free-brands-svg-icons";
-
+import { faGooglePlusG, faGithub } from "@fortawesome/free-brands-svg-icons";
 import "../css/LoginPage.css";
 
+// state for styling depending on the page
 const LoginPage = () => {
   const [isActive, setIsActive] = useState(false);
 
@@ -20,6 +15,15 @@ const LoginPage = () => {
     setIsActive(false);
   };
 
+  // Login using Github
+  const CILENT_ID = "67a8d9820b5c96e50203";
+
+  const loginWithGithub = () => {
+    window.location.assign(
+      "https://github.com/login/oauth/authorize?client_id=" + CILENT_ID
+    );
+  };
+
   return (
     <div className="main">
       <div className={`login-container ${isActive ? "active" : ""}`}>
@@ -27,17 +31,12 @@ const LoginPage = () => {
           <form>
             <h1>Create Account</h1>
             <div className="social-icons">
-              <a href="#!" className="icon">
+              <a onClick={{}} className="icon">
                 <FontAwesomeIcon icon={faGooglePlusG} />
               </a>
-              <a href="#!" className="icon">
-                <FontAwesomeIcon icon={faFacebookF} />
-              </a>
-              <a href="#!" className="icon">
+
+              <a onClick={loginWithGithub} className="icon">
                 <FontAwesomeIcon icon={faGithub} />
-              </a>
-              <a href="#!" className="icon">
-                <FontAwesomeIcon icon={faLinkedinIn} />
               </a>
             </div>
             <span>or use your email for registration</span>
@@ -54,14 +53,9 @@ const LoginPage = () => {
               <a href="#" className="icon">
                 <FontAwesomeIcon icon={faGooglePlusG} />
               </a>
-              <a href="#" className="icon">
-                <FontAwesomeIcon icon={faFacebookF} />
-              </a>
+
               <a href="#" className="icon">
                 <FontAwesomeIcon icon={faGithub} />
-              </a>
-              <a href="#" className="icon">
-                <FontAwesomeIcon icon={faLinkedinIn} />
               </a>
             </div>
             <span>or use your email password</span>
@@ -75,16 +69,14 @@ const LoginPage = () => {
           <div className="toggle">
             <div className="toggle-panel toggle-left">
               <h1>Welcome Back!</h1>
-              <p>Enter your personal details to use all site features</p>
+              <p>Enter your details to login </p>
               <button className="hidden" onClick={handleLoginClick}>
                 Sign In
               </button>
             </div>
             <div className="toggle-panel toggle-right">
               <h1>Hello, Friend!</h1>
-              <p>
-                Register with your personal details to use all site features
-              </p>
+              <p>Register with your personal details and start your journey.</p>
               <button className="hidden" onClick={handleRegisterClick}>
                 Sign Up
               </button>

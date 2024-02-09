@@ -31,16 +31,20 @@
   margin-left: 10px;
 }
 
+.login-link {
+  border: 2px solid white;
+}
+
 .topnav a {
   display: block;
   color: white;
   text-align: center;
-  padding: 14px 16px;
+  padding: 12px 14px;
   text-decoration: none;
 }
 
 .topnav a:hover {
-  background-color: #ddd;
+  background-color: white;
   color: black;
 }
 
