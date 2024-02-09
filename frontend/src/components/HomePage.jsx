@@ -8,7 +8,6 @@ const HomePage = () => {
     <div>
       <Carousel />
       <Main />
-      <Footer />
     </div>
   );
 };
