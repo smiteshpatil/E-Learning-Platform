@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
 import "../css/Navbar.css";
 import logo from "../images/logo.png";
@@ -6,6 +6,8 @@ import SearchBar from "./SearchBar";
 import { VscAccount } from "react-icons/vsc";
 
 const Navbar = () => {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
   return (
     <nav className="topnav">
       <ul>
@@ -20,15 +22,17 @@ const Navbar = () => {
         <li className="center">
           <SearchBar />
         </li>
-        <li className="right">
-          <NavLink to="/login">Log In</NavLink>
-        </li>
-        <li className="right">
-          <NavLink to="/signup">Sign Up</NavLink>
-        </li>
+        {isLoggedIn ? (
+          <></>
+        ) : (
+          <li className="right login-link">
+            <NavLink to="/login">LogIn/Register</NavLink>
+          </li>
+        )}
+
         <li className="right">
           <NavLink to="/profile">
-            <VscAccount size={45} />
+            <VscAccount size={40} />
           </NavLink>
         </li>
       </ul>
