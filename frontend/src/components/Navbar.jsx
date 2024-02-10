@@ -31,7 +31,7 @@ const Navbar = () => {
         )}
 
         <li className="right">
-          <NavLink to="/profile">
+          <NavLink to="/user/profile">
             <VscAccount size={40} />
           </NavLink>
         </li>
