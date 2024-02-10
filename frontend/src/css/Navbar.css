@@ -1,5 +1,4 @@
 .topnav {
-  /* background-color: #512da8; */
   background-color: #582bd3;
   overflow: hidden;
 }
@@ -33,6 +32,13 @@
 
 .login-link {
   border: 2px solid white;
+}
+
+.logout {
+  color: white;
+}
+.logout:hover {
+  cursor: pointer;
 }
 
 .topnav a {

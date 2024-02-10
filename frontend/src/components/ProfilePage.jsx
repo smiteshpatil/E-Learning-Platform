@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 // import React, { useState } from "react";
 // import { Col, Container, Image, Row } from "react-bootstrap";
 // import { NavLink } from "react-router-dom";
@@ -233,6 +234,11 @@
 import React from "react";
 import { Col, Container, Image, Row } from "react-bootstrap";
 import { NavLink, Outlet } from "react-router-dom";
+=======
+import React from "react";
+import { Row, Col, Image } from "react-bootstrap";
+import { NavLink } from "react-router-dom";
+>>>>>>> 8acdbdea91b9b2ee42256e155ba4ce47901cf40c
 
 const ProfilePage = () => {
   return (
@@ -288,6 +294,42 @@ const ProfilePage = () => {
           </Row>
         </Container>
       </div>
+<<<<<<< HEAD
+=======
+      <Row>
+        {/* Left Partition */}
+        <Col md={4}>
+          <div className="text-center mb-4">
+            <Image
+              src="https://via.placeholder.com/150"
+              roundedCircle
+              className="mb-2"
+            />
+            <h3>User Name</h3>
+          </div>
+          <div className="text-left mb-2">
+            <ul className="list-unstyled">
+              <li>
+                <NavLink to="/profile/photo">Profile Photo</NavLink>
+              </li>
+              <li>
+                <NavLink to="/profile/security">Account Security</NavLink>
+              </li>
+              <li>
+                <NavLink to="/profile/closeAccount">Close Account</NavLink>
+              </li>
+            </ul>
+          </div>
+        </Col>
+        {/* Right Partition */}
+        <Col md={8}>
+          <div>
+            <h2>Profile Content</h2>
+            {/* Content for profile editing */}
+          </div>
+        </Col>
+      </Row>
+>>>>>>> 8acdbdea91b9b2ee42256e155ba4ce47901cf40c
     </div>
   );
 };

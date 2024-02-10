@@ -2,44 +2,69 @@ import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faGooglePlusG, faGithub } from "@fortawesome/free-brands-svg-icons";
 import "../css/LoginPage.css";
+import { useEffect } from "react";
+import { useAuth } from "../context/AuthContext";
+import { jwtDecode } from "jwt-decode";
+import { useNavigate } from "react-router-dom";
+import { signIn, signUp } from "../api/userService";
 
-// state for styling depending on the page
 const LoginPage = () => {
+  // state for styling depending on the page
   const [isActive, setIsActive] = useState(false);
+  const navigate = useNavigate();
+  const { authUser, setAuthUser, isLoggedIn, setIsLoggedIn } = useAuth();
 
   const handleRegisterClick = () => {
     setIsActive(true);
   };
-
   const handleLoginClick = () => {
     setIsActive(false);
   };
 
-  // Login using Github
-  const CILENT_ID = "67a8d9820b5c96e50203";
-
-  const loginWithGithub = () => {
-    window.location.assign(
-      "https://github.com/login/oauth/authorize?client_id=" + CILENT_ID
-    );
+  const logIn = (currentUser) => {
+    setIsLoggedIn(true);
+    setAuthUser({
+      name: currentUser.name,
+      picture: currentUser.picture,
+      email: currentUser.email,
+    });
+    navigate("/");
   };
+
+  //login using google
+  function handleCallbackResponse(response) {
+    let userDetails = jwtDecode(response.credential);
+    userDetails.password = "abc123";
+    userDetails.role = "ROLE_INSTRUCTOR";
+    userDetails.gender = "male";
+    const token = userDetails.token;
+    console.log(userDetails);
+    signUp(userDetails, token);
+    logIn(userDetails);
+  }
+
+  useEffect(() => {
+    /*global google*/
+    google.accounts.id.initialize({
+      client_id:
+        "521201201906-m7n0pfhcsuo67gond8j5rlriimi88dj4.apps.googleusercontent.com",
+      callback: handleCallbackResponse,
+    });
+
+    google.accounts.id.renderButton(document.getElementById("signInBtn"), {
+      theme: "",
+      size: "large",
+    });
+    google.accounts.id.prompt();
+  }, []);
 
   return (
     <div className="main">
       <div className={`login-container ${isActive ? "active" : ""}`}>
         <div className="form-container sign-up">
           <form>
-            <h1>Create Account</h1>
-            <div className="social-icons">
-              <a onClick={{}} className="icon">
-                <FontAwesomeIcon icon={faGooglePlusG} />
-              </a>
-
-              <a onClick={loginWithGithub} className="icon">
-                <FontAwesomeIcon icon={faGithub} />
-              </a>
-            </div>
-            <span>or use your email for registration</span>
+            <h1>Create New Account</h1>
+            <span>Use your email for registration</span>
             <input type="text" placeholder="Name" />
             <input type="email" placeholder="Email" />
             <input type="password" placeholder="Password" />
@@ -50,12 +75,8 @@ const LoginPage = () => {
           <form>
             <h1>Sign In</h1>
             <div className="social-icons">
-              <a href="#" className="icon">
+              <a id="signInBtn" className="icon">
                 <FontAwesomeIcon icon={faGooglePlusG} />
-              </a>
-
-              <a href="#" className="icon">
-                <FontAwesomeIcon icon={faGithub} />
               </a>
             </div>
             <span>or use your email password</span>
