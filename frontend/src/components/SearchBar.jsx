@@ -26,7 +26,7 @@ const SearchBar = () => {
     top: "9%",
     left: "22.5%",
     width: "52%",
-    backgroundColor: "rgba(0, 0, 0, 0.5)",
+    backgroundColor: "rgba(0, 0, 0, 0.4)",
     zIndex: "9999",
     justifyContent: "center",
     alignItems: "center",
