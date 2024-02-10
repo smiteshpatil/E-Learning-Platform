@@ -10,12 +10,12 @@ import lombok.Setter;
 @Getter
 @Setter
 public class SignupRequest {
-//	@JsonProperty(access = Access.READ_ONLY)
-//	private Long id;
-	private String firstName;	
-	private String lastName;	
+	@JsonProperty(access = Access.READ_ONLY)
+	private Long id;
+	private String firstName;
+	private String lastName;
 	private String email;
-	private String password;	
+	private String password;
 	private String phoneNo;
 	private String gender;
 	private Role role;
