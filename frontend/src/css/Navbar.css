@@ -34,6 +34,10 @@
   border: 2px solid white;
 }
 
+.login-link:hover {
+  background-color: white;
+}
+
 .logout {
   color: white;
 }
@@ -50,7 +54,6 @@
 }
 
 .topnav a:hover {
-  background-color: white;
   color: black;
 }
 
