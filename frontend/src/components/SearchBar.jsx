@@ -24,7 +24,7 @@ const SearchBar = () => {
   const searchResultStyle = {
     position: "absolute",
     top: "9%",
-    left: "22.5%",
+    left: "18.4%",
     width: "52%",
     backgroundColor: "rgba(0, 0, 0, 0.4)",
     zIndex: "9999",
