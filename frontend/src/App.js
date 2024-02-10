@@ -7,6 +7,7 @@ import ProfilePhoto from "./components/ProfilePhoto";
 import ProfilePage from "./components/ProfilePage";
 import ProfileAccountSecurity from "./components/ProfileAccountSecurity";
 import ProfileCloseAccount from "./components/ProfileCloseAccount";
+import Course from "./components/pages/Course";
 import Footer from "./components/Footer";
 
 function App() {
@@ -26,6 +27,9 @@ function App() {
           path="/profile/closeAccount"
           element={<ProfileCloseAccount />}
         ></Route>
+        <Route path="/courses">
+          <Route path=":id" element={<Course />}></Route>
+        </Route>
       </Routes>
       <Footer />
     </div>

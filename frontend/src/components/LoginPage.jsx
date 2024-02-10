@@ -21,12 +21,12 @@ const LoginPage = () => {
     setIsActive(false);
   };
 
-  const logIn = () => {
+  const logIn = (currentUser) => {
     setIsLoggedIn(true);
     setAuthUser({
-      Name: "",
-      profileURL: "",
-      email: "",
+      name: currentUser.name,
+      picture: currentUser.picture,
+      email: currentUser.email,
     });
     navigate("/");
   };
@@ -34,9 +34,13 @@ const LoginPage = () => {
   //login using google
   function handleCallbackResponse(response) {
     let userDetails = jwtDecode(response.credential);
+    userDetails.password = "abc123";
+    userDetails.role = "ROLE_INSTRUCTOR";
+    userDetails.gender = "male";
+    const token = userDetails.token;
     console.log(userDetails);
-    // signIn(userDetails);
-    logIn();
+    signUp(userDetails, token);
+    logIn(userDetails);
   }
 
   useEffect(() => {

@@ -4,6 +4,7 @@ import ReactPaginate from "react-paginate";
 import "../css/Main.css";
 
 import thumbnail from "../images/card1.jpg";
+import { Link } from "react-router-dom";
 
 const Main = () => {
   const [trendingCourses, setTrendingCourses] = useState([]);
@@ -151,14 +152,13 @@ const Main = () => {
                       })}
                     </p>
                   </div>
-                  <a
-                    href={currentCourse.courseUrl}
-                    target="_blank"
+                  <Link
+                    to={`courses/${currentCourse.id}`}
                     rel="noopener noreferrer"
                     className="read-more"
                   >
                     View Course
-                  </a>
+                  </Link>
                 </div>
               </div>
             ))}
