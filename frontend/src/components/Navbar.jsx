@@ -3,15 +3,13 @@ import { NavLink } from "react-router-dom";
 import "../css/Navbar.css";
 import logo from "../images/logo.png";
 import SearchBar from "./SearchBar";
-
 import { TbLogout2 } from "react-icons/tb";
 import { useAuth } from "../context/AuthContext";
 import { useNavigate } from "react-router-dom";
 import ProfileIcon from "./ProfileIcon";
-import DropdownBtn from "./DropdownBtn";
 
 const Navbar = () => {
-  const { isLoggedIn, setIsLoggedIn, authUser, setAuthUser } = useAuth();
+  const { isLoggedIn, setIsLoggedIn, setAuthUser } = useAuth();
   const navigate = useNavigate();
 
   //log out
@@ -36,15 +34,14 @@ const Navbar = () => {
         {isLoggedIn ? (
           <TbLogout2 size={40} onClick={logOut} className="logout" />
         ) : (
-          // <li className="right login-link">
-          //   <NavLink to="/login">LogIn/Register</NavLink>
-          // </li>
-          <DropdownBtn />
+          <li className="right login-link">
+            <NavLink to="/login">LogIn/Register</NavLink>
+          </li>
         )}
 
         <li className="right">
-          <NavLink to="/profile">
-            <VscAccount size={40} />
+          <NavLink to="/user/profile">
+            <ProfileIcon />
           </NavLink>
         </li>
       </ul>
