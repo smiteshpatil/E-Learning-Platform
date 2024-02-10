@@ -44,7 +44,7 @@ const Navbar = () => {
 
         <li className="right">
           <NavLink to="/profile">
-            <ProfileIcon />
+            <VscAccount size={40} />
           </NavLink>
         </li>
       </ul>

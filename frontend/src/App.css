@@ -2,3 +2,33 @@
   margin: 0;
   padding: 0;
 }
+
+.border-container {
+  border: 2px solid black;
+  padding: 20px; /* Add padding to give space between border and content */
+  margin: 20px auto; /* Add margin to center the container */
+  max-width: 100%; /* Ensure container doesn't exceed screen width */
+  box-sizing: border-box; 
+  /* Include padding and border in element's total width and height */
+}
+
+.border-container {
+  border: 2px solid black;
+  padding: 10px; /* Add padding to give space between border and content */
+}
+
+.border-right {
+  border-right: 2px solid black; /* Add right border to left column */
+  padding: 10px;
+}
+
+.border-bottom {
+  border-bottom: 2px solid black; 
+  /* Add bottom border to upper right row */
+}
+
+.border-top {
+  /* border-top: 2px solid black;  */
+  /* Add top border to lower right row */
+  border-top: 2px;
+}
