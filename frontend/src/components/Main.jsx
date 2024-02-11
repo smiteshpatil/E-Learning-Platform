@@ -2,101 +2,12 @@ import React, { useState, useEffect } from "react";
 
 import ReactPaginate from "react-paginate";
 import "../css/Main.css";
-
-import thumbnail from "../images/card1.jpg";
 import { Link } from "react-router-dom";
-
+import { courses } from "../api/courseService";
 const Main = () => {
   const [trendingCourses, setTrendingCourses] = useState([]);
   const [currentCourse, setcurrentCourse] = useState(1);
   const [coursesPerPage] = useState(3);
-
-  //populated courses
-  const courses = [
-    {
-      id: 1,
-      thumbnail: thumbnail,
-      title: "Web Development",
-      description:
-        "Web development course by smitesh patil. Learn from the best of the bestLearn from the best of the best Learn from the best of the best Learn from the best of the best.",
-      author: {
-        profilePicture: {
-          url: thumbnail,
-        },
-      },
-      datePublished: "Mar 15, 2024",
-      courseUrl: "https://google.com",
-    },
-    {
-      id: 2,
-      thumbnail: thumbnail,
-      title: "JavaScript",
-      description:
-        "Javascript course by smitesh patil. Learn from the best of the best Learn from the best of the best Learn from the best of the best.",
-      author: {
-        profilePicture: {
-          url: thumbnail,
-        },
-      },
-      datePublished: "Mar 15, 2024",
-      courseUrl: "https://google.com",
-    },
-    {
-      id: 3,
-      thumbnail: thumbnail,
-      title: "jQuery",
-      description:
-        "jQuery course by smitesh patil. Learn from the best of the best Learn from the best of the best Learn from the best of the best.",
-      author: {
-        profilePicture: {
-          url: thumbnail,
-        },
-      },
-      datePublished: "Mar 15, 2024",
-      courseUrl: "https://google.com",
-    },
-    {
-      id: 4,
-      thumbnail: thumbnail,
-      title: "HTML5",
-      description:
-        "HTML5 course by smitesh patil. Learn from the best of the best Learn from the best of the best Learn from the best of the best.",
-      author: {
-        profilePicture: {
-          url: thumbnail,
-        },
-      },
-      datePublished: "Mar 15, 2024",
-      courseUrl: "https://google.com",
-    },
-    {
-      id: 5,
-      thumbnail: thumbnail,
-      title: "Bootstrap",
-      description:
-        "Bootstrap course by smitesh patil. Learn from the best of the best Learn from the best of the best Learn from the best of the best.",
-      author: {
-        profilePicture: {
-          url: thumbnail,
-        },
-      },
-      datePublished: "Mar 15, 2024",
-      courseUrl: "https://google.com",
-    },
-    {
-      id: 6,
-      thumbnail: thumbnail,
-      title: "React",
-      description: "React course by smitesh patil",
-      author: {
-        profilePicture: {
-          url: thumbnail,
-        },
-      },
-      datePublished: "Mar 15, 2024",
-      courseUrl: "https://google.com",
-    },
-  ];
 
   useEffect(() => {
     const fetchTrendingCourses = async () => {
