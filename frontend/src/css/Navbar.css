@@ -1,5 +1,5 @@
 .topnav {
-  background-color: #512da8;
+  background-color: #582bd3;
   overflow: hidden;
 }
 
@@ -30,16 +30,32 @@
   margin-left: 10px;
 }
 
+.login-link {
+  border-radius: 5px;
+  margin: 7px;
+  border: 2px solid white;
+}
+
+.login-link:hover {
+  background-color: white;
+}
+
+.logout {
+  color: white;
+}
+.logout:hover {
+  cursor: pointer;
+}
+
 .topnav a {
   display: block;
   color: white;
   text-align: center;
-  padding: 14px 16px;
+  padding: 12px 14px;
   text-decoration: none;
 }
 
 .topnav a:hover {
-  background-color: #ddd;
   color: black;
 }
 
@@ -57,18 +73,8 @@
   height: 50px;
   width: auto;
 }
-.logo:hover {
-  border-radius: 8px;
-  height: 60px;
-  width: auto;
-}
 
 @media screen and (max-width: 768px) {
-  .topnav ul {
-    flex-direction: column;
-    align-items: stretch;
-  }
-
   .topnav li {
     display: block;
     margin-bottom: 10px;

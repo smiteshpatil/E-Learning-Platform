@@ -3,9 +3,23 @@ import { NavLink } from "react-router-dom";
 import "../css/Navbar.css";
 import logo from "../images/logo.png";
 import SearchBar from "./SearchBar";
-import { VscAccount } from "react-icons/vsc";
+import { TbLogout2 } from "react-icons/tb";
+import { useAuth } from "../context/AuthContext";
+import { useNavigate } from "react-router-dom";
+import ProfileIcon from "./ProfileIcon";
 
 const Navbar = () => {
+  const { isLoggedIn, setIsLoggedIn, setAuthUser } = useAuth();
+  const navigate = useNavigate();
+
+  //log out
+  const logOut = (e) => {
+    e.preventDefault();
+    setIsLoggedIn(false);
+    setAuthUser(null);
+    navigate("/");
+  };
+
   return (
     <nav className="topnav">
       <ul>
@@ -14,22 +28,30 @@ const Navbar = () => {
             <img className="logo" src={logo} alt="Logo" />
           </NavLink>
         </li>
-        <li className="left">
-          <NavLink to="/">Categories</NavLink>
-        </li>
         <li className="center">
           <SearchBar />
         </li>
+
         <li className="right">
-          <NavLink to="/login">Log In</NavLink>
+          <NavLink to="/user/instructor">Instructor Panel</NavLink>
         </li>
+
+        {isLoggedIn ? (
+          <TbLogout2 size={35} onClick={logOut} className="logout" />
+        ) : (
+          <li className="right login-link">
+            <NavLink to="/login">LogIn/Register</NavLink>
+          </li>
+        )}
+
         <li className="right">
-          <NavLink to="/signup">Sign Up</NavLink>
-        </li>
-        <li className="right">
-          <NavLink to="/account">
-            <VscAccount size={45} />
-          </NavLink>
+          {isLoggedIn ? (
+            <NavLink to="/user/profile">
+              <ProfileIcon />
+            </NavLink>
+          ) : (
+            <></>
+          )}
         </li>
       </ul>
     </nav>
