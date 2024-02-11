@@ -123,16 +123,19 @@ const Main = () => {
         <h1>Trending Courses</h1>
       </div>
       {trendingCourses ? (
-        <div className="blog-content-section">
-          <div className="blog-container">
+        <div className="course-content-section">
+          <div className="course-container">
             {currentCourses.map((currentCourse) => (
-              <div className="blog-post" key={currentCourse.id}>
+              <div className="course-post" key={currentCourse.id}>
                 <img
                   className="cover-img"
                   src={currentCourse.thumbnail}
                   alt=""
                 />
-                <h2 className="title">{currentCourse.title}</h2>
+
+                <Link to={`courses/${currentCourse.id}`}>
+                  <h2 className="title">{currentCourse.title}</h2>
+                </Link>
 
                 <p className="description">{currentCourse.description}</p>
                 <div className="card-details">
