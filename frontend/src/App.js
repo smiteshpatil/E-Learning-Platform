@@ -11,24 +11,34 @@ import ProfileCloseAccount from "./components/ProfileCloseAccount";
 
 import UserProfile from "./components/UserProfile";
 import Course from "./components/pages/Course";
+import Dashboard from "./components/instructor/Dashboard";
 
 function App() {
   return (
     <div className="App">
       <Navbar></Navbar>
+
       <Routes>
+        {/* Home page route */}
         <Route path="/" element={<HomePage />}></Route>
+        {/* Loginpage route */}
         <Route path="/login" element={<LoginPage />}></Route>
 
+        {/* User Routes */}
         <Route path="/user" element={<ProfilePage />}>
           <Route path="photo" element={<ProfilePhoto />} />
           <Route path="security" element={<ProfileAccountSecurity />} />
           <Route path="closeAccount" element={<ProfileCloseAccount />} />
           <Route path="profile" element={<UserProfile />} />
         </Route>
+
+        {/* Courses */}
         <Route path="/courses">
           <Route path=":id" element={<Course />}></Route>
         </Route>
+
+        {/* Instructor */}
+        <Route path="/user/instructor" element={<Dashboard />}></Route>
       </Routes>
       <Footer />
     </div>
