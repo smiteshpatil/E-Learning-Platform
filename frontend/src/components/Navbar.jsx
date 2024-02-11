@@ -4,6 +4,7 @@ import "../css/Navbar.css";
 import logo from "../images/logo.png";
 import SearchBar from "./SearchBar";
 import { TbLogout2 } from "react-icons/tb";
+import { FaCartShopping } from "react-icons/fa6";
 import { useAuth } from "../context/AuthContext";
 import { useNavigate } from "react-router-dom";
 import ProfileIcon from "./ProfileIcon";
@@ -33,13 +34,14 @@ const Navbar = () => {
         </li>
 
         <li className="right">
-          <NavLink to="/cart">Cart</NavLink>
+          <NavLink to="/user/instructor">Instructor</NavLink>
         </li>
-
         <li className="right">
-          <NavLink to="/user/instructor">Instructor Panel</NavLink>
+          <NavLink to="/cart">
+            {/* Cart Icon */}
+            <FaCartShopping size={30} />
+          </NavLink>
         </li>
-
         {isLoggedIn ? (
           <TbLogout2 size={35} onClick={logOut} className="logout" />
         ) : (
