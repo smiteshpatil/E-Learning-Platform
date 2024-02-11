@@ -1,52 +1,45 @@
-/*=========picked from: https://github.com/binodswain/react-faq-component  =====================*/
-import React, { useEffect, useState } from "react";
-import Faq from "react-faq-component";
+// CourseContent.js
+import React from "react";
 
-const data = {
-    title: "Course Content",
-    rows: [
-        {
-            title: "Day 1: Let's get started",
-            content: `<a href="#" >Lorem ipsum dolor sit amet, consectetur adipiscing elit. In sed tempor sem.</a>.`,
-        },
-        {
-            title: "Day 2: Practical",
-            content: `<a href="#" >Lorem ipsum dolor sit amet, consectetur adipiscing elit. In sed tempor sem.</a>.`,
-        },            
-        {
-            title: "Day 3: chill",
-            content: 'chil'
-        },
-        {
-            title: "What is the package version",
-            content: <p>current version is 1.2.1</p>,
-        },
-    ],
+const CourseContent = ({ handleVideoChange }) => {
+  const playlist = [
+    {
+      title: "Introduction to React",
+      videoUrl: "https://www.example.com/video1.mp4",
+    },
+    {
+      title: "State and Props",
+      videoUrl: "https://www.example.com/video2.mp4",
+    },
+    {
+      title: "Components Lifecycle",
+      videoUrl: "https://www.example.com/video3.mp4",
+    },
+    // Add more video lectures as needed
+  ];
+
+  return (
+    <div className="dropdown">
+      <div
+        className="dropdown-toggle"
+        id="dropdownMenuButton"
+        data-toggle="dropdown"
+      >
+        Select Lecture <span className="arrow">&#9662;</span>
+      </div>
+      <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
+        {playlist.map((lecture, index) => (
+          <div
+            key={index}
+            className="dropdown-item"
+            onClick={() => handleVideoChange(lecture.videoUrl)}
+          >
+            {lecture.title}
+          </div>
+        ))}
+      </div>
+    </div>
+  );
 };
 
-const styles = {
-    // bgColor: 'white',
-    titleTextColor: "blue",
-    rowTitleColor: "blue",
-    // rowContentColor: 'grey',
-    // arrowColor: "red",
-};
-
-const config = {
-    // animate: true,
-    // arrowIcon: "V",
-    // tabFocus: true
-};
-
-export default function Course() {
-
-    return (
-        <div>
-            <Faq
-                data={data}
-                styles={styles}
-                config={config}
-            />
-        </div>
-    );
-}
+export default CourseContent;
