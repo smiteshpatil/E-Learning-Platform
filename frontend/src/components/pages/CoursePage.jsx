@@ -1,8 +1,8 @@
 import React, { useEffect } from "react";
 import CourseContent from "./CourseContent";
-import CoursePost from "./CoursePost";
 import { useAuth } from "../../context/AuthContext";
 import { courses } from "../../api/courseService";
+import "./CoursePage.css";
 const CoursePage = () => {
   const { allCourses, setAllCourses } = useAuth();
 
@@ -16,13 +16,14 @@ const CoursePage = () => {
         <div class="container mt-5">
           <div class="row">
             <div class="col-sm-8">
-              <h2>Course Title</h2>
-              <h5>Sub heading</h5>
-              <div class="review">BestSeller/created by</div>
-              <p>
-                Some text about me in culpa qui officia deserunt mollit anim..
-              </p>
-
+              <div >
+                <h2>Course Title</h2>
+                <h5>Sub heading</h5>
+                <div class="review">BestSeller/created by</div>
+                <p>
+                  Some text about me in culpa qui officia deserunt mollit anim..
+                </p>
+              </div>
               <h3 class="mt-4">What you will learn</h3>
               <div class="row">
                 <div class="col-sm-6">First</div>
@@ -45,6 +46,21 @@ const CoursePage = () => {
               </div>
 
               <CourseContent />
+            </div>
+            <div class="col-sm-4 offset-md-6" style={{position: 'fixed'}}>
+              <div class="card">
+                <img src="/w3images/team2.jpg" alt="John" style={{width:'100%'}} />
+                <h1>John Doe</h1>
+                <p class="title">CEO & Founder, Example</p>
+                <p>Harvard University</p>
+                <div style={{margin: '24px 0'}}>
+                  <a href="#"><i class="fa fa-dribbble"></i></a> 
+                  <a href="#"><i class="fa fa-twitter"></i></a>  
+                  <a href="#"><i class="fa fa-linkedin"></i></a>  
+                  <a href="#"><i class="fa fa-facebook"></i></a> 
+                </div>
+                <p><button>Contact</button></p>
+              </div>
             </div>
             {/* <CoursePost currentCourse={allCourses[0]} /> */}
           </div>
