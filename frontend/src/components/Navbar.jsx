@@ -33,6 +33,10 @@ const Navbar = () => {
         </li>
 
         <li className="right">
+          <NavLink to="/cart">Cart</NavLink>
+        </li>
+
+        <li className="right">
           <NavLink to="/user/instructor">Instructor Panel</NavLink>
         </li>
 
