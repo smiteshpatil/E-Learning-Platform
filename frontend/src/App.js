@@ -11,7 +11,7 @@ import ProfileCloseAccount from "./components/ProfileCloseAccount";
 
 import UserProfile from "./components/UserProfile";
 import Course from "./components/pages/CoursePage";
-import Dashboard from "./components/instructor/Dashboard";
+import Test from "./components/pages/Test";
 
 import VideoPage from "./components/pages/VideoPage";
 import VideoOverview from "./components/pages/VideoOverview";
@@ -53,7 +53,7 @@ function App() {
         <Route path="/product" element={<Products />}></Route>
 
         {/* Instructor */}
-        <Route path="/user/instructor" element={<Dashboard />}></Route>
+        <Route path="/user/instructor" element={<Test />}></Route>
 
         {/* Video Routes demo */}
         <Route path="/video" element={<VideoPage />}>
