@@ -75,11 +75,6 @@
 }
 
 @media screen and (max-width: 768px) {
-  .topnav ul {
-    flex-direction: column;
-    align-items: stretch;
-  }
-
   .topnav li {
     display: block;
     margin-bottom: 10px;
