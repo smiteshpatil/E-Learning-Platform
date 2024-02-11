@@ -10,7 +10,7 @@ import ProfileAccountSecurity from "./components/ProfileAccountSecurity";
 import ProfileCloseAccount from "./components/ProfileCloseAccount";
 
 import UserProfile from "./components/UserProfile";
-import Course from "./components/pages/Course";
+import Course from "./components/pages/CoursePage";
 import Dashboard from "./components/instructor/Dashboard";
 
 function App() {
