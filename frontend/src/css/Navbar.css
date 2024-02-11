@@ -31,7 +31,13 @@
 }
 
 .login-link {
+  border-radius: 5px;
+  margin: 7px;
   border: 2px solid white;
+}
+
+.login-link:hover {
+  background-color: white;
 }
 
 .logout {
@@ -50,7 +56,6 @@
 }
 
 .topnav a:hover {
-  background-color: white;
   color: black;
 }
 
@@ -68,18 +73,8 @@
   height: 50px;
   width: auto;
 }
-.logo:hover {
-  border-radius: 8px;
-  height: 60px;
-  width: auto;
-}
 
 @media screen and (max-width: 768px) {
-  .topnav ul {
-    flex-direction: column;
-    align-items: stretch;
-  }
-
   .topnav li {
     display: block;
     margin-bottom: 10px;

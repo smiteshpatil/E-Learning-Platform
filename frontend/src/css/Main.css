@@ -33,38 +33,38 @@ img {
   margin: 40px 0;
 }
 
-.blog-container {
+.course-container {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
   grid-gap: 30px;
   margin-top: 20px;
 }
 
-.blog-post {
+.course-post {
   position: relative;
   height: 480px;
 }
 
-.blog-post .cover-img {
+.course-post .cover-img {
   width: 100%;
   height: 200px;
   object-fit: cover;
   border-radius: 10px;
 }
 
-.blog-post .title {
+.course-post .title {
   font-size: 20px;
   font-weight: 600;
   margin-bottom: 10px;
 }
 
-.blog-post .description {
+.course-post .description {
   font-size: 16px;
   color: #828282;
   margin-bottom: 10px;
 }
 
-.blog-post .card-details {
+.course-post .card-details {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -85,7 +85,7 @@ img {
   color: #828282;
 }
 
-.blog-post .read-more {
+.course-post .read-more {
   font-size: 16px;
   font-weight: 600;
   color: #582bd3;
@@ -93,11 +93,11 @@ img {
   margin-top: 10px;
 }
 
-.blog-post .read-more:hover {
+.course-post .read-more:hover {
   text-decoration: underline;
 }
 
-.blog-post .author-img {
+.course-post .author-img {
   width: 40px;
   height: 40px;
   border-radius: 50%;

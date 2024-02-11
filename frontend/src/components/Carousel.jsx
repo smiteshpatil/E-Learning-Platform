@@ -29,7 +29,13 @@ const Carousel = () => {
         style={{ transform: `translateX(${-currentImageIndex * 100}%)` }}
       >
         {images.map((image, index) => (
-          <img key={index} src={image} alt={`Slide ${index + 1}`} />
+          <img
+            key={index}
+            src={image}
+            alt={`Slide ${index + 1}`}
+            className="img-fluid"
+            style={{ height: "50vh" }}
+          />
         ))}
       </div>
     </div>

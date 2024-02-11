@@ -1,5 +1,5 @@
 import { Route, Routes } from "react-router-dom";
-import "./App.css";
+
 import Footer from "./components/Footer";
 import HomePage from "./components/HomePage";
 import LoginPage from "./components/LoginPage";
@@ -10,15 +10,33 @@ import ProfilePage from "./components/ProfilePage";
 import ProfilePhoto from "./components/ProfilePhoto";
 import UserProfile from "./components/UserProfile";
 
-import Course from "./components/pages/Course";
+import Course from "./components/pages/CoursePage";
+// import Test from "./components/pages/Test";
+
+import "./App.css";
+import VideoNotes from "./components/pages/VideoNotes";
+import VideoOverview from "./components/pages/VideoOverview";
+import VideoPage from "./components/pages/VideoPage";
+import VideoQAndA from "./components/pages/VideoQAndA";
+import VideoReview from "./components/pages/VideoReview";
+
+import Cart from "./components/pages/Cart";
+import Products from "./components/pages/Products";
+
 
 function App() {
   return (
     <div className="App">
       <Navbar></Navbar>
+
       <Routes>
+        {/* Home page route */}
         <Route path="/" element={<HomePage />}></Route>
+        {/* Loginpage route */}
         <Route path="/login" element={<LoginPage />}></Route>
+
+
+        {/* User Routes */}
 
         <Route path="/user" element={<ProfilePage />}>
           <Route path="photo" element={<ProfilePhoto />} />
@@ -27,7 +45,28 @@ function App() {
           <Route path="profile" element={<UserProfile />} />
         </Route>
         <Route path="/courses">
+          <Route path=":id" element={<Course />}/>
+        </Route>
+        {/* Courses */}
+        <Route path="/courses">
           <Route path=":id" element={<Course />}></Route>
+        </Route>
+
+        {/* Cart */}
+        <Route path="/cart" element={<Cart />}></Route>
+        {/* Cart */}
+        <Route path="/product" element={<Products />}></Route>
+
+        {/* Instructor */}
+        {/* <Route path="/user/instructor" element={<Test />}></Route> */}
+
+        {/* Video Routes demo */}
+        <Route path="/video" element={<VideoPage />}>
+          <Route path="overview" component={VideoOverview} />
+          <Route path="qanda" component={VideoQAndA} />
+          <Route path="notes" component={VideoNotes} />
+          <Route path="review" component={VideoReview} />
+
         </Route>
       </Routes>
       <Footer />

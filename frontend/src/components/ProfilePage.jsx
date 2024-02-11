@@ -1,10 +1,11 @@
-
-
-import React from "react";
+import { default as React } from "react";
 import { Col, Container, Image, Row } from "react-bootstrap";
 import { NavLink, Outlet } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
+
 
 const ProfilePage = () => {
+  let { authUser } = useAuth();
   return (
     <div>
       <div className="mt-4 mb-4">
@@ -14,7 +15,11 @@ const ProfilePage = () => {
               {/* Content for the left column */}
               <div className="text-center mb-4 ">
                 <Image
-                  src="https://via.placeholder.com/150"
+                  src={
+                    authUser.picture != null
+                      ? authUser.picture
+                      : "https://via.placeholder.com/150"
+                  }
                   roundedCircle
                   className="mb-2"
                 />
@@ -39,21 +44,7 @@ const ProfilePage = () => {
             </Col>
 
             <Col md={10} sm={16}>
-              {/* Upper row */}
-              
-              
-              {/* <Row className="border-top">
-                <div className="text-center mb-4 mt-4">
-                  <Outlet name="heading" />
-                </div>
-              </Row> */}
-              
-                  <Outlet />
-              {/* Lower row */}
-              {/* <Row className="border-top">
-                <div className="text-center mb-4 mt-4">
-                </div>
-              </Row> */}
+              <Outlet />
             </Col>
           </Row>
         </Container>
@@ -92,6 +83,7 @@ const ProfilePage = () => {
           </div>
         </Col>
       </Row>
+
 
     </div>
   );

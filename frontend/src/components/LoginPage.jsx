@@ -9,22 +9,27 @@ import { useNavigate } from "react-router-dom";
 import { signIn, signUp } from "../api/userService";
 
 const LoginPage = () => {
+  const { setAuthUser, setIsLoggedIn } = useAuth();
+  const navigate = useNavigate();
+
   // state for styling depending on the page
   const [isActive, setIsActive] = useState(false);
-  const navigate = useNavigate();
-  const { authUser, setAuthUser, isLoggedIn, setIsLoggedIn } = useAuth();
 
-  const handleRegisterClick = () => {
-    setIsActive(true);
-  };
-  const handleLoginClick = () => {
-    setIsActive(false);
-  };
+  const [formDetails, setFormDetails] = useState({
+    name: "",
+    email: "",
+    role: "",
+    password: "",
+  });
+
+  const handleSignIn = (e) => {};
+  const handleSignUp = (e) => {};
 
   const logIn = (currentUser) => {
     setIsLoggedIn(true);
     setAuthUser({
-      name: currentUser.name,
+      firstName: currentUser.name,
+      lastName: currentUser.family_name,
       picture: currentUser.picture,
       email: currentUser.email,
     });
@@ -65,9 +70,9 @@ const LoginPage = () => {
           <form>
             <h1>Create New Account</h1>
             <span>Use your email for registration</span>
-            <input type="text" placeholder="Name" />
-            <input type="email" placeholder="Email" />
-            <input type="password" placeholder="Password" />
+            <input type="text" name="name" placeholder="Name" />
+            <input type="email" name="email" placeholder="Email" />
+            <input type="password" name="password" placeholder="Password" />
             <button>Sign Up</button>
           </form>
         </div>
@@ -91,14 +96,24 @@ const LoginPage = () => {
             <div className="toggle-panel toggle-left">
               <h1>Welcome Back!</h1>
               <p>Enter your details to login </p>
-              <button className="hidden" onClick={handleLoginClick}>
+              <button
+                className="hidden"
+                onClick={() => {
+                  setIsActive(false);
+                }}
+              >
                 Sign In
               </button>
             </div>
             <div className="toggle-panel toggle-right">
               <h1>Hello, Friend!</h1>
               <p>Register with your personal details and start your journey.</p>
-              <button className="hidden" onClick={handleRegisterClick}>
+              <button
+                className="hidden"
+                onClick={() => {
+                  setIsActive(true);
+                }}
+              >
                 Sign Up
               </button>
             </div>
