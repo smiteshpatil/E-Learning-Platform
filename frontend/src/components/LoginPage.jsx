@@ -22,10 +22,38 @@ const LoginPage = () => {
     password: "",
   });
 
-  const handleSignIn = (e) => {};
-  const handleSignUp = (e) => {};
+  //set form details
+  const handleChange = (event) => {
+    let { name, value } = event.target;
+    setFormDetails({ ...formDetails, [name]: value });
+  };
 
-  const logIn = (currentUser) => {
+  // sign in using userService
+  const handleSignIn = () => {
+    if (formDetails.email !== "" && formDetails.password !== "") {
+      signIn(formDetails.email, formDetails.password);
+    }
+  };
+
+  //signUp using userService
+  const handleSignUp = () => {
+    if (
+      formDetails.name !== "" &&
+      formDetails.email !== "" &&
+      formDetails.password !== ""
+    ) {
+      setFormDetails({
+        ...formDetails,
+        role: document.getElementById("role").value,
+      });
+      signUp(formDetails);
+    } else {
+      document.getElementById("errMsg").innerText =
+        "* All filed are compulsory";
+    }
+  };
+
+  const setUserContext = (currentUser) => {
     setIsLoggedIn(true);
     setAuthUser({
       firstName: currentUser.name,
@@ -39,13 +67,8 @@ const LoginPage = () => {
   //login using google
   function handleCallbackResponse(response) {
     let userDetails = jwtDecode(response.credential);
-    userDetails.password = "abc123";
-    userDetails.role = "ROLE_INSTRUCTOR";
-    userDetails.gender = "male";
-    const token = userDetails.token;
-    console.log(userDetails);
-    signUp(userDetails, token);
-    logIn(userDetails);
+    signUp(userDetails);
+    setUserContext(userDetails);
   }
 
   useEffect(() => {
@@ -57,7 +80,7 @@ const LoginPage = () => {
     });
 
     google.accounts.id.renderButton(document.getElementById("signInBtn"), {
-      theme: "",
+      theme: "filled",
       size: "large",
     });
     google.accounts.id.prompt();
@@ -70,10 +93,38 @@ const LoginPage = () => {
           <form>
             <h1>Create New Account</h1>
             <span>Use your email for registration</span>
-            <input type="text" name="name" placeholder="Name" />
-            <input type="email" name="email" placeholder="Email" />
-            <input type="password" name="password" placeholder="Password" />
-            <button>Sign Up</button>
+            <input
+              type="text"
+              name="name"
+              placeholder="Name"
+              value={formDetails.name}
+              onChange={handleChange}
+            />
+            <span id="errEmail"></span>
+            <input
+              type="email"
+              name="email"
+              placeholder="Email"
+              value={formDetails.email}
+              onChange={handleChange}
+            />
+
+            <input
+              type="password"
+              name="password"
+              placeholder="Password"
+              required
+              onChange={handleChange}
+            />
+            <div style={{ textAlign: "left" }}>
+              <span id="errMsg" style={{ color: "red" }}></span>
+              <h6>Select Your Role:</h6>
+              <select name="role" id="role">
+                <option value="ROLE_STUDENT">Student</option>
+                <option value="ROLE_INSTRUCTOR">Instructor</option>
+              </select>
+            </div>
+            <button onClick={handleSignUp}>Sign Up</button>
           </form>
         </div>
         <div className="form-container sign-in">
@@ -85,10 +136,22 @@ const LoginPage = () => {
               </a>
             </div>
             <span>or use your email password</span>
-            <input type="email" placeholder="Email" />
-            <input type="password" placeholder="Password" />
+            <input
+              type="email"
+              name="name"
+              value={formDetails.name}
+              onChange={handleChange}
+              placeholder="Email"
+            />
+            <input
+              type="password"
+              name="password"
+              value={formDetails.password}
+              onChange={handleChange}
+              placeholder="Password"
+            />
             <a href="#">Forget Your Password?</a>
-            <button>Sign In</button>
+            <button onClick={handleSignIn}>Sign In</button>
           </form>
         </div>
         <div className="toggle-container">

@@ -22,6 +22,9 @@ import "./App.css";
 
 import Cart from "./components/pages/Cart";
 import Products from "./components/pages/Products";
+import Courses from "./components/instructor/Courses";
+import Home from "./components/instructor/Home";
+import Revenue from "./components/instructor/Revenue";
 
 function App() {
   return (
@@ -53,7 +56,11 @@ function App() {
         <Route path="/product" element={<Products />}></Route>
 
         {/* Instructor */}
-        <Route path="/user/instructor" element={<Dashboard />}></Route>
+        <Route path="/user/instructor" element={<Dashboard />}>
+          <Route path="dashboard" element={<Home />} />
+          <Route path="courses" element={<Courses />} />
+          <Route path="revenue" element={<Revenue />} />
+        </Route>
 
         {/* Video Routes demo */}
         <Route path="/video" element={<VideoPage />}>

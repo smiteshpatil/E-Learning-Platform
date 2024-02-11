@@ -6,7 +6,7 @@ import { useAuth } from "../context/AuthContext";
 const ProfilePage = () => {
   let { authUser } = useAuth();
   return (
-    <div>
+    <div className="container">
       <div className="mt-4 mb-4">
         <Container className="border-container mt-4 mb-4">
           <Row>

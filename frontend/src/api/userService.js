@@ -1,39 +1,30 @@
 import axios from "axios";
 
-const baseURL = "http://localhost:7070";
+const baseURL = "http://localhost:8080";
 
-export const signIn = async (userCredentials) => {
+export const signIn = async (userEmail, userPass) => {
   try {
     const response = await axios.post(baseURL + "/users/signin", {
-      email: userCredentials.email,
-      password: userCredentials.password,
+      email: userEmail,
+      password: userPass,
     });
     console.log(response);
+    return response;
   } catch (err) {
     console.log(err);
   }
 };
 
-export const signUp = async (user, token) => {
+export const signUp = async (user) => {
   try {
-    const response = await axios.post(
-      baseURL + "/users/signup",
-      {
-        email: user.email,
-        firstName: user.name,
-        lastName: user.family_name,
-        password: user.password,
-        role: user.role,
-        phoneNo: user.phoneNo,
-        gender: user.gender,
-      },
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      }
-    );
+    const response = await axios.post(baseURL + "/users/signup", {
+      email: user.email,
+      firstName: user.name,
+      password: user.password,
+      role: user.role,
+    });
     console.log(response);
+    return response;
   } catch (err) {
     console.log(err);
   }
