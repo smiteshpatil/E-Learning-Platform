@@ -8,7 +8,7 @@ const CoursePage = () => {
 
   useEffect(() => {
     setAllCourses(courses);
-  }, []);
+  });
 
   return (
     <div>
@@ -47,7 +47,6 @@ const CoursePage = () => {
 
               <CourseContent />
             </div>
-<<<<<<< HEAD
             <div class="col-sm-4 offset-md-6" style={{position: 'fixed'}}>
               <div class="card">
                 <img src="/w3images/team2.jpg" alt="John" style={{width:'100%'}} />
@@ -64,8 +63,6 @@ const CoursePage = () => {
               </div>
             </div>
             {/* <CoursePost currentCourse={allCourses[0]} /> */}
-=======
->>>>>>> f5a30e27faf9d96f241ebbfd897cc335b26a57d0
           </div>
         </div>
       </div>
