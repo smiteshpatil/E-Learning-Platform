@@ -2,8 +2,15 @@ import React, { useState, useEffect } from "react";
 import "../css/Carousel.css";
 import slide1 from "../images/carousel_img1.jpg";
 import slide2 from "../images/carousel_img2.jpg";
+import slide3 from "../images/carousel_img3.jpg";
+import slide4 from "../images/carousel_img4.jpg";
+import slide5 from "../images/carousel_img5.jpg";
+import slide6 from "../images/carousel_img6.jpg";
+
+
+
 const Carousel = () => {
-  const images = [slide1, slide2];
+  const images = [slide1, slide2,slide3,slide4,slide5,slide6];
 
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
