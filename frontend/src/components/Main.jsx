@@ -73,6 +73,9 @@ const Main = () => {
                   >
                     View Course
                   </Link>
+                  <Link to={`product`}>page</Link>
+                  <br/>
+                  <Link to={`cart`}>cart</Link>
                 </div>
               </div>
             ))}

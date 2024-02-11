@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { useRef } from "react";
-import VideoPlayer from "react-video-js-player";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 const VideoPage = () => {
