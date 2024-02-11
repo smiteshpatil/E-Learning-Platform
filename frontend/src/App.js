@@ -1,5 +1,5 @@
 import { Route, Routes } from "react-router-dom";
-import "./App.css";
+
 import Footer from "./components/Footer";
 import HomePage from "./components/HomePage";
 import LoginPage from "./components/LoginPage";
@@ -18,6 +18,7 @@ import VideoOverview from "./components/pages/VideoOverview";
 import VideoQAndA from "./components/pages/VideoQAndA";
 import VideoNotes from "./components/pages/VideoNotes";
 import VideoReview from "./components/pages/VideoReview";
+import "./App.css";
 function App() {
   return (
     <div className="App">

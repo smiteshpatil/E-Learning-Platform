@@ -3,6 +3,9 @@ import CourseContent from "./CourseContent";
 import { useAuth } from "../../context/AuthContext";
 import { courses } from "../../api/courseService";
 import "./CoursePage.css";
+
+import img from "../../images/card1.jpg";
+
 const CoursePage = () => {
   const { allCourses, setAllCourses } = useAuth();
 
@@ -16,7 +19,7 @@ const CoursePage = () => {
         <div class="container mt-5">
           <div class="row">
             <div class="col-sm-8">
-              <div >
+              <div>
                 <h2>Course Title</h2>
                 <h5>Sub heading</h5>
                 <div class="review">BestSeller/created by</div>
@@ -47,22 +50,33 @@ const CoursePage = () => {
 
               <CourseContent />
             </div>
-            <div class="col-sm-4 offset-md-6" style={{position: 'fixed'}}>
-              <div class="card">
-                <img src="/w3images/team2.jpg" alt="John" style={{width:'100%'}} />
+            <div class="col-sm-4">
+              <div class="card course-card">
+                <img src={img} alt="John" style={{ width: "100%" }} />
                 <h1>John Doe</h1>
-                <p class="title">CEO & Founder, Example</p>
+                <p class="title course-title">CEO & Founder, Example</p>
                 <p>Harvard University</p>
-                <div style={{margin: '24px 0'}}>
-                  <a href="#"><i class="fa fa-dribbble"></i></a> 
-                  <a href="#"><i class="fa fa-twitter"></i></a>  
-                  <a href="#"><i class="fa fa-linkedin"></i></a>  
-                  <a href="#"><i class="fa fa-facebook"></i></a> 
-                </div>
-                <p><button>Contact</button></p>
+                {/* <div style={{ margin: "24px 0" }}>
+                  <a href="#">
+                    <i class="fa fa-dribbble"></i>
+                  </a>
+                  <a href="#">
+                    <i class="fa fa-twitter"></i>
+                  </a>
+                  <a href="#">
+                    <i class="fa fa-linkedin"></i>
+                  </a>
+                  <a href="#">
+                    <i class="fa fa-facebook"></i>
+                  </a>
+                </div> */}
+                <p>
+                  <button className="btn btn-outline-success">
+                    Buy This Course
+                  </button>
+                </p>
               </div>
             </div>
-            {/* <CoursePost currentCourse={allCourses[0]} /> */}
           </div>
         </div>
       </div>
