@@ -13,6 +13,11 @@ import UserProfile from "./components/UserProfile";
 import Course from "./components/pages/CoursePage";
 import Dashboard from "./components/instructor/Dashboard";
 
+import VideoPage from "./components/pages/VideoPage";
+import VideoOverview from "./components/pages/VideoOverview";
+import VideoQAndA from "./components/pages/VideoQAndA";
+import VideoNotes from "./components/pages/VideoNotes";
+import VideoReview from "./components/pages/VideoReview";
 function App() {
   return (
     <div className="App">
@@ -39,6 +44,14 @@ function App() {
 
         {/* Instructor */}
         <Route path="/user/instructor" element={<Dashboard />}></Route>
+
+        {/* Video Routes demo */}
+        <Route path="/video" element={<VideoPage />}>
+          <Route path="overview" component={VideoOverview} />
+          <Route path="qanda" component={VideoQAndA} />
+          <Route path="notes" component={VideoNotes} />
+          <Route path="review" component={VideoReview} />
+        </Route>
       </Routes>
       <Footer />
     </div>
