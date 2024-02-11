@@ -31,8 +31,13 @@ const Navbar = () => {
         <li className="center">
           <SearchBar />
         </li>
+
+        <li className="right">
+          <NavLink to="/user/instructor">Instructor Panel</NavLink>
+        </li>
+
         {isLoggedIn ? (
-          <TbLogout2 size={40} onClick={logOut} className="logout" />
+          <TbLogout2 size={35} onClick={logOut} className="logout" />
         ) : (
           <li className="right login-link">
             <NavLink to="/login">LogIn/Register</NavLink>
@@ -40,9 +45,13 @@ const Navbar = () => {
         )}
 
         <li className="right">
-          <NavLink to="/user/profile">
-            <ProfileIcon />
-          </NavLink>
+          {isLoggedIn ? (
+            <NavLink to="/user/profile">
+              <ProfileIcon />
+            </NavLink>
+          ) : (
+            <></>
+          )}
         </li>
       </ul>
     </nav>
