@@ -1,8 +1,15 @@
 import React, { useState } from "react";
 import { Container, Row } from "react-bootstrap";
+import { useAuth } from "../context/AuthContext";
 
 const ProfilePhoto = () => {
-  const placeholderImage = "https://via.placeholder.com/200"; // Placeholder image URL
+  let { authUser } = useAuth();
+
+  const placeholderImage = `${
+    authUser.picture != null
+      ? authUser.picture
+      : "https://via.placeholder.com/200"
+  }`; // Placeholder image URL
   const [imagePreview, setImagePreview] = useState(placeholderImage); // State for image preview
 
   const handleImageChange = (e) => {
@@ -21,7 +28,6 @@ const ProfilePhoto = () => {
   return (
     <>
       <Container className="mt-2 mb-4">
-
         <Row>
           <div className="text-center mb-1 mt-2">
             <h3>Profile Photo </h3>
@@ -71,8 +77,19 @@ const ProfilePhoto = () => {
               >
                 <div>
                   <div className="text-start">
-                    <label htmlFor="image-upload" className="image-upload ud-sr-only mb-2">Add / Change Image</label> 
-                    <input accept=".gif, .jpg, .jpeg, .png" className="form-control" type="file" id="image-upload" onChange={handleImageChange}/>
+                    <label
+                      htmlFor="image-upload"
+                      className="image-upload ud-sr-only mb-2"
+                    >
+                      Add / Change Image
+                    </label>
+                    <input
+                      accept=".gif, .jpg, .jpeg, .png"
+                      className="form-control"
+                      type="file"
+                      id="image-upload"
+                      onChange={handleImageChange}
+                    />
                   </div>
                 </div>
               </div>

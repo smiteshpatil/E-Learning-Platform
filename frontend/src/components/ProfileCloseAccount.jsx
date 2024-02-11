@@ -24,16 +24,16 @@ export default function ProfileCloseAccount() {
                 Warning: If you close your account, you will be unsubscribed
                 from all your 7 courses, and will lose access forever.
               </p>
-              
             </div>
-            <div className="text-start"
-              style={{ 
+            <div
+              className="text-start"
+              style={{
                 paddingBottom: "1rem",
                 paddingLeft: "10rem",
                 paddingRight: "10rem",
               }}
             >
-              <button type="submit" class="btn btn-dark btn-lg">
+              <button type="submit" class="btn btn-danger btn-lg">
                 Close Account
               </button>
             </div>
