@@ -15,6 +15,7 @@ export const courses = [
     },
     datePublished: "Mar 15, 2024",
     courseUrl: "https://google.com",
+    price: 123,
   },
   {
     id: 2,
@@ -29,6 +30,7 @@ export const courses = [
     },
     datePublished: "Mar 15, 2024",
     courseUrl: "https://google.com",
+    price: 456,
   },
   {
     id: 3,
@@ -43,6 +45,7 @@ export const courses = [
     },
     datePublished: "Mar 15, 2024",
     courseUrl: "https://google.com",
+    price: 789,
   },
   {
     id: 4,
@@ -57,6 +60,7 @@ export const courses = [
     },
     datePublished: "Mar 15, 2024",
     courseUrl: "https://google.com",
+    price: 987,
   },
   {
     id: 5,
@@ -71,6 +75,7 @@ export const courses = [
     },
     datePublished: "Mar 15, 2024",
     courseUrl: "https://google.com",
+    price: 654,
   },
   {
     id: 6,
@@ -84,5 +89,6 @@ export const courses = [
     },
     datePublished: "Mar 15, 2024",
     courseUrl: "https://google.com",
+    price: 321,
   },
 ];

@@ -19,6 +19,10 @@ import VideoQAndA from "./components/pages/VideoQAndA";
 import VideoNotes from "./components/pages/VideoNotes";
 import VideoReview from "./components/pages/VideoReview";
 import "./App.css";
+
+import Cart from "./components/pages/Cart";
+import Products from "./components/pages/Products";
+
 function App() {
   return (
     <div className="App">
@@ -42,6 +46,11 @@ function App() {
         <Route path="/courses">
           <Route path=":id" element={<Course />}></Route>
         </Route>
+
+        {/* Cart */}
+        <Route path="/cart" element={<Cart />}></Route>
+        {/* Cart */}
+        <Route path="/product" element={<Products />}></Route>
 
         {/* Instructor */}
         <Route path="/user/instructor" element={<Dashboard />}></Route>

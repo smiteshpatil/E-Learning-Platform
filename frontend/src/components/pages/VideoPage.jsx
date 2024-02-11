@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import PlayListDropdown from "./PlayListDropdown";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 const VideoPage = () => {
   const [selectedVideo, setSelectedVideo] = useState("");
