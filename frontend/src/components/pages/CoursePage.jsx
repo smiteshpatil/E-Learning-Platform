@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
 import CourseContent from "./CourseContent";
-import CoursePost from "./CoursePost";
 import { useAuth } from "../../context/AuthContext";
 import { courses } from "../../api/courseService";
 const CoursePage = () => {
@@ -8,7 +7,7 @@ const CoursePage = () => {
 
   useEffect(() => {
     setAllCourses(courses);
-  });
+  }, []);
 
   return (
     <div>
@@ -46,7 +45,6 @@ const CoursePage = () => {
 
               <CourseContent />
             </div>
-            {/* <CoursePost currentCourse={allCourses[0]} /> */}
           </div>
         </div>
       </div>
