@@ -1,6 +1,7 @@
 package com.app.dao;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
@@ -12,6 +13,6 @@ public interface ContentRepository extends JpaRepository<Content, Long>{
 	//find by courseId
 	List<Content> findByCourseId(Long courseId);
 	
-	//List<Content> findByContentId(Long contentId);
+	Optional<Content> findByContentNo(Long contentNo);
 	
 }

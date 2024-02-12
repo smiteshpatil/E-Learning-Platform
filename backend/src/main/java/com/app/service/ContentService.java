@@ -16,11 +16,13 @@ public interface ContentService {
 	//add new Content
 	ContentDTO addContent(ContentDTO dto);
 	
-	ContentDTO updateContent(Long contentId, ContentDTO dto);
+	ContentDTO updateContent(Long contentNo, ContentDTO dto);
 	
 	ContentDTO getContentDetails(Long courseId, Long contentId);
 	
 	//get all contents : pagination
 	List<ContentDTO> getAllContents(int pageNumber, int pageSize);
+
+
 } 
 

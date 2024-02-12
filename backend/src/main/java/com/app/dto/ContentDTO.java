@@ -1,4 +1,5 @@
 package com.app.dto;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonProperty.Access;
 
@@ -10,12 +11,12 @@ import lombok.ToString;
 @Setter
 @ToString
 public class ContentDTO {
-	@JsonProperty(access = Access.READ_ONLY)
+	@JsonProperty(access = Access.READ_ONLY) // used during serialization
 	private Long id;
 	private Long contentNo;
 	private String contentName;
 	private String contentDescription;
 	private String contentUrl;
-	
+	@JsonProperty(access = Access.WRITE_ONLY)
 	private Long courseId;
 }
