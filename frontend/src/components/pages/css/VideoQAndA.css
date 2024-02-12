@@ -1,0 +1,19 @@
+div {
+  color: black;
+}
+
+.QandAcontainer {
+  border: 1px solid;
+  font-size: "large";
+  margin: 0rem 1rem;
+  padding: 1rem 2rem;
+}
+.tips-list {
+  list-style: disc;
+}
+
+/* searchbar div */
+.QandASearch {
+  margin: 0rem 1rem;
+  padding: 1rem 2rem;
+}

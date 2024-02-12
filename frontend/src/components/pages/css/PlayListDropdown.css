@@ -1,3 +1,10 @@
+.course-content {
+  background-color: white;
+  z-index: 1;
+  position: sticky;
+  top: 0%;
+}
+
 .dropbtn {
   color: black;
   border-bottom: 1px solid gainsboro;
@@ -7,7 +14,7 @@
   width: 100%;
   text-align: left;
   border: none;
-  border-bottom: 2px solid #ccc; /* Add bottom border */
+  border-bottom: 2px solid #ccc;
 }
 
 .dropbtn:hover,
@@ -26,7 +33,6 @@
   position: relative;
   background-color: #f1f1f1;
   min-width: 100%;
-  max-height: 300px;
   overflow-y: auto;
   box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
   z-index: 1;

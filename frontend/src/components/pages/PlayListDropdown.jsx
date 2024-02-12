@@ -92,6 +92,78 @@ const PlaylistDropdown = (props) => {
         { title: "Video 2", url: "https://www.example.com/day10/video2.mp4" },
       ],
     },
+    {
+      id: "day11",
+      name: "Day 11",
+      videos: [
+        { title: "Video 1", url: "https://www.example.com/day10/video1.mp4" },
+        { title: "Video 2", url: "https://www.example.com/day10/video2.mp4" },
+      ],
+    },
+    {
+      id: "day11",
+      name: "Day 11",
+      videos: [
+        { title: "Video 1", url: "https://www.example.com/day10/video1.mp4" },
+        { title: "Video 2", url: "https://www.example.com/day10/video2.mp4" },
+      ],
+    },
+    {
+      id: "day11",
+      name: "Day 11",
+      videos: [
+        { title: "Video 1", url: "https://www.example.com/day10/video1.mp4" },
+        { title: "Video 2", url: "https://www.example.com/day10/video2.mp4" },
+      ],
+    },
+    {
+      id: "day11",
+      name: "Day 11",
+      videos: [
+        { title: "Video 1", url: "https://www.example.com/day10/video1.mp4" },
+        { title: "Video 2", url: "https://www.example.com/day10/video2.mp4" },
+      ],
+    },
+    {
+      id: "day11",
+      name: "Day 11",
+      videos: [
+        { title: "Video 1", url: "https://www.example.com/day10/video1.mp4" },
+        { title: "Video 2", url: "https://www.example.com/day10/video2.mp4" },
+      ],
+    },
+    {
+      id: "day11",
+      name: "Day 11",
+      videos: [
+        { title: "Video 1", url: "https://www.example.com/day10/video1.mp4" },
+        { title: "Video 2", url: "https://www.example.com/day10/video2.mp4" },
+      ],
+    },
+    {
+      id: "day11",
+      name: "Day 11",
+      videos: [
+        { title: "Video 1", url: "https://www.example.com/day10/video1.mp4" },
+        { title: "Video 2", url: "https://www.example.com/day10/video2.mp4" },
+      ],
+    },
+    {
+      id: "day11",
+      name: "Day 11",
+      videos: [
+        { title: "Video 1", url: "https://www.example.com/day10/video1.mp4" },
+        { title: "Video 2", url: "https://www.example.com/day10/video2.mp4" },
+      ],
+    },
+    {
+      id: "day11",
+      name: "Day 11",
+      videos: [
+        { title: "Video 1", url: "https://www.example.com/day10/video1.mp4" },
+        { title: "Video 2", url: "https://www.example.com/day10/video2.mp4" },
+      ],
+    },
   ];
 
   const [openDay, setOpenDay] = useState(null);
@@ -107,7 +179,7 @@ const PlaylistDropdown = (props) => {
 
   return (
     <div className="playlist-dropdown-container">
-      <h3 className="mt-3 mx-3">Course Contents</h3>
+      <h3 className="course-content">Course Contents</h3>
 
       {days.map((day) => (
         <div key={day.id} className="dropdown">
