@@ -7,7 +7,7 @@ import { courses } from "../api/courseService";
 const Main = () => {
   const [trendingCourses, setTrendingCourses] = useState([]);
   const [currentCourse, setcurrentCourse] = useState(1);
-  const [coursesPerPage] = useState(3);
+  const [coursesPerPage] = useState(4);
 
   useEffect(() => {
     const fetchTrendingCourses = async () => {

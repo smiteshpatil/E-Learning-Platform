@@ -1,10 +1,18 @@
 import React from "react";
-
+import { courses } from "../../api/courseService";
 const VideoOverview = () => {
+  let currentCourse = courses[0];
+
   return (
-    <div>
-      <h2>Video Overview</h2>
-      <p>This is the overview section.</p>
+    <div className="container mt-3" style={{ color: "black" }}>
+      <h3 className="title">{currentCourse.title}</h3>
+      <p
+        style={{
+          fontSize: "large",
+        }}
+      >
+        {currentCourse.description}
+      </p>
     </div>
   );
 };

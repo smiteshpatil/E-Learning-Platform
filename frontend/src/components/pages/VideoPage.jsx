@@ -81,8 +81,8 @@ const VideoPage = () => {
             <source src={selectedVideo} type="video/mp4" />
             Your browser does not support the video tag.
           </video>
-          <p>Playtime: {playtimeInSeconds} seconds</p>
-          <p>Watched Time: {watchedTime.toFixed(2)} seconds</p>
+          {/* <p>Playtime: {playtimeInSeconds} seconds</p>
+          <p>Watched Time: {watchedTime.toFixed(2)} seconds</p> */}
           {/* Lecture wise material section*/}
           <ul className="resource-section">
             <li className="nav-item">
@@ -104,7 +104,7 @@ const VideoPage = () => {
                 }
                 onClick={() => toggleStyle("qanda")}
               >
-                Q/A
+                Q&A
               </NavLink>
             </li>
             <li className="nav-item">
@@ -130,13 +130,14 @@ const VideoPage = () => {
               </NavLink>
             </li>
           </ul>
+          <hr style={{ border: "1px solid black", margin: "0" }} />
           {/* Outlet  */}
           <Outlet />
         </div>
         <div
           className="col-md-4 bg-light"
           style={{
-            height: "100vh",
+            height: "150vh",
             overflowY: "auto",
             margin: "0px",
             padding: "0px",
