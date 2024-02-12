@@ -9,6 +9,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -61,6 +62,9 @@ public class Student extends BaseEntity{
 	@Lob // large object :col : longblob
 	private byte[] image; //This will be used for storing n restoring images in DB
 	private String imagePath;//This will be used for storing n restoring images in server side folder
+	
+	@OneToMany(mappedBy = "student",fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	private List<CartItem> cartItems = new ArrayList<>();
 	
 //	@OneToMany(mappedBy = "student", 
 //			cascade = CascadeType.ALL, 

@@ -56,6 +56,9 @@ public class Course extends BaseEntity {
 
 	@OneToMany(mappedBy = "course", cascade = CascadeType.ALL, orphanRemoval = true /* , fetch = FetchType.EAGER */)
 	private List<Content> contents = new ArrayList<>();
+	
+	@OneToMany(mappedBy = "course", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	private List<CartItem> cartItems = new ArrayList<>();
 
 	public void addContent(Content c) {
 		contents.add(c);

@@ -1,6 +1,8 @@
 package com.app.service;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -124,7 +126,32 @@ public class CourseServiceImpl implements CourseService {
 	@Override
 	public List<CourseRespDTO> getAllCoursesFromStudent(Long studentId) {
 		// TODO Auto-generated method stub
+		
 		return null;
+	}
+
+	@Override
+	public String assignStudentToMultipleCourses(Long studentId, List<Long> courseIds) {
+		// TODO Auto-generated method stub
+		Student student = studentRepo.findById(studentId).orElseThrow(()-> new ResourceNotFoundException("Invalid StudentID !"));
+		List<Course> courses = courseRepo.findAllById(courseIds);
+		
+		//To save the each mapping in the list
+		List<CourseStudentDetails> courseStudDetails = new ArrayList<>();
+		
+		LocalDate enrollmentDate = LocalDate.now();
+		
+		for (Course	course: courses) {
+			CourseStudentDetails csDetails = new CourseStudentDetails();
+			csDetails.setEnrolledDate(enrollmentDate);
+			csDetails.setMyCourse(course);
+			csDetails.setMyStudent(student);
+			courseStudDetails.add(csDetails);
+		}
+		
+		courseStudentRepo.saveAll(courseStudDetails);
+		
+		return "You have enrolled in all Courses";
 	}
 
 }

@@ -1,5 +1,7 @@
 package com.app.controller;
 
+import java.util.List;
+
 import javax.validation.Valid;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
@@ -18,6 +20,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.app.dto.StudentCoursesDTO;
 import com.app.dto.StudentDTO;
+import com.app.entities.Course;
+import com.app.service.CartService;
 import com.app.service.CourseService;
 import com.app.service.StudentService;
 
@@ -31,12 +35,14 @@ public class StudentController {
 	@Autowired
 	private CourseService courseService;
 	
+	@Autowired
+	private CartService cartService;
+	
 	@GetMapping
 	public ResponseEntity<?> getAllStudentDetails() {
 		System.out.println("in GET all student " );
 		return ResponseEntity
 				.ok(studentService.getAllStudents());
-
 	}
 	
 	@GetMapping("/{studentId}")
@@ -44,7 +50,6 @@ public class StudentController {
 		System.out.println("in GET student " + studentId);
 		return ResponseEntity
 				.ok(studentService.getStudentDetails(studentId));
-
 	}
 	
 	@PutMapping("/update/{studentId}")
@@ -74,5 +79,22 @@ public class StudentController {
 		System.out.println("in Enroll course " + studentId);
 		return ResponseEntity.ok(courseService.assignStudentToCourse(courseId, studentId));
 	}
+	
+	@PostMapping("/enrollCourse/{studentId}")
+	public ResponseEntity<?> enrollMultipleCourses(@PathVariable Long studentId, @RequestBody List<Long>courseIds){
+		return ResponseEntity.ok(courseService.assignStudentToMultipleCourses(studentId, courseIds));
+	}
+	
+	@PostMapping("/cartItems/{studentId}")
+	public ResponseEntity<?> SaveCartItems(@PathVariable Long studentId, @RequestBody List<Long> courseIds){
+		return ResponseEntity.ok(cartService.addCoursesToCart(studentId, courseIds));
+	}
+	
+	@GetMapping("/cartItems/{studentEmail}")
+	public ResponseEntity<?> GetAllCartItems(@PathVariable String studentEmail){
+		List<Long> courseIds = cartService.getAllCourseIdFromCart(studentEmail);
+		return ResponseEntity.ok(courseIds);
+	}
+	
 	
 }

@@ -23,8 +23,11 @@ public interface CourseService {
 	//get all courses : pagination
 	List<CourseRespDTO> getAllCourses(int pageNumber,int pageSize);
 	
-	//Student Related Course
+	//Enroll student to single course
 	String assignStudentToCourse(Long courseId, Long studentId);
+	
+	//Enroll Student to multiple courses
+	String assignStudentToMultipleCourses(Long studentId, List<Long> courseIds);
 	
 	String removeStudentFromCourse(Long courseId, Long studentId);
 	

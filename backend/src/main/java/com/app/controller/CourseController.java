@@ -26,7 +26,6 @@ public class CourseController {
 	@Autowired
 	private CourseService courseService;
 	
-	
 	//add new course to existing instructor  //request payload : AddCourse dto
 	@PostMapping("/add")
 	public ResponseEntity<?> addCourseToExistingInstructor(@RequestBody @Valid CourseDTO dto){
@@ -66,6 +65,8 @@ public class CourseController {
 		System.out.println("in get course details by instructor id n course id " + instructorId + " " + courseId);
 		return ResponseEntity.ok(courseService.getCourseDetails(courseId, instructorId));
 	}
+	
+	
 	
 	@GetMapping
 	public ResponseEntity<?> getAllEmpsPaginated(
