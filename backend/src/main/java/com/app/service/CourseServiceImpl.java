@@ -1,5 +1,6 @@
 package com.app.service;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -12,11 +13,15 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.app.custom_exceptions.ResourceNotFoundException;
 import com.app.dao.CourseRepository;
+import com.app.dao.CourseStudentDetailsRepository;
 import com.app.dao.InstructorRepository;
+import com.app.dao.StudentRepository;
 import com.app.dto.CourseDTO;
 import com.app.dto.CourseRespDTO;
 import com.app.entities.Course;
+import com.app.entities.CourseStudentDetails;
 import com.app.entities.Instructor;
+import com.app.entities.Student;
 @Service
 @Transactional
 public class CourseServiceImpl implements CourseService {
@@ -26,6 +31,12 @@ public class CourseServiceImpl implements CourseService {
 	
 	@Autowired
 	private InstructorRepository instRepo;
+	
+	@Autowired
+	private StudentRepository studentRepo;
+	
+	@Autowired
+	private CourseStudentDetailsRepository courseStudentRepo;
 	
 	@Autowired
 	private ModelMapper mapper;
@@ -89,6 +100,31 @@ public class CourseServiceImpl implements CourseService {
 				return courseList.stream()
 						.map(course-> mapper.map(course, CourseRespDTO.class))
 						.collect(Collectors.toList());
+	}
+
+	@Override
+	public String assignStudentToCourse(Long courseId, Long studentId) {
+		Course course = courseRepo.findById(courseId)
+				.orElseThrow(() -> new ResourceNotFoundException("Invalid Course id !!!"));
+		Student student = studentRepo.getReferenceById(studentId);
+		CourseStudentDetails details = new CourseStudentDetails();
+		details.setEnrolledDate(LocalDate.now());
+		details.setMyStudent(student);
+		details.setMyCourse(course);
+		courseStudentRepo.save(details);
+		return "Course " + course.getCourseName()+ " assigned to Student " + student.getFirstName();
+	}
+
+	@Override
+	public String removeStudentFromCourse(Long courseId, Long studentId) {
+		
+		return null;
+	}
+
+	@Override
+	public List<CourseRespDTO> getAllCoursesFromStudent(Long studentId) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

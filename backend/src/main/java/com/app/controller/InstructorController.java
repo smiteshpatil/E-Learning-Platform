@@ -41,12 +41,14 @@ public class InstructorController {
 //	@Qualifier("image_db")
 //	private ImageHandlingService imgService;
 
-	// add new Instructor // req payload : instructor dto
-//	@PostMapping("/add")
-//	public ResponseEntity<?> addNewInstructor(@RequestBody @Valid InstructorDTO dto) {
-//		System.out.println("In add new Instructor " + dto);
-//		return ResponseEntity.status(HttpStatus.CREATED).body(instructorService.addNewInstructor(dto));
-//	}
+	//get All instructors - access only to ADMIN
+	@GetMapping
+	public ResponseEntity<?> getAllInstructors() {
+		System.out.println("in GET all student " );
+		return ResponseEntity
+				.ok(instructorService.getAllInstructors());
+
+	}
 
 	// get Instructor details
 	@GetMapping("/{instructorId}")

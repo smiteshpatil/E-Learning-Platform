@@ -8,7 +8,7 @@ import com.app.entities.Instructor;
 
 public interface InstructorService {
 	
-	List<Instructor> getAllInstructors();
+	List<InstructorDTO> getAllInstructors();
 	InstructorDTO getInstructorDetails(Long instructorId);
 	InstructorDTO addNewInstructor(InstructorDTO inst);
 	InstructorCoursesDTO getInstructorAndCourseDetails(Long instructorId);

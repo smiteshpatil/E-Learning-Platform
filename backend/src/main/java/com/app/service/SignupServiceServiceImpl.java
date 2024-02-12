@@ -7,10 +7,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.app.dao.AdminRepository;
 import com.app.dao.InstructorRepository;
 import com.app.dao.StudentRepository;
 import com.app.dao.UserRepository;
 import com.app.dto.Signup;
+import com.app.entities.Admin;
 import com.app.entities.Instructor;
 import com.app.entities.Role;
 import com.app.entities.Student;
@@ -27,11 +29,14 @@ public class SignupServiceServiceImpl implements SignupService {
 	private InstructorRepository instRepo;
 	
 	@Autowired
-	private ModelMapper mapper;
-	
-	@Autowired
 	private StudentRepository studentRepo;
 
+	@Autowired
+	private AdminRepository adminRepo;
+	
+	@Autowired
+	private ModelMapper mapper;
+	
 	@Autowired
 	private PasswordEncoder encoder;
 
@@ -49,7 +54,10 @@ public class SignupServiceServiceImpl implements SignupService {
 			userRepo.save(new UserInfo(request.getEmail(),request.getPassword(),request.getRole().ROLE_STUDENT));
 			return mapper.map(persistentStudent, Signup.class);
 		}
-		return null;
+		request.setPassword(encoder.encode(request.getPassword()));
+		Admin admin = adminRepo.save(mapper.map(request, Admin.class));
+		userRepo.save(new UserInfo(request.getEmail(),request.getPassword(),request.getRole().ROLE_ADMIN));
+		return mapper.map(admin, Signup.class);
 	}
 	
 

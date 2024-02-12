@@ -29,5 +29,7 @@ public class CourseDTO {
 	
 	private String language;
 	
+	private Long price;
+	
 	private Long instructorId;
 }

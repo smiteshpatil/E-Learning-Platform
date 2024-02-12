@@ -34,4 +34,5 @@ public class StudentDTO {
 
 	private String imageUrl;
 	
+	
 }
