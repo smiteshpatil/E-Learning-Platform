@@ -16,10 +16,17 @@ const LoginPage = () => {
   const [isActive, setIsActive] = useState(false);
 
   const [formDetails, setFormDetails] = useState({
-    name: "",
+    firstName: "",
     email: "",
     role: "",
     password: "",
+    /**	this.firstName = firstName;
+		this.lastName = lastName;
+		this.email = email;
+		this.password = password;
+		this.phoneNo = phoneNo;
+		this.gender = gender;
+		this.role = role; */
   });
 
   //set form details
@@ -29,16 +36,18 @@ const LoginPage = () => {
   };
 
   // sign in using userService
-  const handleSignIn = () => {
+  const handleSignIn = (e) => {
+    e.preventDefault();
     if (formDetails.email !== "" && formDetails.password !== "") {
       signIn(formDetails.email, formDetails.password);
     }
   };
 
   //signUp using userService
-  const handleSignUp = () => {
+  const handleSignUp = (e) => {
+    e.preventDefault();
     if (
-      formDetails.name !== "" &&
+      formDetails.firstName !== "" &&
       formDetails.email !== "" &&
       formDetails.password !== ""
     ) {
@@ -56,7 +65,7 @@ const LoginPage = () => {
   const setUserContext = (currentUser) => {
     setIsLoggedIn(true);
     setAuthUser({
-      firstName: currentUser.name,
+      firstName: currentUser.firstName,
       lastName: currentUser.family_name,
       picture: currentUser.picture,
       email: currentUser.email,
@@ -95,9 +104,9 @@ const LoginPage = () => {
             <span>Use your email for registration</span>
             <input
               type="text"
-              name="name"
+              name="firstName"
               placeholder="Name"
-              value={formDetails.name}
+              value={formDetails.firstName}
               onChange={handleChange}
             />
             <span id="errEmail"></span>
@@ -138,8 +147,8 @@ const LoginPage = () => {
             <span>or use your email password</span>
             <input
               type="email"
-              name="name"
-              value={formDetails.name}
+              name="email"
+              value={formDetails.email}
               onChange={handleChange}
               placeholder="Email"
             />
