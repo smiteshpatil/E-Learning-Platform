@@ -30,7 +30,7 @@ function CategoryList() {
     },
     {
       name: "All Categories",
-      subcategories: [<Link to="/product">All Courses</Link>], //["Subcategory", "Subcategory", "Subcategory"],
+      subcategories: [<Link to="/product">All Courses</Link>],
     },
   ];
 

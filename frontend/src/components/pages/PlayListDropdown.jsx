@@ -114,10 +114,10 @@ const PlaylistDropdown = (props) => {
           <button onClick={() => toggleDropdown(day.id)} className="dropbtn">
             {day.name}
             <span className={`arrow ${openDay === day.id ? "open" : ""}`}>
-              &#9660;
+              <strong>-</strong>
             </span>
             <span className={`arrow ${openDay === day.id ? "" : "open"}`}>
-              &#9658;
+              <strong>+</strong>
             </span>
           </button>
           <div

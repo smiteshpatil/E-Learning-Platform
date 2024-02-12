@@ -1,25 +1,22 @@
-.course-content {
-  overflow-y: auto; /* Enable vertical scrollbar */
-  max-height: calc(100vh - 56px); /* Adjust as needed to fit the page */
+/* Resourse section start */
+.resource-section {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  background-color: palegoldenrod;
 }
 
-.course-scroll {
-  padding: 20px;
-}
-
-.course-heading {
-  display: block;
-  font-size: 1.25rem;
+.resource-section li {
+  color: black;
   font-weight: bold;
-  margin-bottom: 20px;
+  flex: auto;
+  width: 10%;
 }
 
-.course-list {
-  /* Additional styling for your course list */
+.active-link {
+  background-color: white;
 }
 
-/* Ensure the video player is responsive */
-.video-js {
-  width: 100% !important;
-  height: auto !important;
+.nav-item a {
+  padding: 0.5rem 1rem;
 }

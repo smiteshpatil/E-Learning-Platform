@@ -24,7 +24,7 @@ function Sidebar({ openSidebarToggle, OpenSidebar }) {
 
       <ul className="sidebar-list">
         <li className="sidebar-list-item">
-          <NavLink to="dashboard">
+          <NavLink to="">
             <BsGrid1X2Fill className="icon" /> Dashboard
           </NavLink>
         </li>
@@ -39,22 +39,22 @@ function Sidebar({ openSidebarToggle, OpenSidebar }) {
           </NavLink>
         </li>
         <li className="sidebar-list-item">
-          <NavLink to="/user/instructor/courses">
+          <NavLink to="courses">
             <BsPeopleFill className="icon" /> Students
           </NavLink>
         </li>
         <li className="sidebar-list-item">
-          <NavLink to="/user/instructor/courses">
+          <NavLink to="courses">
             <BsListCheck className="icon" /> Inventory
           </NavLink>
         </li>
         <li className="sidebar-list-item">
-          <NavLink to="/user/instructor/courses">
+          <NavLink to="courses">
             <BsMenuButtonWideFill className="icon" /> Reports
           </NavLink>
         </li>
         <li className="sidebar-list-item">
-          <NavLink to="/user/instructor/courses">
+          <NavLink to="courses">
             <BsFillGearFill className="icon" /> Setting
           </NavLink>
         </li>

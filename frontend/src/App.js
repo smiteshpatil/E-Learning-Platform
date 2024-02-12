@@ -57,7 +57,7 @@ function App() {
         <Route path="/product" element={<Products />}></Route>
         {/* Instructor */}
         <Route path="/user/instructor" element={<Dashboard />}>
-          <Route path="dashboard" element={<Home />} />
+          <Route path="" element={<Home />} />
           <Route path="courses" element={<Courses />} />
           <Route path="revenue" element={<Revenue />} />
         </Route>

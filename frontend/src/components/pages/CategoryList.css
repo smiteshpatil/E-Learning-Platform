@@ -8,8 +8,8 @@
 }
 
 .category-list li {
+  color: black;
   padding: 10px;
-  /* margin: 5px; Add margin between items */
   position: relative;
   text-align: center; /* Center the text */
   flex: 1 0 200px; /* Allow items to grow, but don't shrink below 200px */
