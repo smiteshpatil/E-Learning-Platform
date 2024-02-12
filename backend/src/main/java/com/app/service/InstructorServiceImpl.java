@@ -1,6 +1,7 @@
 package com.app.service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,8 +25,8 @@ public class InstructorServiceImpl implements InstructorService {
 	
 	
 	@Override
-	public List<Instructor> getAllInstructors() {
-			return instructorRepo.findAll();
+	public List<InstructorDTO> getAllInstructors() {
+			return instructorRepo.findAll().stream().map(inst -> mapper.map(inst, InstructorDTO.class)).collect(Collectors.toList());
 	}
 
 	@Override

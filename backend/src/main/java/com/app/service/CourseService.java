@@ -22,4 +22,11 @@ public interface CourseService {
 	
 	//get all courses : pagination
 	List<CourseRespDTO> getAllCourses(int pageNumber,int pageSize);
+	
+	//Student Related Course
+	String assignStudentToCourse(Long courseId, Long studentId);
+	
+	String removeStudentFromCourse(Long courseId, Long studentId);
+	
+	List<CourseRespDTO> getAllCoursesFromStudent(Long studentId);
 }

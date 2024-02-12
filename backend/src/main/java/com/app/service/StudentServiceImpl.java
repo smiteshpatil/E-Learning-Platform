@@ -10,9 +10,12 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.app.custom_exceptions.ResourceNotFoundException;
+import com.app.dao.CourseRepository;
 import com.app.dao.StudentRepository;
+import com.app.dto.CourseRespDTO;
 import com.app.dto.StudentCoursesDTO;
 import com.app.dto.StudentDTO;
+import com.app.entities.Course;
 import com.app.entities.Student;
 
 @Service
@@ -21,6 +24,9 @@ public class StudentServiceImpl implements StudentService {
 
 	@Autowired
 	private StudentRepository studentRepo;
+	
+	@Autowired
+	private CourseRepository courseRepo;
 
 	@Autowired
 	private ModelMapper mapper;
@@ -61,5 +67,7 @@ public class StudentServiceImpl implements StudentService {
 				.orElseThrow(() -> new ResourceNotFoundException("Invalid Student Id !!!!"));
 		return mapper.map(student, StudentCoursesDTO.class);
 	}
+
+
 
 }

@@ -17,4 +17,5 @@ public class CourseRespDTO {
 	private String description;
 	private String skillLevel;
 	private String language;
+	private Long price;
 }

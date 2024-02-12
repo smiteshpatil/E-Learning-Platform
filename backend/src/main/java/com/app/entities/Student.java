@@ -14,6 +14,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -61,9 +62,23 @@ public class Student extends BaseEntity{
 	private byte[] image; //This will be used for storing n restoring images in DB
 	private String imagePath;//This will be used for storing n restoring images in server side folder
 	
+//	@OneToMany(mappedBy = "student", 
+//			cascade = CascadeType.ALL, 
+//			orphanRemoval = true /* , fetch = FetchType.EAGER */ )
+//	private List<Course> courses = new ArrayList<>();
+//	
 	
-	@ManyToMany(mappedBy = "students")
-	private List<Course> courses = new ArrayList<>();
-	
+//	public void addCourseToStudent(Course c) {
+//		courses.add(c);
+//		c.setStudent(this); //course -> students
+//	}
+//	
+//	public void deleteCourse(Course c) {
+//		courses.remove(c);  //instructor -> course
+//		c.setStudent(null);//course -> student
+//	}
+//	@ManyToMany(mappedBy = "students")
+//	private List<Course> courses = new ArrayList<>();
+//	
 	
 }
