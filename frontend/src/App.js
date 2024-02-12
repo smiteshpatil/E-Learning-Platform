@@ -63,10 +63,10 @@ function App() {
         </Route>
         {/* Video Routes demo */}
         <Route path="/video" element={<VideoPage />}>
-          <Route path="overview" component={VideoOverview} />
-          <Route path="qanda" component={VideoQAndA} />
-          <Route path="notes" component={VideoNotes} />
-          <Route path="review" component={VideoReview} />
+          <Route path="overview" element={<VideoOverview />} />
+          <Route path="qanda" element={<VideoQAndA />} />
+          <Route path="notes" element={<VideoNotes />} />
+          <Route path="review" element={<VideoReview />} />
         </Route>
       </Routes>
       <Footer />

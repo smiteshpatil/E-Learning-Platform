@@ -29,6 +29,7 @@ body {
 
 /* Header  */
 .header {
+  color: black;
   grid-area: header;
   height: 60px;
   display: flex;
