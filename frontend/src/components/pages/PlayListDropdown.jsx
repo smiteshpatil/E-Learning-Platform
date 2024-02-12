@@ -101,7 +101,7 @@ const PlaylistDropdown = (props) => {
       ],
     },
     {
-      id: "day11",
+      id: "day12",
       name: "Day 11",
       videos: [
         { title: "Video 1", url: "https://www.example.com/day10/video1.mp4" },
@@ -109,7 +109,7 @@ const PlaylistDropdown = (props) => {
       ],
     },
     {
-      id: "day11",
+      id: "day13",
       name: "Day 11",
       videos: [
         { title: "Video 1", url: "https://www.example.com/day10/video1.mp4" },
@@ -117,7 +117,7 @@ const PlaylistDropdown = (props) => {
       ],
     },
     {
-      id: "day11",
+      id: "day14",
       name: "Day 11",
       videos: [
         { title: "Video 1", url: "https://www.example.com/day10/video1.mp4" },
@@ -125,7 +125,7 @@ const PlaylistDropdown = (props) => {
       ],
     },
     {
-      id: "day11",
+      id: "day15",
       name: "Day 11",
       videos: [
         { title: "Video 1", url: "https://www.example.com/day10/video1.mp4" },
@@ -133,7 +133,7 @@ const PlaylistDropdown = (props) => {
       ],
     },
     {
-      id: "day11",
+      id: "day16",
       name: "Day 11",
       videos: [
         { title: "Video 1", url: "https://www.example.com/day10/video1.mp4" },
