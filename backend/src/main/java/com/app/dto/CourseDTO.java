@@ -2,6 +2,7 @@ package com.app.dto;
 
 import java.time.LocalDate;
 
+import javax.persistence.Lob;
 import javax.validation.constraints.NotBlank;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -19,7 +20,6 @@ public class CourseDTO {
 	private Long id;
 	@NotBlank
 	private String courseName;
-	private LocalDate enrolledDate;
 	
 	private String category;
 	
@@ -30,6 +30,11 @@ public class CourseDTO {
 	private String language;
 	
 	private Long price;
+	
+	private LocalDate publishedDate;
+	
+	@Lob
+	private byte[] coursePoster;
 	
 	private Long instructorId;
 }
