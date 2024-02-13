@@ -34,7 +34,7 @@ import lombok.ToString;
 @AllArgsConstructor
 @Getter
 @Setter
-@ToString(exclude = {"password","imagePath"})
+@ToString(exclude = {"password","imagePath","LinkedInLink", "GitHubLink"})
 public class Student extends BaseEntity{
 	
 	@Column( length = 20)
@@ -58,6 +58,14 @@ public class Student extends BaseEntity{
 	@Enumerated(EnumType.STRING)
 	@Column(length = 30)
 	private Role role;
+	
+	@Column(unique = true)
+	private String LinkedInLink;
+	
+	@Column(unique = true)
+	private String GitHubLink;
+	
+	private String heading;
 	
 	@Lob // large object :col : longblob
 	private byte[] image; //This will be used for storing n restoring images in DB
