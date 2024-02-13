@@ -14,19 +14,19 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
-public class StudentDTO {
+public class AdminDTO {
 	@JsonProperty(access = Access.READ_ONLY)
 	private Long id;
-	
+
 	@NotBlank
 	private String firstName;
-	
+
 	@NotBlank
 	private String lastName;
-	
+
 	@Email
 	private String email;
-	
+
 	@JsonIgnore
 	private String password;
 
@@ -35,10 +35,10 @@ public class StudentDTO {
 	private String gender;
 
 	private String imageUrl;
-	
+
 	private String LinkedInLink;
-	
+
 	private String GitHubLink;
-	
-	private String heading;
+
+	private String Heading;
 }

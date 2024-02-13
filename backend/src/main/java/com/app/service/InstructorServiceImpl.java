@@ -34,6 +34,12 @@ public class InstructorServiceImpl implements InstructorService {
 		Instructor inst = instructorRepo.findById(instructorId).orElseThrow(()-> new ResourceNotFoundException("Invalid Instructor Id !!!!"));
 		return mapper.map(inst, InstructorDTO.class);
 	}
+	
+	@Override
+	public InstructorDTO getInstructorDetails(String instructorEmail) {
+		Instructor inst = instructorRepo.findByEmail(instructorEmail).orElseThrow(()-> new ResourceNotFoundException("Invalid Instructor Id !!!!"));
+		return mapper.map(inst, InstructorDTO.class);
+	}
 
 	@Override
 	public InstructorDTO addNewInstructor(InstructorDTO inst) {

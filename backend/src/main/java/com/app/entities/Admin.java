@@ -28,6 +28,22 @@ public class Admin extends BaseEntity{
 	@Column( nullable = false)
 	private String password;
 	
+	@Column(length = 10)
+	private String phoneNo;
+
+	@Column(length = 10)
+	private String gender;
+
+	private String imageUrl;
+	
+	@Column(unique = true)
+	private String LinkedInLink;
+
+	@Column(unique = true)
+	private String GitHubLink;
+	
+	private String Heading;
+	
 	@Enumerated(EnumType.STRING)
 	@Column(length = 30)
 	private Role role;

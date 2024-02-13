@@ -10,6 +10,7 @@ public interface InstructorService {
 	
 	List<InstructorDTO> getAllInstructors();
 	InstructorDTO getInstructorDetails(Long instructorId);
+	InstructorDTO getInstructorDetails(String instructorEmail);
 	InstructorDTO addNewInstructor(InstructorDTO inst);
 	InstructorCoursesDTO getInstructorAndCourseDetails(Long instructorId);
 }
