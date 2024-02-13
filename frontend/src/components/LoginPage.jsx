@@ -39,7 +39,13 @@ const LoginPage = () => {
   const handleSignIn = (e) => {
     e.preventDefault();
     if (formDetails.email !== "" && formDetails.password !== "") {
-      signIn(formDetails.email, formDetails.password);
+      signIn(formDetails.email, formDetails.password)
+        .then((currentUser) => {
+          setUserContext(currentUser);
+        })
+        .catch((error) => {
+          // Handle login error
+        });
     }
   };
 
@@ -55,10 +61,16 @@ const LoginPage = () => {
         ...formDetails,
         role: document.getElementById("role").value,
       });
-      signUp(formDetails);
+      signUp(formDetails)
+        .then((currentUser) => {
+          setUserContext(currentUser);
+        })
+        .catch((error) => {
+          // Handle signup error
+        });
     } else {
       document.getElementById("errMsg").innerText =
-        "* All filed are compulsory";
+        "* All fields are compulsory";
     }
   };
 
@@ -129,7 +141,9 @@ const LoginPage = () => {
               <span id="errMsg" style={{ color: "red" }}></span>
               <h6>Select Your Role:</h6>
               <select name="role" id="role">
-                <option value="ROLE_STUDENT">Student</option>
+                <option value="ROLE_STUDENT" selected>
+                  Student
+                </option>
                 <option value="ROLE_INSTRUCTOR">Instructor</option>
               </select>
             </div>
