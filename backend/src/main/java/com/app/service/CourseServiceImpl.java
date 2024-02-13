@@ -25,25 +25,26 @@ import com.app.entities.CourseStudentDetails;
 import com.app.entities.CourseStudentId;
 import com.app.entities.Instructor;
 import com.app.entities.Student;
+
 @Service
 @Transactional
 public class CourseServiceImpl implements CourseService {
 
 	@Autowired
 	private CourseRepository courseRepo;
-	
+
 	@Autowired
 	private InstructorRepository instRepo;
-	
+
 	@Autowired
 	private StudentRepository studentRepo;
-	
+
 	@Autowired
 	private CourseStudentDetailsRepository courseStudentRepo;
-	
+
 	@Autowired
 	private ModelMapper mapper;
-	
+
 	@Override
 	public List<CourseRespDTO> getAllCoursesFromInstructor(Long instructorId) {
 		List<Course> courseList = courseRepo.findByInstructorId(instructorId);
@@ -56,22 +57,22 @@ public class CourseServiceImpl implements CourseService {
 	public String deleteCourseDetails(Long courseId) {
 		long noOfStudentsInCourses = courseStudentRepo.deleteByMyCourseId(courseId);
 		System.out.println("deleted students " + noOfStudentsInCourses);
-		
+
 		courseRepo.deleteById(courseId);
 		return "Course Deleted SuccessFully";
 	}
 
 	@Override
 	public CourseRespDTO addNewCourse(CourseDTO dto) {
-		
+
 		Instructor inst = instRepo.findById(dto.getInstructorId())
 				.orElseThrow(() -> new ResourceNotFoundException("Invalid Instructor id !!!"));
-		
+
 		// set up a bi dir relationship
 		Course course = mapper.map(dto, Course.class);
-		
+
 		inst.addCourse(course);
-		return mapper.map(courseRepo.save(course),CourseRespDTO.class);
+		return mapper.map(courseRepo.save(course), CourseRespDTO.class);
 	}
 
 	@Override
@@ -80,32 +81,33 @@ public class CourseServiceImpl implements CourseService {
 				.orElseThrow(() -> new ResourceNotFoundException("Invalid Course id !!!"));
 		Instructor inst = instRepo.findById(dto.getInstructorId())
 				.orElseThrow(() -> new ResourceNotFoundException("Invalid Instructor id !!!"));
-		
+
 		mapper.map(dto, course);
 		course.setId(courseId);
-		
+
 		inst.addCourse(course);
 		return mapper.map(course, CourseRespDTO.class);
 	}
 
 	@Override
-	public CourseRespDTO getCourseDetails( Long instructorId, Long courseId) {
+	public CourseRespDTO getCourseDetails(Long instructorId, Long courseId) {
 		Course course = courseRepo.findById(courseId)
 				.orElseThrow(() -> new ResourceNotFoundException("Invalid Course id !!!"));
-		if(course.getInst().getId() != courseId)
+		if (course.getInst().getId() != courseId)
 			throw new ResourceNotFoundException("Instructor id does not match !!!");
 		return mapper.map(course, CourseRespDTO.class);
 	}
 
 	@Override
 	public List<CourseRespDTO> getAllCourses(int pageNumber, int pageSize) {
-		//Creates a PageRequest(imple class of Pageable : i/f for pagination) based upon page no n size
-				Pageable pageable = PageRequest.of(pageNumber, pageSize);
-				//fetches the Page of Courses --> getContent() --> List<Course>
-				List<Course> courseList = courseRepo.findAll(pageable).getContent();
-				return courseList.stream()
-						.map(course-> mapper.map(course, CourseRespDTO.class))
-						.collect(Collectors.toList());
+		// Creates a PageRequest(imple class of Pageable : i/f for pagination) based
+		// upon page no n size
+		Pageable pageable = PageRequest.of(pageNumber, pageSize);
+		// fetches the Page of Courses --> getContent() --> List<Course>
+		List<Course> courseList = courseRepo.findAll(pageable).getContent();
+		return courseList.stream()
+				.map(course -> mapper.map(course, CourseRespDTO.class))
+				.collect(Collectors.toList());
 	}
 
 	@Override
@@ -118,7 +120,7 @@ public class CourseServiceImpl implements CourseService {
 		details.setMyStudent(student);
 		details.setMyCourse(course);
 		courseStudentRepo.save(details);
-		return "Course " + course.getCourseName()+ " assigned to Student " + student.getFirstName();
+		return "Course " + course.getCourseName() + " assigned to Student " + student.getFirstName();
 	}
 
 	@Override
@@ -130,39 +132,36 @@ public class CourseServiceImpl implements CourseService {
 
 	@Override
 	public List<CourseRespDTO> getAllCoursesFromStudent(Long studentId) {
-<<<<<<< HEAD
-		// TODO Auto-generated method stub
-		
-		return null;
-=======
+
 		List<Course> courseList = courseStudentRepo.findByStudentId(studentId);
 		return courseList.stream()
 				.map(course -> mapper.map(course, CourseRespDTO.class))
 				.collect(Collectors.toList());
->>>>>>> 57d647ac151ffff3b4642a757040b85f4c5717b0
+
 	}
 
 	@Override
 	public String assignStudentToMultipleCourses(Long studentId, List<Long> courseIds) {
 		// TODO Auto-generated method stub
-		Student student = studentRepo.findById(studentId).orElseThrow(()-> new ResourceNotFoundException("Invalid StudentID !"));
+		Student student = studentRepo.findById(studentId)
+				.orElseThrow(() -> new ResourceNotFoundException("Invalid StudentID !"));
 		List<Course> courses = courseRepo.findAllById(courseIds);
-		
-		//To save the each mapping in the list
+
+		// To save the each mapping in the list
 		List<CourseStudentDetails> courseStudDetails = new ArrayList<>();
-		
+
 		LocalDate enrollmentDate = LocalDate.now();
-		
-		for (Course	course: courses) {
+
+		for (Course course : courses) {
 			CourseStudentDetails csDetails = new CourseStudentDetails();
 			csDetails.setEnrolledDate(enrollmentDate);
 			csDetails.setMyCourse(course);
 			csDetails.setMyStudent(student);
 			courseStudDetails.add(csDetails);
 		}
-		
+
 		courseStudentRepo.saveAll(courseStudDetails);
-		
+
 		return "You have enrolled in all Courses";
 	}
 

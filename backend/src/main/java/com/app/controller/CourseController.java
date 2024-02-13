@@ -30,13 +30,9 @@ import com.app.service.CourseService;
 public class CourseController {
 	@Autowired
 	private CourseService courseService;
-<<<<<<< HEAD
-	
-	//add new course to existing instructor  //request payload : AddCourse dto
-=======
 
 	// add new course to existing instructor //request payload : AddCourse dto
->>>>>>> 57d647ac151ffff3b4642a757040b85f4c5717b0
+
 	@PostMapping("/add")
 	public ResponseEntity<?> addCourseToExistingInstructor(@RequestBody @Valid CourseDTO dto) {
 		System.out.println("In add course" + dto);
@@ -76,13 +72,7 @@ public class CourseController {
 		System.out.println("in get course details by instructor id n course id " + instructorId + " " + courseId);
 		return ResponseEntity.ok(courseService.getCourseDetails(courseId, instructorId));
 	}
-<<<<<<< HEAD
-	
-	
-	
-=======
 
->>>>>>> 57d647ac151ffff3b4642a757040b85f4c5717b0
 	@GetMapping
 	public ResponseEntity<?> getAllEmpsPaginated(@RequestParam(defaultValue = "0", required = false) int pageNumber,
 			@RequestParam(defaultValue = "3", required = false) int pageSize) {
