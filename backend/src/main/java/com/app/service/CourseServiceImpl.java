@@ -45,6 +45,14 @@ public class CourseServiceImpl implements CourseService {
 	@Autowired
 	private ModelMapper mapper;
 
+	
+	@Override
+	public List<CourseRespDTO> getAllCourses() {
+		return courseRepo.findAll().stream().map(list-> mapper.map(list, CourseRespDTO.class)).collect(Collectors.toList());
+	}
+
+	
+	
 	@Override
 	public List<CourseRespDTO> getAllCoursesFromInstructor(Long instructorId) {
 		List<Course> courseList = courseRepo.findByInstructorId(instructorId);
@@ -69,8 +77,9 @@ public class CourseServiceImpl implements CourseService {
 				.orElseThrow(() -> new ResourceNotFoundException("Invalid Instructor id !!!"));
 
 		// set up a bi dir relationship
+		dto.setPublishedDate(LocalDate.now());
 		Course course = mapper.map(dto, Course.class);
-
+		
 		inst.addCourse(course);
 		return mapper.map(courseRepo.save(course), CourseRespDTO.class);
 	}
@@ -166,4 +175,5 @@ public class CourseServiceImpl implements CourseService {
 		return "You have enrolled in all Courses";
 	}
 
+	
 }

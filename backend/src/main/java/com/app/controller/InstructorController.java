@@ -16,6 +16,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -33,6 +34,7 @@ import com.app.service.InstructorService;
 @RestController
 @RequestMapping("/instructors")
 @Validated
+@CrossOrigin(origins = "http://localhost:3000")
 public class InstructorController {
 
 	@Autowired
@@ -42,10 +44,10 @@ public class InstructorController {
 	@Qualifier("image_db")
 	private ImageHandlingService imgService;
 
-	//get All instructors - access only to ADMIN
+	// get All instructors - access only to ADMIN
 	@GetMapping
 	public ResponseEntity<?> getAllInstructors() {
-		System.out.println("in GET all student " );
+		System.out.println("in GET all student ");
 		return ResponseEntity
 				.ok(instructorService.getAllInstructors());
 

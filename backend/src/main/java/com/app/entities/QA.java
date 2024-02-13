@@ -18,7 +18,5 @@ import lombok.ToString;
 public class QA extends BaseEntity{
 
 	@Column
-	private Long queNo;
-	
-	
+	private Long queNo;	
 }

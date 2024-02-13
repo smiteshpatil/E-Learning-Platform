@@ -26,7 +26,7 @@ public class StudentDTO {
 	
 	@Email
 	private String email;
-	
+
 	@JsonIgnore
 	private String password;
 
@@ -35,10 +35,10 @@ public class StudentDTO {
 	private String gender;
 
 	private String imageUrl;
-	
+
 	private String LinkedInLink;
-	
+
 	private String GitHubLink;
-	
+
 	private String heading;
 }
