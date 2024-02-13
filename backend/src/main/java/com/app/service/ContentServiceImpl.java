@@ -60,18 +60,18 @@ public class ContentServiceImpl implements ContentService {
 		course.addContent(contentEntity);
 		
 		Content savedContent = contentRepo.save(contentEntity);
-		System.out.println("Content entity id : " + contentEntity.getId() + " " + savedContent.getId());
+		System.out.println("Content No: " + dto.getContentNo());
 		return mapper.map(savedContent, ContentDTO.class);
 	}
 
 	@Override
-	public ContentDTO updateContent(Long contentId, ContentDTO dto) {
-		Content content = contentRepo.findById(contentId).orElseThrow(() -> new ResourceNotFoundException("Invalid Content id"));
+	public ContentDTO updateContent(Long contentNo, ContentDTO dto) {
+		Content content = contentRepo.findByContentNo(contentNo).orElseThrow(() -> new ResourceNotFoundException("Invalid Content id"));
 		Course course = courseRepo.findById(dto.getCourseId()).orElseThrow(() -> new ResourceNotFoundException("Invalid Course id"));
 		mapper.map(dto, content);
 		System.out.println("After Mapping " + content);
 		course.addContent(content);
-		dto.setId(contentId);
+		dto.setContentNo(contentNo);
 		return dto;
 	}
 

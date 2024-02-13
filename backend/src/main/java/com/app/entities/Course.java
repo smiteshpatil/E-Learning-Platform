@@ -24,7 +24,7 @@ import lombok.ToString;
 @AllArgsConstructor
 @Getter
 @Setter
-@ToString(exclude = { "inst", "students" })
+@ToString(exclude = { "inst","contents"})
 public class Course extends BaseEntity {
 
 	@Column(length = 20)
