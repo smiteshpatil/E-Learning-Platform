@@ -12,4 +12,7 @@ import lombok.Setter;
 public class SigninResponse {
 	private String jwt;
 	private String mesg;
+	private StudentDTO studentDto;
+	
+   
 }

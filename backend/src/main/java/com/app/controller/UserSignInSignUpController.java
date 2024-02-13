@@ -17,8 +17,10 @@ import org.springframework.web.bind.annotation.RestController;
 import com.app.dto.SigninRequest;
 import com.app.dto.SigninResponse;
 import com.app.dto.Signup;
+import com.app.dto.StudentDTO;
 import com.app.security.JwtUtils;
 import com.app.service.SignupService;
+import com.app.service.StudentService;
 
 @RestController
 @RequestMapping("/users")
@@ -26,6 +28,9 @@ import com.app.service.SignupService;
 public class UserSignInSignUpController {
 	@Autowired
 	private SignupService userService;
+	
+	@Autowired
+	private StudentService studentService;
 
 	@Autowired
 	private JwtUtils utils;
@@ -48,8 +53,11 @@ public class UserSignInSignUpController {
 				.authenticate(new UsernamePasswordAuthenticationToken(reqDTO.getEmail(), reqDTO.getPassword()));
 		System.out.println(verifiedAuth.getClass());// Custom user details
 		// => auth success
+		
+		StudentDTO studentDTO = studentService.getStudentDetails(reqDTO.getEmail());
+
 		return ResponseEntity
-				.ok(new SigninResponse(utils.generateJwtToken(verifiedAuth), "Successful Authentication!!!"));
+				.ok(new SigninResponse(utils.generateJwtToken(verifiedAuth), "Successful Authentication!!!", studentDTO));
 
 	}
 

@@ -78,14 +78,15 @@ public class StudentController {
 		return ResponseEntity.ok(courseService.assignStudentToCourse(courseId, studentId));
 	}
 
-	@PostMapping("/enrollCourse/{studentId}")
-	public ResponseEntity<?> enrollMultipleCourses(@PathVariable Long studentId, @RequestBody List<Long> courseIds) {
-		return ResponseEntity.ok(courseService.assignStudentToMultipleCourses(studentId, courseIds));
+	@PostMapping("/enrollCourse/{studentEmail}")
+	public ResponseEntity<?> enrollMultipleCourses(@PathVariable String studentEmail,
+			@RequestBody List<Long> courseIds) {
+		return ResponseEntity.ok(courseService.assignStudentToMultipleCourses(studentEmail, courseIds));
 	}
 
-	@PostMapping("/cartItems/{studentId}")
-	public ResponseEntity<?> SaveCartItems(@PathVariable Long studentId, @RequestBody List<Long> courseIds) {
-		return ResponseEntity.ok(cartService.addCoursesToCart(studentId, courseIds));
+	@PostMapping("/cartItems/{studentEmail}")
+	public ResponseEntity<?> SaveCartItems(@PathVariable String studentEmail, @RequestBody List<Long> courseIds) {
+		return ResponseEntity.ok(cartService.addCoursesToCart(studentEmail, courseIds));
 	}
 
 	@GetMapping("/cartItems/{studentEmail}")
