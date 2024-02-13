@@ -54,6 +54,12 @@ public class Instructor extends BaseEntity {
 	@Enumerated(EnumType.STRING)
 	@Column(length = 30)
 	private Role role;
+	
+	@Column(unique = true)
+	private String LinkedInLink;
+	
+	@Column(unique = true)
+	private String GitHubLink;
 
 	@Lob // large object :col : longblob
 	private byte[] image; //This will be used for storing n restoring images in DB

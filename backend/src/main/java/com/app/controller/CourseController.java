@@ -31,8 +31,14 @@ public class CourseController {
 	@Autowired
 	private CourseService courseService;
 
+	@GetMapping
+	public ResponseEntity<?> getAllCourses(){
+		return ResponseEntity.ok(courseService.getAllCourses());
+	}
+	
+	
+	
 	// add new course to existing instructor //request payload : AddCourse dto
-
 	@PostMapping("/add")
 	public ResponseEntity<?> addCourseToExistingInstructor(@RequestBody @Valid CourseDTO dto) {
 		System.out.println("In add course" + dto);
@@ -73,8 +79,8 @@ public class CourseController {
 		return ResponseEntity.ok(courseService.getCourseDetails(courseId, instructorId));
 	}
 
-	@GetMapping
-	public ResponseEntity<?> getAllEmpsPaginated(@RequestParam(defaultValue = "0", required = false) int pageNumber,
+	@GetMapping("/paginated")
+	public ResponseEntity<?> getAllCoursesPaginated(@RequestParam(defaultValue = "0", required = false) int pageNumber,
 			@RequestParam(defaultValue = "3", required = false) int pageSize) {
 		System.out.println("in get all instructors " + pageNumber + " " + pageSize);
 		List<CourseRespDTO> list = courseService.getAllCourses(pageNumber, pageSize);
