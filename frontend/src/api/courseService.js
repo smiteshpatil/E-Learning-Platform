@@ -1,6 +1,5 @@
 import axios from "axios";
 import thumbnail from "../images/card1.jpg";
-
 const baseUrl = "http://localhost:8080";
 
 // launch new course
