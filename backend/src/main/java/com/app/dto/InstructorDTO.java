@@ -25,8 +25,6 @@ public class InstructorDTO {
 	private String lastName;
 	@Email
 	private String email;
-	
-	private String password;
 
 	private String phoneNo;
 

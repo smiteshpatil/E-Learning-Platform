@@ -71,7 +71,8 @@ public class StudentServiceImpl implements StudentService {
 	public StudentCoursesDTO getStudentAndCoursesDetails(Long studentId) {
 		Student student = studentRepo.findById(studentId)
 				.orElseThrow(() -> new ResourceNotFoundException("Invalid Student Id !!!!"));
-		return mapper.map(student, StudentCoursesDTO.class);
+	List<Course> list = courseRepo.findByStudentId(studentId);
+		return mapper.map(list, StudentCoursesDTO.class);
 	}
 
 
