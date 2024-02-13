@@ -1,6 +1,24 @@
-//populated courses
+import axios from "axios";
 import thumbnail from "../images/card1.jpg";
 
+const baseUrl = "http://localhost:8080";
+
+// launch new course
+export const createNewCourse = async (newCourse, bearerToken) => {
+  try {
+    const response = await axios.post(baseUrl + "/courses/add", newCourse, {
+      headers: {
+        Authorization: `Bearer ${bearerToken}`,
+      },
+    });
+    console.log(response);
+    return response;
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+//populated courses
 export const courses = [
   {
     id: 1,
