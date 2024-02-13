@@ -16,7 +16,7 @@ const LoginPage = () => {
   const [isActive, setIsActive] = useState(false);
 
   const [formDetails, setFormDetails] = useState({
-    name: "",
+    firstName: "",
     email: "",
     role: "",
     password: "",
@@ -29,16 +29,27 @@ const LoginPage = () => {
   };
 
   // sign in using userService
-  const handleSignIn = () => {
+  const handleSignIn = (e) => {
+    e.preventDefault();
     if (formDetails.email !== "" && formDetails.password !== "") {
-      signIn(formDetails.email, formDetails.password);
+      signIn(formDetails.email, formDetails.password)
+        .then((response) => {
+          const { jwt } = response;
+          localStorage.setItem("token", jwt);
+          setUserContext(jwt);
+          navigate("/");
+        })
+        .catch((error) => {
+          // Handle login error
+        });
     }
   };
 
   //signUp using userService
-  const handleSignUp = () => {
+  const handleSignUp = (e) => {
+    e.preventDefault();
     if (
-      formDetails.name !== "" &&
+      formDetails.firstName !== "" &&
       formDetails.email !== "" &&
       formDetails.password !== ""
     ) {
@@ -46,20 +57,28 @@ const LoginPage = () => {
         ...formDetails,
         role: document.getElementById("role").value,
       });
-      signUp(formDetails);
+      signUp(formDetails)
+        .then((currentUser) => {
+          setUserContext(currentUser);
+        })
+        .catch((error) => {
+          // Handle signup error
+        });
     } else {
       document.getElementById("errMsg").innerText =
-        "* All filed are compulsory";
+        "* All fields are compulsory";
     }
   };
 
-  const setUserContext = (currentUser) => {
+  const setUserContext = (jwtToken) => {
     setIsLoggedIn(true);
+    const decodedToken = jwtDecode(jwtToken);
+    console.log("In setUserContext ", decodedToken);
     setAuthUser({
-      firstName: currentUser.name,
-      lastName: currentUser.family_name,
-      picture: currentUser.picture,
-      email: currentUser.email,
+      firstName: decodedToken.firstName,
+      lastName: decodedToken.lastName,
+      picture: decodedToken.picture,
+      email: decodedToken.email,
     });
     navigate("/");
   };
@@ -95,9 +114,9 @@ const LoginPage = () => {
             <span>Use your email for registration</span>
             <input
               type="text"
-              name="name"
+              name="firstName"
               placeholder="Name"
-              value={formDetails.name}
+              value={formDetails.firstName}
               onChange={handleChange}
             />
             <span id="errEmail"></span>
@@ -119,7 +138,7 @@ const LoginPage = () => {
             <div style={{ textAlign: "left" }}>
               <span id="errMsg" style={{ color: "red" }}></span>
               <h6>Select Your Role:</h6>
-              <select name="role" id="role">
+              <select name="role" id="role" defaultValue="ROLE_STUDENT">
                 <option value="ROLE_STUDENT">Student</option>
                 <option value="ROLE_INSTRUCTOR">Instructor</option>
               </select>
@@ -138,8 +157,8 @@ const LoginPage = () => {
             <span>or use your email password</span>
             <input
               type="email"
-              name="name"
-              value={formDetails.name}
+              name="email"
+              value={formDetails.email}
               onChange={handleChange}
               placeholder="Email"
             />

@@ -10,7 +10,7 @@ const ProfileIcon = () => {
 
   return (
     <>
-      {authUser.picture != null ? (
+      {authUser !== null ? (
         <img src={authUser.picture} alt="profile" style={ProfileIcon} />
       ) : (
         <></>

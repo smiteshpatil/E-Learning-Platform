@@ -58,11 +58,10 @@ const ProfilePhoto = () => {
                   <div>
                     <img
                       src={imagePreview}
-                      class="img-fluid"
                       alt="Preview"
                       height="200"
                       width="200"
-                      className="lazy"
+                      className="img-fluid lazy"
                       style={{ maxHeight: "20rem" }}
                     />
                   </div>

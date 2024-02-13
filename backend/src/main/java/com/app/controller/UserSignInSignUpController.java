@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,10 +22,11 @@ import com.app.service.SignupService;
 
 @RestController
 @RequestMapping("/users")
+@CrossOrigin(origins = "http://localhost:3000")
 public class UserSignInSignUpController {
 	@Autowired
 	private SignupService userService;
-	
+
 	@Autowired
 	private JwtUtils utils;
 
@@ -38,7 +40,6 @@ public class UserSignInSignUpController {
 		return ResponseEntity.status(HttpStatus.CREATED).body(userService.registerNewUser(dto));
 	}
 
-	
 	@PostMapping("/signin")
 	public ResponseEntity<?> signinUser(@RequestBody @Valid SigninRequest reqDTO) {
 		System.out.println("in signin " + reqDTO);
