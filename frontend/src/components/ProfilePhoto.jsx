@@ -3,13 +3,12 @@ import { Container, Row } from "react-bootstrap";
 import { useAuth } from "../context/AuthContext";
 
 const ProfilePhoto = () => {
-  let { authUser } = useAuth();
+  const { authUser } = useAuth();
 
-  const placeholderImage = `${
-    authUser.picture != null
+  const placeholderImage =
+    authUser && authUser.picture
       ? authUser.picture
-      : "https://via.placeholder.com/200"
-  }`; // Placeholder image URL
+      : "https://via.placeholder.com/200"; // Placeholder image URL
   const [imagePreview, setImagePreview] = useState(placeholderImage); // State for image preview
 
   const handleImageChange = (e) => {
@@ -56,14 +55,16 @@ const ProfilePhoto = () => {
                 </div>
                 <div className="ud-image-upload-preview-wrapper mb-3 mt-2 border-container">
                   <div>
-                    <img
-                      src={imagePreview}
-                      alt="Preview"
-                      height="200"
-                      width="200"
-                      className="img-fluid lazy"
-                      style={{ maxHeight: "20rem" }}
-                    />
+                    {authUser && authUser.picture && (
+                      <img
+                        src={imagePreview}
+                        alt="Preview"
+                        height="200"
+                        width="200"
+                        className="img-fluid lazy"
+                        style={{ maxHeight: "20rem" }}
+                      />
+                    )}
                   </div>
                 </div>
               </div>

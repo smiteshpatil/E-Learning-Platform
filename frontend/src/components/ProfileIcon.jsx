@@ -3,18 +3,16 @@ import { useAuth } from "../context/AuthContext";
 const ProfileIcon = () => {
   let { authUser } = useAuth();
 
-  const ProfileIcon = {
+  const profileIconStyle = {
     borderRadius: "50%",
     height: "50px",
   };
 
   return (
     <>
-      {authUser !== null ? (
-        <img src={authUser.picture} alt="Profile" style={ProfileIcon} />
-      ) : (
-        <></>
-      )}
+      {authUser && authUser.picture ? (
+        <img src={authUser.picture} alt="Profile" style={profileIconStyle} />
+      ) : null}
     </>
   );
 };
