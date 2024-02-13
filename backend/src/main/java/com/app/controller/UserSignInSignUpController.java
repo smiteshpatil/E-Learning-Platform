@@ -54,11 +54,10 @@ public class UserSignInSignUpController {
 		System.out.println(verifiedAuth.getClass());// Custom user details
 		// => auth success
 		
-		StudentDTO studentDTO = studentService.getStudentDetails(reqDTO.getEmail());
+//		StudentDTO studentDTO = studentService.getStudentDetails(reqDTO.getEmail());
 
 		return ResponseEntity
-				.ok(new SigninResponse(utils.generateJwtToken(verifiedAuth), "Successful Authentication!!!", studentDTO));
-
+				.ok(new SigninResponse(utils.generateJwtToken(verifiedAuth), "Successful Authentication!!!"));
 	}
 
 }

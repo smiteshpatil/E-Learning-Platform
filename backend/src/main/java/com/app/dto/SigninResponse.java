@@ -1,4 +1,4 @@
-package com.app.dto;
+	package com.app.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -12,7 +12,7 @@ import lombok.Setter;
 public class SigninResponse {
 	private String jwt;
 	private String mesg;
-	private StudentDTO studentDto;
+//	private StudentDTO studentDto;
 	
    
 }
