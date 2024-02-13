@@ -69,11 +69,17 @@ public class StudentServiceImpl implements StudentService {
 
 	@Override
 	public StudentCoursesDTO getStudentAndCoursesDetails(Long studentId) {
-		Student student = studentRepo.findById(studentId)
-				.orElseThrow(() -> new ResourceNotFoundException("Invalid Student Id !!!!"));
-	List<Course> list = courseRepo.findByStudentId(studentId);
-		return mapper.map(list, StudentCoursesDTO.class);
+		// TODO Auto-generated method stub
+		return null;
 	}
+
+//	@Override
+//	public StudentCoursesDTO getStudentAndCoursesDetails(Long studentId) {
+//		Student student = studentRepo.findById(studentId)
+//				.orElseThrow(() -> new ResourceNotFoundException("Invalid Student Id !!!!"));
+//	List<Course> list = courseRepo.findByStudentId(studentId);
+//		return mapper.map(list, StudentCoursesDTO.class);
+//	}
 
 
 

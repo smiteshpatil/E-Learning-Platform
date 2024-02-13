@@ -65,11 +65,11 @@ public class StudentController {
 		return ResponseEntity.ok(studentService.deleteStudent(studentId));
 	}
 
-	@GetMapping("/{studentId}/courses")
-	public ResponseEntity<?> getStudentAndCoursesDetails(@PathVariable @Min(1) @Max(10) Long studentId) {
-		System.out.println("in GET student n courses dtls " + studentId);
-		return ResponseEntity.ok(studentService.getStudentAndCoursesDetails(studentId));
-	}
+//	@GetMapping("/{studentId}/courses")
+//	public ResponseEntity<?> getStudentAndCoursesDetails(@PathVariable @Min(1) @Max(10) Long studentId) {
+//		System.out.println("in GET student n courses dtls " + studentId);
+//		return ResponseEntity.ok(studentService.getStudentAndCoursesDetails(studentId));
+//	}
 
 	@PostMapping("/enrollCourse/{studentId}/{courseId}")
 
