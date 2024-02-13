@@ -77,9 +77,44 @@ const ProfilePhoto = () => {
                   />
 
                   <p className="text-start small fw-light">
-                    Add a professional headline like, "Instructor at Udemy" or
-                    "Architect."
+                    Add a professional headline.
                   </p>
+                </div>
+              </div>
+
+              <div
+                style={{
+                  paddingBottom: "1rem",
+                  paddingLeft: "10rem",
+                  paddingRight: "10rem",
+                }}
+              >
+                <p className="text-start">Mobile</p>
+                <input
+                  className="form-control form-control-lg"
+                  type="number"
+                  name="phoneNo"
+                  placeholder="+91"
+                  aria-label="Last Name"
+                  value={authUser.phoneNo}
+                />
+                <br />
+                <p className="text-start">Gender</p>
+                <div style={{ display: "flex", alignItems: "center" }}>
+                  <input type="radio" name="gender" id="male" value="male" />
+                  <label htmlFor="male" style={{ marginLeft: "0.5rem" }}>
+                    Male
+                  </label>
+                  <input
+                    type="radio"
+                    name="gender"
+                    id="female"
+                    value="female"
+                    style={{ marginLeft: "1rem" }}
+                  />
+                  <label htmlFor="female" style={{ marginLeft: "0.5rem" }}>
+                    Female
+                  </label>
                 </div>
               </div>
 
