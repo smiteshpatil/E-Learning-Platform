@@ -1,11 +1,8 @@
 package com.app.entities;
 
-
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
@@ -22,11 +19,9 @@ import lombok.ToString;
 @AllArgsConstructor
 @Getter
 @Setter
-@ToString(exclude = "contentUrl")
+@ToString(exclude = "course")
 public class Content extends BaseEntity{
 	
-//	@Column(length = 20)
-//	private String courseName;
 	@Column
 	private Long contentNo;
 	@Column(length = 20)
@@ -36,7 +31,7 @@ public class Content extends BaseEntity{
 	@Column
 	private String contentUrl;
 	
-	@ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.MERGE)
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "course_id")
 	private Course course;
 }

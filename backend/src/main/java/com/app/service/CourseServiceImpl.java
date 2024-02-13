@@ -20,6 +20,7 @@ import com.app.dto.CourseDTO;
 import com.app.dto.CourseRespDTO;
 import com.app.entities.Course;
 import com.app.entities.CourseStudentDetails;
+import com.app.entities.CourseStudentId;
 import com.app.entities.Instructor;
 import com.app.entities.Student;
 @Service
@@ -51,8 +52,11 @@ public class CourseServiceImpl implements CourseService {
 
 	@Override
 	public String deleteCourseDetails(Long courseId) {
-		// TODO Auto-generated method stub
-		return null;
+		long noOfStudentsInCourses = courseStudentRepo.deleteByMyCourseId(courseId);
+		System.out.println("deleted students " + noOfStudentsInCourses);
+		
+		courseRepo.deleteById(courseId);
+		return "Course Deleted SuccessFully";
 	}
 
 	@Override
@@ -117,14 +121,17 @@ public class CourseServiceImpl implements CourseService {
 
 	@Override
 	public String removeStudentFromCourse(Long courseId, Long studentId) {
-		
-		return null;
+		CourseStudentId id = new CourseStudentId(courseId, studentId);
+		courseStudentRepo.deleteById(id);
+		return "Student Removed From Course " + courseId;
 	}
 
 	@Override
 	public List<CourseRespDTO> getAllCoursesFromStudent(Long studentId) {
-		// TODO Auto-generated method stub
-		return null;
+		List<Course> courseList = courseStudentRepo.findByStudentId(studentId);
+		return courseList.stream()
+				.map(course -> mapper.map(course, CourseRespDTO.class))
+				.collect(Collectors.toList());
 	}
 
 }

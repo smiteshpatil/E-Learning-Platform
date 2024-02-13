@@ -7,9 +7,14 @@ import org.springframework.data.jpa.repository.Query;
 
 import com.app.entities.Course;
 import com.app.entities.CourseStudentDetails;
+import com.app.entities.CourseStudentId;
 import com.app.entities.Student;
 
-public interface CourseStudentDetailsRepository extends JpaRepository<CourseStudentDetails, Long> {
+public interface CourseStudentDetailsRepository extends JpaRepository<CourseStudentDetails, CourseStudentId> {
+	
+	int deleteByMyStudentId(Long studentId);
+	
+	int deleteByMyCourseId(Long courseId);
 	
 	@Query("select s.myStudent from CourseStudentDetails s where s.myCourse.id=:courseId")
 	List<Student> findByCourseId(Long courseId);

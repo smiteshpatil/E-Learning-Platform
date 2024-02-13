@@ -1,7 +1,5 @@
 package com.app.dto;
 
-import java.time.LocalDate;
-
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -10,9 +8,8 @@ import lombok.ToString;
 @Setter
 @ToString
 public class CourseRespDTO {
-	private Long courseId;
+	private Long id;
 	private String courseName;
-	private LocalDate enrolledDate;
 	private String category;
 	private String description;
 	private String skillLevel;
