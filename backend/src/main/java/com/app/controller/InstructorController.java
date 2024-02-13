@@ -26,6 +26,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.app.dto.InstructorDTO;
+import com.app.service.ImageHandlingService;
 //import com.app.service.ImageHandlingService;
 import com.app.service.InstructorService;
 
@@ -37,9 +38,9 @@ public class InstructorController {
 	@Autowired
 	private InstructorService instructorService;
 
-//	@Autowired
-//	@Qualifier("image_db")
-//	private ImageHandlingService imgService;
+	@Autowired
+	@Qualifier("image_db")
+	private ImageHandlingService imgService;
 
 	//get All instructors - access only to ADMIN
 	@GetMapping
@@ -64,20 +65,20 @@ public class InstructorController {
 		return ResponseEntity.ok(instructorService.getInstructorAndCourseDetails(instructorId));
 	}
 
-//	// upload image from client n saving it either on db or in server side folder
-//	@PostMapping(value = "/images/{instructorId}", consumes = "multipart/form-data")
-//	public ResponseEntity<?> uploadImage(@PathVariable Long instructorId, @RequestParam MultipartFile imageFile)
-//			throws IOException {
-//		System.out.println("In upload img " + instructorId);
-//		return ResponseEntity.status(HttpStatus.CREATED).body(imgService.uploadImage(instructorId, imageFile));
-//
-//	}
-//
-//	// download image of specific instructor
-//	@GetMapping(value = "/images/{instructorId}", produces = { IMAGE_GIF_VALUE, IMAGE_JPEG_VALUE, IMAGE_PNG_VALUE,
-//			ALL_VALUE })
-//	public ResponseEntity<?> downloadEmpImage(@PathVariable Long instructorId) throws IOException {
-//		System.out.println("in download img " + instructorId);
-//		return ResponseEntity.ok(imgService.downloadImage(instructorId));
-//	}
+	// upload image from client n saving it either on db or in server side folder
+	@PostMapping(value = "/images/{instructorId}", consumes = "multipart/form-data")
+	public ResponseEntity<?> uploadImage(@PathVariable Long instructorId, @RequestParam MultipartFile imageFile)
+			throws IOException {
+		System.out.println("In upload img " + instructorId);
+		return ResponseEntity.status(HttpStatus.CREATED).body(imgService.uploadImage(instructorId, imageFile));
+
+	}
+
+	// download image of specific instructor
+	@GetMapping(value = "/images/{instructorId}", produces = { IMAGE_GIF_VALUE, IMAGE_JPEG_VALUE, IMAGE_PNG_VALUE,
+			ALL_VALUE })
+	public ResponseEntity<?> downloadEmpImage(@PathVariable Long instructorId) throws IOException {
+		System.out.println("in download img " + instructorId);
+		return ResponseEntity.ok(imgService.downloadImage(instructorId));
+	}
 }

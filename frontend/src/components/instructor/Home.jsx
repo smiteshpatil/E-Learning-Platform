@@ -9,9 +9,7 @@ import {
 const Home = () => {
   return (
     <main className="main-container">
-      <div className="main-title">
-        <h3>DASHBOARD</h3>
-      </div>
+      <div className="main-title"></div>
 
       <div className="main-cards">
         <div className="card-outer">
@@ -37,7 +35,7 @@ const Home = () => {
         </div>
         <div className="card-outer">
           <div className="card-inner">
-            <h3>Alerts</h3>
+            <h3>Questions</h3>
             <BsFillBellFill className="card_icon" />
           </div>
           <h1>42</h1>

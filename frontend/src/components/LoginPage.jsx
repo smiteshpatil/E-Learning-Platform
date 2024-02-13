@@ -85,9 +85,9 @@ const LoginPage = () => {
 
   //login using google
   function handleCallbackResponse(response) {
-    let userDetails = jwtDecode(response.credential);
-    signUp(userDetails);
-    setUserContext(userDetails);
+    console.log("reached here", response);
+    // signUp(userDetails);
+    setUserContext(response.credential);
   }
 
   useEffect(() => {

@@ -1,14 +1,13 @@
 import React from "react";
 import "./css/VideoQAndA.css";
 import { courses } from "../../api/courseService";
-import SearchBar from "../SearchBar";
 import QandASearchBar from "./QandASearchBar";
 import PublishQuestion from "./PublishQuestion";
 const VideoQAndA = () => {
   let currentCourse = courses[0];
   return (
     <>
-      <div className="mx-3 mt-3">
+      <div className="mx-3 mt-3" style={{ color: "black" }}>
         <div className="QandAcontainer">
           <strong>Tips on getting your questions answered faster</strong>
           <ul className="tips-list">

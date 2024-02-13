@@ -15,7 +15,7 @@ const ProfilePage = () => {
               <div className="text-center mb-4 ">
                 <Image
                   src={
-                    authUser.picture != null
+                    authUser && authUser.picture
                       ? authUser.picture
                       : "https://via.placeholder.com/150"
                   }
