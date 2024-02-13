@@ -141,10 +141,11 @@ public class CourseServiceImpl implements CourseService {
 	}
 
 	@Override
-	public String assignStudentToMultipleCourses(Long studentId, List<Long> courseIds) {
+	public String assignStudentToMultipleCourses(String studentEmail, List<Long> courseIds) {
 		// TODO Auto-generated method stub
-		Student student = studentRepo.findById(studentId)
-				.orElseThrow(() -> new ResourceNotFoundException("Invalid StudentID !"));
+		Student student = studentRepo.findByEmail(studentEmail)
+				.orElseThrow(() -> new ResourceNotFoundException("Invalid Student email: " + studentEmail));
+
 		List<Course> courses = courseRepo.findAllById(courseIds);
 
 		// To save the each mapping in the list
