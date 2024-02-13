@@ -4,7 +4,6 @@ import { faGooglePlusG, faGithub } from "@fortawesome/free-brands-svg-icons";
 import "../css/LoginPage.css";
 import { useEffect } from "react";
 import { useAuth } from "../context/AuthContext";
-import { jwtDecode } from "jwt-decode";
 import { useNavigate } from "react-router-dom";
 import { signIn, signUp } from "../api/userService";
 
@@ -28,16 +27,27 @@ const LoginPage = () => {
     setFormDetails({ ...formDetails, [name]: value });
   };
 
+  //set user context
+  const setUserContext = (jwt, userDetails) => {
+    setIsLoggedIn(true);
+    console.log("LoginPage: In setUserContext ", userDetails);
+    setAuthUser(userDetails);
+    navigate("/");
+  };
+
   // sign in using userService
   const handleSignIn = (e) => {
     e.preventDefault();
     if (formDetails.email !== "" && formDetails.password !== "") {
       signIn(formDetails.email, formDetails.password)
         .then((response) => {
-          const { jwt } = response;
+          console.table(response);
+          //jwt and body from response
+          const { jwt, userDetails } = response;
+          //save the token in localstorage
           localStorage.setItem("token", jwt);
-          setUserContext(jwt);
-          navigate("/");
+          localStorage.setItem("userObject", userDetails);
+          setUserContext(jwt, userDetails);
         })
         .catch((error) => {
           // Handle login error
@@ -68,19 +78,6 @@ const LoginPage = () => {
       document.getElementById("errMsg").innerText =
         "* All fields are compulsory";
     }
-  };
-
-  const setUserContext = (jwtToken) => {
-    setIsLoggedIn(true);
-    const decodedToken = jwtDecode(jwtToken);
-    console.log("In setUserContext ", decodedToken);
-    setAuthUser({
-      firstName: decodedToken.firstName,
-      lastName: decodedToken.lastName,
-      picture: decodedToken.picture,
-      email: decodedToken.email,
-    });
-    navigate("/");
   };
 
   //login using google

@@ -8,7 +8,7 @@ const CreateCourseCard = (props) => {
     skillLevel: "",
     language: "",
     price: "",
-    poster: "", // Adding poster as a string
+    coursePoster: "", // Adding coursePoster as a string
   });
 
   const [imagePreview, setImagePreview] = useState(null);
@@ -20,8 +20,12 @@ const CreateCourseCard = (props) => {
     const reader = new FileReader();
     reader.onloadend = () => {
       setImagePreview(reader.result);
-      // Add poster file in the newCourse
-      setNewCourse({ ...newCourse, poster: reader.result }); // Set poster as base64 string
+      // Add coursePoster file in the newCourse
+      console.log(reader.result);
+      setNewCourse({
+        ...newCourse,
+        coursePoster: JSON.stringify(reader.result),
+      }); // Set coursePoster as base64 string
     };
     if (file) {
       reader.readAsDataURL(file);
@@ -96,7 +100,7 @@ const CreateCourseCard = (props) => {
               type="file"
               className="form-control-file"
               id="imageUpload"
-              name="poster"
+              name="coursePoster"
               onChange={handleImageUpload}
               accept="image/*"
             />
@@ -121,7 +125,9 @@ const CreateCourseCard = (props) => {
               className="form-select"
               name="category"
               id="category"
-              onChange={handleChange}
+              defaultValue="development"
+              value={newCourse.category} // Set value from state
+              onChange={handleChange} // Add onChange handler
             >
               <option value="development">Development</option>
               <option value="finance">Finance</option>
@@ -144,7 +150,9 @@ const CreateCourseCard = (props) => {
               className="form-select"
               name="language"
               id="language"
-              onChange={handleChange}
+              defaultValue="english"
+              value={newCourse.language} // Set value from state
+              onChange={handleChange} // Add onChange handler
             >
               <option value="english">English</option>
               <option value="hindi">Hindi</option>
@@ -152,6 +160,7 @@ const CreateCourseCard = (props) => {
             </select>
           </div>
         </div>
+
         <div className="row mb-3">
           <label
             htmlFor="skillLevel"
