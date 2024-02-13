@@ -41,7 +41,7 @@ public class SecurityConfig {
 		.exceptionHandling().authenticationEntryPoint(authEntry).
 		and().
 		authorizeRequests()
-		.antMatchers("/users/signup","/users/signin","/instructors/images/{instructorId}",
+		.antMatchers("/users/signup","/users/signin","/courses","/instructors/images/{instructorId}",
 				"/v*/api-doc*/**","/swagger-ui/**").permitAll()
 		// only required for JS clnts (react / angular) : for the pre flight requests
 		.antMatchers(HttpMethod.OPTIONS).permitAll()
@@ -57,7 +57,6 @@ public class SecurityConfig {
 		.hasRole("STUDENT")
 		.antMatchers("/instructors/{instructorId}",
 				"/instructors/{instructorId}/courses",
-				"/courses",
 				"/courses/{instructorId}",
 				"/courses/add",
 				"/courses/update/{courseId}",

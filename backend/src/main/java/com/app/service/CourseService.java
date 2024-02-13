@@ -6,9 +6,9 @@ import com.app.dto.CourseDTO;
 import com.app.dto.CourseRespDTO;
 
 public interface CourseService {
-	// get list of courses from specific Instructor
-	List<CourseRespDTO> getAllCoursesFromInstructor(Long instructorId);
 
+	List<CourseRespDTO> getAllCourses();
+	
 	// delete= course details
 	String deleteCourseDetails(Long courseId);
 
@@ -32,4 +32,8 @@ public interface CourseService {
 	String removeStudentFromCourse(Long courseId, Long studentId);
 
 	List<CourseRespDTO> getAllCoursesFromStudent(Long studentId);
+
+	// get list of courses from specific Instructor
+	List<CourseRespDTO> getAllCoursesFromInstructor(Long instructorId);
+
 }
