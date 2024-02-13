@@ -39,7 +39,7 @@ const ProfilePhoto = () => {
                     name="firstName"
                     placeholder="First Name"
                     aria-label="First Name"
-                    value={authUser.firstName}
+                    value={authUser ? authUser.firstName : ""}
                   />
                 </div>
                 <div
@@ -55,7 +55,7 @@ const ProfilePhoto = () => {
                     name="lastName"
                     placeholder="Last Name"
                     aria-label="Last Name"
-                    value={authUser.lastName}
+                    value={authUser ? authUser.lastName : ""}
                   />
                 </div>
                 <div
@@ -96,7 +96,7 @@ const ProfilePhoto = () => {
                   name="phoneNo"
                   placeholder="+91"
                   aria-label="Last Name"
-                  value={authUser.phoneNo}
+                  value={authUser ? authUser.phoneNo : ""}
                 />
                 <br />
                 <p className="text-start">Gender</p>

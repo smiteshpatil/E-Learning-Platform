@@ -1,5 +1,6 @@
 import React, { useState, useContext, useEffect } from "react";
 import { jwtDecode } from "jwt-decode";
+import { useNavigate } from "react-router-dom";
 const AuthContext = React.createContext();
 
 export function useAuth() {
@@ -10,6 +11,8 @@ export function AuthProvider(props) {
   const [authUser, setAuthUser] = useState(null);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [allCourses, setAllCourses] = useState([]);
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     //check if token exists in localStorage
@@ -25,6 +28,10 @@ export function AuthProvider(props) {
         picture: decodedToken.picture,
         email: decodedToken.email,
       });
+    } else {
+      // toast here
+      setIsLoggedIn(false);
+      navigate("/login");
     }
   }, []);
 

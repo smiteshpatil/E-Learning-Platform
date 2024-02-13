@@ -7,7 +7,7 @@ function Header({ OpenSidebar }) {
       <div className="menu-icon">
         <BsJustify className="icon" onClick={OpenSidebar} />
       </div>
-      <h2>Instructor Dashbard</h2>
+      {/* <h2>Instructor Dashbard</h2> */}
     </header>
   );
 }
