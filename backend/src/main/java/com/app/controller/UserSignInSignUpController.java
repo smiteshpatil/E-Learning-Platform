@@ -41,7 +41,7 @@ public class UserSignInSignUpController {
 
 	@Autowired
 	private InstructorService instructorService;
-	
+
 	@Autowired
 	private AdminService adminService;
 
@@ -63,40 +63,39 @@ public class UserSignInSignUpController {
 
 	@PostMapping("/signin")
 	public ResponseEntity<?> signinUser(@RequestBody @Valid SigninRequest reqDTO) {
-	    System.out.println("in signin " + reqDTO);
+		System.out.println("in signin " + reqDTO);
 
-	    Authentication verifiedAuth = mgr
-	            .authenticate(new UsernamePasswordAuthenticationToken(reqDTO.getEmail(), reqDTO.getPassword()));
-	    
-	    System.out.println(verifiedAuth.getClass());// Custom user details
-	    // => auth success
+		Authentication verifiedAuth = mgr
+				.authenticate(new UsernamePasswordAuthenticationToken(reqDTO.getEmail(), reqDTO.getPassword()));
 
-	    // Determine the user type
-	    Role userType = signinService.determineUserType(verifiedAuth);
-	    System.out.println("UserType is:  " + userType);
+		System.out.println(verifiedAuth.getClass());// Custom user details
+		// => auth success
 
-	    // Get user details based on the determined user type
-	    Object userDetails = null;
-	    switch (userType) {
-	        case ROLE_STUDENT:
-	            userDetails = studentService.getStudentDetails(reqDTO.getEmail());
-	            break;
-	        case ROLE_INSTRUCTOR:
-	            userDetails = instructorService.getInstructorDetails(reqDTO.getEmail());
-	            break;
-	        case ROLE_ADMIN:
-	            userDetails = adminService.getAdminByEmail(reqDTO.getEmail());
-	            break;
-	        default:
-	        	return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Unknown user type");
-	    }
+		// Determine the user type
+		Role userType = signinService.determineUserType(verifiedAuth);
+		System.out.println("UserType is:  " + userType);
 
-	    // Create a SignInResponse object with JWT token and user details
-	    SigninResponse<Object> response = new SigninResponse<>(utils.generateJwtToken(verifiedAuth),
-	            "Successful Authentication!!!", userDetails);
+		// Get user details based on the determined user type
+		Object userDetails = null;
+		switch (userType) {
+			case ROLE_STUDENT:
+				userDetails = studentService.getStudentDetails(reqDTO.getEmail());
+				break;
+			case ROLE_INSTRUCTOR:
+				userDetails = instructorService.getInstructorDetails(reqDTO.getEmail());
+				break;
+			case ROLE_ADMIN:
+				userDetails = adminService.getAdminByEmail(reqDTO.getEmail());
+				break;
+			default:
+				return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Unknown user type");
+		}
 
-	    return ResponseEntity.ok(response);
+		// Create a SignInResponse object with JWT token and user details
+		SigninResponse<Object> response = new SigninResponse<>(utils.generateJwtToken(verifiedAuth),
+				"Successful Authentication!!!", userDetails);
+
+		return ResponseEntity.ok(response);
 	}
-
 
 }
