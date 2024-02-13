@@ -10,7 +10,7 @@ export const signIn = async (userEmail, userPass) => {
       password: userPass,
     });
     console.log(response);
-    return response;
+    return response.data;
   } catch (err) {
     console.log(err);
   }

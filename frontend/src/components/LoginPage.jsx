@@ -20,13 +20,6 @@ const LoginPage = () => {
     email: "",
     role: "",
     password: "",
-    /**	this.firstName = firstName;
-		this.lastName = lastName;
-		this.email = email;
-		this.password = password;
-		this.phoneNo = phoneNo;
-		this.gender = gender;
-		this.role = role; */
   });
 
   //set form details
@@ -40,8 +33,11 @@ const LoginPage = () => {
     e.preventDefault();
     if (formDetails.email !== "" && formDetails.password !== "") {
       signIn(formDetails.email, formDetails.password)
-        .then((currentUser) => {
-          setUserContext(currentUser);
+        .then((response) => {
+          const { jwt } = response;
+          localStorage.setItem("token", jwt);
+          setUserContext(jwt);
+          navigate("/");
         })
         .catch((error) => {
           // Handle login error
@@ -74,13 +70,15 @@ const LoginPage = () => {
     }
   };
 
-  const setUserContext = (currentUser) => {
+  const setUserContext = (jwtToken) => {
     setIsLoggedIn(true);
+    const decodedToken = jwtDecode(jwtToken);
+    console.log("In setUserContext ", decodedToken);
     setAuthUser({
-      firstName: currentUser.firstName,
-      lastName: currentUser.family_name,
-      picture: currentUser.picture,
-      email: currentUser.email,
+      firstName: decodedToken.firstName,
+      lastName: decodedToken.lastName,
+      picture: decodedToken.picture,
+      email: decodedToken.email,
     });
     navigate("/");
   };
@@ -140,10 +138,8 @@ const LoginPage = () => {
             <div style={{ textAlign: "left" }}>
               <span id="errMsg" style={{ color: "red" }}></span>
               <h6>Select Your Role:</h6>
-              <select name="role" id="role">
-                <option value="ROLE_STUDENT" selected>
-                  Student
-                </option>
+              <select name="role" id="role" defaultValue="ROLE_STUDENT">
+                <option value="ROLE_STUDENT">Student</option>
                 <option value="ROLE_INSTRUCTOR">Instructor</option>
               </select>
             </div>
