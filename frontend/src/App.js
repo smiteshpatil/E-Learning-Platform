@@ -26,6 +26,7 @@ import Dashboard from "./components/instructor/Dashboard";
 import Courses from "./components/instructor/Courses";
 import Home from "./components/instructor/Home";
 import Revenue from "./components/instructor/Revenue";
+import UploadContentPage from "./components/instructor/UploadContentPage";
 
 function App() {
   return (
@@ -44,13 +45,14 @@ function App() {
           <Route path="closeAccount" element={<ProfileCloseAccount />} />
           <Route path="profile" element={<UserProfile />} />
         </Route>
-        <Route path="/courses">
-          <Route path=":id" element={<Course />} />
-        </Route>
+
         {/* Courses */}
         <Route path="/courses">
           <Route path=":id" element={<Course />}></Route>
+          {/* upload course content routes */}
+          <Route path="upload" element={<UploadContentPage />} />
         </Route>
+
         {/* Cart */}
         <Route path="/cart" element={<Cart />}></Route>
         {/* Cart */}
