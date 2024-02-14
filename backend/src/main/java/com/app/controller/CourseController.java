@@ -34,10 +34,9 @@ public class CourseController {
 	public ResponseEntity<?> getAllCourses() {
 		return ResponseEntity.ok(courseService.getAllCourses());
 	}
-	
+
 	@GetMapping("/details")
-	public ResponseEntity<?> getAllCoursesWithDetails()
-	{
+	public ResponseEntity<?> getAllCoursesWithDetails() {
 		return ResponseEntity.ok(courseService.getAllCoursesWithDetails());
 	}
 
@@ -67,6 +66,17 @@ public class CourseController {
 	public ResponseEntity<?> getCoursesByInstructorId(@PathVariable Long instructorId) {
 		System.out.println("In get courses from instructor" + instructorId);
 		List<CourseRespDTO> list = courseService.getAllCoursesFromInstructor(instructorId);
+		if (list.isEmpty())
+			return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+		// course not found
+		return ResponseEntity.ok(list);
+	}
+
+	// get all courses by Instructor Id
+	@GetMapping("/{instructorEmail}")
+	public ResponseEntity<?> getCoursesByInstructorEmail(@RequestBody String instructorEmail) {
+		System.out.println("In get courses from instructor" + instructorEmail);
+		List<CourseRespDTO> list = courseService.getAllCourseByInstructorEmail(instructorEmail);
 		if (list.isEmpty())
 			return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
 		// course not found

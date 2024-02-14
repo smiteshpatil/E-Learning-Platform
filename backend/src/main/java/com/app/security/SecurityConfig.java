@@ -58,6 +58,7 @@ public class SecurityConfig {
 		.antMatchers("/instructors/{instructorId}",
 				"/instructors/{instructorId}/courses",
 				"/courses/{instructorId}",
+				"/courses/{instructorEmail}",
 				"/courses/add",
 				"/courses/update/{courseId}",
 				"/delete/{courseId}",

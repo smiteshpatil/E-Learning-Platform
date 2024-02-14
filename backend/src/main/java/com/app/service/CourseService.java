@@ -39,5 +39,7 @@ public interface CourseService {
 
 	// get list of courses from specific Instructor
 	List<CourseRespDTO> getAllCoursesFromInstructor(Long instructorId);
+	
+	List<CourseRespDTO> getAllCourseByInstructorEmail(String email);
 
 }

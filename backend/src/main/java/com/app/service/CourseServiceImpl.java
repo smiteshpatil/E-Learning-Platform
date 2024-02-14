@@ -78,6 +78,15 @@ public class CourseServiceImpl implements CourseService {
 				.map(course -> mapper.map(course, CourseRespDTO.class))
 				.collect(Collectors.toList());
 	}
+	
+	@Override
+	public List<CourseRespDTO> getAllCourseByInstructorEmail(String email) {
+		List<Course> list = courseRepo.findByInstEmail(email);
+		return list.stream()
+				.map(course -> mapper.map(course, CourseRespDTO.class))
+				.collect(Collectors.toList());
+	}
+
 
 	@Override
 	public String deleteCourseDetails(Long courseId) {
@@ -192,5 +201,6 @@ public class CourseServiceImpl implements CourseService {
 		return "You have enrolled in all Courses";
 	}
 
+	
 	
 }
