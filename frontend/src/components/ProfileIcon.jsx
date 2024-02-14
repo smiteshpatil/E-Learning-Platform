@@ -1,5 +1,6 @@
 import React from "react";
 import { useAuth } from "../context/AuthContext";
+import { FaUserCircle } from "react-icons/fa";
 const ProfileIcon = () => {
   let { authUser } = useAuth();
 
@@ -12,7 +13,9 @@ const ProfileIcon = () => {
     <>
       {authUser && authUser.picture ? (
         <img src={authUser.picture} alt="Profile" style={profileIconStyle} />
-      ) : null}
+      ) : (
+        <FaUserCircle size={35} />
+      )}
     </>
   );
 };

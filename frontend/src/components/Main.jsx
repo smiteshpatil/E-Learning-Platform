@@ -36,8 +36,8 @@ const Main = () => {
       {trendingCourses ? (
         <div className="course-content-section">
           <div className="course-container">
-            {currentCourses.map((currentCourse) => (
-              <CourseCard currentCourse={currentCourse} />
+            {currentCourses.map((currentCourse, index) => (
+              <CourseCard key={index} currentCourse={currentCourse} />
             ))}
           </div>
           <ReactPaginate

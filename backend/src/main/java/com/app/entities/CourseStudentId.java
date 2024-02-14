@@ -19,7 +19,6 @@ import lombok.ToString;
 @EqualsAndHashCode
 @ToString
 public class CourseStudentId implements Serializable {
-
 	
 	private static final long serialVersionUID = 1L;
 	

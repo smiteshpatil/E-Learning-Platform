@@ -3,13 +3,11 @@ package com.app.controller;
 import java.util.List;
 
 import javax.validation.Valid;
-import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotNull;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -27,12 +25,23 @@ import com.app.service.CourseService;
 
 @RestController
 @RequestMapping("/courses")
+@CrossOrigin(origins = "http://localhost:3000")
 public class CourseController {
 	@Autowired
 	private CourseService courseService;
 
-	// add new course to existing instructor //request payload : AddCourse dto
+	@GetMapping
+	public ResponseEntity<?> getAllCourses() {
+		return ResponseEntity.ok(courseService.getAllCourses());
+	}
+	
+	@GetMapping("/details")
+	public ResponseEntity<?> getAllCoursesWithDetails()
+	{
+		return ResponseEntity.ok(courseService.getAllCoursesWithDetails());
+	}
 
+	// add new course to existing instructor //request payload : AddCourse dto
 	@PostMapping("/add")
 	public ResponseEntity<?> addCourseToExistingInstructor(@RequestBody @Valid CourseDTO dto) {
 		System.out.println("In add course" + dto);
@@ -73,8 +82,8 @@ public class CourseController {
 		return ResponseEntity.ok(courseService.getCourseDetails(courseId, instructorId));
 	}
 
-	@GetMapping
-	public ResponseEntity<?> getAllEmpsPaginated(@RequestParam(defaultValue = "0", required = false) int pageNumber,
+	@GetMapping("/paginated")
+	public ResponseEntity<?> getAllCoursesPaginated(@RequestParam(defaultValue = "0", required = false) int pageNumber,
 			@RequestParam(defaultValue = "3", required = false) int pageSize) {
 		System.out.println("in get all instructors " + pageNumber + " " + pageSize);
 		List<CourseRespDTO> list = courseService.getAllCourses(pageNumber, pageSize);

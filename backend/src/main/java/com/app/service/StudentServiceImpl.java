@@ -3,19 +3,15 @@ package com.app.service;
 import java.util.List;
 import java.util.stream.Collectors;
 
-
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.app.custom_exceptions.ResourceNotFoundException;
-import com.app.dao.CourseRepository;
 import com.app.dao.StudentRepository;
-import com.app.dto.CourseRespDTO;
 import com.app.dto.StudentCoursesDTO;
 import com.app.dto.StudentDTO;
-import com.app.entities.Course;
 import com.app.entities.Student;
 
 @Service
@@ -24,9 +20,6 @@ public class StudentServiceImpl implements StudentService {
 
 	@Autowired
 	private StudentRepository studentRepo;
-	
-	@Autowired
-	private CourseRepository courseRepo;
 
 	@Autowired
 	private ModelMapper mapper;
@@ -69,10 +62,16 @@ public class StudentServiceImpl implements StudentService {
 
 	@Override
 	public StudentCoursesDTO getStudentAndCoursesDetails(Long studentId) {
-		Student student = studentRepo.findById(studentId)
-				.orElseThrow(() -> new ResourceNotFoundException("Invalid Student Id !!!!"));
-		return mapper.map(student, StudentCoursesDTO.class);
+		return null;
 	}
+
+//	@Override
+//	public StudentCoursesDTO getStudentAndCoursesDetails(Long studentId) {
+//		Student student = studentRepo.findById(studentId)
+//				.orElseThrow(() -> new ResourceNotFoundException("Invalid Student Id !!!!"));
+//	List<Course> list = courseRepo.findByStudentId(studentId);
+//		return mapper.map(list, StudentCoursesDTO.class);
+//	}
 
 
 

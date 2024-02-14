@@ -1,6 +1,7 @@
 .topnav {
-  background-color: #582bd3;
+  /* background-color: #582bd3; */
   overflow: hidden;
+  color: black;
 }
 
 .topnav ul {
@@ -49,7 +50,7 @@
 
 .topnav a {
   display: block;
-  color: white;
+  color: black;
   text-align: center;
   padding: 12px 14px;
   text-decoration: none;

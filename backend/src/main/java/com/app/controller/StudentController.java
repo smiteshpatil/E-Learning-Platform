@@ -3,12 +3,11 @@ package com.app.controller;
 import java.util.List;
 
 import javax.validation.Valid;
-import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -21,12 +20,12 @@ import org.springframework.web.bind.annotation.RestController;
 import com.app.dto.StudentDTO;
 import com.app.service.CartService;
 import com.app.service.CourseService;
-
 import com.app.service.StudentService;
 
 @RestController
 @RequestMapping("/students")
 @Validated
+@CrossOrigin(origins = "http://localhost:3000")
 public class StudentController {
 	@Autowired
 	private StudentService studentService;
@@ -65,11 +64,13 @@ public class StudentController {
 		return ResponseEntity.ok(studentService.deleteStudent(studentId));
 	}
 
-	@GetMapping("/{studentId}/courses")
-	public ResponseEntity<?> getStudentAndCoursesDetails(@PathVariable @Min(1) @Max(10) Long studentId) {
-		System.out.println("in GET student n courses dtls " + studentId);
-		return ResponseEntity.ok(studentService.getStudentAndCoursesDetails(studentId));
-	}
+	// @GetMapping("/{studentId}/courses")
+	// public ResponseEntity<?> getStudentAndCoursesDetails(@PathVariable @Min(1)
+	// @Max(10) Long studentId) {
+	// System.out.println("in GET student n courses dtls " + studentId);
+	// return
+	// ResponseEntity.ok(studentService.getStudentAndCoursesDetails(studentId));
+	// }
 
 	@PostMapping("/enrollCourse/{studentId}/{courseId}")
 

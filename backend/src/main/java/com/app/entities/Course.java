@@ -1,5 +1,6 @@
 package com.app.entities;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,6 +13,8 @@ import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -44,6 +47,10 @@ public class Course extends BaseEntity {
 
 	@Column
 	private Long price;
+	
+	@Column
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	private LocalDate publishedDate;
 	
 	@Lob
 	private byte[] coursePoster;
