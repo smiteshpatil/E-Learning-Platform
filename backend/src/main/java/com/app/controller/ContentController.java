@@ -42,12 +42,12 @@ public class ContentController {
 		System.out.println("in GET contents y courseId " + courseId);
 		return ResponseEntity.ok(contentService.getAllContentFromCourse(courseId));
 	}
-
-	@GetMapping("/{courseId}/{contentId}") // courseId is just for validation
-	public ResponseEntity<?> getContentDetailsByCourseIdAndContentNo(@RequestBody @Valid ContentDTO dto) {
-
-		return null;
-	}
+//
+//	@GetMapping("/{courseId}/{contentId}") // courseId is just for validation
+//	public ResponseEntity<?> getContentDetailsByCourseIdAndContentNo(@RequestBody @Valid ContentDTO dto) {
+//
+//		return null;
+//	}
 
 	@PutMapping("/update/{contentId}")
 	public ResponseEntity<?> updateContent(@PathVariable Long contentId, @RequestBody @Valid ContentDTO dto) {

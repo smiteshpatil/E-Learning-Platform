@@ -3,9 +3,6 @@ package com.app.controller;
 import java.util.List;
 
 import javax.validation.Valid;
-import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotNull;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -38,6 +35,11 @@ public class CourseController {
 		return ResponseEntity.ok(courseService.getAllCourses());
 	}
 
+	@GetMapping("/details")
+	public ResponseEntity<?> getAllCoursesWithDetails() {
+		return ResponseEntity.ok(courseService.getAllCoursesWithDetails());
+	}
+
 	// add new course to existing instructor //request payload : AddCourse dto
 	@PostMapping("/add")
 	public ResponseEntity<?> addCourseToExistingInstructor(@RequestBody @Valid CourseDTO dto) {
@@ -64,6 +66,17 @@ public class CourseController {
 	public ResponseEntity<?> getCoursesByInstructorId(@PathVariable Long instructorId) {
 		System.out.println("In get courses from instructor" + instructorId);
 		List<CourseRespDTO> list = courseService.getAllCoursesFromInstructor(instructorId);
+		if (list.isEmpty())
+			return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+		// course not found
+		return ResponseEntity.ok(list);
+	}
+
+	// get all courses by Instructor Id
+	@GetMapping("/{instructorEmail}")
+	public ResponseEntity<?> getCoursesByInstructorEmail(@RequestBody String instructorEmail) {
+		System.out.println("In get courses from instructor" + instructorEmail);
+		List<CourseRespDTO> list = courseService.getAllCourseByInstructorEmail(instructorEmail);
 		if (list.isEmpty())
 			return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
 		// course not found

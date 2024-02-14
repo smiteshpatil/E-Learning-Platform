@@ -28,7 +28,6 @@ public class CartServiceImpl implements CartService {
 
 	@Override
 	public String addCoursesToCart(String studentEmail, List<Long> courseIds) {
-		// TODO Auto-generated method stub
 		Student student = studentRepository.findByEmail(studentEmail)
 				.orElseThrow(() -> new ResourceNotFoundException("Invalid Student email: " + studentEmail));
 		List<Course> courses = courseRepository.findAllById(courseIds);
@@ -50,7 +49,6 @@ public class CartServiceImpl implements CartService {
 
 	@Override
 	public List<Long> getAllCourseIdFromCart(String studentEmail) {
-		// TODO Auto-generated method stub
 		Student student = studentRepository.findByEmail(studentEmail)
 				.orElseThrow(() -> new ResourceNotFoundException("Invalid Student email: " + studentEmail));
 

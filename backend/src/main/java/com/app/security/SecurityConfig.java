@@ -10,7 +10,7 @@ import org.springframework.security.config.annotation.method.configuration.Enabl
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
-import org.springframework.security.crypto.password.PasswordEncoder;
+// import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
@@ -20,8 +20,8 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 //To enable method level authorization support : pre n post authorization
 public class SecurityConfig {
 	//dep : pwd encoder
-	@Autowired
-	private PasswordEncoder enc;
+	// @Autowired
+	// private PasswordEncoder enc;
 	//dep : custom jwt auth filter
 	@Autowired
 	private JwtAuthenticationFilter jwtFilter;
@@ -41,7 +41,7 @@ public class SecurityConfig {
 		.exceptionHandling().authenticationEntryPoint(authEntry).
 		and().
 		authorizeRequests()
-		.antMatchers("/users/signup","/users/signin","/courses","/instructors/images/{instructorId}",
+		.antMatchers("/users/signup","/users/signin","/courses","/courses/details","/instructors/images/{instructorId}",
 				"/v*/api-doc*/**","/swagger-ui/**").permitAll()
 		// only required for JS clnts (react / angular) : for the pre flight requests
 		.antMatchers(HttpMethod.OPTIONS).permitAll()
@@ -58,6 +58,7 @@ public class SecurityConfig {
 		.antMatchers("/instructors/{instructorId}",
 				"/instructors/{instructorId}/courses",
 				"/courses/{instructorId}",
+				"/courses/{instructorEmail}",
 				"/courses/add",
 				"/courses/update/{courseId}",
 				"/delete/{courseId}",
@@ -69,7 +70,7 @@ public class SecurityConfig {
 				"contents/delete/{contentId}")
 		.hasRole("INSTRUCTOR")
 		
-		.antMatchers("/students","/instructors")
+		.antMatchers("/instructors","/students")
 		.hasRole("ADMIN")
 		.anyRequest().authenticated()
 		.and()

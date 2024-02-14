@@ -2,7 +2,6 @@ package com.app.service;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -18,8 +17,11 @@ import com.app.dao.CourseRepository;
 import com.app.dao.CourseStudentDetailsRepository;
 import com.app.dao.InstructorRepository;
 import com.app.dao.StudentRepository;
+import com.app.dto.ContentDTO;
 import com.app.dto.CourseDTO;
 import com.app.dto.CourseRespDTO;
+import com.app.dto.GetAllDetailsDTO;
+import com.app.dto.InstructorDTO;
 import com.app.entities.Course;
 import com.app.entities.CourseStudentDetails;
 import com.app.entities.CourseStudentId;
@@ -32,7 +34,7 @@ public class CourseServiceImpl implements CourseService {
 
 	@Autowired
 	private CourseRepository courseRepo;
-
+	
 	@Autowired
 	private InstructorRepository instRepo;
 
@@ -50,9 +52,25 @@ public class CourseServiceImpl implements CourseService {
 	public List<CourseRespDTO> getAllCourses() {
 		return courseRepo.findAll().stream().map(list-> mapper.map(list, CourseRespDTO.class)).collect(Collectors.toList());
 	}
+	
+	@Override
+	public List<GetAllDetailsDTO> getAllCoursesWithDetails(){
+		List<Course> courses = courseRepo.findAll();
+		List<GetAllDetailsDTO> allCourseDetails = new ArrayList<>();
+		
+		for(Course course: courses) {
+			GetAllDetailsDTO courseDetails = new GetAllDetailsDTO();
+			courseDetails.setCourseDTO(mapper.map(course, CourseDTO.class));
+			courseDetails.setInstructorDTO(mapper.map(course.getInst(), InstructorDTO.class));
+			List<ContentDTO> contentDTOs = course.getContents().stream()
+					.map(content -> mapper.map(content, ContentDTO.class)).collect(Collectors.toList());
+			courseDetails.setContentDTO(contentDTOs);
+			allCourseDetails.add(courseDetails);
+		}
+		
+		return allCourseDetails;
+	}
 
-	
-	
 	@Override
 	public List<CourseRespDTO> getAllCoursesFromInstructor(Long instructorId) {
 		List<Course> courseList = courseRepo.findByInstructorId(instructorId);
@@ -60,6 +78,15 @@ public class CourseServiceImpl implements CourseService {
 				.map(course -> mapper.map(course, CourseRespDTO.class))
 				.collect(Collectors.toList());
 	}
+	
+	@Override
+	public List<CourseRespDTO> getAllCourseByInstructorEmail(String email) {
+		List<Course> list = courseRepo.findByInstEmail(email);
+		return list.stream()
+				.map(course -> mapper.map(course, CourseRespDTO.class))
+				.collect(Collectors.toList());
+	}
+
 
 	@Override
 	public String deleteCourseDetails(Long courseId) {
@@ -151,7 +178,6 @@ public class CourseServiceImpl implements CourseService {
 
 	@Override
 	public String assignStudentToMultipleCourses(String studentEmail, List<Long> courseIds) {
-		// TODO Auto-generated method stub
 		Student student = studentRepo.findByEmail(studentEmail)
 				.orElseThrow(() -> new ResourceNotFoundException("Invalid Student email: " + studentEmail));
 
@@ -175,5 +201,6 @@ public class CourseServiceImpl implements CourseService {
 		return "You have enrolled in all Courses";
 	}
 
+	
 	
 }
