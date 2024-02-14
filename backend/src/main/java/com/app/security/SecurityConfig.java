@@ -70,7 +70,7 @@ public class SecurityConfig {
 				"contents/delete/{contentId}")
 		.hasRole("INSTRUCTOR")
 		
-		.antMatchers("/students","/instructors")
+		.antMatchers("/instructors","/students")
 		.hasRole("ADMIN")
 		.anyRequest().authenticated()
 		.and()
