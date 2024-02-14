@@ -3,9 +3,6 @@ package com.app.controller;
 import java.util.List;
 
 import javax.validation.Valid;
-import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotNull;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -36,6 +33,12 @@ public class CourseController {
 	@GetMapping
 	public ResponseEntity<?> getAllCourses() {
 		return ResponseEntity.ok(courseService.getAllCourses());
+	}
+	
+	@GetMapping("/details")
+	public ResponseEntity<?> getAllCoursesWithDetails()
+	{
+		return ResponseEntity.ok(courseService.getAllCoursesWithDetails());
 	}
 
 	// add new course to existing instructor //request payload : AddCourse dto

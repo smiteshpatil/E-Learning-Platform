@@ -24,42 +24,39 @@ public class SignupServiceServiceImpl implements SignupService {
 
 	@Autowired
 	private UserRepository userRepo;
-	
+
 	@Autowired
 	private InstructorRepository instRepo;
-	
+
 	@Autowired
 	private StudentRepository studentRepo;
 
 	@Autowired
 	private AdminRepository adminRepo;
-	
+
 	@Autowired
 	private ModelMapper mapper;
-	
+
 	@Autowired
 	private PasswordEncoder encoder;
 
 	@Override
 	public Signup registerNewUser(Signup request) {
-		if(request.getRole() == Role.ROLE_INSTRUCTOR) {
-		request.setPassword(encoder.encode(request.getPassword()));
-		Instructor persistentInstructor = instRepo.save(mapper.map(request, Instructor.class));
-		userRepo.save(new UserInfo(request.getEmail(),request.getPassword(),request.getRole().ROLE_INSTRUCTOR));
-		return mapper.map(persistentInstructor, Signup.class);
-		}
-		else if(request.getRole() == Role.ROLE_STUDENT) {
+		if (request.getRole() == Role.ROLE_INSTRUCTOR) {
+			request.setPassword(encoder.encode(request.getPassword()));
+			Instructor persistentInstructor = instRepo.save(mapper.map(request, Instructor.class));
+			userRepo.save(new UserInfo(request.getEmail(), request.getPassword(), request.getRole().ROLE_INSTRUCTOR));
+			return mapper.map(persistentInstructor, Signup.class);
+		} else if (request.getRole() == Role.ROLE_STUDENT) {
 			request.setPassword(encoder.encode(request.getPassword()));
 			Student persistentStudent = studentRepo.save(mapper.map(request, Student.class));
-			userRepo.save(new UserInfo(request.getEmail(),request.getPassword(),request.getRole().ROLE_STUDENT));
+			userRepo.save(new UserInfo(request.getEmail(), request.getPassword(), request.getRole().ROLE_STUDENT));
 			return mapper.map(persistentStudent, Signup.class);
 		}
 		request.setPassword(encoder.encode(request.getPassword()));
 		Admin admin = adminRepo.save(mapper.map(request, Admin.class));
-		userRepo.save(new UserInfo(request.getEmail(),request.getPassword(),request.getRole().ROLE_ADMIN));
+		userRepo.save(new UserInfo(request.getEmail(), request.getPassword(), request.getRole().ROLE_ADMIN));
 		return mapper.map(admin, Signup.class);
 	}
-	
-
 
 }

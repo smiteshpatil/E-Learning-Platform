@@ -4,11 +4,15 @@ import java.util.List;
 
 import com.app.dto.CourseDTO;
 import com.app.dto.CourseRespDTO;
+import com.app.dto.GetAllDetailsDTO;
 
 public interface CourseService {
 
 	List<CourseRespDTO> getAllCourses();
-	
+
+	// Get all courses with instructor and content
+	List<GetAllDetailsDTO> getAllCoursesWithDetails();
+
 	// delete= course details
 	String deleteCourseDetails(Long courseId);
 

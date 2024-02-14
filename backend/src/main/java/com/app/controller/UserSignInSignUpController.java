@@ -14,13 +14,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.app.dto.AdminDTO;
-import com.app.dto.InstructorDTO;
 import com.app.dto.SigninRequest;
 import com.app.dto.SigninResponse;
 import com.app.dto.Signup;
-import com.app.dto.StudentDTO;
-import com.app.dto.UserDTO;
 import com.app.entities.Role;
 import com.app.security.JwtUtils;
 import com.app.service.AdminService;

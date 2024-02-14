@@ -7,7 +7,6 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import com.app.entities.Course;
-import com.app.entities.Student;
 
 public interface CourseRepository extends JpaRepository<Course, Long>{
 	/*

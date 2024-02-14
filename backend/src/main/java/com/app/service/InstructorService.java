@@ -4,7 +4,6 @@ import java.util.List;
 
 import com.app.dto.InstructorCoursesDTO;
 import com.app.dto.InstructorDTO;
-import com.app.entities.Instructor;
 
 public interface InstructorService {
 	

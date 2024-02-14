@@ -3,8 +3,6 @@ package com.app.controller;
 import java.util.List;
 
 import javax.validation.Valid;
-import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -22,7 +20,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.app.dto.StudentDTO;
 import com.app.service.CartService;
 import com.app.service.CourseService;
-
 import com.app.service.StudentService;
 
 @RestController
