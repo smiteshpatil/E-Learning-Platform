@@ -39,7 +39,7 @@ function App() {
   return (
     <div className="App">
       <ToastContainer
-        position="top-right"
+        position="top-center"
         autoClose={2000}
         hideProgressBar={false}
         newestOnTop={false}
@@ -63,12 +63,10 @@ function App() {
           <Route path="closeAccount" element={<ProfileCloseAccount />} />
           <Route path="profile" element={<UserProfile />} />
         </Route>
-
         {/* Courses */}
         <Route path="/courses">
           <Route path=":id" element={<Course />}></Route>
         </Route>
-
         {/* Cart */}
         <Route path="/cart" element={<Cart />}></Route>
         {/* Cart */}
@@ -79,22 +77,20 @@ function App() {
           <Route path="courses" element={<Courses />} />
           <Route path="revenue" element={<Revenue />} />
         </Route>
-
-        {/* Admin */}
-       = <Route path="/user/admin" element={<AdminDashboard />}>
+        {/* Admin */}={" "}
+        <Route path="/user/admin" element={<AdminDashboard />}>
           <Route path="" element={<AdminHome />} />
           <Route path="courseController" element={<CourseController />} />
           <Route path="studentController" element={<StudentController />} />
-          <Route path="instructorController" element={<InstructorController />} />
+          <Route
+            path="instructorController"
+            element={<InstructorController />}
+          />
         </Route>
-
-
         {/* upload course content routes */}
         <Route path="/upload" element={<UploadContentPage />}>
           <Route path=":id" element={<CreateContent />} />
         </Route>
-
-
         {/* Video Routes demo */}
         <Route path="/video" element={<VideoPage />}>
           <Route path="overview" element={<VideoOverview />} />
