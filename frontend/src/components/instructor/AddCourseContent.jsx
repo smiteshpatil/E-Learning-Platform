@@ -2,7 +2,8 @@ import React from "react";
 import { Link } from "react-router-dom";
 const AddCourseContent = (props) => {
   //handle delete course
-  const deleteCourse = () => {
+  const handleDeleteCourse = () => {
+    console.log(props.course.id);
     props.deleteCourse(props.course.id);
   };
 
@@ -10,9 +11,9 @@ const AddCourseContent = (props) => {
     <>
       <div className="col-lg-4 col-md-6 col-sm-12">
         <div className="card">
-          <img src="..." className="card-img-top" alt="..." />
+          <img src="" className="card-img-top" alt="..." />
           <div className="card-body">
-            <h5 className="card-title">{props.course.title}</h5>
+            <h5 className="card-title">{props.course.courseName}</h5>
             <p className="card-text">{props.course.description}</p>
             <Link to={`/upload/${props.course.id}`} className="btn btn-primary">
               Add content
@@ -23,6 +24,7 @@ const AddCourseContent = (props) => {
               className="btn btn-outline-danger"
               data-bs-toggle="modal"
               data-bs-target="#staticBackdrop"
+              onClick={handleDeleteCourse}
             >
               Delete
             </button>
@@ -65,8 +67,9 @@ const AddCourseContent = (props) => {
               >
                 Cancel
               </button>
+              &nbsp;
               <button
-                onClick={deleteCourse}
+                // onClick={() => handleDeleteCourse(props.course.id)}
                 data-bs-dismiss="modal"
                 className="btn btn-danger"
               >

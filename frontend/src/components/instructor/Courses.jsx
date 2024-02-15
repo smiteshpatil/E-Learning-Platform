@@ -8,11 +8,14 @@ import {
   deleteCourseById,
 } from "../../api/courseService";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../context/AuthContext";
 const Courses = () => {
   const navigate = useNavigate();
+  let { authUser } = useAuth();
 
-  //instructoId
-  let instructorId = localStorage.getItem("userObject").id;
+  //get instructorId and token from localStorage
+  // let instructorId = authUser.id;
+  let instructorId = JSON.parse(localStorage.getItem("userObject")).id;
   let token = localStorage.getItem("token");
 
   // State for managing the list of courses
@@ -20,11 +23,10 @@ const Courses = () => {
 
   // handle launching a new course
   const launchNewCourse = (newCourse) => {
-    const token = localStorage.getItem("token");
     //add instructor id in newCourse
     newCourse.instructorId = instructorId;
     try {
-      const resp = createNewCourse(newCourse, token);
+      const resp = createNewCourse(newCourse, token); //original
       console.table(resp);
       setMyCourses([...myCourses, newCourse]);
     } catch (err) {
@@ -34,28 +36,23 @@ const Courses = () => {
 
   //delete course
   const handleDeleteCourse = (courseId) => {
-    deleteCourseById(courseId);
+    const resp = deleteCourseById(courseId, token);
+    console.log("In Course.jsx: ", resp);
   };
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        if (token) {
-          const coursesPromise = getAllCoursesByInstructorId(instructorId);
-          toast.promise(coursesPromise, {
-            pending: "Loading your courses...",
-            success: "Your courses loaded",
-            error: "Error loading your courses",
-          });
-          const courses = await coursesPromise;
-          setMyCourses(courses);
-          console.log(courses);
+        if (token && instructorId) {
+          const resp = await getAllCoursesByInstructorId(instructorId, token);
+          setMyCourses(resp.data);
         } else {
           toast.warning("You need to be logged in to view your courses.");
           navigate("/login");
         }
       } catch (error) {
         console.error("Error fetching courses:", error);
+        // Handle error, show toast, etc.
       }
     };
 
@@ -71,10 +68,10 @@ const Courses = () => {
         <h2>My Courses</h2>
         <div className="row">
           {myCourses && myCourses.length > 0 ? (
-            myCourses.map((course, index) => (
+            myCourses.map((currCourse, index) => (
               <AddCourseContent
                 key={index}
-                course={course}
+                course={currCourse}
                 deleteCourse={handleDeleteCourse}
               />
             ))

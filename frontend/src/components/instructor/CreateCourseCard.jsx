@@ -40,7 +40,6 @@ const CreateCourseCard = (props) => {
   const handleCreateCourse = () => {
     // Handle creating course here, you can use the values of courseName, description, and imageFile
     console.log("Creating course:");
-    console.log(newCourse);
     props.createCourse(newCourse);
   };
 

@@ -5,21 +5,19 @@ import logo from "../images/logo.png";
 import SearchBar from "./SearchBar";
 import { TbLogout2 } from "react-icons/tb";
 import { FaCartShopping } from "react-icons/fa6";
-import { useAuth } from "../context/AuthContext";
 import { useNavigate } from "react-router-dom";
 import ProfileIcon from "./ProfileIcon";
+import { useAuth } from "../context/AuthContext";
 
 const Navbar = () => {
-  const { isLoggedIn, setIsLoggedIn, setAuthUser } = useAuth();
+  let { authUser, isLoggedIn, setIsLoggedIn } = useAuth();
   const navigate = useNavigate();
 
   //log out
   const logOut = (e) => {
-    e.preventDefault();
+    setIsLoggedIn(false);
     localStorage.removeItem("token");
     localStorage.removeItem("userObject");
-    setIsLoggedIn(false);
-    setAuthUser(null);
     navigate("/login");
   };
 

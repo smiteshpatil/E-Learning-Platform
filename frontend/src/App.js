@@ -9,9 +9,7 @@ import ProfileCloseAccount from "./components/ProfileCloseAccount";
 import ProfilePage from "./components/ProfilePage";
 import ProfilePhoto from "./components/ProfilePhoto";
 import UserProfile from "./components/UserProfile";
-
 import Course from "./components/pages/CoursePage";
-
 import "./App.css";
 import "react-toastify/dist/ReactToastify.css";
 import VideoNotes from "./components/pages/VideoNotes";
@@ -77,7 +75,7 @@ function App() {
           <Route path="courses" element={<Courses />} />
           <Route path="revenue" element={<Revenue />} />
         </Route>
-        {/* Admin */}={" "}
+        {/* Admin */}
         <Route path="/user/admin" element={<AdminDashboard />}>
           <Route path="" element={<AdminHome />} />
           <Route path="courseController" element={<CourseController />} />

@@ -37,16 +37,6 @@ const LoginPage = () => {
     setFormDetails({ ...formDetails, [name]: value });
   };
 
-  //set user context
-  // const setUserContext = (jwt, userDetails) => {
-  //   setIsLoggedIn(true);
-  //   console.log("LoginPage: In setUserContext ", userDetails);
-  //   setAuthUser(userDetails);
-  //   navigate("/");
-  // };
-
-  // sign in using userService
-
   const handleSignIn = async (e) => {
     e.preventDefault();
     if (formDetails.email !== "" && formDetails.password !== "") {
@@ -56,10 +46,10 @@ const LoginPage = () => {
         // Check if response exists and contains jwt and userDetails
         if (response && response.jwt && response.userDetails) {
           const { jwt, userDetails } = response;
-          // save the token in local storage
+          // save the token,userDetails and loginState in local storage
           localStorage.setItem("token", jwt);
-          localStorage.setItem("userObject", userDetails);
-          // setUserContext(jwt, userDetails);
+          localStorage.setItem("userObject", JSON.stringify(userDetails));
+
           toast.success("Signed in successfully");
           setIsLoggedIn(true);
           navigate("/");
@@ -89,7 +79,7 @@ const LoginPage = () => {
       try {
         await signUp(formDetails);
         toast.success("Signed up successfully"); // Show success toast on successful sign up
-        navigate("/login");
+        setIsActive(false);
       } catch (error) {
         toast.error("email Already exists Please Login to Continue! "); // Show error toast on sign up error
       }
