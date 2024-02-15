@@ -9,7 +9,6 @@ export const signIn = async (userEmail, userPass) => {
       email: userEmail,
       password: userPass,
     });
-    console.log("signIn in service try", response);
     return response.data;
   } catch (err) {
     console.log("signIn in service err", err, "end");

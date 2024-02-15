@@ -8,23 +8,24 @@ import {
   deleteCourseById,
 } from "../../api/courseService";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../context/AuthContext";
 const Courses = () => {
   const navigate = useNavigate();
+  let { authUser } = useAuth();
 
-  //instructoId
-  let instructorId = localStorage.getItem("userObject").id;
+  //get instructorId and token from localStorage
+  let instructorId = authUser.id;
   let token = localStorage.getItem("token");
 
   // State for managing the list of courses
   const [myCourses, setMyCourses] = useState([]);
 
   // handle launching a new course
-  const launchNewCourse = (newCourse) => {
-    const token = localStorage.getItem("token");
+  const launchNewCourse = (newCourse, additionalData) => {
     //add instructor id in newCourse
     newCourse.instructorId = instructorId;
     try {
-      const resp = createNewCourse(newCourse, token);
+      const resp = createNewCourse(newCourse, token); //original
       console.table(resp);
       setMyCourses([...myCourses, newCourse]);
     } catch (err) {
@@ -40,22 +41,19 @@ const Courses = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        if (token) {
-          const coursesPromise = getAllCoursesByInstructorId(instructorId);
-          toast.promise(coursesPromise, {
-            pending: "Loading your courses...",
-            success: "Your courses loaded",
-            error: "Error loading your courses",
-          });
-          const courses = await coursesPromise;
+        if (token && instructorId) {
+          const courses = await getAllCoursesByInstructorId(
+            instructorId,
+            token
+          );
           setMyCourses(courses);
-          console.log(courses);
         } else {
           toast.warning("You need to be logged in to view your courses.");
           navigate("/login");
         }
       } catch (error) {
         console.error("Error fetching courses:", error);
+        // Handle error, show toast, etc.
       }
     };
 
