@@ -31,7 +31,7 @@ import lombok.ToString;
 @ToString(exclude = { "inst","contents"})
 public class Course extends BaseEntity {
 
-	@Column(length = 20)
+	@Column(length = 20,unique = true)
 	private String courseName;
 
 	@Column(length = 20)
@@ -54,6 +54,8 @@ public class Course extends BaseEntity {
 	
 	@Lob
 	private byte[] coursePoster;
+	
+	private String imageUrl;
 	
 	
 	// many to one association(*courses -> 1 Instructor)

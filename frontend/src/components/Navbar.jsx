@@ -67,7 +67,6 @@ const Navbar = () => {
           </li>
         </ul>
       </nav>
-      <hr className="mx-0 my-0 mb-1" />
     </>
   );
 };

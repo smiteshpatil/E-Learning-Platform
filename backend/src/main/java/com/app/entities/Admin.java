@@ -4,6 +4,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.Lob;
 import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
@@ -35,7 +36,8 @@ public class Admin extends BaseEntity{
 	@Column(length = 10)
 	private String gender;
 
-	private String imageUrl;
+	@Lob // large object :col : longblob
+	private byte[] image;
 	
 	@Column(unique = true)
 	private String LinkedInLink;

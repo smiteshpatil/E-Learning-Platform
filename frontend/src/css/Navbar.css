@@ -1,7 +1,11 @@
 .topnav {
-  /* background-color: #582bd3; */
+  background-color: white;
   overflow: hidden;
   color: black;
+  position: sticky;
+  top: 0%;
+  z-index: 1000;
+  border-bottom: 1px solid rgb(219, 219, 217);
 }
 
 .topnav ul {

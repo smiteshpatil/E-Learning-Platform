@@ -30,6 +30,8 @@ public class Content extends BaseEntity{
 	private String contentDescription;
 	@Column
 	private String contentUrl;
+	@Column
+	private String contentPath;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "course_id")
