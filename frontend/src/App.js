@@ -27,6 +27,7 @@ import Courses from "./components/instructor/Courses";
 import Home from "./components/instructor/Home";
 import Revenue from "./components/instructor/Revenue";
 import UploadContentPage from "./components/instructor/UploadContentPage";
+import CreateContent from "./components/instructor/CreateContent";
 
 function App() {
   return (
@@ -49,8 +50,6 @@ function App() {
         {/* Courses */}
         <Route path="/courses">
           <Route path=":id" element={<Course />}></Route>
-          {/* upload course content routes */}
-          <Route path="upload" element={<UploadContentPage />} />
         </Route>
 
         {/* Cart */}
@@ -63,6 +62,12 @@ function App() {
           <Route path="courses" element={<Courses />} />
           <Route path="revenue" element={<Revenue />} />
         </Route>
+
+        {/* upload course content routes */}
+        <Route path="/upload" element={<UploadContentPage />}>
+          <Route path=":id" element={<CreateContent />} />
+        </Route>
+
         {/* Video Routes demo */}
         <Route path="/video" element={<VideoPage />}>
           <Route path="overview" element={<VideoOverview />} />
