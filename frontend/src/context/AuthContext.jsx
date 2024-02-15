@@ -11,7 +11,7 @@ export function AuthProvider(props) {
   const [allCourses, setAllCourses] = useState([]);
 
   useEffect(() => {
-    const token = localStorage.getItem("token");
+    // const token = localStorage.getItem("token");
     const userDetails = localStorage.getItem("userObject");
     //set authUser with details
     console.log("AuthContext: In setUserContext ");

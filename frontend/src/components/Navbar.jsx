@@ -16,9 +16,11 @@ const Navbar = () => {
   //log out
   const logOut = (e) => {
     e.preventDefault();
+    localStorage.removeItem("token");
+    localStorage.removeItem("userObject");
     setIsLoggedIn(false);
     setAuthUser(null);
-    navigate("/");
+    navigate("/login");
   };
 
   return (

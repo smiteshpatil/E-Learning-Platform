@@ -13,25 +13,35 @@ import UserProfile from "./components/UserProfile";
 import Course from "./components/pages/CoursePage";
 
 import "./App.css";
+import "react-toastify/dist/ReactToastify.css";
 import VideoNotes from "./components/pages/VideoNotes";
 import VideoOverview from "./components/pages/VideoOverview";
 import VideoPage from "./components/pages/VideoPage";
 import VideoQAndA from "./components/pages/VideoQAndA";
 import VideoReview from "./components/pages/VideoReview";
-
 import Cart from "./components/pages/Cart";
 import Products from "./components/pages/Products";
-
 import Dashboard from "./components/instructor/Dashboard";
 import Courses from "./components/instructor/Courses";
 import Home from "./components/instructor/Home";
 import Revenue from "./components/instructor/Revenue";
 import UploadContentPage from "./components/instructor/UploadContentPage";
 import CreateContent from "./components/instructor/CreateContent";
-
+import { ToastContainer } from "react-toastify";
 function App() {
   return (
     <div className="App">
+      <ToastContainer
+        position="top-right"
+        autoClose={2000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        draggable
+        pauseOnHover
+        theme="light"
+      />
       <Navbar></Navbar>
 
       <Routes>
