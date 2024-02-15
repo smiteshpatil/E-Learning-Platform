@@ -72,17 +72,6 @@ public class CourseController {
 		return ResponseEntity.ok(list);
 	}
 
-	// get all courses by Instructor Id
-	@GetMapping("/{instructorEmail}")
-	public ResponseEntity<?> getCoursesByInstructorEmail(@RequestBody String instructorEmail) {
-		System.out.println("In get courses from instructor" + instructorEmail);
-		List<CourseRespDTO> list = courseService.getAllCourseByInstructorEmail(instructorEmail);
-		if (list.isEmpty())
-			return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
-		// course not found
-		return ResponseEntity.ok(list);
-	}
-
 	// GET course details by Instructor & Course Id
 	// Instructor id is here just used for validation
 	@GetMapping("{instructorId}/{courseId}")

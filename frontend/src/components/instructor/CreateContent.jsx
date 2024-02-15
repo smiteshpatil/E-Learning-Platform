@@ -1,10 +1,12 @@
-import React, { useState, useRef } from "react";
+import React, { useState } from "react";
+import DropboxUpload from "./DropboxUplaod";
 
 const CreateContent = (props) => {
   const [currContent, setCurrContent] = useState({
     contentName: "",
     description: "",
-    contentUrl: "",
+    contentPath: "",
+    contentUrl: null,
   });
 
   const handleChange = (e) => {
@@ -15,10 +17,8 @@ const CreateContent = (props) => {
     }));
   };
 
-  const inputFile = useRef(null);
-
-  const handleAddContent = () => {
-    props.createContent(currContent);
+  const handleAddContent = async () => {
+    // const videoUrl = await uploadFile(currContent.contentUrl);
   };
 
   const handleCancel = () => {
@@ -27,10 +27,6 @@ const CreateContent = (props) => {
       description: "",
       contentUrl: "",
     });
-
-    if (inputFile.current) {
-      inputFile.current.value = ""; // Reset the value of the file input
-    }
   };
 
   return (
@@ -67,20 +63,11 @@ const CreateContent = (props) => {
         <label htmlFor="contentUrl" className="col-sm-3 col-form-label">
           Upload Video
         </label>
-        <div className="col-sm-9">
-          <input
-            type="file"
-            className="form-control"
-            id="contentUrl"
-            name="contentUrl"
-            ref={inputFile}
-            onChange={handleChange}
-          />
-        </div>
+        <DropboxUpload />
       </div>
       <div className="text-center mb-4">
         <button onClick={handleAddContent} className="btn btn-primary btn-sm">
-          Add Video
+          Add Lecture
         </button>
         &nbsp;
         <button onClick={handleCancel} className="btn btn-secondary btn-sm">

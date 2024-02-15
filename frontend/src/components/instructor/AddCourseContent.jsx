@@ -14,7 +14,7 @@ const AddCourseContent = (props) => {
           <div className="card-body">
             <h5 className="card-title">{props.course.title}</h5>
             <p className="card-text">{props.course.description}</p>
-            <Link to="/courses/upload" className="btn btn-primary">
+            <Link to={`/upload/${props.course.id}`} className="btn btn-primary">
               Add content
             </Link>
             {/* Button trigger modal */}

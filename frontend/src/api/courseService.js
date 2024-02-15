@@ -123,81 +123,58 @@ export const courses = [
     courseUrl: "https://google.com",
     price: 654,
   },
-  {
-    id: 6,
-    thumbnail: thumbnail,
-    title: "React",
-    description: "React course by smitesh patil",
-    author: {
-      profilePicture: {
-        url: thumbnail,
-      },
-    },
-    datePublished: "Mar 15, 2024",
-    courseUrl: "https://google.com",
-    price: 321,
-  },
 ];
 
-export const content = [
+//handle addNewContent
+export const addContentService = (newContent) => {
+  content.push(newContent);
+  console.log("content with id", newContent.id, "Added");
+};
+
+//handle content delete
+export const deleteContentService = (contentId) => {
+  // Use filter to create a new array without the content with the given id
+  content = content.filter((curr) => curr.id !== contentId);
+  console.log("content with id", contentId, "deleted");
+};
+
+export let content = [
   {
     id: 1,
     contentName: "Name of the lecture 1",
+    description:
+      "video description goes here and this can be changed later. asdkjffhfuiflfguewlfyweg",
     videoUrl:
       "https://www.dropbox.com/scl/fi/hldrytn68bochhie8zpm4/20220602_152154.mp4?rlkey=e219id7vkdjp4zjq1aqf0s37i&raw=1",
   },
   {
     id: 2,
     contentName: "Name of the lecture 2",
+    description:
+      "video description goes here and this can be changed later. asdkjffhfuiflfguewlfyweg",
     videoUrl:
       "https://www.dropbox.com/scl/fi/tdt5pwmfy1axl039ucmzt/09bd3cf8c4704199bd605661bf955e36.mp4?rlkey=r4d7yk5wnyvzvz2n4xwruw8c1&raw=1",
   },
   {
     id: 3,
     contentName: "Name of the lecture 3",
+    description:
+      "video description goes here and this can be changed later. asdkjffhfuiflfguewlfyweg",
     videoUrl:
       "https://www.dropbox.com/scl/fi/hldrytn68bochhie8zpm4/20220602_152154.mp4?rlkey=e219id7vkdjp4zjq1aqf0s37i&raw=1",
   },
   {
     id: 4,
     contentName: "Name of the lecture 4",
-    videoUrl:
-      "https://www.dropbox.com/scl/fi/hldrytn68bochhie8zpm4/20220602_152154.mp4?rlkey=e219id7vkdjp4zjq1aqf0s37i&raw=1",
+    description:
+      "video description goes here and this can be changed later. asdkjffhfuiflfguewlfyweg",
+    videoUrl: "",
   },
   {
     id: 5,
     contentName: "Name of the lecture 5",
-    videoUrl:
-      "https://www.dropbox.com/scl/fi/hldrytn68bochhie8zpm4/20220602_152154.mp4?rlkey=e219id7vkdjp4zjq1aqf0s37i&raw=1",
-  },
-  {
-    id: 6,
-    contentName: "Name of the lecture 6",
-    videoUrl:
-      "https://www.dropbox.com/scl/fi/hldrytn68bochhie8zpm4/20220602_152154.mp4?rlkey=e219id7vkdjp4zjq1aqf0s37i&raw=1",
-  },
-  {
-    id: 7,
-    contentName: "Name of the lecture 7",
-    videoUrl:
-      "https://www.dropbox.com/scl/fi/hldrytn68bochhie8zpm4/20220602_152154.mp4?rlkey=e219id7vkdjp4zjq1aqf0s37i&raw=1",
-  },
-  {
-    id: 8,
-    contentName: "Name of the lecture 8",
-    videoUrl:
-      "https://www.dropbox.com/scl/fi/hldrytn68bochhie8zpm4/20220602_152154.mp4?rlkey=e219id7vkdjp4zjq1aqf0s37i&raw=1",
-  },
-  {
-    id: 9,
-    contentName: "Name of the lecture 9",
-    videoUrl:
-      "https://www.dropbox.com/scl/fi/hldrytn68bochhie8zpm4/20220602_152154.mp4?rlkey=e219id7vkdjp4zjq1aqf0s37i&raw=1",
-  },
-  {
-    id: 10,
-    contentName: "Name of the lecture 10",
-    videoUrl:
-      "https://www.dropbox.com/scl/fi/hldrytn68bochhie8zpm4/20220602_152154.mp4?rlkey=e219id7vkdjp4zjq1aqf0s37i&raw=1",
+    description:
+      "video description goes here and this can be changed later. asdkjffhfuiflfguewlfyweg",
+    videoUrl: "",
   },
 ];
