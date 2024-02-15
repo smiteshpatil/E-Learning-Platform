@@ -6,7 +6,7 @@ import { useEffect } from "react";
 import { useAuth } from "../context/AuthContext";
 import { useNavigate } from "react-router-dom";
 import { signIn, signUp } from "../api/userService";
-
+import { toast } from "react-toastify";
 const LoginPage = () => {
   const { setAuthUser, setIsLoggedIn } = useAuth();
   const navigate = useNavigate();
@@ -21,6 +21,16 @@ const LoginPage = () => {
     password: "",
   });
 
+  //handleClearForm
+  const handleClearForm = () => {
+    setFormDetails({
+      firstName: "",
+      email: "",
+      role: "",
+      password: "",
+    });
+  };
+
   //set form details
   const handleChange = (event) => {
     let { name, value } = event.target;
@@ -28,55 +38,63 @@ const LoginPage = () => {
   };
 
   //set user context
-  const setUserContext = (jwt, userDetails) => {
-    setIsLoggedIn(true);
-    console.log("LoginPage: In setUserContext ", userDetails);
-    setAuthUser(userDetails);
-    navigate("/");
-  };
+  // const setUserContext = (jwt, userDetails) => {
+  //   setIsLoggedIn(true);
+  //   console.log("LoginPage: In setUserContext ", userDetails);
+  //   setAuthUser(userDetails);
+  //   navigate("/");
+  // };
 
   // sign in using userService
-  const handleSignIn = (e) => {
+
+  const handleSignIn = async (e) => {
     e.preventDefault();
     if (formDetails.email !== "" && formDetails.password !== "") {
-      signIn(formDetails.email, formDetails.password)
-        .then((response) => {
-          console.table(response);
-          //jwt and body from response
+      try {
+        const response = await signIn(formDetails.email, formDetails.password);
+        console.table(response);
+        // Check if response exists and contains jwt and userDetails
+        if (response && response.jwt && response.userDetails) {
           const { jwt, userDetails } = response;
-          //save the token in localstorage
+          // save the token in local storage
           localStorage.setItem("token", jwt);
           localStorage.setItem("userObject", userDetails);
-          setUserContext(jwt, userDetails);
-        })
-        .catch((error) => {
-          // Handle login error
-        });
+          // setUserContext(jwt, userDetails);
+          toast.success("Signed in successfully");
+          setIsLoggedIn(true);
+          navigate("/");
+        } else {
+          toast.error("Invalid email or password");
+        }
+      } catch (error) {
+        if (error && error.response && error.response.status === 401) {
+          toast.error("Error signing in");
+        }
+      }
+    } else {
+      toast.error("All fields are compulsory");
     }
   };
 
   //signUp using userService
-  const handleSignUp = (e) => {
+  const handleSignUp = async (e) => {
     e.preventDefault();
-    if (
-      formDetails.firstName !== "" &&
-      formDetails.email !== "" &&
-      formDetails.password !== ""
-    ) {
+    const { firstName, email, password } = formDetails;
+
+    if (firstName !== "" && email !== "" && password !== "") {
       setFormDetails({
         ...formDetails,
         role: document.getElementById("role").value,
       });
-      signUp(formDetails)
-        .then((currentUser) => {
-          setUserContext(currentUser);
-        })
-        .catch((error) => {
-          // Handle signup error
-        });
+      try {
+        await signUp(formDetails);
+        toast.success("Signed up successfully"); // Show success toast on successful sign up
+        navigate("/login");
+      } catch (error) {
+        toast.error("email Already exists Please Login to Continue! "); // Show error toast on sign up error
+      }
     } else {
-      document.getElementById("errMsg").innerText =
-        "* All fields are compulsory";
+      toast.error("All fields are compulsory");
     }
   };
 
@@ -84,7 +102,7 @@ const LoginPage = () => {
   function handleCallbackResponse(response) {
     console.log("reached here", response);
     // signUp(userDetails);
-    setUserContext(response.credential);
+    // setUserContext(response.credential);
   }
 
   useEffect(() => {
@@ -138,6 +156,7 @@ const LoginPage = () => {
               <select name="role" id="role" defaultValue="ROLE_STUDENT">
                 <option value="ROLE_STUDENT">Student</option>
                 <option value="ROLE_INSTRUCTOR">Instructor</option>
+                <option value="ROLE_ADMIN">Admin</option>
               </select>
             </div>
             <button onClick={handleSignUp}>Sign Up</button>
@@ -178,6 +197,7 @@ const LoginPage = () => {
               <button
                 className="hidden"
                 onClick={() => {
+                  handleClearForm();
                   setIsActive(false);
                 }}
               >
@@ -190,6 +210,7 @@ const LoginPage = () => {
               <button
                 className="hidden"
                 onClick={() => {
+                  handleClearForm();
                   setIsActive(true);
                 }}
               >

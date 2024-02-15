@@ -9,10 +9,10 @@ export const signIn = async (userEmail, userPass) => {
       email: userEmail,
       password: userPass,
     });
-    console.log(response);
+    console.log("signIn in service try", response);
     return response.data;
   } catch (err) {
-    console.log(err);
+    console.log("signIn in service err", err, "end");
   }
 };
 
@@ -25,9 +25,9 @@ export const signUp = async (user) => {
       password: user.password,
       role: user.role,
     });
-    console.log(response);
-    return response;
+    console.log("signUp in service", response);
+    return response.data;
   } catch (err) {
-    console.log(err);
+    throw err; // Throw error to be caught in handleSignUp function
   }
 };

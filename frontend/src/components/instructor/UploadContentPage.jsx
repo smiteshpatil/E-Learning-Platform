@@ -43,14 +43,17 @@ const UploadContentPage = (props) => {
       </div>
       <div className="container">
         <div className="row">
-          {content.length > 0 &&
+          {content && content.length > 0 ? (
             content.map((currContent, index) => (
               <ContentCard
                 key={index}
                 content={currContent}
                 deleteContent={handleDeleteContent}
               />
-            ))}
+            ))
+          ) : (
+            <></>
+          )}
         </div>
       </div>
     </>
