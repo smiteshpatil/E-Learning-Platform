@@ -4,4 +4,5 @@ import com.app.dto.AdminDTO;
 
 public interface AdminService {
 	AdminDTO getAdminByEmail(String adminEmail);
+	int getTotalStudents();
 }

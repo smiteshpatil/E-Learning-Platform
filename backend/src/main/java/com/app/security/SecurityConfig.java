@@ -80,8 +80,8 @@ public class SecurityConfig {
 
 		return http.build();
 	}
-	// configure AuthMgr as a spring bean
 
+	// configure AuthMgr as a spring bean
 	@Bean
 	public AuthenticationManager authenticationManager(AuthenticationConfiguration config) throws Exception {
 		return config.getAuthenticationManager();
