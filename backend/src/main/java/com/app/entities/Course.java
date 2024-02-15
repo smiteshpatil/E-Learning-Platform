@@ -55,6 +55,8 @@ public class Course extends BaseEntity {
 	@Lob
 	private byte[] coursePoster;
 	
+	private String imageUrl;
+	
 	
 	// many to one association(*courses -> 1 Instructor)
 	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE) // MERGE : NEW n INTERESTING !!!!!
