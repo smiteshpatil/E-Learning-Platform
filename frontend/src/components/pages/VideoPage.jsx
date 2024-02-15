@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { NavLink, Outlet } from "react-router-dom";
 import PlayListDropdown from "./PlayListDropdown";
+import { content } from "../../api/courseService";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./css/VideoPage.css";
 
@@ -11,6 +12,7 @@ const VideoPage = () => {
   const [isPlaying, setIsPlaying] = useState(false);
   const [startTime, setStartTime] = useState(null);
   const [activeLink, setActiveLink] = useState(""); // State to store the active link
+  const [currentVideoIndex, setCurrentVideoIndex] = useState(0); // State to store the index of the currently playing video
 
   // change style on click
   const toggleStyle = (link) => {
@@ -18,8 +20,19 @@ const VideoPage = () => {
   };
 
   // set video link
-  const handleVideoChange = (videoUrl) => {
+  const handleVideoChange = (videoUrl, index) => {
     setSelectedVideo(videoUrl);
+    setCurrentVideoIndex(index);
+  };
+
+  // Function to handle video end event
+  const handleVideoEnd = () => {
+    // Play the next video in the playlist if available
+    if (currentVideoIndex < content.length - 1) {
+      const nextVideoIndex = currentVideoIndex + 1;
+      const nextVideoUrl = content[nextVideoIndex].videoUrl;
+      handleVideoChange(nextVideoUrl, nextVideoIndex);
+    }
   };
 
   // Function to update watched time
@@ -56,6 +69,14 @@ const VideoPage = () => {
     };
   }, [selectedVideo, isPlaying, startTime]);
 
+  //automatically play first video
+  useEffect(() => {
+    const videoElement = document.querySelector("video");
+    if (videoElement) {
+      videoElement.play(); // Programmatically play the video
+    }
+  }, []);
+
   // Function to handle video play/pause
   const handlePlayPause = () => {
     setIsPlaying((prevIsPlaying) => !prevIsPlaying);
@@ -73,14 +94,17 @@ const VideoPage = () => {
           <video
             controls
             autoPlay
+            muted // Add muted attribute to mute the video by default
             style={{ width: "100%" }}
             key={selectedVideo}
             onPause={handlePlayPause}
             onPlay={handlePlayPause}
+            onEnded={handleVideoEnd}
           >
             <source src={selectedVideo} type="video/mp4" />
             Your browser does not support the video tag.
           </video>
+
           {/* <p>Playtime: {playtimeInSeconds} seconds</p>
           <p>Watched Time: {watchedTime.toFixed(2)} seconds</p> */}
           {/* Lecture wise material section*/}
@@ -143,7 +167,11 @@ const VideoPage = () => {
             padding: "0px",
           }}
         >
-          <PlayListDropdown changeVideoUrl={handleVideoChange} />
+          <PlayListDropdown
+            content={content}
+            changeVideoUrl={handleVideoChange}
+            currentVideoIndex={currentVideoIndex}
+          />
         </div>
       </div>
     </div>

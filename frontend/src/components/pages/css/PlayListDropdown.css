@@ -5,9 +5,17 @@
   top: 0%;
 }
 
-.dropbtn {
-  color: black;
+.content-list {
+  list-style: none;
+  padding: 0;
+}
+
+.content-item {
   border-bottom: 1px solid gainsboro;
+}
+
+.lecture-name {
+  color: black;
   padding: 16px;
   font-size: 16px;
   cursor: pointer;
@@ -17,60 +25,11 @@
   border-bottom: 2px solid #ccc;
 }
 
-.dropbtn:hover,
-.dropbtn:focus {
+.lecture-name:hover,
+.lecture-name:focus {
   background-color: #d7d2d2;
 }
 
-.dropdown {
-  position: relative;
-  display: block;
-  width: 100%;
-}
-
-.dropdown-content {
-  display: none;
-  position: relative;
-  background-color: #f1f1f1;
-  min-width: 100%;
-  overflow-y: auto;
-  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-  z-index: 1;
-  padding: 0;
-  margin: 0;
-}
-
-.dropdown-content a {
-  color: black;
-  padding: 12px 16px;
-  text-decoration: none;
-  display: block;
-  width: 100%;
-  box-sizing: border-box;
-  border-bottom: 1px solid #ddd;
-}
-
-.dropdown-content a:last-child {
+.lecture-name:last-child {
   border-bottom: none;
-}
-
-.dropdown-content a:hover {
-  background-color: #ddd;
-}
-
-.show {
-  display: block;
-}
-
-.arrow {
-  float: right;
-  margin-right: 8px; /* Add some margin between the arrow and the button text */
-}
-
-.arrow.open {
-  display: inline-block; /* Show the open arrow */
-}
-
-.arrow:not(.open) {
-  display: none; /* Hide the closed arrow */
 }

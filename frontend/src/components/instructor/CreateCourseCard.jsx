@@ -3,10 +3,10 @@ import React, { useState } from "react";
 const CreateCourseCard = (props) => {
   const [newCourse, setNewCourse] = useState({
     courseName: "",
-    category: "",
+    category: "development",
     description: "",
     skillLevel: "",
-    language: "",
+    language: "english",
     price: "",
     coursePoster: "", // Adding coursePoster as a string
   });
@@ -44,12 +44,31 @@ const CreateCourseCard = (props) => {
     props.createCourse(newCourse);
   };
 
+  //handle clear form
+  const clearForm = () => {
+    setNewCourse({
+      courseName: "",
+      category: "development",
+      description: "",
+      skillLevel: "",
+      language: "english",
+      price: "",
+      coursePoster: "", // Adding coursePoster as a string
+    });
+  };
+
   return (
-    <div
-      className="container py-4 px-4"
-      style={{ maxWidth: "80%", margin: "auto", backgroundColor: "beige" }}
-    >
-      <div className="card-body">
+    <>
+      <div
+        className="container-fluid py-4 px-4"
+        style={{
+          maxWidth: "80%",
+          margin: "auto",
+          backgroundColor: "beige",
+        }}
+      >
+        <h3>Create New Course</h3>
+        <br />
         <div className="row mb-3">
           <label
             htmlFor="courseName"
@@ -125,9 +144,8 @@ const CreateCourseCard = (props) => {
               className="form-select"
               name="category"
               id="category"
-              defaultValue="development"
-              value={newCourse.category} // Set value from state
-              onChange={handleChange} // Add onChange handler
+              value={newCourse.category}
+              onChange={handleChange}
             >
               <option value="development">Development</option>
               <option value="finance">Finance</option>
@@ -150,7 +168,6 @@ const CreateCourseCard = (props) => {
               className="form-select"
               name="language"
               id="language"
-              defaultValue="english"
               value={newCourse.language} // Set value from state
               onChange={handleChange} // Add onChange handler
             >
@@ -243,16 +260,13 @@ const CreateCourseCard = (props) => {
             >
               Create Course
             </button>
-            <button
-              className="btn btn-outline-secondary"
-              onClick={handleCreateCourse}
-            >
+            <button className="btn btn-outline-secondary" onClick={clearForm}>
               Cancel
             </button>
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 
