@@ -14,14 +14,15 @@ const Courses = () => {
   let { authUser } = useAuth();
 
   //get instructorId and token from localStorage
-  let instructorId = authUser.id;
+  // let instructorId = authUser.id;
+  let instructorId = JSON.parse(localStorage.getItem("userObject")).id;
   let token = localStorage.getItem("token");
 
   // State for managing the list of courses
   const [myCourses, setMyCourses] = useState([]);
 
   // handle launching a new course
-  const launchNewCourse = (newCourse, additionalData) => {
+  const launchNewCourse = (newCourse) => {
     //add instructor id in newCourse
     newCourse.instructorId = instructorId;
     try {
@@ -35,18 +36,16 @@ const Courses = () => {
 
   //delete course
   const handleDeleteCourse = (courseId) => {
-    deleteCourseById(courseId);
+    const resp = deleteCourseById(courseId, token);
+    console.log("In Course.jsx: ", resp);
   };
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         if (token && instructorId) {
-          const courses = await getAllCoursesByInstructorId(
-            instructorId,
-            token
-          );
-          setMyCourses(courses);
+          const resp = await getAllCoursesByInstructorId(instructorId, token);
+          setMyCourses(resp.data);
         } else {
           toast.warning("You need to be logged in to view your courses.");
           navigate("/login");
@@ -69,10 +68,10 @@ const Courses = () => {
         <h2>My Courses</h2>
         <div className="row">
           {myCourses && myCourses.length > 0 ? (
-            myCourses.map((course, index) => (
+            myCourses.map((currCourse, index) => (
               <AddCourseContent
                 key={index}
-                course={course}
+                course={currCourse}
                 deleteCourse={handleDeleteCourse}
               />
             ))
