@@ -30,17 +30,12 @@ public class FeedbackServiceImpl implements FeedbackService
     }
 
     @Override
-<<<<<<< HEAD
-    public void addFeedback(FeedbackDTO feedbackDTO) 
+    public void addFeedback(FeedbackDTO feedbackDTO)
     {
-=======
-    public void addFeedback(FeedbackDTO feedbackDTO) {
->>>>>>> 71a61f96e647c463868801b054f1357ff6b64b14
-        // Check if feedback already exists for the given student and course combination
+        
         Feedback existingFeedback = feedbackRepository.findByStudentIdAndCourseId(feedbackDTO.getStudentId(), feedbackDTO.getCourseId());
         if (existingFeedback != null) {
-            // Feedback already exists, you can throw an exception or handle it as per your requirement
-            // For now, let's just return
+            
             return;
         }
 

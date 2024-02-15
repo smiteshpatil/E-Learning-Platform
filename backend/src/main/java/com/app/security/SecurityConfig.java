@@ -48,12 +48,12 @@ public class SecurityConfig {
 		.antMatchers(
 				"/feedback/add",
 				"/students/{studentId}",
-				"/students/{studentId}/courses",
+				
 				"/students/update/{studentId}",
 				"/students/delete/{studentId}",
 				"/courses/enrollCourse}",
 				"/courses/removeCourse",
-				"/courses/student/{studentId}")
+				"/courses/student/{studentId}","/students/{studentId}/courses")
 		.hasRole("STUDENT")
 		.antMatchers("/instructors/{instructorId}",
 				"/instructors/{instructorId}/courses",
@@ -69,7 +69,7 @@ public class SecurityConfig {
 				"contents/delete/{contentId}")
 		.hasRole("INSTRUCTOR")
 		
-		.antMatchers("/instructors","/students")
+		.antMatchers("/instructors","/students","/student_courses","/admin/enrolledStudents")
 		.hasRole("ADMIN")
 		.anyRequest().authenticated()
 		.and()
