@@ -33,9 +33,6 @@ public class FeedbackServiceImpl implements FeedbackService {
 		Feedback existingFeedback = feedbackRepository.findByStudentIdAndCourseId(feedbackDTO.getStudentId(),
 				feedbackDTO.getCourseId());
 		if (existingFeedback != null) {
-			// Feedback already exists, you can throw an exception or handle it as per your
-			// requirement
-			// For now, let's just return
 			return;
 		}
 

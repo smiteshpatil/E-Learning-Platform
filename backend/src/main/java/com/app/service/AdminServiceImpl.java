@@ -13,18 +13,18 @@ import com.app.entities.Admin;
 
 @Service
 @Transactional
-public class AdminServiceImpl implements AdminService{
-	
+public class AdminServiceImpl implements AdminService {
+
 	@Autowired
 	private AdminRepository adminRepo;
-	
+
 	@Autowired
 	private ModelMapper mapper;
-	
+
 	@Override
 	public AdminDTO getAdminByEmail(String adminEmail) {
 		Admin admin = adminRepo.findByEmail(adminEmail)
-				.orElseThrow(()-> new ResourceNotFoundException("Invalid Emaail for ROLE_ADMIN"));
+				.orElseThrow(() -> new ResourceNotFoundException("Invalid Emaail for ROLE_ADMIN"));
 		return mapper.map(admin, AdminDTO.class);
 	}
 

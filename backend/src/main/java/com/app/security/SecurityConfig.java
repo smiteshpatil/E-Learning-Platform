@@ -29,7 +29,6 @@ public class SecurityConfig {
 	@Autowired
 	private CustomAuthenticationEntryPoint authEntry;
 	
-	
 	@Bean
 	public SecurityFilterChain authorizeRequests(HttpSecurity http) throws Exception
 	{
@@ -62,7 +61,7 @@ public class SecurityConfig {
 				"/courses/{instructorEmail}",
 				"/courses/add",
 				"/courses/update/{courseId}",
-				"/delete/{courseId}",
+				"/courses/delete/{courseId}",
 				"/contents",
 				"/contents/add",
 				"/contents/{courseId}",
@@ -84,6 +83,7 @@ public class SecurityConfig {
 	
 		return http.build();
 	}
+	
 	//configure AuthMgr as a spring bean
 	@Bean
 	public AuthenticationManager authenticationManager

@@ -8,12 +8,12 @@ import org.springframework.data.repository.query.Param;
 
 import com.app.entities.Course;
 
-public interface CourseRepository extends JpaRepository<Course, Long>{
+public interface CourseRepository extends JpaRepository<Course, Long> {
 	/*
 	 * @Query("select c from Course c where c.inst.instructorId=:instructorId")
 	 * List<Course> findByInstructorId(Long id);
 	 */
-	
+
 	@Query("select c from Course c where c.inst.id = :id")
 	List<Course> findByInstructorId(@Param("id") Long id);
 
