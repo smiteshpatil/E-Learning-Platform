@@ -26,7 +26,7 @@ import com.app.entities.Instructor;
 import com.app.entities.Student;
 
 @RestController
-@RequestMapping("/api/images")
+@RequestMapping("/images")
 @CrossOrigin(origins = "http://localhost:3000")
 public class ImageController {
 
