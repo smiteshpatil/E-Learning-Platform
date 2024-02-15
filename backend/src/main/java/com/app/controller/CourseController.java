@@ -34,10 +34,9 @@ public class CourseController {
 	public ResponseEntity<?> getAllCourses() {
 		return ResponseEntity.ok(courseService.getAllCourses());
 	}
-	
+
 	@GetMapping("/details")
-	public ResponseEntity<?> getAllCoursesWithDetails()
-	{
+	public ResponseEntity<?> getAllCoursesWithDetails() {
 		return ResponseEntity.ok(courseService.getAllCoursesWithDetails());
 	}
 

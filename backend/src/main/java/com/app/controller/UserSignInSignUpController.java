@@ -74,17 +74,17 @@ public class UserSignInSignUpController {
 		// Get user details based on the determined user type
 		Object userDetails = null;
 		switch (userType) {
-			case ROLE_STUDENT:
-				userDetails = studentService.getStudentDetails(reqDTO.getEmail());
-				break;
-			case ROLE_INSTRUCTOR:
-				userDetails = instructorService.getInstructorDetails(reqDTO.getEmail());
-				break;
-			case ROLE_ADMIN:
-				userDetails = adminService.getAdminByEmail(reqDTO.getEmail());
-				break;
-			default:
-				return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Unknown user type");
+		case ROLE_STUDENT:
+			userDetails = studentService.getStudentDetails(reqDTO.getEmail());
+			break;
+		case ROLE_INSTRUCTOR:
+			userDetails = instructorService.getInstructorDetails(reqDTO.getEmail());
+			break;
+		case ROLE_ADMIN:
+			userDetails = adminService.getAdminByEmail(reqDTO.getEmail());
+			break;
+		default:
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Unknown user type");
 		}
 
 		// Create a SignInResponse object with JWT token and user details

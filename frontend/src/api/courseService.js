@@ -2,7 +2,37 @@ import axios from "axios";
 import thumbnail from "../images/card1.jpg";
 const baseUrl = "http://localhost:8080";
 
-// launch new course
+//GET: get all available courses
+export const getAllCourses = async () => {
+  try {
+    const response = await axios.get(baseUrl + "/courses/details");
+    console.log("In getAllCourses in courseService: ");
+    console.log(response.data);
+    return response.data;
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+//GET: allCourses by instructorId
+export const getAllCoursesByInstructorId = async (
+  instructorId,
+  bearerToken
+) => {
+  try {
+    const response = await axios.get(baseUrl + `/courses/${instructorId}`, {
+      headers: {
+        Authorization: `Bearer ${bearerToken}`,
+      },
+    });
+    console.table(response);
+    return response;
+  } catch (err) {
+    console.table(err);
+  }
+};
+
+//POST:  launch new course
 export const createNewCourse = async (newCourse, bearerToken) => {
   try {
     const response = await axios.post(baseUrl + "/courses/add", newCourse, {
@@ -12,6 +42,37 @@ export const createNewCourse = async (newCourse, bearerToken) => {
     });
     console.log(response);
     return response;
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+//DELETE: delete course by instructorId
+export const deleteCourseById = async (courseId, bearerToken) => {
+  try {
+    const response = await axios.delete(
+      baseUrl + `/courses/delete/${courseId}`,
+      {
+        headers: {
+          Authorization: `Bearer ${bearerToken}`,
+        },
+      }
+    );
+    console.log(response);
+    return response;
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+//POST: add new content by courseId
+export const addNewContent = async (courseId, newContent) => {
+  try {
+    const response = await axios.post(
+      baseUrl + `/contents/${courseId}`,
+      newContent
+    );
+    console.table(response);
   } catch (err) {
     console.log(err);
   }
@@ -94,18 +155,58 @@ export const courses = [
     courseUrl: "https://google.com",
     price: 654,
   },
+];
+
+//handle addNewContent
+export const addContentService = (newContent) => {
+  content.push(newContent);
+  console.log("content with id", newContent.id, "Added");
+};
+
+//handle content delete
+export const deleteContentService = (contentId) => {
+  // Use filter to create a new array without the content with the given id
+  content = content.filter((curr) => curr.id !== contentId);
+  console.log("content with id", contentId, "deleted");
+};
+
+export let content = [
   {
-    id: 6,
-    thumbnail: thumbnail,
-    title: "React",
-    description: "React course by smitesh patil",
-    author: {
-      profilePicture: {
-        url: thumbnail,
-      },
-    },
-    datePublished: "Mar 15, 2024",
-    courseUrl: "https://google.com",
-    price: 321,
+    id: 1,
+    contentName: "Name of the lecture 1",
+    description:
+      "video description goes here and this can be changed later. asdkjffhfuiflfguewlfyweg",
+    videoUrl:
+      "https://www.dropbox.com/scl/fi/hldrytn68bochhie8zpm4/20220602_152154.mp4?rlkey=e219id7vkdjp4zjq1aqf0s37i&raw=1",
+  },
+  {
+    id: 2,
+    contentName: "Name of the lecture 2",
+    description:
+      "video description goes here and this can be changed later. asdkjffhfuiflfguewlfyweg",
+    videoUrl:
+      "https://www.dropbox.com/scl/fi/tdt5pwmfy1axl039ucmzt/09bd3cf8c4704199bd605661bf955e36.mp4?rlkey=r4d7yk5wnyvzvz2n4xwruw8c1&raw=1",
+  },
+  {
+    id: 3,
+    contentName: "Name of the lecture 3",
+    description:
+      "video description goes here and this can be changed later. asdkjffhfuiflfguewlfyweg",
+    videoUrl:
+      "https://www.dropbox.com/scl/fi/hldrytn68bochhie8zpm4/20220602_152154.mp4?rlkey=e219id7vkdjp4zjq1aqf0s37i&raw=1",
+  },
+  {
+    id: 4,
+    contentName: "Name of the lecture 4",
+    description:
+      "video description goes here and this can be changed later. asdkjffhfuiflfguewlfyweg",
+    videoUrl: "",
+  },
+  {
+    id: 5,
+    contentName: "Name of the lecture 5",
+    description:
+      "video description goes here and this can be changed later. asdkjffhfuiflfguewlfyweg",
+    videoUrl: "",
   },
 ];

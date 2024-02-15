@@ -11,15 +11,15 @@ import lombok.Setter;
 @Getter
 @Setter
 public class FeedbackDTO {
-    
-    private String comment;
-    
-    @Min(0)
-    @Max(5)
-    private int rating;
 
-    private Long courseId;
+	private String comment;
 
-    private Long studentId;
+	@Min(0)
+	@Max(5)
+	private int rating;
+
+	private Long courseId;
+
+	private Long studentId;
 
 }

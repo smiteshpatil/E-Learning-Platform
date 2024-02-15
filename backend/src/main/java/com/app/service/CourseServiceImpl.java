@@ -34,7 +34,7 @@ public class CourseServiceImpl implements CourseService {
 
 	@Autowired
 	private CourseRepository courseRepo;
-	
+
 	@Autowired
 	private InstructorRepository instRepo;
 
@@ -47,18 +47,18 @@ public class CourseServiceImpl implements CourseService {
 	@Autowired
 	private ModelMapper mapper;
 
-	
 	@Override
 	public List<CourseRespDTO> getAllCourses() {
-		return courseRepo.findAll().stream().map(list-> mapper.map(list, CourseRespDTO.class)).collect(Collectors.toList());
+		return courseRepo.findAll().stream().map(list -> mapper.map(list, CourseRespDTO.class))
+				.collect(Collectors.toList());
 	}
-	
+
 	@Override
-	public List<GetAllDetailsDTO> getAllCoursesWithDetails(){
+	public List<GetAllDetailsDTO> getAllCoursesWithDetails() {
 		List<Course> courses = courseRepo.findAll();
 		List<GetAllDetailsDTO> allCourseDetails = new ArrayList<>();
-		
-		for(Course course: courses) {
+
+		for (Course course : courses) {
 			GetAllDetailsDTO courseDetails = new GetAllDetailsDTO();
 			courseDetails.setCourseDTO(mapper.map(course, CourseDTO.class));
 			courseDetails.setInstructorDTO(mapper.map(course.getInst(), InstructorDTO.class));
@@ -67,16 +67,20 @@ public class CourseServiceImpl implements CourseService {
 			courseDetails.setContentDTO(contentDTOs);
 			allCourseDetails.add(courseDetails);
 		}
-		
+
 		return allCourseDetails;
 	}
 
 	@Override
 	public List<CourseRespDTO> getAllCoursesFromInstructor(Long instructorId) {
 		List<Course> courseList = courseRepo.findByInstructorId(instructorId);
-		return courseList.stream()
-				.map(course -> mapper.map(course, CourseRespDTO.class))
-				.collect(Collectors.toList());
+		return courseList.stream().map(course -> mapper.map(course, CourseRespDTO.class)).collect(Collectors.toList());
+	}
+
+	@Override
+	public List<CourseRespDTO> getAllCourseByInstructorEmail(String email) {
+		List<Course> list = courseRepo.findByInstEmail(email);
+		return list.stream().map(course -> mapper.map(course, CourseRespDTO.class)).collect(Collectors.toList());
 	}
 
 	@Override
@@ -97,7 +101,7 @@ public class CourseServiceImpl implements CourseService {
 		// set up a bi dir relationship
 		dto.setPublishedDate(LocalDate.now());
 		Course course = mapper.map(dto, Course.class);
-		
+
 		inst.addCourse(course);
 		return mapper.map(courseRepo.save(course), CourseRespDTO.class);
 	}
@@ -132,9 +136,7 @@ public class CourseServiceImpl implements CourseService {
 		Pageable pageable = PageRequest.of(pageNumber, pageSize);
 		// fetches the Page of Courses --> getContent() --> List<Course>
 		List<Course> courseList = courseRepo.findAll(pageable).getContent();
-		return courseList.stream()
-				.map(course -> mapper.map(course, CourseRespDTO.class))
-				.collect(Collectors.toList());
+		return courseList.stream().map(course -> mapper.map(course, CourseRespDTO.class)).collect(Collectors.toList());
 	}
 
 	@Override
@@ -161,9 +163,7 @@ public class CourseServiceImpl implements CourseService {
 	public List<CourseRespDTO> getAllCoursesFromStudent(Long studentId) {
 
 		List<Course> courseList = courseStudentRepo.findByStudentId(studentId);
-		return courseList.stream()
-				.map(course -> mapper.map(course, CourseRespDTO.class))
-				.collect(Collectors.toList());
+		return courseList.stream().map(course -> mapper.map(course, CourseRespDTO.class)).collect(Collectors.toList());
 
 	}
 
@@ -192,5 +192,4 @@ public class CourseServiceImpl implements CourseService {
 		return "You have enrolled in all Courses";
 	}
 
-	
 }

@@ -4,6 +4,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.Lob;
 import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
@@ -13,40 +14,41 @@ import lombok.Setter;
 import lombok.ToString;
 
 @Entity
-@Table(name="admin")
+@Table(name = "admin")
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
 @Setter
 @ToString(exclude = "password")
-public class Admin extends BaseEntity{
+public class Admin extends BaseEntity {
 	@Column(length = 20)
 	private String firstName;
 	@Column(length = 20)
 	private String lastName;
 	@Column(unique = true, nullable = false)
 	private String email;
-	@Column( nullable = false)
+	@Column(nullable = false)
 	private String password;
-	
+
 	@Column(length = 10)
 	private String phoneNo;
 
 	@Column(length = 10)
 	private String gender;
 
-	private String imageUrl;
-	
+	@Lob // large object :col : longblob
+	private byte[] image;
+
 	@Column(unique = true)
 	private String LinkedInLink;
 
 	@Column(unique = true)
 	private String GitHubLink;
-	
+
 	private String Heading;
-	
+
 	@Enumerated(EnumType.STRING)
 	@Column(length = 30)
 	private Role role;
-	
+
 }

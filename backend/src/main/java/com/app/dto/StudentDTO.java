@@ -17,13 +17,13 @@ import lombok.ToString;
 public class StudentDTO {
 	@JsonProperty(access = Access.READ_ONLY)
 	private Long id;
-	
+
 	@NotBlank
 	private String firstName;
-	
+
 	@NotBlank
 	private String lastName;
-	
+
 	@Email
 	private String email;
 

@@ -1,9 +1,11 @@
 package com.app.entities;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -20,18 +22,21 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString(exclude = "course")
-public class Content extends BaseEntity{
-	
+public class Content extends BaseEntity {
+
 	@Column
 	private Long contentNo;
-	@Column(length = 20)
+	@Column
 	private String contentName;
+	@Lob
 	@Column
 	private String contentDescription;
 	@Column
 	private String contentUrl;
-	
-	@ManyToOne(fetch = FetchType.LAZY)
+	@Column
+	private String contentPath;
+
+	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinColumn(name = "course_id")
 	private Course course;
 }

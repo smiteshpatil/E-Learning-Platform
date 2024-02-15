@@ -1,35 +1,88 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import CreateCourseCard from "./CreateCourseCard";
-import MyCourses from "./MyCourses";
-import { createNewCourse } from "../../api/courseService";
-import { useAuth } from "../../context/AuthContext";
-
+import AddCourseContent from "./AddCourseContent";
+import { toast } from "react-toastify";
+import {
+  getAllCoursesByInstructorId,
+  createNewCourse,
+  deleteCourseById,
+} from "../../api/courseService";
+import { useNavigate } from "react-router-dom";
 const Courses = () => {
-  let { authUser } = useAuth();
+  const navigate = useNavigate();
+
+  //instructoId
+  let instructorId = localStorage.getItem("userObject").id;
+  let token = localStorage.getItem("token");
+
   // State for managing the list of courses
   const [myCourses, setMyCourses] = useState([]);
 
-  // Function to handle launching a new course
+  // handle launching a new course
   const launchNewCourse = (newCourse) => {
-    // Send a request to your backend API to create the new course
     const token = localStorage.getItem("token");
-
     //add instructor id in newCourse
-    newCourse.instructorId = authUser.id;
+    newCourse.instructorId = instructorId;
     try {
       const resp = createNewCourse(newCourse, token);
-      console.log(resp);
+      console.table(resp);
+      setMyCourses([...myCourses, newCourse]);
     } catch (err) {
       console.log(err);
     }
-
-    setMyCourses([...myCourses, newCourse]);
   };
+
+  //delete course
+  const handleDeleteCourse = (courseId) => {
+    deleteCourseById(courseId);
+  };
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        if (token) {
+          const coursesPromise = getAllCoursesByInstructorId(instructorId);
+          toast.promise(coursesPromise, {
+            pending: "Loading your courses...",
+            success: "Your courses loaded",
+            error: "Error loading your courses",
+          });
+          const courses = await coursesPromise;
+          setMyCourses(courses);
+          console.log(courses);
+        } else {
+          toast.warning("You need to be logged in to view your courses.");
+          navigate("/login");
+        }
+      } catch (error) {
+        console.error("Error fetching courses:", error);
+      }
+    };
+
+    fetchData();
+  }, [token, instructorId]);
 
   return (
     <>
       <CreateCourseCard createCourse={launchNewCourse} />
-      <MyCourses courses={myCourses} />
+
+      {/* My courses */}
+      <div className="container my-3">
+        <h2>My Courses</h2>
+        <div className="row">
+          {myCourses && myCourses.length > 0 ? (
+            myCourses.map((course, index) => (
+              <AddCourseContent
+                key={index}
+                course={course}
+                deleteCourse={handleDeleteCourse}
+              />
+            ))
+          ) : (
+            <div>You have not created any course yet !</div>
+          )}
+        </div>
+      </div>
     </>
   );
 };

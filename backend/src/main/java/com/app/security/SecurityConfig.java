@@ -14,34 +14,88 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
-@EnableWebSecurity//to enable spring sec frmwork support
-@Configuration //to tell SC , this is config class containing @Bean methods
+@EnableWebSecurity // to enable spring sec frmwork support
+@Configuration // to tell SC , this is config class containing @Bean methods
 @EnableGlobalMethodSecurity(prePostEnabled = true)
-//To enable method level authorization support : pre n post authorization
+// To enable method level authorization support : pre n post authorization
 public class SecurityConfig {
-	//dep : pwd encoder
+	// dep : pwd encoder
 	// @Autowired
 	// private PasswordEncoder enc;
-	//dep : custom jwt auth filter
+	// dep : custom jwt auth filter
 	@Autowired
 	private JwtAuthenticationFilter jwtFilter;
-	//dep : custom auth entry point
+	// dep : custom auth entry point
 	@Autowired
 	private CustomAuthenticationEntryPoint authEntry;
+<<<<<<< HEAD
+
+=======
 	
-	
+>>>>>>> 852587c72c56566456dc34b2fabb825f390d7727
 	@Bean
-	public SecurityFilterChain authorizeRequests(HttpSecurity http) throws Exception
-	{
-		//URL based authorization rules
+	public SecurityFilterChain authorizeRequests(HttpSecurity http) throws Exception {
+		// URL based authorization rules
 		http.cors()
+<<<<<<< HEAD
+				.and().
+				// disable CSRF token generation n verification
+				csrf().disable()
+				.exceptionHandling().authenticationEntryPoint(authEntry).and().authorizeRequests()
+				.antMatchers("/users/signup", "/users/signin", "/courses", "/courses/details",
+						"/images/upload/{type}/{id}", "/images/download/{type}/{id}",
+						"/v*/api-doc*/**", "/swagger-ui/**")
+				.permitAll()
+				// only required for JS clnts (react / angular) : for the pre flight requests
+				.antMatchers(HttpMethod.OPTIONS).permitAll()
+				.antMatchers(
+						"/feedback/add",
+						"/students/{studentId}",
+						"/students/{studentId}/courses",
+						"/students/update/{studentId}",
+						"/students/delete/{studentId}",
+						"/courses/enrollCourse}",
+						"/courses/removeCourse",
+						"/courses/student/{studentId}")
+				.hasRole("STUDENT")
+				.antMatchers("/instructors/{instructorId}",
+						"/instructors/{instructorId}/courses",
+						"/courses/{instructorId}",
+						"/courses/{instructorEmail}",
+						"/courses/add",
+						"/courses/update/{courseId}",
+						"/courses/delete/{courseId}",
+						"/contents",
+						"/contents/add",
+						"/contents/{courseId}",
+						"/contents/{courseId}/{contentId}",
+						"/contents/update/{contentId}",
+						"contents/delete/{contentId}")
+				.hasRole("INSTRUCTOR")
+
+				.antMatchers("/instructors", "/students")
+				.hasRole("ADMIN")
+				.anyRequest().authenticated()
+				.and()
+				// to tell spring sec : not to use HttpSession to store user's auth details
+				.sessionManagement()
+				.sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
+				// inserting jwt filter before sec filter
+				.addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
+
+		return http.build();
+	}
+
+	// configure AuthMgr as a spring bean
+=======
 		.and().
 		//disable CSRF token generation n verification
 		csrf()	.disable()
 		.exceptionHandling().authenticationEntryPoint(authEntry).
 		and().
 		authorizeRequests()
-		.antMatchers("/users/signup","/users/signin","/courses","/courses/details","/instructors/images/{instructorId}",
+		.antMatchers("/users/signup","/users/signin","/courses","/courses/details",
+				"/images/upload/{type}/{id}","/images/download/{type}/{id}",
 				"/v*/api-doc*/**","/swagger-ui/**").permitAll()
 		// only required for JS clnts (react / angular) : for the pre flight requests
 		.antMatchers(HttpMethod.OPTIONS).permitAll()
@@ -60,7 +114,7 @@ public class SecurityConfig {
 				"/courses/{instructorId}",
 				"/courses/add",
 				"/courses/update/{courseId}",
-				"/delete/{courseId}",
+				"/courses/delete/{courseId}",
 				"/contents",
 				"/contents/add",
 				"/contents/{courseId}",
@@ -82,11 +136,11 @@ public class SecurityConfig {
 	
 		return http.build();
 	}
+	
 	//configure AuthMgr as a spring bean
+>>>>>>> 852587c72c56566456dc34b2fabb825f390d7727
 	@Bean
-	public AuthenticationManager authenticationManager
-	(AuthenticationConfiguration config) throws Exception
-	{
+	public AuthenticationManager authenticationManager(AuthenticationConfiguration config) throws Exception {
 		return config.getAuthenticationManager();
 	}
 }
