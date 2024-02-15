@@ -19,17 +19,6 @@ public class FeedbackServiceImpl implements FeedbackService {
 	private final CourseRepository courseRepository;
 	private final StudentRepository studentRepository;
 
-<<<<<<< HEAD
-    @Override
-    public void addFeedback(FeedbackDTO feedbackDTO)
-    {
-        
-        Feedback existingFeedback = feedbackRepository.findByStudentIdAndCourseId(feedbackDTO.getStudentId(), feedbackDTO.getCourseId());
-        if (existingFeedback != null) {
-            
-            return;
-        }
-=======
 	@Autowired
 	public FeedbackServiceImpl(FeedbackRepository feedbackRepository,
 			CourseRepository courseRepository,
@@ -38,7 +27,6 @@ public class FeedbackServiceImpl implements FeedbackService {
 		this.courseRepository = courseRepository;
 		this.studentRepository = studentRepository;
 	}
->>>>>>> 6c5b6cf8bf80253ab46d3438568305d632b36751
 
 	@Override
 	public void addFeedback(FeedbackDTO feedbackDTO) {

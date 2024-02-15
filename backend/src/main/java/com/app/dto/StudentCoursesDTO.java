@@ -19,8 +19,7 @@ import lombok.ToString;
 @Setter
 @ToString
 public class StudentCoursesDTO {
-<<<<<<< HEAD
-=======
+
 	@JsonProperty(access = Access.READ_ONLY)
 	private Long id;
 	@NotBlank
@@ -31,14 +30,6 @@ public class StudentCoursesDTO {
 	private String email;
 
 	private String password;
->>>>>>> 6c5b6cf8bf80253ab46d3438568305d632b36751
-
-    
-    @Email
-    private String email;
-    
-
-<<<<<<< HEAD
     
     // New fields
     private String courseName;
@@ -49,7 +40,6 @@ public class StudentCoursesDTO {
         this.courseName = courseName;
         this.enrolledDate = enrolledDate;
     }
-=======
 	private String gender;
 
 	private String imageUrl;
@@ -58,5 +48,4 @@ public class StudentCoursesDTO {
 	private Role role;
 
 	private List<CourseDTO> courses;
->>>>>>> 6c5b6cf8bf80253ab46d3438568305d632b36751
 }
