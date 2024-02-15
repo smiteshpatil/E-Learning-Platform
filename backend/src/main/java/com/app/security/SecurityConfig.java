@@ -41,6 +41,7 @@ public class SecurityConfig {
 		and().
 		authorizeRequests()
 		.antMatchers("/users/signup","/users/signin","/courses","/courses/details",
+				"/password/sendOtp","/password/updatePassword",
 				"/images/upload/{type}/{id}","/images/download/{type}/{id}",
 				"/v*/api-doc*/**","/swagger-ui/**").permitAll()
 		// only required for JS clnts (react / angular) : for the pre flight requests
