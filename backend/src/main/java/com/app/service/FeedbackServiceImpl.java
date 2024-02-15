@@ -14,47 +14,19 @@ import com.app.dao.StudentRepository;
 
 @Service
 public class FeedbackServiceImpl implements FeedbackService {
-<<<<<<< HEAD
-
-    private final FeedbackRepository feedbackRepository;
-    private final CourseRepository courseRepository;
-    private final StudentRepository studentRepository;
-
-    @Autowired
-    public FeedbackServiceImpl(FeedbackRepository feedbackRepository,
-            CourseRepository courseRepository,
-            StudentRepository studentRepository) {
-        this.feedbackRepository = feedbackRepository;
-        this.courseRepository = courseRepository;
-        this.studentRepository = studentRepository;
-    }
-
-    @Override
-
-    public void addFeedback(FeedbackDTO feedbackDTO) {
-        // Check if feedback already exists for the given student and course combination
-        Feedback existingFeedback = feedbackRepository.findByStudentIdAndCourseId(feedbackDTO.getStudentId(),
-                feedbackDTO.getCourseId());
-        if (existingFeedback != null) {
-            // Feedback already exists, you can throw an exception or handle it as per your
-            // requirement
-            // For now, let's just return
-            return;
-        }
-=======
 
 	private final FeedbackRepository feedbackRepository;
 	private final CourseRepository courseRepository;
 	private final StudentRepository studentRepository;
 
 	@Autowired
-	public FeedbackServiceImpl(FeedbackRepository feedbackRepository, CourseRepository courseRepository,
+	public FeedbackServiceImpl(FeedbackRepository feedbackRepository,
+			CourseRepository courseRepository,
 			StudentRepository studentRepository) {
 		this.feedbackRepository = feedbackRepository;
 		this.courseRepository = courseRepository;
 		this.studentRepository = studentRepository;
 	}
->>>>>>> da6fbcf496581e1ff76fb9fdc3bc6e8a3e2a5a0e
 
 	@Override
 	public void addFeedback(FeedbackDTO feedbackDTO) {
@@ -62,39 +34,9 @@ public class FeedbackServiceImpl implements FeedbackService {
 		Feedback existingFeedback = feedbackRepository.findByStudentIdAndCourseId(feedbackDTO.getStudentId(),
 				feedbackDTO.getCourseId());
 		if (existingFeedback != null) {
-			// Feedback already exists, you can throw an exception or handle it as per your
-			// requirement
-			// For now, let's just return
 			return;
 		}
-
-<<<<<<< HEAD
-        // Set course and student based on DTO data
-        feedback.setCourse(courseRepository.findById(feedbackDTO.getCourseId())
-                .orElseThrow(() -> new IllegalArgumentException("Invalid course ID")));
-        feedback.setStudent(studentRepository.findById(feedbackDTO.getStudentId())
-                .orElseThrow(() -> new IllegalArgumentException("Invalid student ID")));
-
-        feedbackRepository.save(feedback);
-    }
-
-    @Override
-    public void deleteFeedback(Long feedbackId, Long studentId) {
-        // Check if the feedback belongs to the requesting student
-        Feedback feedback = feedbackRepository.findById(feedbackId)
-                .orElseThrow(() -> new EntityNotFoundException("Feedback not found"));
-        if (!feedback.getStudent().getId().equals(studentId)) {
-            throw new AccessDeniedException("You are not authorized to delete this feedback");
-        }
-
-        feedbackRepository.deleteById(feedbackId);
-    }
-
-=======
 		Feedback feedback = new Feedback();
-		feedback.setComment(feedbackDTO.getComment());
-		feedback.setRating(feedbackDTO.getRating());
-
 		// Set course and student based on DTO data
 		feedback.setCourse(courseRepository.findById(feedbackDTO.getCourseId())
 				.orElseThrow(() -> new IllegalArgumentException("Invalid course ID")));
@@ -116,5 +58,4 @@ public class FeedbackServiceImpl implements FeedbackService {
 		feedbackRepository.deleteById(feedbackId);
 	}
 
->>>>>>> da6fbcf496581e1ff76fb9fdc3bc6e8a3e2a5a0e
 }

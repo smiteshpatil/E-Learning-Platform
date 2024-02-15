@@ -7,14 +7,9 @@ import java.util.List;
 public interface FeedbackRepository extends JpaRepository<Feedback, Long> {
     // Custom method to find feedback by course ID
     List<Feedback> findByCourseId(Long courseId);
-<<<<<<< HEAD
 
-    Feedback findByStudentIdAndCourseId(Long studentId, Long courseId);
-        
-}
-=======
     Feedback findByStudentIdAndCourseId(Long studentId, Long courseId);
     
     //Feedback findByStudentIdAndCourseId(Long studentId, Long courseId);
 }
->>>>>>> da6fbcf496581e1ff76fb9fdc3bc6e8a3e2a5a0e
+
