@@ -27,7 +27,7 @@ public class StudentCoursesDTO {
 	private String lastName;
 	@Email
 	private String email;
-	
+
 	private String password;
 
 	private String phoneNo;
@@ -35,9 +35,9 @@ public class StudentCoursesDTO {
 	private String gender;
 
 	private String imageUrl;
-	
+
 	@Enumerated(EnumType.STRING)
 	private Role role;
-	
+
 	private List<CourseDTO> courses;
 }

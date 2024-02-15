@@ -1,5 +1,7 @@
 package com.app.dto;
 
+import javax.persistence.Lob;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonProperty.Access;
 
@@ -15,6 +17,7 @@ public class ContentDTO {
 	private Long id;
 	private Long contentNo;
 	private String contentName;
+	@Lob
 	private String contentDescription;
 	private String contentUrl;
 	@JsonProperty(access = Access.WRITE_ONLY)

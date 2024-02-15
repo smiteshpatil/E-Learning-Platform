@@ -28,10 +28,9 @@ public class ContentController {
 	@Autowired
 	private ContentService contentService;
 
-	
 	// add new Content to existing course
 	@PostMapping("/add")
-	public ResponseEntity<?> addNewContent(@RequestBody @Valid ContentDTO dto){
+	public ResponseEntity<?> addNewContent(@RequestBody @Valid ContentDTO dto) {
 		System.out.println("In add Content " + dto);
 		return ResponseEntity.status(HttpStatus.CREATED).body(contentService.addContent(dto));
 	}
@@ -54,17 +53,10 @@ public class ContentController {
 		System.out.println("In update content " + contentId);
 		return ResponseEntity.ok(contentService.updateContent(contentId, dto));
 	}
-	
-	
-	@DeleteMapping("/delete/{contentId}")
-	public ResponseEntity<?> deleteContent(@PathVariable Long contentId){
-	System.out.println("In delete content " + contentId);
-	return ResponseEntity.ok(contentService.deleteContent(contentId));
-}
-}
 
-//public ResponseEntity<?> addNewContent(@RequestBody @Valid AddContentDTO dto){
-//	
-//	
-//	return null;
-//}
+	@DeleteMapping("/delete/{contentId}")
+	public ResponseEntity<?> deleteContent(@PathVariable Long contentId) {
+		System.out.println("In delete content " + contentId);
+		return ResponseEntity.ok(contentService.deleteContent(contentId));
+	}
+}

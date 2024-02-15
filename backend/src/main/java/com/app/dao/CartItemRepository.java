@@ -6,7 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.app.entities.CartItem;
 
-public interface CartItemRepository extends JpaRepository<CartItem, Long>{
-	//@Query("SELECT c FROM CartItem c WHERE c.student.id = :studentId")
+public interface CartItemRepository extends JpaRepository<CartItem, Long> {
+	// @Query("SELECT c FROM CartItem c WHERE c.student.id = :studentId")
 	List<CartItem> findByStudentId(Long StudentId);
 }

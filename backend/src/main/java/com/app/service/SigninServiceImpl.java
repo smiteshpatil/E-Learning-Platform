@@ -12,30 +12,30 @@ import com.app.entities.Role;
 
 @Service
 @Transactional
-public class SigninServiceImpl implements SigninService{
+public class SigninServiceImpl implements SigninService {
 
 	@Override
 	public Role determineUserType(Authentication authentication) {
-	
+
 		// Get the authorities (roles) of the authenticated user
-	    Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
-	    
-	    // Check if the user has a specific role and determine the user type accordingly
-	    if (authorities != null && !authorities.isEmpty()) {
-	        for (GrantedAuthority authority : authorities) {
-	            String role = authority.getAuthority();
-	            if (role.equals("ROLE_STUDENT")) {
-	                return Role.ROLE_STUDENT;
-	            } else if (role.equals("ROLE_INSTRUCTOR")) {
-	                return Role.ROLE_INSTRUCTOR;
-	            } else if (role.equals("ROLE_ADMIN")) {
-	                return Role.ROLE_ADMIN;
-	            }
-	        }
-	    }
-	    
-	    // If no specific role is found, return a default user type
-	    return Role.ROLE_UNKNOWN;
+		Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
+
+		// Check if the user has a specific role and determine the user type accordingly
+		if (authorities != null && !authorities.isEmpty()) {
+			for (GrantedAuthority authority : authorities) {
+				String role = authority.getAuthority();
+				if (role.equals("ROLE_STUDENT")) {
+					return Role.ROLE_STUDENT;
+				} else if (role.equals("ROLE_INSTRUCTOR")) {
+					return Role.ROLE_INSTRUCTOR;
+				} else if (role.equals("ROLE_ADMIN")) {
+					return Role.ROLE_ADMIN;
+				}
+			}
+		}
+
+		// If no specific role is found, return a default user type
+		return Role.ROLE_UNKNOWN;
 	}
-	
+
 }

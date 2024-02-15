@@ -25,6 +25,13 @@ import Dashboard from "./components/instructor/Dashboard";
 import Courses from "./components/instructor/Courses";
 import Home from "./components/instructor/Home";
 import Revenue from "./components/instructor/Revenue";
+
+import AdminDashboard from "./components/admin/AdminDashboard";
+import AdminHome from "./components/admin/AdminHome";
+import StudentController from "./components/admin/StudentController";
+import CourseController from "./components/admin/CourseController";
+import InstructorController from "./components/admin/InstructorController";
+
 import UploadContentPage from "./components/instructor/UploadContentPage";
 import CreateContent from "./components/instructor/CreateContent";
 import { ToastContainer } from "react-toastify";
@@ -73,10 +80,20 @@ function App() {
           <Route path="revenue" element={<Revenue />} />
         </Route>
 
+        {/* Admin */}
+       = <Route path="/user/admin" element={<AdminDashboard />}>
+          <Route path="" element={<AdminHome />} />
+          <Route path="courseController" element={<CourseController />} />
+          <Route path="studentController" element={<StudentController />} />
+          <Route path="instructorController" element={<InstructorController />} />
+        </Route>
+
+
         {/* upload course content routes */}
         <Route path="/upload" element={<UploadContentPage />}>
           <Route path=":id" element={<CreateContent />} />
         </Route>
+
 
         {/* Video Routes demo */}
         <Route path="/video" element={<VideoPage />}>

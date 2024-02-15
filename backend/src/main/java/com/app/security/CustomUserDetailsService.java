@@ -7,10 +7,8 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-
 import com.app.dao.UserRepository;
 import com.app.entities.UserInfo;
-
 
 @Service
 @Transactional

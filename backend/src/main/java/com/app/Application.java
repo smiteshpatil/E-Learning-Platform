@@ -18,14 +18,15 @@ public class Application {
 
 	@Bean // equivalent to <bean id ..../> in xml file
 	public ModelMapper mapper() {
-		ModelMapper modelMapper = new ModelMapper();		modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT)
-	.setPropertyCondition(Conditions.isNotNull());
+		ModelMapper modelMapper = new ModelMapper();
+		modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT)
+				.setPropertyCondition(Conditions.isNotNull());
 		return modelMapper;
 	}
-	//configure PasswordEncoder bean 
+
+	// configure PasswordEncoder bean
 	@Bean
-	public PasswordEncoder passwordEncoder()
-	{
+	public PasswordEncoder passwordEncoder() {
 		return new BCryptPasswordEncoder();
 	}
 

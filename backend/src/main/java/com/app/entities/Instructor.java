@@ -24,9 +24,9 @@ import lombok.ToString;
 @AllArgsConstructor
 @Getter
 @Setter
-@ToString(exclude = {"password","imagePath","courses"})
+@ToString(exclude = { "password", "imagePath", "courses" })
 public class Instructor extends BaseEntity {
-	
+
 	@Column(length = 20)
 	private String firstName;
 
@@ -44,44 +44,33 @@ public class Instructor extends BaseEntity {
 
 	@Column(length = 10)
 	private String gender;
-	
+
 	@Enumerated(EnumType.STRING)
 	@Column(length = 30)
 	private Role role;
-	
+
 	@Column(unique = true)
 	private String LinkedInLink;
-	
+
 	@Column(unique = true)
 	private String GitHubLink;
 
 	@Lob // large object :col : longblob
-	private byte[] image; //This will be used for storing n restoring images in DB
-	private String imagePath;//This will be used for storing n restoring images in server side folder
-	
-	
-	@OneToMany(mappedBy = "inst", 
-			cascade = CascadeType.ALL, 
-			orphanRemoval = true /* , fetch = FetchType.EAGER */ )
+	private byte[] image; // This will be used for storing n restoring images in DB
+	private String imagePath;// This will be used for storing n restoring images in server side folder
+
+	@OneToMany(mappedBy = "inst", cascade = CascadeType.ALL, orphanRemoval = true /* , fetch = FetchType.EAGER */ )
 	private List<Course> courses = new ArrayList<>();
-	
-	
-	
-	//add course helper method
+
+	// add course helper method
 	public void addCourse(Course c) {
-		courses.add(c);  //instructor -> course
-		c.setInst(this); //course -> instructor
+		courses.add(c); // instructor -> course
+		c.setInst(this); // course -> instructor
 	}
-	
+
 	public void deleteCourse(Course c) {
-		courses.remove(c);  //instructor -> course
-		c.setInst(null); //course -> instructor
+		courses.remove(c); // instructor -> course
+		c.setInst(null); // course -> instructor
 	}
-	
-	
-	
-	
-	
-	
 
 }

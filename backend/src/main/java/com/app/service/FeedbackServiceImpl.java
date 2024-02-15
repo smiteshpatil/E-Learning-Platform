@@ -6,11 +6,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.stereotype.Service;
 
-import com.app.dto.FeedbackDTO;
-import com.app.entities.Feedback;
 import com.app.dao.CourseRepository;
 import com.app.dao.FeedbackRepository;
 import com.app.dao.StudentRepository;
+import com.app.dto.FeedbackDTO;
+import com.app.entities.Feedback;
 
 @Service
 public class FeedbackServiceImpl implements FeedbackService {
@@ -20,7 +20,8 @@ public class FeedbackServiceImpl implements FeedbackService {
 	private final StudentRepository studentRepository;
 
 	@Autowired
-	public FeedbackServiceImpl(FeedbackRepository feedbackRepository, CourseRepository courseRepository,
+	public FeedbackServiceImpl(FeedbackRepository feedbackRepository,
+			CourseRepository courseRepository,
 			StudentRepository studentRepository) {
 		this.feedbackRepository = feedbackRepository;
 		this.courseRepository = courseRepository;
@@ -33,16 +34,9 @@ public class FeedbackServiceImpl implements FeedbackService {
 		Feedback existingFeedback = feedbackRepository.findByStudentIdAndCourseId(feedbackDTO.getStudentId(),
 				feedbackDTO.getCourseId());
 		if (existingFeedback != null) {
-			// Feedback already exists, you can throw an exception or handle it as per your
-			// requirement
-			// For now, let's just return
 			return;
 		}
-
 		Feedback feedback = new Feedback();
-		feedback.setComment(feedbackDTO.getComment());
-		feedback.setRating(feedbackDTO.getRating());
-
 		// Set course and student based on DTO data
 		feedback.setCourse(courseRepository.findById(feedbackDTO.getCourseId())
 				.orElseThrow(() -> new IllegalArgumentException("Invalid course ID")));

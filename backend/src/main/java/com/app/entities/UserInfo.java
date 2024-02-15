@@ -15,8 +15,8 @@ import lombok.Setter;
 @AllArgsConstructor
 @Getter
 @Setter
-public class UserInfo extends BaseEntity{
-	
+public class UserInfo extends BaseEntity {
+
 	private String email;
 	private String password;
 	@Enumerated(EnumType.STRING)

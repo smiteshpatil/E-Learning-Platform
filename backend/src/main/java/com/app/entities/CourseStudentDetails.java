@@ -24,19 +24,19 @@ import lombok.Setter;
 public class CourseStudentDetails {
 	@EmbeddedId
 	private CourseStudentId courseStudentId = new CourseStudentId();
-	
+
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private LocalDate enrolledDate;
-	
+
 	@ManyToOne(fetch = FetchType.LAZY)
-	@MapsId("courseId") //shared PK approach
+	@MapsId("courseId") // shared PK approach
 	@JoinColumn(name = "course_id")
 	private Course myCourse;
 	@ManyToOne(fetch = FetchType.LAZY)
-	@MapsId("studentId") //shared PK approach
+	@MapsId("studentId") // shared PK approach
 	@JoinColumn(name = "student_id")
 	private Student myStudent;
-	
+
 	public CourseStudentDetails(CourseStudentId courseStudentId) {
 		super();
 		this.courseStudentId = courseStudentId;

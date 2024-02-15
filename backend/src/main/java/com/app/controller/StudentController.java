@@ -47,8 +47,7 @@ public class StudentController {
 	public ResponseEntity<?> getStudentDetails(@PathVariable Long studentId) {
 		System.out.println("in GET student " + studentId);
 
-		return ResponseEntity
-				.ok(studentService.getStudentDetails(studentId));
+		return ResponseEntity.ok(studentService.getStudentDetails(studentId));
 
 	}
 
