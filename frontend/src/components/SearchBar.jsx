@@ -6,6 +6,7 @@ const SearchBar = () => {
   const searchBarStyle = {
     display: "flex",
     alignItems: "center",
+    width: "50%",
     maxWidth: "800px",
     margin: "0 auto",
     borderRadius: "25px",
@@ -65,7 +66,7 @@ const SearchBar = () => {
       <div style={searchBarStyle}>
         <input
           type="text"
-          placeholder="Search for courses..."
+          placeholder="Search..."
           style={inputStyle}
           value={searchQuery}
           onChange={(e) => {

@@ -1,9 +1,6 @@
 package com.app.dto;
 
 import javax.validation.constraints.Email;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.Length;
 
@@ -16,7 +13,7 @@ import lombok.ToString;
 @ToString
 public class SigninRequest {
 	
-	@NotBlank(message = "Email can't be blank")
+//	@NotBlank(message = "Email can't be blank")
 	@Email(message = "Invalid email format")
 	private String email;
 //	@NotBlank

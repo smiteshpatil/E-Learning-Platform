@@ -5,9 +5,9 @@ import org.modelmapper.convention.MatchingStrategies;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.modelmapper.Conditions;
 
 @SpringBootApplication
 public class Application {
@@ -18,14 +18,14 @@ public class Application {
 
 	@Bean // equivalent to <bean id ..../> in xml file
 	public ModelMapper mapper() {
-		ModelMapper modelMapper = new ModelMapper();
-		modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
+		ModelMapper modelMapper = new ModelMapper();		modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT)
+	.setPropertyCondition(Conditions.isNotNull());
 		return modelMapper;
 	}
-
-	// configure password encoder bean for spring sec.
+	//configure PasswordEncoder bean 
 	@Bean
-	public PasswordEncoder passwordEncoder() {
+	public PasswordEncoder passwordEncoder()
+	{
 		return new BCryptPasswordEncoder();
 	}
 

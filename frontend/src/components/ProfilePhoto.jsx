@@ -1,15 +1,14 @@
 import React, { useState } from "react";
-import { Container, Row } from "react-bootstrap";
+import { Container, Row, Col, Button } from "react-bootstrap";
 import { useAuth } from "../context/AuthContext";
 
 const ProfilePhoto = () => {
-  let { authUser } = useAuth();
+  const { authUser } = useAuth();
 
-  const placeholderImage = `${
-    authUser.picture != null
+  const placeholderImage =
+    authUser && authUser.picture
       ? authUser.picture
-      : "https://via.placeholder.com/200"
-  }`; // Placeholder image URL
+      : "https://via.placeholder.com/200"; // Placeholder image URL
   const [imagePreview, setImagePreview] = useState(placeholderImage); // State for image preview
 
   const handleImageChange = (e) => {
@@ -27,25 +26,24 @@ const ProfilePhoto = () => {
 
   return (
     <>
-      <Container className="mt-2 mb-4">
-        <Row>
-          <div className="text-center mb-1 mt-2">
-            <h3>Profile Photo </h3>
-            <p>Add a nice photo of yourself for your profile.</p>
-          </div>
-        </Row>
-        <Row className="border-top">
-          <div className="text-center mb-4 mt-4">
-            <form action="/userProfile/photo" method="post">
+      <Container className="mt-2 mb-4" style={{ margintop: "70px" }}>
+        <Row className="justify-content-center">
+          <Col xs={12} md={8} lg={8}>
+            <div className="text-center mb-1 mt-2">
+              <h3>Profile Photo</h3>
+              <p>Add a nice photo of yourself for your profile.</p>
+            </div>
+
+            <form>
               <div
-                className="ud-form-group "
+                className="border-top text-center ud-form-group mb-2 mt-4"
                 style={{
                   paddingBottom: "1rem",
-                  paddingLeft: "10rem",
-                  paddingRight: "10rem",
+                  paddingLeft: "1rem",
+                  paddingRight: "1rem",
                 }}
               >
-                <div className="text-start">
+                <div className="text-start " style={{ paddingBottom: "1rem", paddingTop: "1rem" }}>
                   <label
                     htmlFor="image-preview"
                     className="ud-form-label ud-heading-sm"
@@ -54,25 +52,26 @@ const ProfilePhoto = () => {
                     Image preview
                   </label>
                 </div>
-                <div className="ud-image-upload-preview-wrapper mb-3 mt-2 border-container">
+                <div className="ud-image-upload-preview-wrapper mt-2 form-control" >
                   <div>
-                    <img
-                      src={imagePreview}
-                      class="img-fluid"
-                      alt="Preview"
-                      height="200"
-                      width="200"
-                      className="lazy"
-                      style={{ maxHeight: "20rem" }}
-                    />
+                    {authUser && authUser.picture && (
+                      <img
+                        src={imagePreview}
+                        alt="Preview"
+                        height="200"
+                        width="200"
+                        className="img-fluid lazy"
+                        style={{  maxWidth: "100%", maxHeight: "100%", borderRadius: "100%" }}
+                      />
+                    )}
                   </div>
                 </div>
               </div>
               <div
                 style={{
                   paddingBottom: "1rem",
-                  paddingLeft: "10rem",
-                  paddingRight: "10rem",
+                  paddingLeft: "1rem",
+                  paddingRight: "1rem",
                 }}
               >
                 <div>
@@ -94,22 +93,20 @@ const ProfilePhoto = () => {
                 </div>
               </div>
               <div
-                className="ud-footer-btns text-start"
+                className="ud-footer-btns text-start mt-4 mb-2"
                 style={{
                   paddingBottom: "1rem",
-                  paddingLeft: "10rem",
-                  paddingRight: "10rem",
+                  paddingLeft: "1rem",
+                  paddingRight: "1rem",
                 }}
               >
-                <button
-                  type="submit"
-                  className="ud-btn ud-btn-large ud-btn-primary ud-heading-md"
-                >
-                  Save
-                </button>
+                <Button variant="primary" className="me-2">
+                      Save
+                  </Button>
+                  <Button variant="outline-secondary">Cancel</Button>
               </div>
             </form>
-          </div>
+          </Col>
         </Row>
       </Container>
     </>

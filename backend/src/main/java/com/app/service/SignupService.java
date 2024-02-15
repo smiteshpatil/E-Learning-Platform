@@ -1,8 +1,7 @@
 package com.app.service;
 
-import com.app.dto.SignupRequest;
+import com.app.dto.Signup;
 
 public interface SignupService {
-	SignupRequest registerNewInstructor(SignupRequest request);
-	SignupRequest registerNewStudent(SignupRequest request);
+	Signup registerNewUser(Signup request);
 }

@@ -1,9 +1,11 @@
 package com.app.entities;
 
-import javax.persistence.*;
-
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonProperty.Access;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.Lob;
+import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -23,10 +25,27 @@ public class Admin extends BaseEntity{
 	private String firstName;
 	@Column(length = 20)
 	private String lastName;
-	@Column(length = 20, unique = true, nullable = false)
+	@Column(unique = true, nullable = false)
 	private String email;
-	@Column(length = 15, nullable = false)
+	@Column( nullable = false)
 	private String password;
+	
+	@Column(length = 10)
+	private String phoneNo;
+
+	@Column(length = 10)
+	private String gender;
+
+	@Lob // large object :col : longblob
+	private byte[] image;
+	
+	@Column(unique = true)
+	private String LinkedInLink;
+
+	@Column(unique = true)
+	private String GitHubLink;
+	
+	private String Heading;
 	
 	@Enumerated(EnumType.STRING)
 	@Column(length = 30)

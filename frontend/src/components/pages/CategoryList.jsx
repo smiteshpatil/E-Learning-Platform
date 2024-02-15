@@ -1,5 +1,6 @@
 import React from "react";
 import "./CategoryList.css";
+import { Link } from "react-router-dom";
 
 function CategoryList() {
   const categories = [
@@ -29,7 +30,7 @@ function CategoryList() {
     },
     {
       name: "All Categories",
-      subcategories: [], //["Subcategory", "Subcategory", "Subcategory"],
+      subcategories: [<Link to="/product">All Courses</Link>],
     },
   ];
 

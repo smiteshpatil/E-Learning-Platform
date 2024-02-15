@@ -1,0 +1,22 @@
+/* Resourse section start */
+.resource-section {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  background-color: palegoldenrod;
+}
+
+.resource-section li {
+  color: black;
+  font-weight: bold;
+  flex: auto;
+  width: 10%;
+}
+
+.active-link {
+  background-color: white;
+}
+
+.nav-item a {
+  padding: 0.5rem 1rem;
+}

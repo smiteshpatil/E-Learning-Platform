@@ -4,7 +4,6 @@ import { faGooglePlusG, faGithub } from "@fortawesome/free-brands-svg-icons";
 import "../css/LoginPage.css";
 import { useEffect } from "react";
 import { useAuth } from "../context/AuthContext";
-import { jwtDecode } from "jwt-decode";
 import { useNavigate } from "react-router-dom";
 import { signIn, signUp } from "../api/userService";
 
@@ -16,36 +15,76 @@ const LoginPage = () => {
   const [isActive, setIsActive] = useState(false);
 
   const [formDetails, setFormDetails] = useState({
-    name: "",
+    firstName: "",
     email: "",
     role: "",
     password: "",
   });
 
-  const handleSignIn = (e) => {};
-  const handleSignUp = (e) => {};
+  //set form details
+  const handleChange = (event) => {
+    let { name, value } = event.target;
+    setFormDetails({ ...formDetails, [name]: value });
+  };
 
-  const logIn = (currentUser) => {
+  //set user context
+  const setUserContext = (jwt, userDetails) => {
     setIsLoggedIn(true);
-    setAuthUser({
-      firstName: currentUser.name,
-      lastName: currentUser.family_name,
-      picture: currentUser.picture,
-      email: currentUser.email,
-    });
+    console.log("LoginPage: In setUserContext ", userDetails);
+    setAuthUser(userDetails);
     navigate("/");
+  };
+
+  // sign in using userService
+  const handleSignIn = (e) => {
+    e.preventDefault();
+    if (formDetails.email !== "" && formDetails.password !== "") {
+      signIn(formDetails.email, formDetails.password)
+        .then((response) => {
+          console.table(response);
+          //jwt and body from response
+          const { jwt, userDetails } = response;
+          //save the token in localstorage
+          localStorage.setItem("token", jwt);
+          localStorage.setItem("userObject", userDetails);
+          setUserContext(jwt, userDetails);
+        })
+        .catch((error) => {
+          // Handle login error
+        });
+    }
+  };
+
+  //signUp using userService
+  const handleSignUp = (e) => {
+    e.preventDefault();
+    if (
+      formDetails.firstName !== "" &&
+      formDetails.email !== "" &&
+      formDetails.password !== ""
+    ) {
+      setFormDetails({
+        ...formDetails,
+        role: document.getElementById("role").value,
+      });
+      signUp(formDetails)
+        .then((currentUser) => {
+          setUserContext(currentUser);
+        })
+        .catch((error) => {
+          // Handle signup error
+        });
+    } else {
+      document.getElementById("errMsg").innerText =
+        "* All fields are compulsory";
+    }
   };
 
   //login using google
   function handleCallbackResponse(response) {
-    let userDetails = jwtDecode(response.credential);
-    userDetails.password = "abc123";
-    userDetails.role = "ROLE_INSTRUCTOR";
-    userDetails.gender = "male";
-    const token = userDetails.token;
-    console.log(userDetails);
-    signUp(userDetails, token);
-    logIn(userDetails);
+    console.log("reached here", response);
+    // signUp(userDetails);
+    setUserContext(response.credential);
   }
 
   useEffect(() => {
@@ -57,7 +96,7 @@ const LoginPage = () => {
     });
 
     google.accounts.id.renderButton(document.getElementById("signInBtn"), {
-      theme: "",
+      theme: "filled",
       size: "large",
     });
     google.accounts.id.prompt();
@@ -70,10 +109,38 @@ const LoginPage = () => {
           <form>
             <h1>Create New Account</h1>
             <span>Use your email for registration</span>
-            <input type="text" name="name" placeholder="Name" />
-            <input type="email" name="email" placeholder="Email" />
-            <input type="password" name="password" placeholder="Password" />
-            <button>Sign Up</button>
+            <input
+              type="text"
+              name="firstName"
+              placeholder="Name"
+              value={formDetails.firstName}
+              onChange={handleChange}
+            />
+            <span id="errEmail"></span>
+            <input
+              type="email"
+              name="email"
+              placeholder="Email"
+              value={formDetails.email}
+              onChange={handleChange}
+            />
+
+            <input
+              type="password"
+              name="password"
+              placeholder="Password"
+              required
+              onChange={handleChange}
+            />
+            <div style={{ textAlign: "left" }}>
+              <span id="errMsg" style={{ color: "red" }}></span>
+              <h6>Select Your Role:</h6>
+              <select name="role" id="role" defaultValue="ROLE_STUDENT">
+                <option value="ROLE_STUDENT">Student</option>
+                <option value="ROLE_INSTRUCTOR">Instructor</option>
+              </select>
+            </div>
+            <button onClick={handleSignUp}>Sign Up</button>
           </form>
         </div>
         <div className="form-container sign-in">
@@ -85,10 +152,22 @@ const LoginPage = () => {
               </a>
             </div>
             <span>or use your email password</span>
-            <input type="email" placeholder="Email" />
-            <input type="password" placeholder="Password" />
+            <input
+              type="email"
+              name="email"
+              value={formDetails.email}
+              onChange={handleChange}
+              placeholder="Email"
+            />
+            <input
+              type="password"
+              name="password"
+              value={formDetails.password}
+              onChange={handleChange}
+              placeholder="Password"
+            />
             <a href="#">Forget Your Password?</a>
-            <button>Sign In</button>
+            <button onClick={handleSignIn}>Sign In</button>
           </form>
         </div>
         <div className="toggle-container">
