@@ -69,13 +69,9 @@ const LoginPage = () => {
   //signUp using userService
   const handleSignUp = async (e) => {
     e.preventDefault();
-    const { firstName, email, password } = formDetails;
+    const { firstName, email, password, role } = formDetails;
 
-    if (firstName !== "" && email !== "" && password !== "") {
-      setFormDetails({
-        ...formDetails,
-        role: document.getElementById("role").value,
-      });
+    if (firstName !== "" && email !== "" && password !== "" && role !== "") {
       try {
         await signUp(formDetails);
         toast.success("Signed up successfully"); // Show success toast on successful sign up
@@ -123,6 +119,7 @@ const LoginPage = () => {
               placeholder="Name"
               value={formDetails.firstName}
               onChange={handleChange}
+              required
             />
             <span id="errEmail"></span>
             <input
@@ -137,19 +134,26 @@ const LoginPage = () => {
               type="password"
               name="password"
               placeholder="Password"
-              required
+              value={formDetails.password}
               onChange={handleChange}
             />
             <div style={{ textAlign: "left" }}>
-              <span id="errMsg" style={{ color: "red" }}></span>
               <h6>Select Your Role:</h6>
-              <select name="role" id="role" defaultValue="ROLE_STUDENT">
+              <select
+                className="form-select"
+                name="role"
+                id="role"
+                value={formDetails.role}
+                onChange={handleChange}
+              >
                 <option value="ROLE_STUDENT">Student</option>
                 <option value="ROLE_INSTRUCTOR">Instructor</option>
                 <option value="ROLE_ADMIN">Admin</option>
               </select>
             </div>
-            <button onClick={handleSignUp}>Sign Up</button>
+            <button type="submit" onClick={handleSignUp}>
+              Sign Up
+            </button>
           </form>
         </div>
         <div className="form-container sign-in">
