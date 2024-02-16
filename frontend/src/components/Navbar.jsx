@@ -43,7 +43,7 @@ const Navbar = () => {
               <FaCartShopping size={30} />
             </NavLink>
           </li>
-          {isLoggedIn ? (
+          {authUser && localStorage.getItem("userObject") ? (
             <TbLogout2
               color="black"
               size={30}

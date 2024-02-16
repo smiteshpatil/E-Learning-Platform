@@ -19,7 +19,7 @@ const Courses = () => {
   let token = localStorage.getItem("token");
 
   // State for managing the list of courses
-  const [myCourses, setMyCourses] = useState([]);
+  const [myCourses, setMyCourses] = useState(false);
 
   // handle launching a new course
   const launchNewCourse = (newCourse) => {
@@ -27,9 +27,6 @@ const Courses = () => {
     newCourse.instructorId = instructorId;
     try {
       const resp = createNewCourse(newCourse, token);
-      //make componet rerender
-
-      setMyCourses((prevCourses) => [...prevCourses, resp.data]);
       console.table(resp);
     } catch (err) {
       console.log(err);
@@ -39,14 +36,12 @@ const Courses = () => {
   //delete course
   const handleDeleteCourse = (courseId) => {
     const resp = deleteCourseById(courseId, token);
-
-    console.log("In Course.jsx: ", resp);
   };
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        if (authUser) {
+        if (authUser || localStorage.getItem("userObject")) {
           const resp = await getAllCoursesByInstructorId(instructorId, token);
           setMyCourses(resp.data);
         } else {

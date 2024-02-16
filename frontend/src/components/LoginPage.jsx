@@ -120,22 +120,23 @@ const LoginPage = () => {
               value={formDetails.firstName}
               onChange={handleChange}
               required
+              style={{ color: "black" }}
             />
-            <span id="errEmail"></span>
             <input
               type="email"
               name="email"
               placeholder="Email"
               value={formDetails.email}
               onChange={handleChange}
+              style={{ color: "black" }}
             />
-
             <input
               type="password"
               name="password"
               placeholder="Password"
               value={formDetails.password}
               onChange={handleChange}
+              style={{ color: "black" }}
             />
             <div style={{ textAlign: "left" }}>
               <h6>Select Your Role:</h6>
