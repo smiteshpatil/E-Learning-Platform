@@ -17,6 +17,7 @@ import lombok.Setter;
 @Setter
 public class UserInfo extends BaseEntity {
 
+	@Column(unique = true)
 	private String email;
 	private String password;
 	@Enumerated(EnumType.STRING)
