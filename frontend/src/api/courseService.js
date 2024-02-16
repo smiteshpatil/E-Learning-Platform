@@ -6,8 +6,7 @@ const baseUrl = "http://localhost:8080";
 export const getAllCourses = async () => {
   try {
     const response = await axios.get(baseUrl + "/courses/details");
-    console.log("In getAllCourses in courseService: ");
-    console.log(response.data);
+    console.log("In getAllCourses, courseService: ");
     return response.data;
   } catch (err) {
     console.log(err);
@@ -25,7 +24,6 @@ export const getAllCoursesByInstructorId = async (
         Authorization: `Bearer ${bearerToken}`,
       },
     });
-    console.table(response);
     return response;
   } catch (err) {
     console.table(err);
@@ -34,13 +32,13 @@ export const getAllCoursesByInstructorId = async (
 
 //POST:  launch new course
 export const createNewCourse = async (newCourse, bearerToken) => {
+  console.log("in createNewCourse", newCourse);
   try {
     const response = await axios.post(baseUrl + "/courses/add", newCourse, {
       headers: {
         Authorization: `Bearer ${bearerToken}`,
       },
     });
-    console.log(response);
     return response;
   } catch (err) {
     console.log(err);
@@ -60,19 +58,6 @@ export const deleteCourseById = async (courseId, bearerToken) => {
     );
     console.log(response);
     return response;
-  } catch (err) {
-    console.log(err);
-  }
-};
-
-//POST: add new content by courseId
-export const addNewContent = async (courseId, newContent) => {
-  try {
-    const response = await axios.post(
-      baseUrl + `/contents/${courseId}`,
-      newContent
-    );
-    console.table(response);
   } catch (err) {
     console.log(err);
   }

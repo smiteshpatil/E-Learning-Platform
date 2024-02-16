@@ -1,21 +1,27 @@
 import React from "react";
 import { Link } from "react-router-dom";
 const AddCourseContent = (props) => {
-  //handle delete course
+  let currCourse = props.course;
+
   const handleDeleteCourse = () => {
-    console.log(props.course.id);
-    props.deleteCourse(props.course.id);
+    console.log("deleting course with id: ", currCourse.id);
+    props.deleteCourse(currCourse.id);
   };
 
   return (
     <>
-      <div className="col-lg-4 col-md-6 col-sm-12">
-        <div className="card">
-          <img src="" className="card-img-top" alt="..." />
+      <div className="col-lg-4 col-md-6 col-sm-12 px-2 py-2">
+        <div className="card" style={{ width: "100%", height: "100%" }}>
+          <img
+            src={currCourse.imageUrl}
+            className="card-img-top block"
+            style={{ objectFit: "contain", width: "150%", height: "250px" }} // Set fixed height for the image
+            alt="..."
+          />
           <div className="card-body">
-            <h5 className="card-title">{props.course.courseName}</h5>
-            <p className="card-text">{props.course.description}</p>
-            <Link to={`/upload/${props.course.id}`} className="btn btn-primary">
+            <h5 className="card-title">{currCourse.courseName}</h5>
+            <p className="card-text">{currCourse.description}</p>
+            <Link to={`/upload/${currCourse.id}`} className="btn btn-primary">
               Add content
             </Link>
             {/* Button trigger modal */}
@@ -24,7 +30,6 @@ const AddCourseContent = (props) => {
               className="btn btn-outline-danger"
               data-bs-toggle="modal"
               data-bs-target="#staticBackdrop"
-              onClick={handleDeleteCourse}
             >
               Delete
             </button>
@@ -69,7 +74,7 @@ const AddCourseContent = (props) => {
               </button>
               &nbsp;
               <button
-                // onClick={() => handleDeleteCourse(props.course.id)}
+                onClick={handleDeleteCourse}
                 data-bs-dismiss="modal"
                 className="btn btn-danger"
               >

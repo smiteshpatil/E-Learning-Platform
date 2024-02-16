@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import CreateCourseCard from "./CreateCourseCard";
 import AddCourseContent from "./AddCourseContent";
 import { toast } from "react-toastify";
@@ -14,49 +14,57 @@ const Courses = () => {
   let { authUser } = useAuth();
 
   //get instructorId and token from localStorage
-  // let instructorId = authUser.id;
   let instructorId = JSON.parse(localStorage.getItem("userObject")).id;
   let token = localStorage.getItem("token");
 
   // State for managing the list of courses
-  const [myCourses, setMyCourses] = useState(false);
+  const [myCourses, setMyCourses] = useState([]);
 
-  // handle launching a new course
-  const launchNewCourse = (newCourse) => {
-    //add instructor id in newCourse
-    newCourse.instructorId = instructorId;
+  // Function to fetch courses
+  const fetchCourses = useCallback(async () => {
     try {
-      const resp = createNewCourse(newCourse, token);
-      console.table(resp);
+      if (authUser || localStorage.getItem("userObject")) {
+        const resp = await getAllCoursesByInstructorId(instructorId, token);
+        setMyCourses(resp.data);
+      } else {
+        toast.warning("You need to be logged in to view your courses.");
+        navigate("/login");
+      }
+    } catch (error) {
+      console.error("Error fetching courses:", error);
+      // Handle error, show toast
+    }
+  }, [authUser, instructorId, navigate, token]);
+
+  // Effect to fetch courses on component mount
+  useEffect(() => {
+    fetchCourses();
+  }, [fetchCourses]);
+
+  // Function to launch a new course
+  const launchNewCourse = async (newCourse) => {
+    newCourse.instructorId = instructorId;
+    console.log("in launch new course:", newCourse.imageUrl);
+    try {
+      await createNewCourse(newCourse, token);
+      // Refresh course list after creating a new course
+      fetchCourses();
     } catch (err) {
       console.log(err);
     }
   };
 
-  //delete course
-  const handleDeleteCourse = (courseId) => {
-    const resp = deleteCourseById(courseId, token);
+  // Function to delete a course
+  const handleDeleteCourse = async (courseId) => {
+    try {
+      await deleteCourseById(courseId, token);
+      // Refresh course list after deleting a course
+      fetchCourses();
+    } catch (error) {
+      console.error("Error deleting course:", error);
+      // Handle error, show toast
+    }
   };
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        if (authUser || localStorage.getItem("userObject")) {
-          const resp = await getAllCoursesByInstructorId(instructorId, token);
-          setMyCourses(resp.data);
-        } else {
-          toast.warning("You need to be logged in to view your courses.");
-          navigate("/login");
-        }
-      } catch (error) {
-        console.error("Error fetching courses:", error);
-        // Handle error, show toast, etc.
-      }
-    };
-
-    fetchData();
-  }, []);
-
   return (
     <>
       <CreateCourseCard createCourse={launchNewCourse} />

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
-import { uploadVideoToDropbox } from "../../api/dropboxService";
+import { uploadFileToDropbox } from "../../api/dropboxService";
 import "react-toastify/dist/ReactToastify.css";
 
 const DropboxUpload = () => {
@@ -12,7 +12,7 @@ const DropboxUpload = () => {
 
   //sent video to dropbox
   const handleUpload = () => {
-    uploadVideoToDropbox(file);
+    uploadFileToDropbox(file);
   };
 
   return (
@@ -24,7 +24,7 @@ const DropboxUpload = () => {
         name="contentUrl"
         onChange={handleChange}
       />
-      <button onClick={handleUpload}>Upload</button>
+      <button onClick={handleUpload}>Choose file</button>
       <ToastContainer />
     </div>
   );

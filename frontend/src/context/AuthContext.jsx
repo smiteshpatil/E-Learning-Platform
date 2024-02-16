@@ -12,6 +12,7 @@ export function AuthProvider(props) {
   useEffect(() => {
     const storedUser = localStorage.getItem("userObject");
     if (storedUser) {
+      console.log(storedUser);
       setAuthUser(JSON.parse(storedUser));
     }
   }, [isLoggedIn]);

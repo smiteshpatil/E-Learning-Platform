@@ -1,24 +1,46 @@
-import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import React, { useState, useEffect, useCallback } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import {
   content as courseContent,
   addContentService,
   deleteContentService,
 } from "../../api/courseService";
+
+import { getAllContentsByCourseId } from "../../api/contentService";
 import CreateContent from "./CreateContent";
 import ContentCard from "./ContentCard";
+import { useAuth } from "../../context/AuthContext";
+import { toast } from "react-toastify";
 
-const UploadContentPage = (props) => {
+const UploadContentPage = () => {
+  const navigate = useNavigate();
+  let { authUser } = useAuth();
   //current courseId require for addContent
-  let { id } = useParams();
+  let { courseId } = useParams();
 
   const [content, setContent] = useState([]);
+  let token = localStorage.getItem("token");
 
+  // Function to fetch contents
+  const fetchContents = useCallback(async () => {
+    try {
+      if (authUser || localStorage.getItem("userObject")) {
+        const resp = await getAllContentsByCourseId(courseId, token);
+        setContent(resp.data);
+      } else {
+        toast.warning("please logIn to continue.");
+        navigate("/login");
+      }
+    } catch (error) {
+      console.error("Error fetching courses:", error);
+      // Handle error, show toast
+    }
+  }, [authUser, courseId, navigate, token]);
+
+  // Effect to fetch courses on component mount
   useEffect(() => {
-    // Simulate fetching content from server
-    // Replace this with actual API call
-    setContent(courseContent);
-  }, []);
+    fetchContents();
+  }, [fetchContents]);
 
   const handleAddContent = (newContent) => {
     // Request server to upload the videos
@@ -52,7 +74,7 @@ const UploadContentPage = (props) => {
               />
             ))
           ) : (
-            <></>
+            <>No lecture available in this course</>
           )}
         </div>
       </div>
