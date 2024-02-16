@@ -21,4 +21,5 @@ public class CourseRespDTO {
 	private String language;
 	private Long price;
 	private LocalDate publishedDate;
+	private String imageUrl;
 }
