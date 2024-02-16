@@ -38,7 +38,7 @@ public class ForgotPasswordController {
                                                  @RequestParam String otp) {
         boolean isUpdated = forgotPasswordService.updatePassword(email, userType, newPassword, otp);
         if (isUpdated) {
-            return ResponseEntity.ok("Password updated successfully");
+            return ResponseEntity.ok("Password updated successfully , newPassword : " + newPassword);
         } else {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Failed to update password");
         }
