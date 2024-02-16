@@ -26,9 +26,11 @@ const Courses = () => {
     //add instructor id in newCourse
     newCourse.instructorId = instructorId;
     try {
-      const resp = createNewCourse(newCourse, token); //original
+      const resp = createNewCourse(newCourse, token);
+      //make componet rerender
+
+      setMyCourses((prevCourses) => [...prevCourses, resp.data]);
       console.table(resp);
-      setMyCourses([...myCourses, newCourse]);
     } catch (err) {
       console.log(err);
     }
@@ -37,13 +39,14 @@ const Courses = () => {
   //delete course
   const handleDeleteCourse = (courseId) => {
     const resp = deleteCourseById(courseId, token);
+
     console.log("In Course.jsx: ", resp);
   };
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        if (token && instructorId) {
+        if (authUser) {
           const resp = await getAllCoursesByInstructorId(instructorId, token);
           setMyCourses(resp.data);
         } else {
@@ -57,7 +60,7 @@ const Courses = () => {
     };
 
     fetchData();
-  }, [token, instructorId]);
+  }, []);
 
   return (
     <>
