@@ -3,6 +3,7 @@ package com.app.dto;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 
+import com.app.entities.Role;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonProperty.Access;
@@ -41,4 +42,6 @@ public class InstructorDTO {
 	private String GitHubLink;
 
 	private String Heading;
+	
+	private Role role;
 }
