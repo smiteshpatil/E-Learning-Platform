@@ -1,10 +1,10 @@
 import React, { useState, useRef } from "react";
-
+import { deleteContent } from "../../api/contentService";
 const ContentCard = (props) => {
   const [currContent, setCurrentContent] = useState({
-    id: props.content.id,
-    contentName: props.content.contentName,
-    description: props.content.description,
+    id: props.currContentDetails.id, // requied for update
+    contentName: props.currContentDetails.contentName,
+    contentDescription: props.currContentDetails.contentDescription,
   });
 
   //clear uploaded file
@@ -23,8 +23,8 @@ const ContentCard = (props) => {
 
   // Handle Delete Content
   const handleDeleteContent = () => {
-    console.log("In content Card: ", props.content.id);
-    props.deleteContent(props.content.id);
+    deleteContent(props.currContentDetails.id, localStorage.getItem("token"));
+    props.refresh((prev) => !prev); //refresh
   };
 
   return (
@@ -46,15 +46,15 @@ const ContentCard = (props) => {
         />
       </div>
       <div className="mb-3">
-        <label htmlFor="contentDesc" className="form-label">
+        <label htmlFor="contentDescription" className="form-label">
           Description
         </label>
         <input
           type="text"
           className="form-control"
-          id="contentDesc"
-          name="description"
-          value={currContent.description}
+          id="contentDescription"
+          name="contentDescription"
+          value={currContent.contentDescription}
           onChange={handleChange}
         />
       </div>

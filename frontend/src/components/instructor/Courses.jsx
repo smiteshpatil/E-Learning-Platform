@@ -46,7 +46,11 @@ const Courses = () => {
     newCourse.instructorId = instructorId;
     console.log("in launch new course:", newCourse.imageUrl);
     try {
-      await createNewCourse(newCourse, token);
+      await toast.promise(createNewCourse(newCourse, token), {
+        pending: "creating new course...",
+        success: "course added successfully",
+        error: "err uploading",
+      });
       // Refresh course list after creating a new course
       fetchCourses();
     } catch (err) {
