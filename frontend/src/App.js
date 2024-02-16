@@ -32,7 +32,7 @@ import InstructorController from "./components/admin/InstructorController";
 
 import UploadContentPage from "./components/instructor/UploadContentPage";
 import CreateContent from "./components/instructor/CreateContent";
-import { ToastContainer } from "react-toastify";
+import { ToastContainer, Bounce } from "react-toastify";
 function App() {
   return (
     <div className="App">
@@ -46,6 +46,7 @@ function App() {
         draggable
         pauseOnHover
         theme="light"
+        transition={Bounce}
       />
       <Navbar></Navbar>
 
@@ -87,7 +88,7 @@ function App() {
         </Route>
         {/* upload course content routes */}
         <Route path="/upload" element={<UploadContentPage />}>
-          <Route path=":id" element={<CreateContent />} />
+          <Route path=":courseId" element={<CreateContent />} />
         </Route>
         {/* Video Routes demo */}
         <Route path="/video" element={<VideoPage />}>
