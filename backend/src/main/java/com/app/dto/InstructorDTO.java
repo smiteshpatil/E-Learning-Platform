@@ -1,8 +1,12 @@
 package com.app.dto;
 
+import java.time.LocalDate;
+import java.util.List;
+
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 
+import com.app.entities.Role;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonProperty.Access;
@@ -41,4 +45,13 @@ public class InstructorDTO {
 	private String GitHubLink;
 
 	private String Heading;
+	
+<<<<<<< HEAD
+	private List<String> courseNames; // List of course names associated with the instructor
+    private List<LocalDate> publishedDates;
+	
+	
+=======
+	private Role role;
+>>>>>>> 93a535c66278c45ae3e87791653cbcea8b5c99d0
 }

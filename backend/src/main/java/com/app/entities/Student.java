@@ -65,23 +65,23 @@ public class Student extends BaseEntity {
 	@OneToMany(mappedBy = "student", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private List<CartItem> cartItems = new ArrayList<>();
 
-//	@OneToMany(mappedBy = "student", 
-//			cascade = CascadeType.ALL, 
-//			orphanRemoval = true /* , fetch = FetchType.EAGER */ )
-//	private List<Course> courses = new ArrayList<>();
-//	
+	// @OneToMany(mappedBy = "student",
+	// cascade = CascadeType.ALL,
+	// orphanRemoval = true /* , fetch = FetchType.EAGER */ )
+	// private List<Course> courses = new ArrayList<>();
+	//
 
-//	public void addCourseToStudent(Course c) {
-//		courses.add(c);
-//		c.setStudent(this); //course -> students
-//	}
-//	
-//	public void deleteCourse(Course c) {
-//		courses.remove(c);  //instructor -> course
-//		c.setStudent(null);//course -> student
-//	}
-//	@ManyToMany(mappedBy = "students")
-//	private List<Course> courses = new ArrayList<>();
-//	
+	// public void addCourseToStudent(Course c) {
+	// courses.add(c);
+	// c.setStudent(this); //course -> students
+	// }
+	//
+	// public void deleteCourse(Course c) {
+	// courses.remove(c); //instructor -> course
+	// c.setStudent(null);//course -> student
+	// }
+	// @ManyToMany(mappedBy = "students")
+	// private List<Course> courses = new ArrayList<>();
+	//
 
 }

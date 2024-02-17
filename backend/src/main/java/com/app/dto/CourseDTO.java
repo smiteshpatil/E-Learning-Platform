@@ -36,5 +36,8 @@ public class CourseDTO {
 	@Lob
 	private byte[] coursePoster;
 
+	private String imageUrl;
+
 	private Long instructorId;
+	
 }

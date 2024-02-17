@@ -12,6 +12,7 @@ import lombok.ToString;
 @Setter
 @ToString
 public class CourseRespDTO {
+
 	private Long id;
 	private String courseName;
 	private String category;
@@ -21,5 +22,4 @@ public class CourseRespDTO {
 	private String language;
 	private Long price;
 	private LocalDate publishedDate;
-	
 }

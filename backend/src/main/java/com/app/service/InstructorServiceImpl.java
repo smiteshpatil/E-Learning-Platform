@@ -40,7 +40,7 @@ public class InstructorServiceImpl implements InstructorService {
 	@Override
 	public InstructorDTO getInstructorDetails(String instructorEmail) {
 		Instructor inst = instructorRepo.findByEmail(instructorEmail)
-				.orElseThrow(() -> new ResourceNotFoundException("Invalid Instructor Id !!!!"));
+				.orElseThrow(() -> new ResourceNotFoundException("Invalid Instructor Email !!!!"));
 		return mapper.map(inst, InstructorDTO.class);
 	}
 

@@ -37,10 +37,12 @@ public class SecurityConfig {
 				// disable CSRF token generation n verification
 				csrf().disable()
 				.exceptionHandling().authenticationEntryPoint(authEntry).and().authorizeRequests()
-				.antMatchers("/qna/add/{courseId}","/qna/answer/{questionId}","/qna/{courseId}","/qna/unanswered/{courseId}","/users/signup", "/users/signin", "/courses", "/courses/details",
+				.antMatchers("/users/signup", "/users/signin", "/courses", "/courses/details",
+						"/password/sendOtp", "/password/updatePassword",
 						"/images/upload/{type}/{id}", "/images/download/{type}/{id}",
-						"/v*/api-doc*/**", "/swagger-ui/**")
-				.permitAll()	
+						"/v*/api-doc*/**", "/swagger-ui/**", "/admin/instructorinfo", "/admin/coursedetails",
+						"/admin/students/{courseId}", "/admin/{studentId}/{courseId}")
+				.permitAll()
 				// only required for JS clnts (react / angular) : for the pre flight requests
 				.antMatchers(HttpMethod.OPTIONS).permitAll()
 				.antMatchers(
@@ -56,7 +58,6 @@ public class SecurityConfig {
 				.antMatchers("/instructors/{instructorId}",
 						"/instructors/{instructorId}/courses",
 						"/courses/{instructorId}",
-						"/courses/{instructorEmail}",
 						"/courses/add",
 						"/courses/update/{courseId}",
 						"/courses/delete/{courseId}",
@@ -68,10 +69,7 @@ public class SecurityConfig {
 						"contents/delete/{contentId}")
 				.hasRole("INSTRUCTOR")
 
-				.antMatchers("/instructors", 
-						"/students", 
-						"/enrolledStudents", 
-						"/studentCourse")
+				.antMatchers("/instructors", "/students", "studentcourses", "/admin/enrolledStudents")
 				.hasRole("ADMIN")
 				.anyRequest().authenticated()
 				.and()
@@ -84,7 +82,6 @@ public class SecurityConfig {
 		return http.build();
 	}
 
-	// configure AuthMgr as a spring bean
 	@Bean
 	public AuthenticationManager authenticationManager(AuthenticationConfiguration config) throws Exception {
 		return config.getAuthenticationManager();

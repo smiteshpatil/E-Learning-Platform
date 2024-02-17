@@ -32,6 +32,7 @@ public class CourseStudentDetails {
 	@MapsId("courseId") // shared PK approach
 	@JoinColumn(name = "course_id")
 	private Course myCourse;
+	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@MapsId("studentId") // shared PK approach
 	@JoinColumn(name = "student_id")
@@ -41,4 +42,5 @@ public class CourseStudentDetails {
 		super();
 		this.courseStudentId = courseStudentId;
 	}
+	
 }

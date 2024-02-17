@@ -9,7 +9,6 @@ export const signIn = async (userEmail, userPass) => {
       email: userEmail,
       password: userPass,
     });
-    console.log("signIn in service try", response);
     return response.data;
   } catch (err) {
     console.log("signIn in service err", err, "end");
@@ -29,5 +28,43 @@ export const signUp = async (user) => {
     return response.data;
   } catch (err) {
     throw err; // Throw error to be caught in handleSignUp function
+  }
+};
+
+// POST: send OTP to user
+export const sendOTP = async (email, userType) => {
+  try {
+    const response = await axios.post(baseURL + "/password/sendOtp", null, {
+      params: {
+        email: email,
+        userType: userType,
+      },
+    });
+    return response;
+  } catch (err) {
+    throw err;
+  }
+};
+
+//POST: update password
+export const updatePassword = async (userDetails) => {
+  try {
+    console.log("In updatePassword: ", userDetails);
+    const response = await axios.post(
+      baseURL + "/password/updatePassword",
+      null,
+      {
+        params: {
+          email: userDetails.email,
+          userType: userDetails.userType,
+          newPassword: userDetails.newPassword,
+          otp: userDetails.otp,
+        },
+      }
+    );
+    console.log(response.data);
+    return response;
+  } catch (error) {
+    throw error;
   }
 };
