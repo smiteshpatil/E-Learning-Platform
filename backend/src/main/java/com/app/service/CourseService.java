@@ -19,7 +19,7 @@ public interface CourseService {
 	// add Course
 	CourseRespDTO addNewCourse(CourseDTO dto);
 
-	// update Course Details
+	// update Course Details 
 	CourseRespDTO updateCourse(Long courseId, CourseDTO dto);
 
 	CourseRespDTO getCourseDetails(Long instructorId, Long courseId);

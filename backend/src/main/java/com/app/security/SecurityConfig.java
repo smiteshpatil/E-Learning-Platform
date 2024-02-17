@@ -37,10 +37,10 @@ public class SecurityConfig {
 				// disable CSRF token generation n verification
 				csrf().disable()
 				.exceptionHandling().authenticationEntryPoint(authEntry).and().authorizeRequests()
-				.antMatchers("/users/signup", "/users/signin", "/courses", "/courses/details",
+				.antMatchers("/qna/add/{courseId}","/qna/answer/{questionId}","/qna/{courseId}","/qna/unanswered/{courseId}","/users/signup", "/users/signin", "/courses", "/courses/details",
 						"/images/upload/{type}/{id}", "/images/download/{type}/{id}",
 						"/v*/api-doc*/**", "/swagger-ui/**")
-				.permitAll()
+				.permitAll()	
 				// only required for JS clnts (react / angular) : for the pre flight requests
 				.antMatchers(HttpMethod.OPTIONS).permitAll()
 				.antMatchers(
@@ -68,7 +68,10 @@ public class SecurityConfig {
 						"contents/delete/{contentId}")
 				.hasRole("INSTRUCTOR")
 
-				.antMatchers("/instructors", "/students")
+				.antMatchers("/instructors", 
+						"/students", 
+						"/enrolledStudents", 
+						"/studentCourse")
 				.hasRole("ADMIN")
 				.anyRequest().authenticated()
 				.and()
