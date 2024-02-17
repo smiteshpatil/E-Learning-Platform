@@ -33,10 +33,6 @@ public class SecurityConfig {
 	public SecurityFilterChain authorizeRequests(HttpSecurity http) throws Exception {
 		// URL based authorization rules
 		http.cors()
-<<<<<<< HEAD
-
-=======
->>>>>>> 93a535c66278c45ae3e87791653cbcea8b5c99d0
 		.and().
 		//disable CSRF token generation n verification
 		csrf()	.disable()
@@ -73,11 +69,7 @@ public class SecurityConfig {
 				"contents/delete/{contentId}")
 		.hasRole("INSTRUCTOR")
 		
-<<<<<<< HEAD
 		.antMatchers("/instructors","/students","studentcourses","/admin/enrolledStudents")
-=======
-		.antMatchers("/instructors","/students")
->>>>>>> 93a535c66278c45ae3e87791653cbcea8b5c99d0
 		.hasRole("ADMIN")
 		.anyRequest().authenticated()
 		.and()
@@ -90,14 +82,7 @@ public class SecurityConfig {
 	
 		return http.build();
 	}
-<<<<<<< HEAD
-	
-	//configure AuthMgr as a spring bean
 
-=======
-
-	// configure AuthMgr as a spring bean
->>>>>>> 93a535c66278c45ae3e87791653cbcea8b5c99d0
 	@Bean
 	public AuthenticationManager authenticationManager(AuthenticationConfiguration config) throws Exception {
 		return config.getAuthenticationManager();

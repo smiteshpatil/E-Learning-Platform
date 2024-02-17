@@ -22,11 +22,7 @@ public class FeedbackServiceImpl implements FeedbackService {
 	private final CourseRepository courseRepository;
 	private final StudentRepository studentRepository;
 
-<<<<<<< HEAD
 
-
-=======
->>>>>>> 93a535c66278c45ae3e87791653cbcea8b5c99d0
 	@Autowired
 	public FeedbackServiceImpl(FeedbackRepository feedbackRepository,
 			CourseRepository courseRepository,
@@ -35,10 +31,6 @@ public class FeedbackServiceImpl implements FeedbackService {
 		this.courseRepository = courseRepository;
 		this.studentRepository = studentRepository;
 	}
-<<<<<<< HEAD
-
-=======
->>>>>>> 93a535c66278c45ae3e87791653cbcea8b5c99d0
 
 	@Override
 	public void addFeedback(FeedbackDTO feedbackDTO) {
