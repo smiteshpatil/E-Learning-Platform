@@ -47,8 +47,8 @@ public class InstructorDTO {
 	private String Heading;
 
 	private List<String> courseNames; // List of course names associated with the instructor
-	private List<LocalDate> publishedDates;
-
+    private List<LocalDate> publishedDates;
+	
 	private Role role;
 
 }

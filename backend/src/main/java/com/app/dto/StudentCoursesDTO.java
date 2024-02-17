@@ -50,4 +50,5 @@ public class StudentCoursesDTO {
 
 	private List<CourseDTO> courses;
 
+
 }
