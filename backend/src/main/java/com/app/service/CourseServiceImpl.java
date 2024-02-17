@@ -2,6 +2,7 @@ package com.app.service;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -15,11 +16,13 @@ import org.springframework.transaction.annotation.Transactional;
 import com.app.custom_exceptions.ResourceNotFoundException;
 import com.app.dao.CourseRepository;
 import com.app.dao.CourseStudentDetailsRepository;
+import com.app.dao.FeedbackRepository;
 import com.app.dao.InstructorRepository;
 import com.app.dao.StudentRepository;
 import com.app.dto.ContentDTO;
 import com.app.dto.CourseDTO;
 import com.app.dto.CourseRespDTO;
+import com.app.dto.FeedbackDTO;
 import com.app.dto.GetAllDetailsDTO;
 import com.app.dto.InstructorDTO;
 import com.app.entities.Course;
@@ -43,9 +46,21 @@ public class CourseServiceImpl implements CourseService {
 
 	@Autowired
 	private CourseStudentDetailsRepository courseStudentRepo;
+	////////
+	private final CourseStudentDetailsRepository courseStudentDetailsRepository;
+    private final FeedbackRepository feedbackRepository;
 
+    @Autowired
+    public CourseServiceImpl(CourseStudentDetailsRepository courseStudentDetailsRepository, FeedbackRepository feedbackRepository,CourseRepository courseRepo) {
+        this.courseStudentDetailsRepository = courseStudentDetailsRepository;
+        this.feedbackRepository = feedbackRepository;
+        this.courseRepo = courseRepo;
+    }
+    //////////
 	@Autowired
 	private ModelMapper mapper;
+	
+	
 
 	@Override
 	public List<CourseRespDTO> getAllCourses() {
@@ -192,5 +207,26 @@ public class CourseServiceImpl implements CourseService {
 
 		return "You have enrolled in all Courses";
 	}
+	
+	
+	///////////////
+	
+//	 @Override
+//	    public int getTotalEnrolledStudents(Long courseId) {
+//	        return courseStudentDetailsRepository.countByCourseStudentIdCourseId(courseId);
+//	    }
+//
+//	    @Override
+//	    public double getAverageRating(Long courseId) {
+//	        List<Integer> ratings = feedbackRepository.findRatingsByCourseId(courseId);
+//	        if (ratings.isEmpty()) {
+//	            return 0.0;
+//	        }
+//	        return ratings.stream().mapToInt(Integer::intValue).average().getAsDouble();
+//	    }
+//	   
 
+	
 }
+
+

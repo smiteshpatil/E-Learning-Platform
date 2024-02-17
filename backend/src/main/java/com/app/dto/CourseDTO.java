@@ -39,4 +39,5 @@ public class CourseDTO {
 	private String imageUrl;
 
 	private Long instructorId;
+	
 }

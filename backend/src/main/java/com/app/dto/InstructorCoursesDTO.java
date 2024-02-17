@@ -1,5 +1,6 @@
 package com.app.dto;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import javax.validation.constraints.Email;
@@ -34,4 +35,8 @@ public class InstructorCoursesDTO {
 	private String imageUrl;
 
 	List<CourseRespDTO> courses;
+	
+	private List<LocalDate> publishedDates;
+    private List<String> courseNames;
+	
 }

@@ -44,5 +44,8 @@ public class StudentDTO {
 
 	private String heading;
 
+	private int rating;
+
 	private Role role;
+
 }

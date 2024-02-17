@@ -30,6 +30,7 @@ public class StudentCoursesDTO {
 	private String email;
 
 	private String password;
+
     
     // New fields
     private String courseName;
@@ -40,6 +41,7 @@ public class StudentCoursesDTO {
         this.courseName = courseName;
         this.enrolledDate = enrolledDate;
     }
+
 	private String gender;
 
 	private String imageUrl;
@@ -48,4 +50,5 @@ public class StudentCoursesDTO {
 	private Role role;
 
 	private List<CourseDTO> courses;
+
 }

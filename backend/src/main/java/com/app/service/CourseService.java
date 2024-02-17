@@ -2,10 +2,14 @@ package com.app.service;
 
 import java.util.List;
 
+import org.springframework.stereotype.Service;
+
 import com.app.dto.CourseDTO;
 import com.app.dto.CourseRespDTO;
+import com.app.dto.FeedbackDTO;
 import com.app.dto.GetAllDetailsDTO;
 
+@Service
 public interface CourseService {
 
 	List<CourseRespDTO> getAllCourses();
@@ -19,7 +23,7 @@ public interface CourseService {
 	// add Course
 	CourseRespDTO addNewCourse(CourseDTO dto);
 
-	// update Course Details
+	// update Course Details 
 	CourseRespDTO updateCourse(Long courseId, CourseDTO dto);
 
 	CourseRespDTO getCourseDetails(Long instructorId, Long courseId);
@@ -41,5 +45,9 @@ public interface CourseService {
 	List<CourseRespDTO> getAllCoursesFromInstructor(Long instructorId);
 
 	List<CourseRespDTO> getAllCourseByInstructorEmail(String email);
-
+	
+	
+	
+	
+	
 }

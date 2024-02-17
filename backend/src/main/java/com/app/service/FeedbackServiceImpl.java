@@ -1,5 +1,8 @@
 package com.app.service;
 
+import java.util.List;
+import java.util.OptionalDouble;
+
 import javax.persistence.EntityNotFoundException;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +21,7 @@ public class FeedbackServiceImpl implements FeedbackService {
 	private final FeedbackRepository feedbackRepository;
 	private final CourseRepository courseRepository;
 	private final StudentRepository studentRepository;
+
 
 	@Autowired
 	public FeedbackServiceImpl(FeedbackRepository feedbackRepository,
@@ -42,7 +46,8 @@ public class FeedbackServiceImpl implements FeedbackService {
 				.orElseThrow(() -> new IllegalArgumentException("Invalid course ID")));
 		feedback.setStudent(studentRepository.findById(feedbackDTO.getStudentId())
 				.orElseThrow(() -> new IllegalArgumentException("Invalid student ID")));
-
+		feedback.setComment(feedbackDTO.getComment());
+		feedback.setRating(feedbackDTO.getRating());
 		feedbackRepository.save(feedback);
 	}
 
@@ -57,5 +62,15 @@ public class FeedbackServiceImpl implements FeedbackService {
 
 		feedbackRepository.deleteById(feedbackId);
 	}
+	
+//	  @Override
+//	    public double getAverageRating(Long courseId) {
+//	        // Fetch ratings for the given course ID
+//	        List<Integer> ratings = feedbackRepository.findRatingsByCourseId(courseId);
+//
+//	        // Calculate average rating
+//	        OptionalDouble average = ratings.stream().mapToInt(Integer::intValue).average();
+//	        return average.isPresent() ? average.getAsDouble() : 0.0; // Return average rating or 0 if list is empty
+//	    }
 
 }

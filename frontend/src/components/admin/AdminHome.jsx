@@ -34,9 +34,10 @@ const AdminHome = () => {
 
   const fetchEnrolledStudents = async () => {
     try {
-      const EnrolledStudnetsResponse = await getEnrolledStudents(jwt);
-      const Enrolledstudents = EnrolledStudnetsResponse.data;
-      setTotalEnrolledStudents(Enrolledstudents.length);
+      const enrolledStudnetsResponse = await getEnrolledStudents(jwt);
+      if (enrolledStudnetsResponse && enrolledStudnetsResponse.data) {
+        setTotalEnrolledStudents(enrolledStudnetsResponse.data);
+      }
     } catch (error) {
       console.error("Error Fetching Enrolled Students: ", error);
     }

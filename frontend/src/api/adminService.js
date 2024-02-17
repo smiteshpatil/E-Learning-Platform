@@ -19,7 +19,7 @@ export const getAllStudents = async (bearerToken) => {
 // Get All EnrolledStudents
 export const getEnrolledStudents = async (bearerToken) => {
     try {
-        const response = await axios.get(baseUrl + "/students", {
+        const response = await axios.get(baseUrl + "/admin/enrolledStudents", {
             headers:{
                 Authorization: `Bearer ${bearerToken}`
             },
@@ -33,7 +33,7 @@ export const getEnrolledStudents = async (bearerToken) => {
 //get All Courses
 export const getAllCourses = async (bearerToken) => {
     try {
-        const response = await axios.get(baseUrl + "/students" , {
+        const response = await axios.get(baseUrl + "/courses" , {
             headers:{
                 Authorization: `Bearer ${bearerToken}`,
             }
@@ -47,13 +47,55 @@ export const getAllCourses = async (bearerToken) => {
 //get all instructors 
 export const getInstructors = async (bearerToken)=>{
     try {
-        const response = await axios.get(baseUrl + "/students", {
+        const response = await axios.get(baseUrl + "/instructors", {
+            headers:{
+                Authorization: `Bearer ${bearerToken}`
+            }
+        }) 
+        return response;
+    } catch (error) {
+        console.error("Error in fetching all instructors: ", error);
+    }
+}
+
+//get studentControllerDetails
+export const getStudentCourseDetails = async (bearerToken)=>{
+    try {
+        const response = await axios.get(baseUrl + "/admin/studentCourse", {
             headers:{
                 Authorization: `Bearer ${bearerToken}`
             }
         })
         return response;
     } catch (error) {
-        console.error("Error in fetching all instructors: ", error);
-    }
+        console.error("Error Fetching  Student Course Details : ", error);
+    }  
+}
+
+//get instructorControllerDetails
+export const getInstructorsDetails = async (bearerToken)=>{
+    try {
+        const response = await axios.get(baseUrl + "/instructors", {
+            headers:{
+                Authorization: `Bearer ${bearerToken}`
+            }
+        })
+        return response;
+    } catch (error) {
+        console.error("Error Fetching  Student Course Details : ", error);
+    }  
+}
+
+//get courseControllerDetails
+export const getCourseDetails = async (bearerToken)=>{
+    try {
+        const response = await axios.get(baseUrl + "/courses", {
+            headers:{
+                Authorization: `Bearer ${bearerToken}`
+            }
+        })
+        return response;
+    } catch (error) {
+        console.error("Error Fetching  Student Course Details : ", error);
+    }  
 }
