@@ -1,5 +1,8 @@
 package com.app.dto;
 
+import java.time.LocalDate;
+import java.util.List;
+
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 
@@ -41,4 +44,9 @@ public class InstructorDTO {
 	private String GitHubLink;
 
 	private String Heading;
+	
+	private List<String> courseNames; // List of course names associated with the instructor
+    private List<LocalDate> publishedDates;
+	
+	
 }

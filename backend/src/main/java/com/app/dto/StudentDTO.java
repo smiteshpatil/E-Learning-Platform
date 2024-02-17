@@ -41,4 +41,8 @@ public class StudentDTO {
 	private String GitHubLink;
 
 	private String heading;
+	
+	
+	////////////////
+	 private int rating;
 }

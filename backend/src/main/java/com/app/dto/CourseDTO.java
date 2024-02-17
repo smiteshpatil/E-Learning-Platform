@@ -37,4 +37,5 @@ public class CourseDTO {
 	private byte[] coursePoster;
 
 	private Long instructorId;
+	
 }
