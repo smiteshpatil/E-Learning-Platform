@@ -11,36 +11,39 @@ export const useAuth = () => {
 export const AuthProvider = (props) => {
   const [authUser, setAuthUser] = useState(null);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [refresh, setRefresh] = useState(false);
   const [allCourses, setAllCourses] = useState([]);
   const navigate = useNavigate();
 
-  //
-  useEffect(() => {
-    const storedUser = localStorage.getItem("userObject");
-    if (storedUser) {
-      console.log(storedUser);
-      setAuthUser(JSON.parse(storedUser));
-    } else {
-      navigate("/login");
-      localStorage.removeItem("userObject");
-      localStorage.removeItem("token");
-    }
-  }, [isLoggedIn]);
+  // refresh context
+  const refreshContext = () => {
+    setRefresh((prev) => !prev);
+  };
 
-  //set all courses in application level
+  //set userState
   useEffect(() => {
     const storedUser = localStorage.getItem("userObject");
     if (storedUser) {
-      console.log(storedUser);
+      console.log("Stored user found:", storedUser);
       setAuthUser(JSON.parse(storedUser));
     } else {
+      console.log("No stored user found, navigating to login...");
       navigate("/login");
       localStorage.removeItem("userObject");
       localStorage.removeItem("token");
     }
+  }, [isLoggedIn, refresh]); // Consider adding authUser to dependency array if needed
+
+  useEffect(() => {
     const fetchCourses = async () => {
-      const response = await getAllCourses();
-      setAllCourses(response.data);
+      try {
+        const response = await getAllCourses();
+        setAllCourses(response.data);
+        console.log("Courses fetched:", response.data);
+      } catch (error) {
+        console.error("Error fetching courses:", error);
+        // Handle error (e.g., show error message)
+      }
     };
     fetchCourses();
   }, []);
@@ -50,6 +53,7 @@ export const AuthProvider = (props) => {
     setAuthUser,
     isLoggedIn,
     setIsLoggedIn,
+    refreshContext,
   };
   return (
     <AuthContext.Provider value={value}>{props.children}</AuthContext.Provider>

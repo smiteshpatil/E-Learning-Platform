@@ -74,6 +74,7 @@ export const updatePassword = async (userDetails) => {
 export const updateStudentService = async (newDetails, token) => {
   try {
     let studentId = newDetails.id;
+    console.log(studentId);
     const resp = await axios.put(
       baseURL + `/students/update/${studentId}`,
       newDetails,
