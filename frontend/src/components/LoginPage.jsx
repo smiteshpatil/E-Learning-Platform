@@ -84,7 +84,7 @@ const LoginPage = () => {
         toast.success("Signed up successfully"); // Show success toast on successful sign up
         setIsActive(false);
       } catch (error) {
-        toast.error("email Already exists Please Login to Continue! "); // Show error toast on sign up error
+        toast.error("Unexpected error occured!"); // Show error toast on sign up error
       }
     } else {
       toast.error("All fields are compulsory");
