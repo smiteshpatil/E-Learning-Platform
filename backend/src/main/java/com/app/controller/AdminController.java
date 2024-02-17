@@ -44,13 +44,6 @@ public class AdminController {
     public int getTotalStudents() {
         return adminService.getTotalStudents();
     }
-<<<<<<< HEAD
- 
-    
-    
-     
-=======
->>>>>>> 6634362feb4c7c5598c31cad8224e367f9cf8d5d
 
     @GetMapping("/studentcourses")
     public List<StudentCoursesDTO> getStudentCourseDetails() {
