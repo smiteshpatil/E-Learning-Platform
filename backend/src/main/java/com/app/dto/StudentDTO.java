@@ -43,16 +43,8 @@ public class StudentDTO {
 	private String GitHubLink;
 
 	private String heading;
-<<<<<<< HEAD
 
 	private int rating;
 
 	private Role role;
-=======
-	
-	private int rating;
-	
-	private Role role;
-
->>>>>>> 3c48af7a2c1ae48f626a895c25291cb3afbbfa85
 }
