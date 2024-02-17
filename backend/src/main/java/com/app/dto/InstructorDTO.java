@@ -3,6 +3,7 @@ package com.app.dto;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 
+import com.app.entities.Role;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonProperty.Access;
@@ -17,13 +18,13 @@ import lombok.ToString;
 public class InstructorDTO {
 	@JsonProperty(access = Access.READ_ONLY)
 	private Long id;
-	
+
 	@NotBlank
 	private String firstName;
-	
+
 	@NotBlank
 	private String lastName;
-	
+
 	@Email
 	private String email;
 
@@ -35,10 +36,12 @@ public class InstructorDTO {
 	private String gender;
 
 	private String imageUrl;
-	
+
 	private String LinkedInLink;
 
 	private String GitHubLink;
-	
+
 	private String Heading;
+	
+	private Role role;
 }

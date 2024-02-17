@@ -20,21 +20,23 @@ public class CourseDTO {
 	private Long id;
 	@NotBlank
 	private String courseName;
-	
+
 	private String category;
-	
+	@Lob
 	private String description;
-	
+
 	private String skillLevel;
-	
+
 	private String language;
-	
+
 	private Long price;
-	
+
 	private LocalDate publishedDate;
-	
+
 	@Lob
 	private byte[] coursePoster;
-	
+
+	private String imageUrl;
+
 	private Long instructorId;
 }

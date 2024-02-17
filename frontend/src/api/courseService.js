@@ -2,45 +2,62 @@ import axios from "axios";
 import thumbnail from "../images/card1.jpg";
 const baseUrl = "http://localhost:8080";
 
-// launch new course
+//GET: get all available courses
+export const getAllCourses = async () => {
+  try {
+    const response = await axios.get(baseUrl + "/courses/details");
+    console.log("In getAllCourses, courseService: ");
+    return response;
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+//GET: allCourses by instructorId
+export const getAllCoursesByInstructorId = async (
+  instructorId,
+  bearerToken
+) => {
+  try {
+    const response = await axios.get(baseUrl + `/courses/${instructorId}`, {
+      headers: {
+        Authorization: `Bearer ${bearerToken}`,
+      },
+    });
+    return response;
+  } catch (err) {
+    console.table(err);
+  }
+};
+
+//POST:  launch new course
 export const createNewCourse = async (newCourse, bearerToken) => {
+  console.log("in createNewCourse", newCourse);
   try {
     const response = await axios.post(baseUrl + "/courses/add", newCourse, {
       headers: {
         Authorization: `Bearer ${bearerToken}`,
       },
     });
+    return response;
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+//DELETE: delete course by instructorId
+export const deleteCourseById = async (courseId, bearerToken) => {
+  try {
+    const response = await axios.delete(
+      baseUrl + `/courses/delete/${courseId}`,
+      {
+        headers: {
+          Authorization: `Bearer ${bearerToken}`,
+        },
+      }
+    );
     console.log(response);
     return response;
-  } catch (err) {
-    console.log(err);
-  }
-};
-
-//newCourse ==> courseName, courseDescription
-export const createDummyCourse = async (newCourse) => {
-  let dummyCourse = {
-    courseName: newCourse.courseName,
-    description: newCourse.description,
-  };
-  try {
-    const response = await axios.post(baseUrl + "/courses/add", dummyCourse);
-    console.log("In courseService :", response);
-    return response;
-  } catch (err) {
-    console.log(err);
-  }
-};
-
-//add new Content by sectionId
-//newContent ==> contentNo, contentName, contentUrl
-export const addNewContent = async (sectionId, newContent) => {
-  try {
-    const response = await axios.post(
-      baseUrl + `/contents/${sectionId}`,
-      newContent
-    );
-    console.table(response);
   } catch (err) {
     console.log(err);
   }

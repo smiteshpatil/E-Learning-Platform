@@ -27,8 +27,9 @@ public class Signup {
 	private String phoneNo;
 	private String gender;
 	private Role role;
-	public Signup(String firstName, String lastName,
-			String email, String password,String phoneNo,String gender, Role role) {
+
+	public Signup(String firstName, String lastName, String email, String password, String phoneNo, String gender,
+			Role role) {
 		super();
 		this.firstName = firstName;
 		this.lastName = lastName;
@@ -38,6 +39,5 @@ public class Signup {
 		this.gender = gender;
 		this.role = role;
 	}
-	
-	
+
 }

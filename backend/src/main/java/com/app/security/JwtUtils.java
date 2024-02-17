@@ -29,8 +29,7 @@ public class JwtUtils {
 
 	@Value("${EXP_TIMEOUT}")
 	private int jwtExpirationMs;
-	
-	
+
 	private Key key;
 
 	@PostConstruct
@@ -43,7 +42,8 @@ public class JwtUtils {
 	public String generateJwtToken(Authentication authentication) {
 		log.info("generate jwt token " + authentication);
 		CustomUserDetails userPrincipal = (CustomUserDetails) authentication.getPrincipal();
-		//JWT : userName,issued at ,exp date,digital signature(does not typically contain password , can contain authorities
+		// JWT : userName,issued at ,exp date,digital signature(does not typically
+		// contain password , can contain authorities
 		return Jwts.builder() // JWTs : a Factory class , used to create JWT tokens
 				.setSubject((userPrincipal.getUsername())) // setting subject part of the token(typically user
 															// name/email)
@@ -72,14 +72,13 @@ public class JwtUtils {
 		// Sets the signing key used to verify JWT digital signature.
 				parseClaimsJws(jwtToken).getBody();// Parses the signed JWT returns the resulting Jws<Claims> instance
 		// throws exc in case of failures in verification
-		return claims;		
+		return claims;
 	}
 	// Accepts Collection<GrantedAuthority> n rets comma separated list of it's
 	// string form
 
 	private String getAuthoritiesInString(Collection<? extends GrantedAuthority> authorities) {
-		String authorityString = authorities.stream().
-				map(authority -> authority.getAuthority())
+		String authorityString = authorities.stream().map(authority -> authority.getAuthority())
 				.collect(Collectors.joining(","));
 		System.out.println(authorityString);
 		return authorityString;

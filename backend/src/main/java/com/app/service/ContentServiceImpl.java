@@ -23,30 +23,32 @@ public class ContentServiceImpl implements ContentService {
 
 	@Autowired
 	private ContentRepository contentRepo;
-	
+
 	@Autowired
 	private CourseRepository courseRepo;
-	
+
 	@Autowired
 	private ModelMapper mapper;
-	
+
 	@Override
 	public List<ContentDTO> getAllContentFromCourse(Long courseId) {
 		List<Content> contentList = contentRepo.findByCourseId(courseId);
-		return contentList.stream().map(content-> mapper.map(content, ContentDTO.class)).collect(Collectors.toList());
+		return contentList.stream().map(content -> mapper.map(content, ContentDTO.class)).collect(Collectors.toList());
 	}
 
 	@Override
 	public String deleteContent(Long contentId) {
-		Content content = contentRepo.findById(contentId).orElseThrow(() -> new ResourceNotFoundException("Invalid Content id"));
+		Content content = contentRepo.findById(contentId)
+				.orElseThrow(() -> new ResourceNotFoundException("Invalid Content id"));
 		contentRepo.delete(content);
 		return "Content deleted SuccessFully";
 	}
 
 	@Override
-	public String deleteSpecificContent(Long contentId,Long contentNo) {
-		Content content = contentRepo.findById(contentId).orElseThrow(() -> new ResourceNotFoundException("Invalid Content id"));
-		if(content.getContentNo() == contentNo) {
+	public String deleteSpecificContent(Long contentId, Long contentNo) {
+		Content content = contentRepo.findById(contentId)
+				.orElseThrow(() -> new ResourceNotFoundException("Invalid Content id"));
+		if (content.getContentNo() == contentNo) {
 
 		}
 		return null;
@@ -54,11 +56,12 @@ public class ContentServiceImpl implements ContentService {
 
 	@Override
 	public ContentDTO addContent(ContentDTO dto) {
-		Course course = courseRepo.findById(dto.getCourseId()).orElseThrow(() -> new ResourceNotFoundException("Invalid Course id"));
-				
+		Course course = courseRepo.findById(dto.getCourseId())
+				.orElseThrow(() -> new ResourceNotFoundException("Invalid Course id"));
+
 		Content contentEntity = mapper.map(dto, Content.class);
 		course.addContent(contentEntity);
-		
+
 		Content savedContent = contentRepo.save(contentEntity);
 		System.out.println("Content No: " + dto.getContentNo());
 		return mapper.map(savedContent, ContentDTO.class);
@@ -66,8 +69,10 @@ public class ContentServiceImpl implements ContentService {
 
 	@Override
 	public ContentDTO updateContent(Long contentNo, ContentDTO dto) {
-		Content content = contentRepo.findByContentNo(contentNo).orElseThrow(() -> new ResourceNotFoundException("Invalid Content id"));
-		Course course = courseRepo.findById(dto.getCourseId()).orElseThrow(() -> new ResourceNotFoundException("Invalid Course id"));
+		Content content = contentRepo.findByContentNo(contentNo)
+				.orElseThrow(() -> new ResourceNotFoundException("Invalid Content id"));
+		Course course = courseRepo.findById(dto.getCourseId())
+				.orElseThrow(() -> new ResourceNotFoundException("Invalid Course id"));
 		mapper.map(dto, content);
 		System.out.println("After Mapping " + content);
 		course.addContent(content);
@@ -77,8 +82,9 @@ public class ContentServiceImpl implements ContentService {
 
 	@Override
 	public ContentDTO getContentDetails(Long courseId, Long contentId) {
-		Content content = contentRepo.findById(contentId).orElseThrow(() -> new ResourceNotFoundException("Invalid Content id"));
-		if(content.getCourse().getId() != courseId)
+		Content content = contentRepo.findById(contentId)
+				.orElseThrow(() -> new ResourceNotFoundException("Invalid Content id"));
+		if (content.getCourse().getId() != courseId)
 			throw new ResourceNotFoundException("Course id does not match !!!");
 
 		return mapper.map(content, ContentDTO.class);
@@ -88,9 +94,8 @@ public class ContentServiceImpl implements ContentService {
 	public List<ContentDTO> getAllContents(int pageNumber, int pageSize) {
 		Pageable pageable = PageRequest.of(pageNumber, pageSize);
 		List<Content> contentList = contentRepo.findAll(pageable).getContent();
-				
-		return contentList.stream().map(content -> mapper.map(content, ContentDTO.class))
-				.collect(Collectors.toList());
+
+		return contentList.stream().map(content -> mapper.map(content, ContentDTO.class)).collect(Collectors.toList());
 	}
 
 }

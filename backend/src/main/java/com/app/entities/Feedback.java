@@ -17,23 +17,21 @@ import javax.validation.constraints.Max;
 @NoArgsConstructor
 @Getter
 @Setter
-public class Feedback extends BaseEntity{
-	
-	@Column(name="comments")
+public class Feedback extends BaseEntity {
+
+	@Column(name = "comments")
 	private String comment;
-	
+
 	@Min(0)
 	@Max(5)
 	private int rating;
-	
 
 	@ManyToOne
-	@JoinColumn(name="course_id")
+	@JoinColumn(name = "course_id")
 	private Course course;
-	
+
 	@ManyToOne
-	@JoinColumn(name="student_id")
+	@JoinColumn(name = "student_id")
 	private Student student;
-	
 
 }

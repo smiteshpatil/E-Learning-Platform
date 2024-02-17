@@ -13,31 +13,34 @@ import com.app.dao.InstructorRepository;
 import com.app.dto.InstructorCoursesDTO;
 import com.app.dto.InstructorDTO;
 import com.app.entities.Instructor;
+
 @Service
 @Transactional
 public class InstructorServiceImpl implements InstructorService {
 
 	@Autowired
 	private InstructorRepository instructorRepo;
-	
+
 	@Autowired
 	private ModelMapper mapper;
-	
-	
+
 	@Override
 	public List<InstructorDTO> getAllInstructors() {
-			return instructorRepo.findAll().stream().map(inst -> mapper.map(inst, InstructorDTO.class)).collect(Collectors.toList());
+		return instructorRepo.findAll().stream().map(inst -> mapper.map(inst, InstructorDTO.class))
+				.collect(Collectors.toList());
 	}
 
 	@Override
 	public InstructorDTO getInstructorDetails(Long instructorId) {
-		Instructor inst = instructorRepo.findById(instructorId).orElseThrow(()-> new ResourceNotFoundException("Invalid Instructor Id !!!!"));
+		Instructor inst = instructorRepo.findById(instructorId)
+				.orElseThrow(() -> new ResourceNotFoundException("Invalid Instructor Id !!!!"));
 		return mapper.map(inst, InstructorDTO.class);
 	}
-	
+
 	@Override
 	public InstructorDTO getInstructorDetails(String instructorEmail) {
-		Instructor inst = instructorRepo.findByEmail(instructorEmail).orElseThrow(()-> new ResourceNotFoundException("Invalid Instructor Id !!!!"));
+		Instructor inst = instructorRepo.findByEmail(instructorEmail)
+				.orElseThrow(() -> new ResourceNotFoundException("Invalid Instructor Email !!!!"));
 		return mapper.map(inst, InstructorDTO.class);
 	}
 

@@ -24,7 +24,7 @@ public class InstructorCoursesDTO {
 	private String lastName;
 	@Email
 	private String email;
-	
+
 	private String password;
 
 	private String phoneNo;
@@ -32,6 +32,6 @@ public class InstructorCoursesDTO {
 	private String gender;
 
 	private String imageUrl;
-	
+
 	List<CourseRespDTO> courses;
 }

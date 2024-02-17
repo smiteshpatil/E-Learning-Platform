@@ -14,26 +14,24 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
-@EnableWebSecurity//to enable spring sec frmwork support
-@Configuration //to tell SC , this is config class containing @Bean methods
+@EnableWebSecurity // to enable spring sec frmwork support
+@Configuration // to tell SC , this is config class containing @Bean methods
 @EnableGlobalMethodSecurity(prePostEnabled = true)
-//To enable method level authorization support : pre n post authorization
+// To enable method level authorization support : pre n post authorization
 public class SecurityConfig {
-	//dep : pwd encoder
+	// dep : pwd encoder
 	// @Autowired
 	// private PasswordEncoder enc;
-	//dep : custom jwt auth filter
+	// dep : custom jwt auth filter
 	@Autowired
 	private JwtAuthenticationFilter jwtFilter;
-	//dep : custom auth entry point
+	// dep : custom auth entry point
 	@Autowired
 	private CustomAuthenticationEntryPoint authEntry;
-	
-	
+
 	@Bean
-	public SecurityFilterChain authorizeRequests(HttpSecurity http) throws Exception
-	{
-		//URL based authorization rules
+	public SecurityFilterChain authorizeRequests(HttpSecurity http) throws Exception {
+		// URL based authorization rules
 		http.cors()
 		.and().
 		//disable CSRF token generation n verification
@@ -42,6 +40,7 @@ public class SecurityConfig {
 		and().
 		authorizeRequests()
 		.antMatchers("/users/signup","/users/signin","/courses","/courses/details",
+				"/password/sendOtp","/password/updatePassword",
 				"/images/upload/{type}/{id}","/images/download/{type}/{id}",
 				"/v*/api-doc*/**","/swagger-ui/**").permitAll()
 		// only required for JS clnts (react / angular) : for the pre flight requests
@@ -59,10 +58,9 @@ public class SecurityConfig {
 		.antMatchers("/instructors/{instructorId}",
 				"/instructors/{instructorId}/courses",
 				"/courses/{instructorId}",
-				"/courses/{instructorEmail}",
 				"/courses/add",
 				"/courses/update/{courseId}",
-				"/delete/{courseId}",
+				"/courses/delete/{courseId}",
 				"/contents",
 				"/contents/add",
 				"/contents/{courseId}",
@@ -84,11 +82,10 @@ public class SecurityConfig {
 	
 		return http.build();
 	}
-	//configure AuthMgr as a spring bean
+
+	// configure AuthMgr as a spring bean
 	@Bean
-	public AuthenticationManager authenticationManager
-	(AuthenticationConfiguration config) throws Exception
-	{
+	public AuthenticationManager authenticationManager(AuthenticationConfiguration config) throws Exception {
 		return config.getAuthenticationManager();
 	}
 }

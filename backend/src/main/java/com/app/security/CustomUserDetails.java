@@ -9,14 +9,13 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import com.app.entities.UserInfo;
 
-
 public class CustomUserDetails implements UserDetails {
 	private UserInfo user;
 
 	public CustomUserDetails(UserInfo user) {
 		this.user = user;
 	}
-	
+
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		// class : SimpleGrantedAuthority --> GrantedAuthority

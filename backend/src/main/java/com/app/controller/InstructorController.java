@@ -29,8 +29,7 @@ public class InstructorController {
 	@GetMapping
 	public ResponseEntity<?> getAllInstructors() {
 		System.out.println("in GET all student ");
-		return ResponseEntity
-				.ok(instructorService.getAllInstructors());
+		return ResponseEntity.ok(instructorService.getAllInstructors());
 
 	}
 

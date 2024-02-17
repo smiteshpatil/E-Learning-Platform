@@ -35,7 +35,7 @@ public class StudentServiceImpl implements StudentService {
 		return mapper.map(studentRepo.findById(studentId)
 				.orElseThrow(() -> new ResourceNotFoundException("Invalid Student Id !!!!")), StudentDTO.class);
 	}
-	
+
 	@Override
 	public StudentDTO getStudentDetails(String studentEmail) {
 		return mapper.map(studentRepo.findByEmail(studentEmail)
@@ -72,7 +72,5 @@ public class StudentServiceImpl implements StudentService {
 //	List<Course> list = courseRepo.findByStudentId(studentId);
 //		return mapper.map(list, StudentCoursesDTO.class);
 //	}
-
-
 
 }

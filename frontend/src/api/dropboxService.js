@@ -1,6 +1,9 @@
 import axios from "axios";
 
-export const uploadVideoToDropbox = async (file) => {
+const acessToken =
+  "sl.BvwRkVoPJbWvcm4I8s-eh0-K0xOPALxn4bUsAwgioo5P5hLGZCTfuiv4q-GFegpP7iyV2fl1NxWqDvKJsoZXRgrnNvJAkNSc20FZZchAWsvIri_8kPT-HjSiLmUWt76f9Y-T0p0PQs8BtDM";
+
+export const uploadFileToDropbox = async (file) => {
   if (!file) {
     console.error("No file selected.");
     return;
@@ -12,7 +15,7 @@ export const uploadVideoToDropbox = async (file) => {
       file,
       {
         headers: {
-          Authorization: `Bearer sl.BvpZYyG9QVPJu3_GBODKfot4E0g_7I50RDSsqmTfVhv8TtBeDFxLrBTf0wu-q6pZu9wWzadoagbzlQKkFx1uKBps1gKArmpAc0_d3eATQE66V6rkwFsmWT_6pT9PhOMnpWTfZ25mNzoa9q4`,
+          Authorization: "Bearer " + acessToken,
           "Content-Type": "application/octet-stream",
           "Dropbox-API-Arg": JSON.stringify({
             path: `/${file.name}`,
@@ -35,13 +38,23 @@ export const uploadVideoToDropbox = async (file) => {
       },
       {
         headers: {
-          Authorization: `Bearer sl.BvpZYyG9QVPJu3_GBODKfot4E0g_7I50RDSsqmTfVhv8TtBeDFxLrBTf0wu-q6pZu9wWzadoagbzlQKkFx1uKBps1gKArmpAc0_d3eATQE66V6rkwFsmWT_6pT9PhOMnpWTfZ25mNzoa9q4`,
+          Authorization: "Bearer " + acessToken,
           "Content-Type": "application/json",
         },
       }
     );
 
     console.log("Shared link:", sharedLinkResponse.data.url);
+
+    function replaceDlWithRaw(url) {
+      return url.replace(/dl=0/g, "raw=1");
+    }
+    let url = replaceDlWithRaw(sharedLinkResponse.data.url);
+    let path = response.data.path_display;
+    console.log(path);
+    console.log(url);
+
+    return [url, path];
   } catch (error) {
     console.error("Error uploading file:", error);
   }

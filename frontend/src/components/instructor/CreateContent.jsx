@@ -1,13 +1,25 @@
 import React, { useState } from "react";
 import DropboxUpload from "./DropboxUplaod";
-
+import { addNewContent } from "../../api/contentService";
+import { toast } from "react-toastify";
+import { useParams } from "react-router-dom";
 const CreateContent = (props) => {
+  let { courseId } = useParams();
+  let token = localStorage.getItem("token");
   const [currContent, setCurrContent] = useState({
+    courseId: courseId,
+    contentNo: "",
     contentName: "",
-    description: "",
-    contentPath: "",
-    contentUrl: null,
+    contentDescription: "",
+    // contentPath: "",
+    contentUrl: "",
   });
+
+  // passing this down to file uploading component
+  const setUrlAndPath = (url, path) => {
+    console.log("CreateContent contentUrl:", url);
+    setCurrContent({ ...currContent, contentUrl: url, contentPath: path });
+  };
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -17,20 +29,52 @@ const CreateContent = (props) => {
     }));
   };
 
+  // save content to db
   const handleAddContent = async () => {
-    // const videoUrl = await uploadFile(currContent.contentUrl);
+    try {
+      if (currContent.contentUrl !== "") {
+        await toast.promise(addNewContent(currContent, token), {
+          success: "Lecture added successfully !",
+          pending: "adding video...",
+          error: "err adding video",
+        });
+        //update the state in parent for rerender
+        props.refresh();
+      } else {
+        toast.warning("Please upload video !");
+      }
+    } catch (err) {
+      console.log("err occured");
+    }
   };
 
   const handleCancel = () => {
     setCurrContent({
+      contentNo: "",
       contentName: "",
-      description: "",
+      contentDescription: "",
       contentUrl: "",
+      contentPath: "",
     });
+    // call dropbox api to delete file with path=contentPath
   };
 
   return (
     <div className="container my-0 px-3 py-3" style={{ maxWidth: "80%" }}>
+      <div className="row mb-3">
+        <label htmlFor="contentNo" className="col-sm-3 col-form-label">
+          Lecture No:
+        </label>
+        <div className="col-sm-9">
+          <input
+            className="form-control"
+            id="contentNo"
+            name="contentNo"
+            value={currContent.contentNo}
+            onChange={handleChange}
+          />
+        </div>
+      </div>
       <div className="row mb-3">
         <label htmlFor="contentName" className="col-sm-3 col-form-label">
           Lecture Title
@@ -46,15 +90,15 @@ const CreateContent = (props) => {
         </div>
       </div>
       <div className="row mb-3">
-        <label htmlFor="description" className="col-sm-3 col-form-label">
+        <label htmlFor="contentDescription" className="col-sm-3 col-form-label">
           Description
         </label>
         <div className="col-sm-9">
           <input
             className="form-control"
-            id="description"
-            name="description"
-            value={currContent.description}
+            id="contentDescription"
+            name="contentDescription"
+            value={currContent.contentDescription}
             onChange={handleChange}
           />
         </div>
@@ -63,7 +107,7 @@ const CreateContent = (props) => {
         <label htmlFor="contentUrl" className="col-sm-3 col-form-label">
           Upload Video
         </label>
-        <DropboxUpload />
+        <DropboxUpload setUrl={setUrlAndPath} />
       </div>
       <div className="text-center mb-4">
         <button onClick={handleAddContent} className="btn btn-primary btn-sm">

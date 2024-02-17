@@ -5,20 +5,20 @@ import logo from "../images/logo.png";
 import SearchBar from "./SearchBar";
 import { TbLogout2 } from "react-icons/tb";
 import { FaCartShopping } from "react-icons/fa6";
-import { useAuth } from "../context/AuthContext";
 import { useNavigate } from "react-router-dom";
 import ProfileIcon from "./ProfileIcon";
+import { useAuth } from "../context/AuthContext";
 
 const Navbar = () => {
-  const { isLoggedIn, setIsLoggedIn, setAuthUser } = useAuth();
+  let { authUser, isLoggedIn, setIsLoggedIn } = useAuth();
   const navigate = useNavigate();
 
   //log out
   const logOut = (e) => {
-    e.preventDefault();
     setIsLoggedIn(false);
-    setAuthUser(null);
-    navigate("/");
+    localStorage.removeItem("token");
+    localStorage.removeItem("userObject");
+    navigate("/login");
   };
 
   return (
@@ -34,16 +34,20 @@ const Navbar = () => {
             <SearchBar />
           </li>
 
-          <li className="right">
-            <NavLink to="/user/instructor">Instructor</NavLink>
-          </li>
-          <li className="right">
-            <NavLink to="/cart">
-              {/* Cart Icon */}
-              <FaCartShopping size={30} />
-            </NavLink>
-          </li>
-          {isLoggedIn ? (
+          {authUser && authUser.role === "ROLE_INSTRUCTOR" && (
+            <li className="right">
+              <NavLink to="/user/instructor">Instructor</NavLink>
+            </li>
+          )}
+          {authUser && authUser.role === "ROLE_STUDENT" && (
+            <li className="right">
+              <NavLink to="/cart">
+                {/* Cart Icon */}
+                <FaCartShopping size={30} />
+              </NavLink>
+            </li>
+          )}
+          {authUser && localStorage.getItem("userObject") ? (
             <TbLogout2
               color="black"
               size={30}
@@ -57,12 +61,10 @@ const Navbar = () => {
           )}
 
           <li className="right">
-            {isLoggedIn ? (
+            {isLoggedIn === true && (
               <NavLink to="/user/profile">
                 <ProfileIcon />
               </NavLink>
-            ) : (
-              <></>
             )}
           </li>
         </ul>
