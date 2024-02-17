@@ -204,6 +204,7 @@ const LoginPage = () => {
                 defaultValue=""
                 onChange={handleChange}
               >
+                <option value="">Select Role</option>
                 <option value="ROLE_STUDENT">Student</option>
                 <option value="ROLE_INSTRUCTOR">Instructor</option>
                 <option value="ROLE_ADMIN">Admin</option>
