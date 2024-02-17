@@ -44,4 +44,8 @@ public class AdminDTO {
 	private String Heading;
 
 	private Role role;
+<<<<<<< HEAD
+=======
+
+>>>>>>> 3c48af7a2c1ae48f626a895c25291cb3afbbfa85
 }

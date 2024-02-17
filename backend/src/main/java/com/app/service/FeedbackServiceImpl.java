@@ -23,8 +23,7 @@ public class FeedbackServiceImpl implements FeedbackService {
 	private final StudentRepository studentRepository;
 
 	@Autowired
-	public FeedbackServiceImpl(FeedbackRepository feedbackRepository,
-			CourseRepository courseRepository,
+	public FeedbackServiceImpl(FeedbackRepository feedbackRepository, CourseRepository courseRepository,
 			StudentRepository studentRepository) {
 		this.feedbackRepository = feedbackRepository;
 		this.courseRepository = courseRepository;
@@ -62,6 +61,7 @@ public class FeedbackServiceImpl implements FeedbackService {
 		feedbackRepository.deleteById(feedbackId);
 	}
 
+<<<<<<< HEAD
 	// @Override
 	// public double getAverageRating(Long courseId) {
 	// // Fetch ratings for the given course ID
@@ -73,5 +73,16 @@ public class FeedbackServiceImpl implements FeedbackService {
 	// return average.isPresent() ? average.getAsDouble() : 0.0; // Return average
 	// rating or 0 if list is empty
 	// }
+=======
+//	  @Override
+//	    public double getAverageRating(Long courseId) {
+//	        // Fetch ratings for the given course ID
+//	        List<Integer> ratings = feedbackRepository.findRatingsByCourseId(courseId);
+//
+//	        // Calculate average rating
+//	        OptionalDouble average = ratings.stream().mapToInt(Integer::intValue).average();
+//	        return average.isPresent() ? average.getAsDouble() : 0.0; // Return average rating or 0 if list is empty
+//	    }
+>>>>>>> 3c48af7a2c1ae48f626a895c25291cb3afbbfa85
 
 }

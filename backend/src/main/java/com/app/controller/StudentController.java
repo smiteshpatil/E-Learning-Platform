@@ -72,7 +72,6 @@ public class StudentController {
 	// }
 
 	@PostMapping("/enrollCourse/{studentId}/{courseId}")
-
 	public ResponseEntity<?> enrollCourse(@PathVariable Long studentId, @PathVariable Long courseId) {
 		System.out.println("in Enroll course " + studentId);
 		return ResponseEntity.ok(courseService.assignStudentToCourse(courseId, studentId));
