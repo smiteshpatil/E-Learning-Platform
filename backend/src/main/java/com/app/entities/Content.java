@@ -31,12 +31,12 @@ public class Content extends BaseEntity {
 	@Lob
 	@Column
 	private String contentDescription;
-	@Column
+	@Column(unique = true)
 	private String contentUrl;
 	@Column
 	private String contentPath;
 
-	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
 	@JoinColumn(name = "course_id")
 	private Course course;
 }
