@@ -1,21 +1,35 @@
 import React, { useState, useContext, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { getAllCourses } from "../api/courseService";
+
 const AuthContext = React.createContext();
 
 export function useAuth() {
   return useContext(AuthContext);
 }
 
-export function AuthProvider(props) {
+export const AuthProvider = (props) => {
   const [authUser, setAuthUser] = useState(null);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [allCourses, setAllCourses] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
-    // const token = localStorage.getItem("token");
-    const userDetails = localStorage.getItem("userObject");
-    //set authUser with details
-    console.log("AuthContext: In setUserContext ");
-    setAuthUser(userDetails);
+    const storedUser = localStorage.getItem("userObject");
+    if (storedUser) {
+      console.log(storedUser);
+      setAuthUser(JSON.parse(storedUser));
+    } else {
+      navigate("/login");
+      localStorage.removeItem("userObject");
+      localStorage.removeItem("token");
+    }
+  }, [isLoggedIn]);
+
+  //set all courses in application level
+  useEffect(async () => {
+    const response = await getAllCourses();
+    setAllCourses(response.data);
   }, []);
 
   const value = {
@@ -23,10 +37,8 @@ export function AuthProvider(props) {
     setAuthUser,
     isLoggedIn,
     setIsLoggedIn,
-    allCourses,
-    setAllCourses,
   };
   return (
     <AuthContext.Provider value={value}>{props.children}</AuthContext.Provider>
   );
-}
+};

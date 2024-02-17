@@ -30,7 +30,10 @@ public class StudentCoursesDTO {
 	private String email;
 
 	private String password;
+<<<<<<< HEAD
 
+=======
+>>>>>>> 93a535c66278c45ae3e87791653cbcea8b5c99d0
     
     // New fields
     private String courseName;
@@ -41,7 +44,10 @@ public class StudentCoursesDTO {
         this.courseName = courseName;
         this.enrolledDate = enrolledDate;
     }
+<<<<<<< HEAD
 
+=======
+>>>>>>> 93a535c66278c45ae3e87791653cbcea8b5c99d0
 	private String gender;
 
 	private String imageUrl;
@@ -50,5 +56,8 @@ public class StudentCoursesDTO {
 	private Role role;
 
 	private List<CourseDTO> courses;
+<<<<<<< HEAD
 
+=======
+>>>>>>> 93a535c66278c45ae3e87791653cbcea8b5c99d0
 }

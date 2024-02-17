@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { uploadFileToDropbox } from "../../api/dropboxService";
 
 const CreateCourseCard = (props) => {
   const [newCourse, setNewCourse] = useState({
@@ -8,40 +9,55 @@ const CreateCourseCard = (props) => {
     skillLevel: "",
     language: "english",
     price: "",
-    coursePoster: "", // Adding coursePoster as a string
+    imageUrl: "",
   });
 
+  // handle to set form data
+  const handleChange = (e) => {
+    let { name, value } = e.target;
+    setNewCourse({ ...newCourse, [name]: value });
+  };
+
   const [imagePreview, setImagePreview] = useState(null);
+  const [courseImg, setCourseImg] = useState(null);
 
-  const handleImageUpload = (event) => {
+  // show image to instructor
+  const handleImageUpload = async (event) => {
     const file = event.target.files[0];
-
+    setCourseImg(file); // set image to upload
     // Set the preview image
     const reader = new FileReader();
     reader.onloadend = () => {
       setImagePreview(reader.result);
-      // Add coursePoster file in the newCourse
-      console.log(reader.result);
-      setNewCourse({
-        ...newCourse,
-        coursePoster: JSON.stringify(reader.result),
-      }); // Set coursePoster as base64 string
     };
     if (file) {
       reader.readAsDataURL(file);
     }
   };
 
-  const handleChange = (e) => {
-    let { name, value } = e.target;
-    setNewCourse({ ...newCourse, [name]: value });
+  // handle upload image to db
+  const uploadImage = async () => {
+    try {
+      const [url, path] = await uploadFileToDropbox(courseImg);
+      console.log("in upload img to db: ", url);
+      return url;
+    } catch (error) {
+      console.error("Error uploading image:", error);
+      throw error; // Rethrow the error to be caught by the caller
+    }
   };
 
-  const handleCreateCourse = () => {
-    // Handle creating course here, you can use the values of courseName, description, and imageFile
-    console.log("Creating course:");
-    console.log(newCourse);
-    props.createCourse(newCourse);
+  //handle course creation
+  const handleCreateCourse = async () => {
+    try {
+      const imageUrl = await uploadImage(); // Wait for image upload to complete
+      const updatedCourse = { ...newCourse, imageUrl }; // Merge imageUrl with newCourse
+      console.log(updatedCourse);
+      props.createCourse(updatedCourse);
+      clearForm();
+    } catch (error) {
+      console.error("Error creating course:", error);
+    }
   };
 
   //handle clear form
@@ -53,8 +69,9 @@ const CreateCourseCard = (props) => {
       skillLevel: "",
       language: "english",
       price: "",
-      coursePoster: "", // Adding coursePoster as a string
+      imageUrl: "", // Adding coursePoster as a string
     });
+    setImagePreview(null);
   };
 
   return (

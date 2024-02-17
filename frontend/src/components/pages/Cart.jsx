@@ -13,19 +13,31 @@ function Cart() {
 
   return (
     <>
+    <h1>Cart ({totalItems})</h1>
+    <div className="course-content-section">
+        <div className="course-container">
+          {items.map((currentCourse) => (
+            <div className="course-post" key={currentCourse.id}>
+              <img className="cover-img" src={currentCourse.thumbnail} alt="" />
+              <h2 className="title">{currentCourse.title}</h2>
+              <p className="description">{currentCourse.description}</p>
+              
+              <button className="btn btn-warning" onClick={() => updateItemQuantity(currentCourse.id, currentCourse.quantity - 1)}>
+              -
+              </button>
+              <button className="btn btn-danger" onClick={() => removeItem(currentCourse.id)}>&times;</button>
+            </div>
+          ))}
+        </div>
+      </div>
     <div className="course-content-section">
             <div className="course-container">
-      <h1>Cart ({totalItems})</h1>
-
       <ul>
         {items.map((item) => (
           <li key={item.id}>
           {item.quantity} x {item.title} &mdash;
             <button onClick={() => updateItemQuantity(item.id, item.quantity - 1)}>
               -
-            </button>
-            <button onClick={() => updateItemQuantity(item.id, item.quantity + 1)}>
-              +
             </button>
             <button onClick={() => removeItem(item.id)}>&times;</button>
           </li>

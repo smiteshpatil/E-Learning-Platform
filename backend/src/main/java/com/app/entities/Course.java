@@ -59,7 +59,7 @@ public class Course extends BaseEntity {
 	private String imageUrl;
 
 	// many to one association(*courses -> 1 Instructor)
-	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL) // MERGE : NEW n INTERESTING !!!!!
+	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE) // MERGE : NEW n INTERESTING !!!!!
 	@JoinColumn(name = "instructor_id") // Optional BUT reco , to specify the name of FK col.
 	private Instructor inst;
 

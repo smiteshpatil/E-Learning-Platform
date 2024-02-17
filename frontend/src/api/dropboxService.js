@@ -1,9 +1,9 @@
 import axios from "axios";
 
 const acessToken =
-  "sl.BvrkEWBwjugegUhAsBH9X75fD6gm56Bt6D1tjRR6fsEvYdcGTMXzdzRf8fc7XUEh7pHlho3p12jxfihFGynRH4schJCR9eaE32tV8i7n45t0y6evfCbU1ovJOKMCcijA6SRf_5ShF_BOWqk";
+  "sl.BvwRkVoPJbWvcm4I8s-eh0-K0xOPALxn4bUsAwgioo5P5hLGZCTfuiv4q-GFegpP7iyV2fl1NxWqDvKJsoZXRgrnNvJAkNSc20FZZchAWsvIri_8kPT-HjSiLmUWt76f9Y-T0p0PQs8BtDM";
 
-export const uploadVideoToDropbox = async (file) => {
+export const uploadFileToDropbox = async (file) => {
   if (!file) {
     console.error("No file selected.");
     return;
@@ -45,6 +45,16 @@ export const uploadVideoToDropbox = async (file) => {
     );
 
     console.log("Shared link:", sharedLinkResponse.data.url);
+
+    function replaceDlWithRaw(url) {
+      return url.replace(/dl=0/g, "raw=1");
+    }
+    let url = replaceDlWithRaw(sharedLinkResponse.data.url);
+    let path = response.data.path_display;
+    console.log(path);
+    console.log(url);
+
+    return [url, path];
   } catch (error) {
     console.error("Error uploading file:", error);
   }

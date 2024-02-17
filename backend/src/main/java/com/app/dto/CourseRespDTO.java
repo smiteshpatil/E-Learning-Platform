@@ -12,6 +12,7 @@ import lombok.ToString;
 @Setter
 @ToString
 public class CourseRespDTO {
+<<<<<<< HEAD
     private Long id;
     private String courseName;
     private String category;
@@ -26,4 +27,16 @@ public class CourseRespDTO {
     private int totalEnrolledStudents;
     private double averageRating;
     
+=======
+	private Long id;
+	private String courseName;
+	private String category;
+	@Lob
+	private String description;
+	private String skillLevel;
+	private String language;
+	private Long price;
+	private LocalDate publishedDate;
+	private String imageUrl;
+>>>>>>> 93a535c66278c45ae3e87791653cbcea8b5c99d0
 }

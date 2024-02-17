@@ -9,9 +9,7 @@ import ProfileCloseAccount from "./components/ProfileCloseAccount";
 import ProfilePage from "./components/ProfilePage";
 import ProfilePhoto from "./components/ProfilePhoto";
 import UserProfile from "./components/UserProfile";
-
 import Course from "./components/pages/CoursePage";
-
 import "./App.css";
 import "react-toastify/dist/ReactToastify.css";
 import VideoNotes from "./components/pages/VideoNotes";
@@ -34,12 +32,12 @@ import InstructorController from "./components/admin/InstructorController";
 
 import UploadContentPage from "./components/instructor/UploadContentPage";
 import CreateContent from "./components/instructor/CreateContent";
-import { ToastContainer } from "react-toastify";
+import { ToastContainer, Bounce } from "react-toastify";
 function App() {
   return (
     <div className="App">
       <ToastContainer
-        position="top-right"
+        position="top-center"
         autoClose={2000}
         hideProgressBar={false}
         newestOnTop={false}
@@ -48,6 +46,7 @@ function App() {
         draggable
         pauseOnHover
         theme="light"
+        transition={Bounce}
       />
       <Navbar></Navbar>
 
@@ -63,12 +62,10 @@ function App() {
           <Route path="closeAccount" element={<ProfileCloseAccount />} />
           <Route path="profile" element={<UserProfile />} />
         </Route>
-
         {/* Courses */}
         <Route path="/courses">
           <Route path=":id" element={<Course />}></Route>
         </Route>
-
         {/* Cart */}
         <Route path="/cart" element={<Cart />}></Route>
         {/* Cart */}
@@ -77,24 +74,23 @@ function App() {
         <Route path="/user/instructor" element={<Dashboard />}>
           <Route path="" element={<Home />} />
           <Route path="courses" element={<Courses />} />
+          {/* <Route path="students" element={<Courses />} /> */}
           <Route path="revenue" element={<Revenue />} />
         </Route>
-
         {/* Admin */}
-       = <Route path="/user/admin" element={<AdminDashboard />}>
+        <Route path="/user/admin" element={<AdminDashboard />}>
           <Route path="" element={<AdminHome />} />
           <Route path="courseController" element={<CourseController />} />
           <Route path="studentController" element={<StudentController />} />
-          <Route path="instructorController" element={<InstructorController />} />
+          <Route
+            path="instructorController"
+            element={<InstructorController />}
+          />
         </Route>
-
-
         {/* upload course content routes */}
         <Route path="/upload" element={<UploadContentPage />}>
-          <Route path=":id" element={<CreateContent />} />
+          <Route path=":courseId" element={<CreateContent />} />
         </Route>
-
-
         {/* Video Routes demo */}
         <Route path="/video" element={<VideoPage />}>
           <Route path="overview" element={<VideoOverview />} />

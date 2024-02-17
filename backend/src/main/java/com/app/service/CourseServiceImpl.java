@@ -100,11 +100,12 @@ public class CourseServiceImpl implements CourseService {
 
 	@Override
 	public String deleteCourseDetails(Long courseId) {
-		long noOfStudentsInCourses = courseStudentRepo.deleteByMyCourseId(courseId);
-		System.out.println("deleted students " + noOfStudentsInCourses);
+		//long noOfStudentsInCourses = courseStudentRepo.deleteByMyCourseId(courseId);
+		//System.out.println("deleted students " + noOfStudentsInCourses);
 
-		courseRepo.deleteById(courseId);
-		return "Course Deleted SuccessFully";
+		Course course = courseRepo.findById(courseId).orElseThrow(()->new ResourceNotFoundException("Invalid Course id !!!"));
+		courseRepo.delete(course);
+		return "Course Deleted SuccessFully " + courseId + " " + course.getCourseName();
 	}
 
 	@Override

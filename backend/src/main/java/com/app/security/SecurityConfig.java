@@ -33,7 +33,10 @@ public class SecurityConfig {
 	public SecurityFilterChain authorizeRequests(HttpSecurity http) throws Exception {
 		// URL based authorization rules
 		http.cors()
+<<<<<<< HEAD
 
+=======
+>>>>>>> 93a535c66278c45ae3e87791653cbcea8b5c99d0
 		.and().
 		//disable CSRF token generation n verification
 		csrf()	.disable()
@@ -41,6 +44,7 @@ public class SecurityConfig {
 		and().
 		authorizeRequests()
 		.antMatchers("/users/signup","/users/signin","/courses","/courses/details",
+				"/password/sendOtp","/password/updatePassword",
 				"/images/upload/{type}/{id}","/images/download/{type}/{id}",
 				"/v*/api-doc*/**","/swagger-ui/**","/admin/instructorinfo","/admin/coursedetails","/admin/students/{courseId}","/admin/{studentId}/{courseId}").permitAll()
 		// only required for JS clnts (react / angular) : for the pre flight requests
@@ -48,12 +52,12 @@ public class SecurityConfig {
 		.antMatchers(
 				"/feedback/add",
 				"/students/{studentId}",
-				
+				"/students/{studentId}/courses",
 				"/students/update/{studentId}",
 				"/students/delete/{studentId}",
 				"/courses/enrollCourse}",
 				"/courses/removeCourse",
-				"/courses/student/{studentId}","/students/{studentId}/courses")
+				"/courses/student/{studentId}")
 		.hasRole("STUDENT")
 		.antMatchers("/instructors/{instructorId}",
 				"/instructors/{instructorId}/courses",
@@ -69,7 +73,11 @@ public class SecurityConfig {
 				"contents/delete/{contentId}")
 		.hasRole("INSTRUCTOR")
 		
+<<<<<<< HEAD
 		.antMatchers("/instructors","/students","studentcourses","/admin/enrolledStudents")
+=======
+		.antMatchers("/instructors","/students")
+>>>>>>> 93a535c66278c45ae3e87791653cbcea8b5c99d0
 		.hasRole("ADMIN")
 		.anyRequest().authenticated()
 		.and()
@@ -82,9 +90,14 @@ public class SecurityConfig {
 	
 		return http.build();
 	}
+<<<<<<< HEAD
 	
 	//configure AuthMgr as a spring bean
 
+=======
+
+	// configure AuthMgr as a spring bean
+>>>>>>> 93a535c66278c45ae3e87791653cbcea8b5c99d0
 	@Bean
 	public AuthenticationManager authenticationManager(AuthenticationConfiguration config) throws Exception {
 		return config.getAuthenticationManager();
