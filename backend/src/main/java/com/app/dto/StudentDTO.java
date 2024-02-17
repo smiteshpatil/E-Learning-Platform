@@ -43,11 +43,7 @@ public class StudentDTO {
 
 	private String heading;
 	
-<<<<<<< HEAD
+	private int rating;
 	
-	////////////////
-	 private int rating;
-=======
 	private Role role;
->>>>>>> 93a535c66278c45ae3e87791653cbcea8b5c99d0
 }

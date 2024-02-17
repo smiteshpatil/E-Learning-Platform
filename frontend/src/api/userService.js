@@ -15,6 +15,39 @@ export const signIn = async (userEmail, userPass) => {
   }
 };
 
+export const syncCart = async (
+  userEmail,
+  bearerToken
+) => {
+  try {
+    const response = await axios.get(baseURL + `/students/cartItems/${userEmail}`, {
+      headers: {
+        Authorization: `Bearer ${bearerToken}`,
+      },
+    });
+    return response;
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+export const syncCartToDB = async (
+  userEmail,
+  bearerToken,
+  cart
+) => {
+  try {
+    const response = await axios.post(baseURL + `/students/cartItems/${userEmail}`, cart, {
+      headers: {
+        Authorization: `Bearer ${bearerToken}`,
+      },
+    });
+    return response;
+  } catch (err) {
+    console.log(err);
+  }
+};
+
 export const signUp = async (user) => {
   try {
     console.log("signUP called");

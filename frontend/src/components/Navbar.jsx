@@ -8,16 +8,23 @@ import { FaCartShopping } from "react-icons/fa6";
 import { useNavigate } from "react-router-dom";
 import ProfileIcon from "./ProfileIcon";
 import { useAuth } from "../context/AuthContext";
+import { syncCartToDB } from "../api/userService";
+import { useCart } from "react-use-cart";
 
 const Navbar = () => {
+  const { items, emptyCart } = useCart();
   let { authUser, isLoggedIn, setIsLoggedIn } = useAuth();
   const navigate = useNavigate();
 
   //log out
-  const logOut = (e) => {
+  const logOut = async (e) => {
+    console.log("items len: "+items.length);
+    //items.map(item => console.log("id: "+item.id));
+    await syncCartToDB(authUser.email, localStorage.getItem('token'), items);
     setIsLoggedIn(false);
     localStorage.removeItem("token");
     localStorage.removeItem("userObject");
+    emptyCart();
     navigate("/login");
   };
 
