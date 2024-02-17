@@ -11,6 +11,7 @@ const Main = () => {
 
   useEffect(() => {
     const fetchTrendingCourses = async () => {
+      // setTrendingCourses(await getAllCourses());
       setTrendingCourses(courses);
     };
 

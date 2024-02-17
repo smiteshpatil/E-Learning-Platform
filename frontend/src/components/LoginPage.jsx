@@ -48,7 +48,7 @@ const LoginPage = () => {
     if (formDetails.email !== "" && formDetails.password !== "") {
       try {
         const response = await signIn(formDetails.email, formDetails.password);
-        console.table(response);
+        // console.table(response);
         // Check if response exists and contains jwt and userDetails
         if (response && response.jwt && response.userDetails) {
           const { jwt, userDetails } = response;

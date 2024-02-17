@@ -18,6 +18,9 @@ public interface FeedbackRepository extends JpaRepository<Feedback, Long> {
     
     List<Feedback> findByCourse(Course course);
 
+<<<<<<< HEAD
 	// Feedback findByStudentIdAndCourseId(Long studentId, Long courseId);
 
+=======
+>>>>>>> 99b44bce319d92fa29189ab4ba57d48a138c99f7
 }

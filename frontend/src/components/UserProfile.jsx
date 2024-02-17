@@ -1,14 +1,40 @@
 import React, { useState } from "react";
 import { Button, Container, Row, Col } from "react-bootstrap";
 import { useAuth } from "../context/AuthContext";
-
+import { updateStudentService } from "../api/userService";
+import { toast } from "react-toastify";
 const UserProfile = () => {
-  const [text, setText] = useState("");
   let { authUser } = useAuth();
+
+  const [newDetails, setNewDetails] = useState({
+    id: authUser.id,
+    email: authUser.email,
+    firstName: authUser.firstName,
+    gender: authUser.gender,
+    gitHubLink: authUser.gitHubLink,
+    heading: authUser.heading,
+    imageUrl: authUser.imageUrl,
+    lastName: authUser.lastName,
+    linkedInLink: authUser.linkedInLink,
+  });
 
   // Update the state with the text from textarea
   const handleChange = (event) => {
-    setText(event.target.value);
+    let { name, value } = event.target;
+    setNewDetails({ ...newDetails, [name]: value });
+  };
+
+  // update student details
+  const handleUpdateStudent = async () => {
+    const resp = await toast.promise(
+      updateStudentService(newDetails, localStorage.getItem("token")),
+      {
+        pending: "Updating profile...",
+        success: "Profile updated successfully",
+        error: "Unexpected error occured",
+      }
+    );
+    console.log(resp.data);
   };
 
   return (
@@ -33,7 +59,8 @@ const UserProfile = () => {
                   name="firstName"
                   placeholder="First Name"
                   aria-label="First Name"
-                  value={authUser ? authUser.firstName : ""}
+                  value={newDetails.firstName}
+                  onChange={handleChange}
                 />
               </div>
               <div className="pb-3">
@@ -43,7 +70,8 @@ const UserProfile = () => {
                   name="lastName"
                   placeholder="Last Name"
                   aria-label="Last Name"
-                  value={authUser ? authUser.lastName : ""}
+                  value={newDetails.lastName}
+                  onChange={handleChange}
                 />
               </div>
 
@@ -54,12 +82,12 @@ const UserProfile = () => {
                 <textarea
                   className="form-control form-control-md"
                   type="textarea"
-                  value={text}
                   name="heading"
-                  onChange={handleChange}
                   rows={1}
                   placeholder="Heading"
                   aria-label="Heading"
+                  value={newDetails.heading}
+                  onChange={handleChange}
                 />
 
                 <div className="pb-2 mt-2">
@@ -70,11 +98,15 @@ const UserProfile = () => {
                     name="phoneNo"
                     placeholder="+91"
                     aria-label="Last Name"
-                    value={authUser ? authUser.phoneNo : ""}
+                    value={newDetails.phoneNo}
+                    onChange={handleChange}
                   />
-                  
+
                   <div className="mt-3">
-                    <div className="text-start mb-2" style={{ fontSize: "1.15rem", margin: "0" }}>
+                    <div
+                      className="text-start mb-2"
+                      style={{ fontSize: "1.15rem", margin: "0" }}
+                    >
                       Gender
                     </div>
                     <div className="d-flex flex-column flex-md-row align-items-md-center">
@@ -83,7 +115,8 @@ const UserProfile = () => {
                           type="radio"
                           name="gender"
                           id="male"
-                          value="male"
+                          value={newDetails.gender}
+                          onChange={handleChange}
                         />
                         <label
                           htmlFor="male"
@@ -98,7 +131,8 @@ const UserProfile = () => {
                           type="radio"
                           name="gender"
                           id="female"
-                          value="female"
+                          value={newDetails.gender}
+                          onChange={handleChange}
                         />
                         <label
                           htmlFor="female"
@@ -117,7 +151,7 @@ const UserProfile = () => {
                 <p className="text-start">Links</p>
 
                 <div className="pb-3 ">
-                <span className="form-text text-start" id="basic-addon4">
+                  <span className="form-text text-start" id="basic-addon4">
                     Your LinkedIn id
                   </span>
                   <div className="input-group ">
@@ -129,13 +163,15 @@ const UserProfile = () => {
                       className="form-control"
                       id="basic-url"
                       aria-describedby="basic-addon3 basic-addon4"
+                      name="LinkedInLink"
+                      value={newDetails.linkedInLink}
+                      onChange={handleChange}
                     />
                   </div>
-                  
                 </div>
 
                 <div>
-                <span className="form-text text-start" id="basic-addon4">
+                  <span className="form-text text-start" id="basic-addon4">
                     Your github id
                   </span>
                   <div className="input-group">
@@ -147,11 +183,18 @@ const UserProfile = () => {
                       className="form-control"
                       id="basic-url"
                       aria-describedby="basic-addon3 basic-addon4"
+                      name="GitHubLink"
+                      value={newDetails.gitHubLink}
+                      onChange={handleChange}
                     />
                   </div>
 
                   <div className="mt-4 mb-2">
-                    <Button variant="primary" className="me-2">
+                    <Button
+                      onClick={handleUpdateStudent}
+                      variant="primary"
+                      className="me-2"
+                    >
                       Save
                     </Button>
                     <Button variant="outline-secondary">Cancel</Button>

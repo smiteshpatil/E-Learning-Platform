@@ -4,9 +4,9 @@ import { useNavigate } from "react-router-dom";
 
 const AuthContext = React.createContext();
 
-export function useAuth() {
+export const useAuth = () => {
   return useContext(AuthContext);
-}
+};
 
 export const AuthProvider = (props) => {
   const [authUser, setAuthUser] = useState(null);
@@ -14,6 +14,7 @@ export const AuthProvider = (props) => {
   const [allCourses, setAllCourses] = useState([]);
   const navigate = useNavigate();
 
+  //
   useEffect(() => {
     const storedUser = localStorage.getItem("userObject");
     if (storedUser) {
@@ -30,10 +31,29 @@ export const AuthProvider = (props) => {
   }, [ isLoggedIn ]);
 
   //set all courses in application level
+<<<<<<< HEAD
   // useEffect(async () => {
   //  const response = await getAllCourses();
   //  setAllCourses(response.data);
   // }, []);
+=======
+  useEffect(() => {
+    const storedUser = localStorage.getItem("userObject");
+    if (storedUser) {
+      console.log(storedUser);
+      setAuthUser(JSON.parse(storedUser));
+    } else {
+      navigate("/login");
+      localStorage.removeItem("userObject");
+      localStorage.removeItem("token");
+    }
+    const fetchCourses = async () => {
+      const response = await getAllCourses();
+      setAllCourses(response.data);
+    };
+    fetchCourses();
+  }, []);
+>>>>>>> 99b44bce319d92fa29189ab4ba57d48a138c99f7
 
   const syncCartWithUser = (userData) => {
     const storedCart = localStorage.getItem('cart');

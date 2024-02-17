@@ -1,19 +1,35 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import CourseContent from "./CourseContent";
 import { useAuth } from "../../context/AuthContext";
 import { courses } from "../../api/courseService";
 import "./CoursePage.css";
-
 import img from "../../images/card1.jpg";
 
 const CoursePage = () => {
+  // currentCourseDetails
+  const [currCourse, setCurrCourse] = useState({});
+
   //current courseId
   const { id } = useParams();
   console.log("In CoursePage", id);
   const { allCourses } = useAuth();
 
-  useEffect(() => {}, []);
+  // set current course details
+  useEffect(() => {
+    const fetchCurrentCourse = () => {
+      const response = allCourses.find((curr) => curr.courseDTO.id === id);
+      // Check if response is defined before setting currCourse
+      if (response) {
+        setCurrCourse(response);
+      } else {
+        // Handle case when no matching course is found
+        // For example, set currCourse to null or show an error message
+      }
+    };
+
+    fetchCurrentCourse();
+  }, [allCourses, id]); // Include allCourses and id in the dependency array
 
   return (
     <div>
@@ -22,8 +38,8 @@ const CoursePage = () => {
           <div className="row">
             <div className="col-sm-8">
               <div>
-                <h2>Course Title</h2>
-                <h5>Sub heading</h5>
+                <h2>{currCourse && currCourse.courseDTO.courseName}</h2>
+                <h5>{currCourse && currCourse.courseDTO.heading}</h5>
                 <div className="review">BestSeller/created by</div>
                 <p>
                   Some text about me in culpa qui officia deserunt mollit anim..

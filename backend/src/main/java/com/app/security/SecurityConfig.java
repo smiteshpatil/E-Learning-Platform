@@ -33,6 +33,7 @@ public class SecurityConfig {
 	public SecurityFilterChain authorizeRequests(HttpSecurity http) throws Exception {
 		// URL based authorization rules
 		http.cors()
+
 				.and().
 				// disable CSRF token generation n verification
 				csrf().disable()
@@ -78,7 +79,6 @@ public class SecurityConfig {
 				.sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
 				// inserting jwt filter before sec filter
 				.addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
-
 		return http.build();
 	}
 

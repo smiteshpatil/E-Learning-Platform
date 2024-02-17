@@ -22,6 +22,10 @@ public class FeedbackServiceImpl implements FeedbackService {
 	private final CourseRepository courseRepository;
 	private final StudentRepository studentRepository;
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 99b44bce319d92fa29189ab4ba57d48a138c99f7
 	@Autowired
 	public FeedbackServiceImpl(FeedbackRepository feedbackRepository,
 			CourseRepository courseRepository,
