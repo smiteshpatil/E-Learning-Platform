@@ -15,15 +15,12 @@ export const AuthProvider = (props) => {
   const [allCourses, setAllCourses] = useState([]);
   const navigate = useNavigate();
 
-<<<<<<< HEAD
   // refresh context
   const refreshContext = () => {
     setRefresh((prev) => !prev);
   };
 
   //set userState
-=======
-  //
   useEffect(() => {
     const storedUser = localStorage.getItem("userObject");
     if (storedUser) {
@@ -37,16 +34,14 @@ export const AuthProvider = (props) => {
       localStorage.removeItem("cart");
       navigate("/login");
     }
-  }, [ isLoggedIn ]);
+  }, [isLoggedIn]);
 
   //set all courses in application level
-<<<<<<< HEAD
   // useEffect(async () => {
   //  const response = await getAllCourses();
   //  setAllCourses(response.data);
   // }, []);
-=======
->>>>>>> cc4f1cde513beb815f7160b1a7448815b9163231
+
   useEffect(() => {
     const storedUser = localStorage.getItem("userObject");
     if (storedUser) {
@@ -73,16 +68,15 @@ export const AuthProvider = (props) => {
     };
     fetchCourses();
   }, []);
->>>>>>> 99b44bce319d92fa29189ab4ba57d48a138c99f7
 
   const syncCartWithUser = (userData) => {
-    const storedCart = localStorage.getItem('cart');
+    const storedCart = localStorage.getItem("cart");
     if (storedCart) {
       // Update the user's cart with the cart data from local storage
       // You may need to implement merging logic if necessary
       // For simplicity, this example assumes the user's cart is overridden
       //userData.cart = JSON.parse(storedCart);
-      localStorage.setItem('cart', storedCart);
+      localStorage.setItem("cart", storedCart);
       //localStorage.setItem('user', JSON.stringify(userData));
     }
   };
@@ -91,12 +85,11 @@ export const AuthProvider = (props) => {
     setAuthUser,
     isLoggedIn,
     setIsLoggedIn,
-<<<<<<< HEAD
+
     refreshContext,
-=======
+
     allCourses,
     setAllCourses,
->>>>>>> cc4f1cde513beb815f7160b1a7448815b9163231
   };
   return (
     <AuthContext.Provider value={value}>{props.children}</AuthContext.Provider>
