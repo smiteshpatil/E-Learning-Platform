@@ -1,4 +1,5 @@
 import React, { useState, useRef } from "react";
+import { toast } from "react-toastify";
 import { deleteContent } from "../../api/contentService";
 const ContentCard = (props) => {
   const [currContent, setCurrentContent] = useState({
@@ -22,9 +23,16 @@ const ContentCard = (props) => {
   };
 
   // Handle Delete Content
-  const handleDeleteContent = () => {
-    deleteContent(props.currContentDetails.id, localStorage.getItem("token"));
-    props.refresh((prev) => !prev); //refresh
+  const handleDeleteContent = async () => {
+    await toast.promise(
+      deleteContent(props.currContentDetails.id, localStorage.getItem("token")),
+      {
+        success: "lecture deleted !",
+        pending: " ",
+        error: " ",
+      }
+    );
+    props.refresh(); //refresh
   };
 
   return (

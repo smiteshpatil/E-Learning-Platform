@@ -34,28 +34,13 @@ function Sidebar({ openSidebarToggle, OpenSidebar }) {
           </NavLink>
         </li>
         <li className="sidebar-list-item">
-          <NavLink to="courses">
-            <BsFillGrid3X3GapFill className="icon" /> Categories
-          </NavLink>
-        </li>
-        <li className="sidebar-list-item">
-          <NavLink to="courses">
+          <NavLink to="students">
             <BsPeopleFill className="icon" /> Students
           </NavLink>
         </li>
         <li className="sidebar-list-item">
-          <NavLink to="courses">
-            <BsListCheck className="icon" /> Inventory
-          </NavLink>
-        </li>
-        <li className="sidebar-list-item">
-          <NavLink to="courses">
-            <BsMenuButtonWideFill className="icon" /> Reports
-          </NavLink>
-        </li>
-        <li className="sidebar-list-item">
-          <NavLink to="courses">
-            <BsFillGearFill className="icon" /> Setting
+          <NavLink to="revenue">
+            <BsFillGrid3X3GapFill className="icon" /> Revenue
           </NavLink>
         </li>
       </ul>

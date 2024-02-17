@@ -11,10 +11,13 @@ const UploadContentPage = () => {
   let { authUser } = useAuth();
   //current courseId require for addContent
   let { courseId } = useParams();
+  let token = localStorage.getItem("token");
 
   const [contents, setContents] = useState([]);
   const [flag, setFlag] = useState(false); // flag to make rerender
-  let token = localStorage.getItem("token");
+  const refresh = () => {
+    setFlag((flag) => !flag);
+  };
 
   // Function to fetch contents
   const fetchContents = async () => {
@@ -44,7 +47,7 @@ const UploadContentPage = () => {
         <div className="w-100">
           <CreateContent
             setNewContents={setContents}
-            refresh={setFlag}
+            refresh={refresh}
             currCourseId={courseId}
           />
         </div>
@@ -55,7 +58,7 @@ const UploadContentPage = () => {
             contents.map((currContent, index) => (
               <ContentCard
                 key={index}
-                refresh={setFlag}
+                refresh={refresh}
                 currContentDetails={currContent}
               />
             ))

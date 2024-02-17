@@ -74,6 +74,7 @@ function App() {
         <Route path="/user/instructor" element={<Dashboard />}>
           <Route path="" element={<Home />} />
           <Route path="courses" element={<Courses />} />
+          {/* <Route path="students" element={<Courses />} /> */}
           <Route path="revenue" element={<Revenue />} />
         </Route>
         {/* Admin */}

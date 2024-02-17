@@ -7,19 +7,16 @@ const SearchBar = () => {
     display: "flex",
     alignItems: "center",
     width: "50%",
-    maxWidth: "800px",
-    margin: "0 auto",
+    maxWidth: "700px",
+    margin: "0",
     borderRadius: "25px",
   };
 
   const inputStyle = {
     width: "100%",
-    padding: "10px",
+    margin: "7px",
     borderRadius: "5px",
     border: "1px solid #ccc",
-    marginRight: "10px",
-    fontSize: "16px",
-    outline: "none",
   };
 
   const searchResultStyle = {
@@ -65,6 +62,7 @@ const SearchBar = () => {
     <>
       <div style={searchBarStyle}>
         <input
+          className="form-control"
           type="text"
           placeholder="Search..."
           style={inputStyle}

@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const acessToken =
-  "sl.BvvlCDfc80lYe9l3L9HcRtt4YCnLjFVeRLp8IVrYXUrsi18YtkliCuniUZZC68pIdA5K7152XgNdZwDPZ2EzciKTWW4U5wnzsncn-APnm_TdnXGpyTbokgtTzPeeNTd1gdQQW1AvoHIHSUU";
+  "sl.BvwRkVoPJbWvcm4I8s-eh0-K0xOPALxn4bUsAwgioo5P5hLGZCTfuiv4q-GFegpP7iyV2fl1NxWqDvKJsoZXRgrnNvJAkNSc20FZZchAWsvIri_8kPT-HjSiLmUWt76f9Y-T0p0PQs8BtDM";
 
 export const uploadFileToDropbox = async (file) => {
   if (!file) {
@@ -49,10 +49,12 @@ export const uploadFileToDropbox = async (file) => {
     function replaceDlWithRaw(url) {
       return url.replace(/dl=0/g, "raw=1");
     }
-    let directLink = replaceDlWithRaw(sharedLinkResponse.data.url);
-    console.log(directLink);
+    let url = replaceDlWithRaw(sharedLinkResponse.data.url);
+    let path = response.data.path_display;
+    console.log(path);
+    console.log(url);
 
-    return directLink;
+    return [url, path];
   } catch (error) {
     console.error("Error uploading file:", error);
   }

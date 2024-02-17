@@ -7,7 +7,7 @@ export const getAllCourses = async () => {
   try {
     const response = await axios.get(baseUrl + "/courses/details");
     console.log("In getAllCourses, courseService: ");
-    return response.data;
+    return response;
   } catch (err) {
     console.log(err);
   }

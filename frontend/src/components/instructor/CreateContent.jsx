@@ -31,12 +31,20 @@ const CreateContent = (props) => {
 
   // save content to db
   const handleAddContent = async () => {
-    if (currContent.contentUrl !== "") {
-      addNewContent(currContent, token);
-      //update the state in parent for rerender
-      props.refresh((prev) => !prev);
-    } else {
-      toast.warning("Please upload video !");
+    try {
+      if (currContent.contentUrl !== "") {
+        await toast.promise(addNewContent(currContent, token), {
+          success: "Lecture added successfully !",
+          pending: "adding video...",
+          error: "err adding video",
+        });
+        //update the state in parent for rerender
+        props.refresh();
+      } else {
+        toast.warning("Please upload video !");
+      }
+    } catch (err) {
+      console.log("err occured");
     }
   };
 

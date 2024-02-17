@@ -13,12 +13,16 @@ const DropboxUpload = (props) => {
   //sent video to server and set url and path
   const handleUpload = async () => {
     <ToastContainer />;
-    let [url, path] = await toast.promise(uploadFileToDropbox(file), {
-      pending: "Uploading video...",
-      success: "Video uploaded successfully",
-      error: "err uploading videos",
-    });
-    props.setUrl(url, path);
+    try {
+      let [url, path] = await toast.promise(uploadFileToDropbox(file), {
+        pending: "Uploading video...",
+        success: "Video uploaded successfully",
+        error: "err uploading videos",
+      });
+      props.setUrl(url, path);
+    } catch (err) {
+      console.log("failed to upload video");
+    }
   };
 
   return (
