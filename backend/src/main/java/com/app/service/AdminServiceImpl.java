@@ -38,11 +38,16 @@ import com.app.entities.Student;
 
 @Service
 @Transactional
+<<<<<<< HEAD
+
+public class AdminServiceImpl implements AdminService{
+=======
 
 
 public class AdminServiceImpl implements AdminService{
 
 
+>>>>>>> 99b44bce319d92fa29189ab4ba57d48a138c99f7
     @Autowired
     private AdminRepository adminRepo;
     

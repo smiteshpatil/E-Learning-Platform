@@ -5,7 +5,7 @@ import "../css/LoginPage.css";
 import { useEffect } from "react";
 import { useAuth } from "../context/AuthContext";
 import { useNavigate } from "react-router-dom";
-import { signIn, signUp, sendOTP, updatePassword } from "../api/userService";
+import { signIn, signUp, sendOTP, updatePassword, syncCart } from "../api/userService";
 import { toast } from "react-toastify";
 const LoginPage = () => {
   const { setAuthUser, setIsLoggedIn } = useAuth();
@@ -55,6 +55,9 @@ const LoginPage = () => {
           // save the token,userDetails and loginState in local storage
           localStorage.setItem("token", jwt);
           localStorage.setItem("userObject", JSON.stringify(userDetails));
+          const cart = await syncCart(formDetails.email, jwt);
+          if(cart !== undefined)
+            localStorage.setItem("cart",cart);
 
           toast.success("Signed in successfully");
           setIsLoggedIn(true);

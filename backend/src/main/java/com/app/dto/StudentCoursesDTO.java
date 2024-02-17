@@ -41,7 +41,10 @@ public class StudentCoursesDTO {
         this.courseName = courseName;
         this.enrolledDate = enrolledDate;
     }
+<<<<<<< HEAD
+=======
 
+>>>>>>> 99b44bce319d92fa29189ab4ba57d48a138c99f7
 	private String gender;
 
 	private String imageUrl;
@@ -50,5 +53,8 @@ public class StudentCoursesDTO {
 	private Role role;
 
 	private List<CourseDTO> courses;
+<<<<<<< HEAD
+=======
 
+>>>>>>> 99b44bce319d92fa29189ab4ba57d48a138c99f7
 }
