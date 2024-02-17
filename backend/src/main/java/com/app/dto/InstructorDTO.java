@@ -45,13 +45,10 @@ public class InstructorDTO {
 	private String GitHubLink;
 
 	private String Heading;
-	
-<<<<<<< HEAD
+
 	private List<String> courseNames; // List of course names associated with the instructor
-    private List<LocalDate> publishedDates;
-	
-	
-=======
+	private List<LocalDate> publishedDates;
+
 	private Role role;
->>>>>>> 93a535c66278c45ae3e87791653cbcea8b5c99d0
+
 }

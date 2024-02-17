@@ -37,6 +37,7 @@ public class CourseController {
 
 	@GetMapping("/details")
 	public ResponseEntity<?> getAllCoursesWithDetails() {
+		System.out.println("In course controller rating is: " + courseService.getAllCoursesWithDetails());
 		return ResponseEntity.ok(courseService.getAllCoursesWithDetails());
 	}
 

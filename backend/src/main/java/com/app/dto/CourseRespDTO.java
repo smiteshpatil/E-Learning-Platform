@@ -22,4 +22,6 @@ public class CourseRespDTO {
 	private String language;
 	private Long price;
 	private LocalDate publishedDate;
+	private int totalEnrolledStudents;
+	private double averageRating;
 }

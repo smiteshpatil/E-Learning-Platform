@@ -2,13 +2,13 @@ package com.app.service;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
 import javax.persistence.EntityNotFoundException;
 import javax.transaction.Transactional;
+
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,12 +21,8 @@ import com.app.dao.FeedbackRepository;
 import com.app.dao.InstructorRepository;
 import com.app.dao.StudentCourseRepository; // Import StudentCourseRepository
 import com.app.dto.AdminDTO;
-import com.app.dto.CourseDTO;
-import com.app.dto.CourseInstructorDto;
 import com.app.dto.CourseRespDTO;
-import com.app.dto.CourseStudent;
 import com.app.dto.InstructorCoursesDTO;
-import com.app.dto.InstructorDTO;
 import com.app.dto.StudentDTO;
 import com.app.entities.Admin;
 import com.app.entities.Course;
@@ -38,13 +34,7 @@ import com.app.entities.Student;
 
 @Service
 @Transactional
-<<<<<<< HEAD
-
 public class AdminServiceImpl implements AdminService{
-
-=======
-public class AdminServiceImpl implements AdminService{
->>>>>>> 93a535c66278c45ae3e87791653cbcea8b5c99d0
     @Autowired
     private AdminRepository adminRepo;
     

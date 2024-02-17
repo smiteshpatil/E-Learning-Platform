@@ -14,5 +14,5 @@ import lombok.Setter;
 public class GetAllDetailsDTO {
 	private InstructorDTO instructorDTO;
 	private CourseDTO courseDTO;
-	private List<ContentDTO> contentDTO;
+	private List<ContentDetailDTO> contentDTO;
 }
