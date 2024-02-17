@@ -28,7 +28,8 @@ public class StudentDTO {
 	@Email
 	private String email;
 
-	@JsonIgnore
+	// @JsonIgnore
+	@JsonProperty(access = Access.WRITE_ONLY)
 	private String password;
 
 	private String phoneNo;
@@ -42,6 +43,6 @@ public class StudentDTO {
 	private String GitHubLink;
 
 	private String heading;
-	
+
 	private Role role;
 }

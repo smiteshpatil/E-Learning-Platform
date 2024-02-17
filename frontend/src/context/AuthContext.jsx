@@ -4,9 +4,9 @@ import { getAllCourses } from "../api/courseService";
 
 const AuthContext = React.createContext();
 
-export function useAuth() {
+export const useAuth = () => {
   return useContext(AuthContext);
-}
+};
 
 export const AuthProvider = (props) => {
   const [authUser, setAuthUser] = useState(null);
@@ -14,6 +14,7 @@ export const AuthProvider = (props) => {
   const [allCourses, setAllCourses] = useState([]);
   const navigate = useNavigate();
 
+  //
   useEffect(() => {
     const storedUser = localStorage.getItem("userObject");
     if (storedUser) {
@@ -27,9 +28,21 @@ export const AuthProvider = (props) => {
   }, [isLoggedIn]);
 
   //set all courses in application level
-  useEffect(async () => {
-    const response = await getAllCourses();
-    setAllCourses(response.data);
+  useEffect(() => {
+    const storedUser = localStorage.getItem("userObject");
+    if (storedUser) {
+      console.log(storedUser);
+      setAuthUser(JSON.parse(storedUser));
+    } else {
+      navigate("/login");
+      localStorage.removeItem("userObject");
+      localStorage.removeItem("token");
+    }
+    const fetchCourses = async () => {
+      const response = await getAllCourses();
+      setAllCourses(response.data);
+    };
+    fetchCourses();
   }, []);
 
   const value = {

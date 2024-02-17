@@ -1,7 +1,7 @@
 import axios from "axios";
-
 const baseURL = "http://localhost:8080";
 
+//POST: signIn using email and pass
 export const signIn = async (userEmail, userPass) => {
   try {
     console.log("sign in calledd");
@@ -15,6 +15,7 @@ export const signIn = async (userEmail, userPass) => {
   }
 };
 
+//POST: Register new User
 export const signUp = async (user) => {
   try {
     console.log("signUP called");
@@ -27,7 +28,7 @@ export const signUp = async (user) => {
     console.log("signUp in service", response);
     return response.data;
   } catch (err) {
-    throw err; // Throw error to be caught in handleSignUp function
+    throw err;
   }
 };
 
@@ -46,7 +47,7 @@ export const sendOTP = async (email, userType) => {
   }
 };
 
-//POST: update password
+//POST: update password via OTP
 export const updatePassword = async (userDetails) => {
   try {
     console.log("In updatePassword: ", userDetails);
@@ -64,6 +65,25 @@ export const updatePassword = async (userDetails) => {
     );
     console.log(response.data);
     return response;
+  } catch (error) {
+    throw error;
+  }
+};
+
+// PUT: update student details
+export const updateStudentService = async (newDetails, token) => {
+  try {
+    let studentId = newDetails.id;
+    const resp = await axios.put(
+      baseURL + `/students/update/${studentId}`,
+      newDetails,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+    return resp;
   } catch (error) {
     throw error;
   }
