@@ -4,19 +4,24 @@ import { useAuth } from "../context/AuthContext";
 import { updateStudentService } from "../api/userService";
 import { toast } from "react-toastify";
 const UserProfile = () => {
-  let { authUser } = useAuth();
+  let { authUser, refreshContext } = useAuth();
 
-  const [newDetails, setNewDetails] = useState({
-    id: authUser.id,
-    email: authUser.email,
-    firstName: authUser.firstName,
-    gender: authUser.gender,
-    gitHubLink: authUser.gitHubLink,
-    heading: authUser.heading,
-    imageUrl: authUser.imageUrl,
-    lastName: authUser.lastName,
-    linkedInLink: authUser.linkedInLink,
-  });
+  const [newDetails, setNewDetails] = useState(
+    authUser
+      ? {
+          id: authUser.id,
+          email: authUser.email,
+          firstName: authUser.firstName,
+          lastName: authUser.lastName,
+          gender: authUser.gender,
+          phoneNo: authUser.phoneNo,
+          gitHubLink: authUser.gitHubLink,
+          heading: authUser.heading,
+          imageUrl: authUser.imageUrl,
+          linkedInLink: authUser.linkedInLink,
+        }
+      : {}
+  );
 
   // Update the state with the text from textarea
   const handleChange = (event) => {
@@ -34,6 +39,7 @@ const UserProfile = () => {
         error: "Unexpected error occured",
       }
     );
+    refreshContext();
     console.log(resp.data);
   };
 

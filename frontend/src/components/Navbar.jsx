@@ -68,7 +68,7 @@ const Navbar = () => {
           )}
 
           <li className="right">
-            {isLoggedIn === true && (
+            {authUser && localStorage.getItem("userObject") && (
               <NavLink to="/user/profile">
                 <ProfileIcon />
               </NavLink>
