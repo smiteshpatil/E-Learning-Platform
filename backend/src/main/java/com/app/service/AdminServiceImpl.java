@@ -38,37 +38,29 @@ import com.app.entities.Student;
 
 @Service
 @Transactional
-<<<<<<< HEAD
 
-public class AdminServiceImpl implements AdminService{
-=======
-
-
-public class AdminServiceImpl implements AdminService{
-
-
->>>>>>> 99b44bce319d92fa29189ab4ba57d48a138c99f7
+public class AdminServiceImpl implements AdminService {
     @Autowired
     private AdminRepository adminRepo;
-    
-    @Autowired
-	private CourseRepository courseRepo;
-    
-    @Autowired
-    private CourseService courseService; 
 
     @Autowired
-    private FeedbackService feedbackService; 
+    private CourseRepository courseRepo;
+
+    @Autowired
+    private CourseService courseService;
+
+    @Autowired
+    private FeedbackService feedbackService;
 
     @Autowired
     private FeedbackRepository feedbackRepo;
-    
-    @Autowired
-	private InstructorRepository instructorRepo ;
 
     @Autowired
-    private StudentCourseRepository studentCourseRepository; 
-    
+    private InstructorRepository instructorRepo;
+
+    @Autowired
+    private StudentCourseRepository studentCourseRepository;
+
     private final CourseStudentDetailsRepository courseStudentDetailsRepository;
 
     @Autowired
@@ -82,7 +74,7 @@ public class AdminServiceImpl implements AdminService{
     @Override
     public AdminDTO getAdminByEmail(String adminEmail) {
         Admin admin = adminRepo.findByEmail(adminEmail)
-                .orElseThrow(()-> new ResourceNotFoundException("Invalid Email for ROLE_ADMIN"));
+                .orElseThrow(() -> new ResourceNotFoundException("Invalid Email for ROLE_ADMIN"));
         return mapper.map(admin, AdminDTO.class);
     }
 
@@ -104,7 +96,8 @@ public class AdminServiceImpl implements AdminService{
             List<String> courseNames = courses.stream().map(Course::getCourseName).collect(Collectors.toList());
             instructorDTO.setCourseNames(courseNames);
 
-            List<LocalDate> publishedDates = courses.stream().map(Course::getPublishedDate).collect(Collectors.toList());
+            List<LocalDate> publishedDates = courses.stream().map(Course::getPublishedDate)
+                    .collect(Collectors.toList());
             instructorDTO.setPublishedDates(publishedDates);
 
             instructorDTOs.add(instructorDTO);
@@ -119,7 +112,7 @@ public class AdminServiceImpl implements AdminService{
         List<CourseRespDTO> courseDetailsList = new ArrayList<>();
 
         for (Course course : courses) {
-        	CourseRespDTO courseDetails = new CourseRespDTO();
+            CourseRespDTO courseDetails = new CourseRespDTO();
             courseDetails.setCourseName(course.getCourseName());
             courseDetails.setTotalEnrolledStudents(course.getCourseStudentDetails().size());
             courseDetails.setAverageRating(calculateAverageRating(course.getFeedbacks()));
@@ -143,7 +136,6 @@ public class AdminServiceImpl implements AdminService{
         return totalRating / feedbacks.size();
     }
 
-
     @Override
     public List<StudentDTO> getStudentDetailsByCourseId(Long courseId) {
         Course course = courseRepo.findById(courseId)
@@ -164,26 +156,25 @@ public class AdminServiceImpl implements AdminService{
 
         return studentDetailsList;
     }
-    
-    
-//    @Override
-//    public void revokeStudentFromCourse(CourseStudent revokeStudentDTO) {
-//        // Find the CourseStudentDetails entity by courseId and studentId
-//        courseStudentDetailsRepository.deleteByCourseStudentId_CourseIdAndCourseStudentId_StudentId(
-//            revokeStudentDTO.getCourseId(), revokeStudentDTO.getStudentId());
-//    }
-    
+
+    // @Override
+    // public void revokeStudentFromCourse(CourseStudent revokeStudentDTO) {
+    // // Find the CourseStudentDetails entity by courseId and studentId
+    // courseStudentDetailsRepository.deleteByCourseStudentId_CourseIdAndCourseStudentId_StudentId(
+    // revokeStudentDTO.getCourseId(), revokeStudentDTO.getStudentId());
+    // }
 
     @Override
     public void deleteStudentFromCourse(Long courseId, Long studentId) {
         // Find the CourseStudentDetails entity by course ID and student ID
-        Optional<CourseStudentDetails> courseStudentDetailsOptional = courseStudentDetailsRepository.findById(new CourseStudentId(courseId, studentId));
+        Optional<CourseStudentDetails> courseStudentDetailsOptional = courseStudentDetailsRepository
+                .findById(new CourseStudentId(courseId, studentId));
         if (courseStudentDetailsOptional.isPresent()) {
             courseStudentDetailsRepository.deleteById(new CourseStudentId(courseId, studentId));
         } else {
-            throw new EntityNotFoundException("CourseStudentDetails not found for course ID " + courseId + " and student ID " + studentId);
+            throw new EntityNotFoundException(
+                    "CourseStudentDetails not found for course ID " + courseId + " and student ID " + studentId);
         }
     }
-    
-    
+
 }

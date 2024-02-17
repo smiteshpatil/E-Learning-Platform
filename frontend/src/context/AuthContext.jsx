@@ -1,6 +1,6 @@
 import React, { useState, useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-//import { getAllCourses } from "../api/courseService";
+import { getAllCourses } from "../api/courseService";
 
 const AuthContext = React.createContext();
 
