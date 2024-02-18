@@ -42,7 +42,7 @@ const CreateCourseCard = (props) => {
       console.log("in upload img to db: ", url);
       if (url) {
         return url;
-        toast;
+        //toast;
       }
     } catch (error) {
       console.error("Error uploading image:", error);
