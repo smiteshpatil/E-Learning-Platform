@@ -1,18 +1,18 @@
 import { useState, useEffect } from "react";
-import { getAllCourses } from "../../api/courseService";
-import { courses as currentCourses } from "../../api/courseService";
 import { CartProvider, useCart } from "react-use-cart";
 import { toast } from "react-toastify";
+import { useAuth } from "../../context/AuthContext";
 import "react-toastify/dist/ReactToastify.css";
 const Page = (props) => {
   const { addItem } = useCart();
+  const { allCourses } = useAuth();
   console.log("In page comp", props.courses);
-
+  const result = allCourses.map((each) => each.courseDTO);
   return (
     <>
       <div className="course-content-section">
         <div className="course-container">
-          {currentCourses.map((currentCourse) => (
+          {result.map((currentCourse) => (
             <div className="course-post" key={currentCourse.id}>
               <img className="cover-img" src={currentCourse.thumbnail} alt="" />
               <h2 className="title">{currentCourse.title}</h2>
@@ -21,7 +21,7 @@ const Page = (props) => {
                 <div className="lh-details">
                   <img
                     className="author-img"
-                    src={currentCourse.author.profilePicture.url}
+                    //src={currentCourse.author.profilePicture.url}
                     alt=""
                   />
                   <p className="date">
@@ -51,13 +51,13 @@ const Page = (props) => {
   );
 };
 function AppProducts() {
-  const [allCourses, setAllCourses] = useState(null);
-
+  const [allCourses1, setAllCourses] = useState(null);
+  const { allCourses } = useAuth();
   //populate all courses
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const coursesPromise = getAllCourses(); // Calling the getAllCourses function
+        const coursesPromise = allCourses; // Calling the getAllCourses function
         toast.promise(coursesPromise, {
           pending: "Loading courses...",
           success: "Courses loaded",
@@ -71,7 +71,7 @@ function AppProducts() {
     };
 
     fetchData();
-  }, []);
+  }, [allCourses1]);
 
   return (
     <CartProvider>
