@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { uploadFileToDropbox } from "../../api/dropboxService";
-
+import { toast } from "react-toastify";
 const CreateCourseCard = (props) => {
   const [newCourse, setNewCourse] = useState({
     courseName: "",
@@ -42,7 +42,8 @@ const CreateCourseCard = (props) => {
       console.log("in upload img to db: ", url);
       if (url) {
         return url;
-        toast;
+      } else {
+        toast.error("Error uploading image !");
       }
     } catch (error) {
       console.error("Error uploading image:", error);

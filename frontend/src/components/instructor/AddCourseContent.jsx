@@ -21,7 +21,9 @@ const AddCourseContent = (props) => {
           />
           <div className="card-body">
             <h5 className="card-title">{currCourse.courseName}</h5>
-            <p className="card-text">{currCourse.description}</p>
+            <p className="card-text">
+              {currCourse.description.split(" ").slice(0, 30).join(" ")}
+            </p>
             <Link to={`/upload/${currCourse.id}`} className="btn btn-primary">
               Add content
             </Link>

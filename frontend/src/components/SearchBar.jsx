@@ -12,11 +12,12 @@ const SearchBar = () => {
   // Function to handle search
   const handleSearch = (query) => {
     const result = allCourses.map((each) => each.courseDTO);
-    result.filter((item) =>
+
+    const searchResult = result.filter((item) =>
       item.courseName.toLowerCase().includes(query.toLowerCase())
     );
-    console.log(result);
-    setSearchResults(result);
+
+    setSearchResults(searchResult);
   };
 
   // Function to clear search results when the search bar is empty
@@ -48,11 +49,13 @@ const SearchBar = () => {
           }`}
         >
           {searchResults.map((currCourse, index) => (
-            <>
-              <Link to={`/course/`} key={index}>
-                {currCourse.courseName}
-              </Link>
-            </>
+            <Link
+              to={`/courses/${currCourse.id}`}
+              key={index}
+              onClick={clearSearchResults}
+            >
+              {currCourse.courseName}
+            </Link>
           ))}
         </div>
       )}

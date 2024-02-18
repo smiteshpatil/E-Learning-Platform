@@ -21,11 +21,17 @@
     width: 100%;
   }
 }
+/*  */
+@media screen and (max-width: 768px) {
+  .searchBarStyle {
+    width: 100%;
+  }
+}
 
 .searchResultStyle {
   position: fixed;
-  top: 20%;
-  left: 5%;
+  top: 7%;
+  left: 6%;
   width: 30%;
   background-color: #f8f9fa;
   color: #333;
@@ -36,6 +42,22 @@
   padding: 10px;
   max-height: 300px;
   overflow-y: auto;
+}
+
+/* Responsive adjustments */
+@media screen and (max-width: 768px) {
+  .searchResultStyle {
+    width: 50%; /* Adjust width for smaller screens */
+    left: 25%; /* Center the element horizontally */
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .searchResultStyle {
+    /* width: 100%; */
+    left: 18%; /* Center the element horizontally */
+    top: 12%; /* Move the element down */
+  }
 }
 
 .inputStyle {

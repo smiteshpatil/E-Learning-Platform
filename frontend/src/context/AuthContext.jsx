@@ -23,37 +23,42 @@ export const AuthProvider = (props) => {
 
   //set userState
   useEffect(() => {
-    const storedUser = localStorage.getItem("userObject");
-    if (storedUser) {
-      syncCartWithUser(authUser);
-    } else {
-      localStorage.removeItem("cart");
+    try {
+      const storedUser = localStorage.getItem("userObject");
+      if (storedUser) {
+        syncCartWithUser(authUser);
+      } else {
+        localStorage.removeItem("cart");
+        navigate("/login");
+      }
+    } catch (error) {
       navigate("/login");
     }
   }, [isLoggedIn, authUser, navigate]);
 
   useEffect(() => {
-    const storedUser = localStorage.getItem("userObject");
-    if (storedUser) {
-      console.log("Stored user found:", storedUser);
-      setAuthUser(JSON.parse(storedUser));
-    } else {
-      console.log("No stored user found, navigating to login...");
+    try {
+      const storedUser = localStorage.getItem("userObject");
+      if (storedUser) {
+        console.log("Stored user found:", storedUser);
+        setAuthUser(JSON.parse(storedUser));
+        setIsLoading(false);
+      } else {
+        console.log("User logged out, navigating to login...");
+        navigate("/login");
+        localStorage.removeItem("userObject");
+        localStorage.removeItem("token");
+      }
+    } catch (error) {
       navigate("/login");
-      localStorage.removeItem("userObject");
-      localStorage.removeItem("token");
     }
   }, [isLoggedIn, refresh, navigate]);
 
   useEffect(() => {
     const fetchCourses = async () => {
-      try {
-        const response = await getAllCourses();
-        console.log("Courses fetched:", response.data);
-        setAllCourses(response.data);
-      } catch (error) {
-        console.error("Error fetching courses:", error); // Handle error (e.g., show error message)
-      }
+      const response = await getAllCourses();
+      console.log(response.data);
+      setAllCourses(response.data);
       setIsLoading(false);
     };
     fetchCourses();

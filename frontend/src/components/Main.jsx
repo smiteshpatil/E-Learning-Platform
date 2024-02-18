@@ -7,7 +7,7 @@ import CourseCard from "./CourseCard";
 const Main = () => {
   const [trendingCourses, setTrendingCourses] = useState([]);
   const [currentCourse, setcurrentCourse] = useState(1);
-  const [coursesPerPage] = useState(4);
+  const [coursesPerPage] = useState(3);
 
   useEffect(() => {
     const fetchTrendingCourses = async () => {
@@ -40,7 +40,7 @@ const Main = () => {
   };
 
   return (
-    <div className="container-fluid mx-5 my-5">
+    <div className="container-fluid my-5">
       <div className="title">
         <h1>Trending Courses</h1>
       </div>

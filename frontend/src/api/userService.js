@@ -108,6 +108,7 @@ export const updateStudentService = async (newDetails, token) => {
   try {
     let studentId = newDetails.id;
     console.log(studentId);
+    console.log(newDetails);
     const resp = await axios.put(
       baseURL + `/students/update/${studentId}`,
       newDetails,
@@ -117,6 +118,7 @@ export const updateStudentService = async (newDetails, token) => {
         },
       }
     );
+    console.log(resp.data);
     return resp;
   } catch (error) {
     throw error;

@@ -92,7 +92,7 @@ function App() {
           <Route path=":courseId" element={<CreateContent />} />
         </Route>
         {/* Video Routes demo */}
-        <Route path="/video" element={<VideoPage />}>
+        <Route path="/videos" element={<VideoPage />}>
           <Route path="overview" element={<VideoOverview />} />
           <Route path="qanda" element={<VideoQAndA />} />
           <Route path="notes" element={<VideoNotes />} />
