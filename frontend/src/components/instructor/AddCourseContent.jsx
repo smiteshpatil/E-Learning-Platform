@@ -12,6 +12,7 @@ const AddCourseContent = (props) => {
     <>
       <div className="col-lg-4 col-md-6 col-sm-12 px-2 py-2">
         <div className="card" style={{ width: "100%", height: "100%" }}>
+          {console.log(currCourse.imageUrl)}
           <img
             src={currCourse.imageUrl}
             className="card-img-top block"

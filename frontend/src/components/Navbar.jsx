@@ -55,12 +55,14 @@ const Navbar = () => {
             </li>
           )}
           {authUser && localStorage.getItem("userObject") ? (
-            <TbLogout2
-              color="black"
-              size={30}
-              onClick={logOut}
-              className="logout"
-            />
+            <li className="right">
+              <TbLogout2
+                color="black"
+                size={30}
+                onClick={logOut}
+                className="logout"
+              />
+            </li>
           ) : (
             <li className="right login-link">
               <NavLink to="/login">LogIn/Register</NavLink>

@@ -9,7 +9,7 @@ import ProfileCloseAccount from "./components/ProfileCloseAccount";
 import ProfilePage from "./components/ProfilePage";
 import ProfilePhoto from "./components/ProfilePhoto";
 import UserProfile from "./components/UserProfile";
-import Course from "./components/pages/CoursePage";
+import CoursePage from "./components/pages/CoursePage";
 import "./App.css";
 import "react-toastify/dist/ReactToastify.css";
 import VideoNotes from "./components/pages/VideoNotes";
@@ -62,10 +62,10 @@ function App() {
           <Route path="closeAccount" element={<ProfileCloseAccount />} />
           <Route path="profile" element={<UserProfile />} />
         </Route>
+
         {/* Courses */}
-        <Route path="/courses">
-          <Route path=":id" element={<Course />}></Route>
-        </Route>
+        <Route path="/courses/:id" element={<CoursePage />}></Route>
+
         {/* Cart */}
         <Route path="/cart" element={<Cart />}></Route>
         {/* Cart */}

@@ -1,34 +1,50 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import thumbnail from "../images/card1.jpg";
+import { useAuth } from "../context/AuthContext";
 const CourseCard = (props) => {
-  return (
-    <div className="course-post" key={props.currentCourse.id}>
-      <img className="cover-img" src={props.currentCourse.thumbnail} alt="" />
+  let currentCourse = props.currCourse.courseDTO;
+  let author = props.currCourse.instructorDTO;
 
-      <Link to={`courses/${props.currentCourse.id}`}>
-        <h2 className="title">{props.currentCourse.title}</h2>
+  let { allCourses } = useAuth();
+  console.log(allCourses);
+
+  return (
+    // <h1>{currentCourse.courseDTO.averageRating}</h1>
+    <div className="course-post" key={currentCourse.id}>
+      <img
+        className="cover-img"
+        src={currentCourse.imageUrl ? currentCourse.imageUrl : thumbnail}
+        alt=""
+      />
+
+      <Link to={`/courses/${currentCourse.id}`}>
+        <h2 className="title">{currentCourse.courseName}</h2>
       </Link>
 
-      <p className="description">{props.currentCourse.description}</p>
+      <p className="description">
+        {currentCourse.description.split(" ").slice(0, 30).join(" ")}...
+      </p>
       <div className="card-details">
         <div className="lh-details">
           <img
             className="author-img"
-            src={props.currentCourse.author.profilePicture.url}
+            src={author.imageUrl ? author.imageUrl : ""}
             alt=""
           />
           <p className="date">
-            {new Date(
-              `${props.currentCourse.datePublished}`
-            ).toLocaleDateString("en-us", {
-              year: "numeric",
-              month: "short",
-              day: "numeric",
-            })}
+            {new Date(`${currentCourse.publishedDate}`).toLocaleDateString(
+              "en-us",
+              {
+                year: "numeric",
+                month: "short",
+                day: "numeric",
+              }
+            )}
           </p>
         </div>
         <Link
-          to={`courses/${props.currentCourse.id}`}
+          to={`courses/${currentCourse.id}`}
           rel="noopener noreferrer"
           className="read-more"
         >

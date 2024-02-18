@@ -40,7 +40,10 @@ const CreateCourseCard = (props) => {
     try {
       const [url, path] = await uploadFileToDropbox(courseImg);
       console.log("in upload img to db: ", url);
-      return url;
+      if (url) {
+        return url;
+        toast;
+      }
     } catch (error) {
       console.error("Error uploading image:", error);
       throw error; // Rethrow the error to be caught by the caller

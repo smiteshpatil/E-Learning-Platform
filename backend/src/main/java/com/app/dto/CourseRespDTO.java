@@ -18,6 +18,7 @@ public class CourseRespDTO {
     private String category;
     @Lob
     private String description;
+    private String imageUrl;
     private String skillLevel;
     private String language;
     private Long price;

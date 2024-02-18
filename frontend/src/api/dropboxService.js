@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const acessToken =
-  "sl.BvwRkVoPJbWvcm4I8s-eh0-K0xOPALxn4bUsAwgioo5P5hLGZCTfuiv4q-GFegpP7iyV2fl1NxWqDvKJsoZXRgrnNvJAkNSc20FZZchAWsvIri_8kPT-HjSiLmUWt76f9Y-T0p0PQs8BtDM";
+  "sl.Bv1g1wF3jT5IpW_Vh2QSexXVvdCwFCugiR8ZqPJvOGvtfwuxfMjocLkLRqOzKB0lrhn_U0n7dJOkW8UKxSYje8fuJNZWLeShWFVXirlRq_OjKzuTS4Kw55-Q3V2bUzq1uVACvnbj60NV2bk";
 
 export const uploadFileToDropbox = async (file) => {
   if (!file) {

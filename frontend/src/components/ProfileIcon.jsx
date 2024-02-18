@@ -14,7 +14,7 @@ const ProfileIcon = () => {
       {authUser && authUser.picture ? (
         <img src={authUser.picture} alt="Profile" style={profileIconStyle} />
       ) : (
-        <FaUserCircle size={35} />
+        <FaUserCircle size={30} />
       )}
     </>
   );
