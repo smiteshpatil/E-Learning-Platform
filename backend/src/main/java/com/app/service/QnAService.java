@@ -10,12 +10,15 @@ public interface QnAService {
 	List<QnADTO> getAllQuestionAnswers(Long courseId);
 	
 	// Add Question (API for Student)
-	QnAddDTO addQuestion(QnAddDTO qnaDto, Long courseId);
+//	QnAddDTO addQuestion(QnAddDTO qnaDto, Long courseId);
 	
     List<QnADTO> getAllUnansweredQuestions(Long courseId);
     
     String updateAnswer(Long questionId, String answer);
 	
-	
+    
+    ///////////Mayur ///////
+    //void addQuestionToCourse(Long courseId, QnAddDTO qnAddDTO);
+    public void addQuestionToCourse(Long courseId, QnAddDTO qnAddDTO);
 	
 }

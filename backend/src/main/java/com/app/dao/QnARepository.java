@@ -13,4 +13,5 @@ public interface QnARepository extends JpaRepository<QnA, Long> {
 //	List<QnA> findById(Long id);
 	List<QnA> findByCourseId(Long courseId);
     List<QnA> findByCourseIdAndAnswered(Long courseId, boolean answered);
+    
 }

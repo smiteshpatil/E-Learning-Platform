@@ -12,7 +12,16 @@ import { syncCartToDB } from "../api/userService";
 import { useCart } from "react-use-cart";
 
 const Navbar = () => {
-  const { items, emptyCart } = useCart();
+  // useCart
+  const {
+    isEmpty,
+    totalItems,
+    items,
+    emptyCart,
+    updateItemQuantity,
+    removeItem,
+  } = useCart();
+
   let { authUser, isLoggedIn, setIsLoggedIn } = useAuth();
   const navigate = useNavigate();
 
@@ -51,6 +60,22 @@ const Navbar = () => {
               <NavLink to="/cart">
                 {/* Cart Icon */}
                 <FaCartShopping size={25} />
+
+                {totalItems ? (
+                  <></>
+                ) : (
+                  <span
+                    style={{
+                      padding: "0 2px",
+                      fontSize: "1rem",
+                      color: "white",
+                      borderRadius: "100%",
+                      backgroundColor: "red",
+                    }}
+                  >
+                    {totalItems}
+                  </span>
+                )}
               </NavLink>
             </li>
           )}

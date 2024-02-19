@@ -13,6 +13,10 @@ import lombok.ToString;
 @ToString
 public class CourseRespDTO {
 
+<<<<<<< HEAD
+
+=======
+>>>>>>> 93ef8da388422d86a0b3f93b2e6cec72e36452d4
     private Long id;
     private String courseName;
     private String category;
@@ -28,4 +32,8 @@ public class CourseRespDTO {
     private int totalEnrolledStudents;
     private double averageRating;
 
+<<<<<<< HEAD
+
+=======
+>>>>>>> 93ef8da388422d86a0b3f93b2e6cec72e36452d4
 }

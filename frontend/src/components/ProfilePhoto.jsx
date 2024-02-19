@@ -9,7 +9,9 @@ const ProfilePhoto = () => {
     authUser && authUser.picture
       ? authUser.picture
       : "https://via.placeholder.com/200"; // Placeholder image URL
-  const [imagePreview, setImagePreview] = useState(placeholderImage); // State for image preview
+  const [imagePreview, setImagePreview] = useState(
+    "https://via.placeholder.com/200"
+  ); // State for image preview
 
   const handleImageChange = (e) => {
     const selectedImage = e.target.files[0];    

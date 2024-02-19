@@ -1,5 +1,8 @@
 package com.app.dto;
+<<<<<<< HEAD
+=======
 
+>>>>>>> 93ef8da388422d86a0b3f93b2e6cec72e36452d4
 import java.time.LocalDate;
 import java.util.List;
 
@@ -13,7 +16,6 @@ import com.fasterxml.jackson.annotation.JsonProperty.Access;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
-
 @Getter
 @Setter
 @ToString
@@ -30,6 +32,24 @@ public class StudentCoursesDTO {
 
 	private String password;
 
+<<<<<<< HEAD
+	
+    
+    // New fields
+    private String courseName;
+    private LocalDate enrolledDate;
+    private Long courseId;
+    private Long studentId;
+    
+    public StudentCoursesDTO(String email, Long courseId,Long studentId, String courseName, LocalDate enrolledDate) {
+        this.email = email;
+        this.courseId = courseId;
+        this.studentId=studentId;
+        this.courseName = courseName;
+        this.enrolledDate = enrolledDate;
+        
+    }
+=======
 	// New fields
 	private String courseName;
 	private LocalDate enrolledDate;
@@ -39,6 +59,7 @@ public class StudentCoursesDTO {
 		this.courseName = courseName;
 		this.enrolledDate = enrolledDate;
 	}
+>>>>>>> 93ef8da388422d86a0b3f93b2e6cec72e36452d4
 
 	private String gender;
 

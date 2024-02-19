@@ -72,7 +72,7 @@ import lombok.Setter;
 @Setter
 public class QnA extends BaseEntity{    
     
-    @Column(unique = true, nullable = false, length = 1000) // Adjust length as needed
+   // @Column(unique = true, nullable = false, length = 1000) // Adjust length as needed
     private String question;
     
     @Column
