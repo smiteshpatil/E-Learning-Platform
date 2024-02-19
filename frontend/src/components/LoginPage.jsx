@@ -14,7 +14,7 @@ import {
 } from "../api/userService";
 import { toast } from "react-toastify";
 const LoginPage = () => {
-  const { setAuthUser, setIsLoggedIn } = useAuth();
+  const { setAuthUser, setCart, setIsLoggedIn } = useAuth();
   const navigate = useNavigate();
 
   // state for styling depending on the page

@@ -6,8 +6,8 @@ const ProfilePhoto = () => {
   const { authUser } = useAuth();
 
   const placeholderImage =
-    authUser && authUser.picture
-      ? authUser.picture
+    authUser && authUser.imageUrl
+      ? authUser.imageUrl
       : "https://via.placeholder.com/200"; // Placeholder image URL
   const [imagePreview, setImagePreview] = useState(placeholderImage); // State for image preview
 
@@ -107,7 +107,7 @@ const ProfilePhoto = () => {
                 }}
               >
                 <Button
-                  // onClick={{ uploadImage }}
+                  onClick={{ uploadImage }}
                   variant="primary"
                   className="me-2"
                 >

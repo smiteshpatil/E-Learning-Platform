@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { NavLink, Outlet } from "react-router-dom";
 import PlayListDropdown from "./PlayListDropdown";
-import { content } from "../../api/courseService";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./css/VideoPage.css";
 
@@ -12,7 +11,7 @@ const VideoPage = () => {
   const [isPlaying, setIsPlaying] = useState(false);
   const [startTime, setStartTime] = useState(null);
   const [activeLink, setActiveLink] = useState(""); // State to store the active link
-  const [currentVideoIndex, setCurrentVideoIndex] = useState(0); // State to store the index of the currently playing video
+  const [currentVideoIndex, setCurrentVideoIndex] = useState(0);
 
   // change style on click
   const toggleStyle = (link) => {
@@ -26,14 +25,14 @@ const VideoPage = () => {
   };
 
   // Function to handle video end event
-  const handleVideoEnd = () => {
-    // Play the next video in the playlist if available
-    if (currentVideoIndex < content.length - 1) {
-      const nextVideoIndex = currentVideoIndex + 1;
-      const nextVideoUrl = content[nextVideoIndex].videoUrl;
-      handleVideoChange(nextVideoUrl, nextVideoIndex);
-    }
-  };
+  // const handleVideoEnd = () => {
+  //   // Play the next video in the playlist if available
+  //   if (currentVideoIndex < content.length - 1) {
+  //     const nextVideoIndex = currentVideoIndex + 1;
+  //     const nextVideoUrl = content[nextVideoIndex].videoUrl;
+  //     handleVideoChange(nextVideoUrl, nextVideoIndex);
+  //   }
+  // };
 
   // Function to update watched time
   const updateWatchedTime = () => {
@@ -99,7 +98,7 @@ const VideoPage = () => {
             key={selectedVideo}
             onPause={handlePlayPause}
             onPlay={handlePlayPause}
-            onEnded={handleVideoEnd}
+            // onEnded={handleVideoEnd}
           >
             <source src={selectedVideo} type="video/mp4" />
             Your browser does not support the video tag.
@@ -168,7 +167,7 @@ const VideoPage = () => {
           }}
         >
           <PlayListDropdown
-            content={content}
+            // content={content}
             changeVideoUrl={handleVideoChange}
             currentVideoIndex={currentVideoIndex}
           />
