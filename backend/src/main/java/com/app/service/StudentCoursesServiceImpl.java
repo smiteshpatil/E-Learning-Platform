@@ -11,8 +11,12 @@ import com.app.dto.StudentCoursesDTO;
 @Service
 public class StudentCoursesServiceImpl implements StudentCoursesService {
 
+    private final StudentCourseRepository studentCourseRepository;
+
     @Autowired
-    private StudentCourseRepository studentCourseRepository;
+    public StudentCoursesServiceImpl(StudentCourseRepository studentCourseRepository) {
+        this.studentCourseRepository = studentCourseRepository;
+    }
 
     @Override
     public List<StudentCoursesDTO> getStudentCourseDetails() {

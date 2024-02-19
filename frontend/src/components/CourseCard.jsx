@@ -18,7 +18,10 @@ const CourseCard = (props) => {
         alt=""
       />
 
-      <Link to={`/courses/${currentCourse.id}`}>
+      <Link
+        style={{ textDecoration: "none" }}
+        to={`/courses/${currentCourse.id}`}
+      >
         <h2 className="title">{currentCourse.courseName}</h2>
       </Link>
 

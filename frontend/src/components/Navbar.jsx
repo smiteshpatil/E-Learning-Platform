@@ -11,8 +11,22 @@ import { useAuth } from "../context/AuthContext";
 import { syncCartToDB } from "../api/userService";
 
 const Navbar = () => {
+<<<<<<< HEAD
   //const { items, emptyCart } = useCart();
   let { authUser, isLoggedIn, setIsLoggedIn, cart } = useAuth();
+=======
+  // useCart
+  const {
+    isEmpty,
+    totalItems,
+    items,
+    emptyCart,
+    updateItemQuantity,
+    removeItem,
+  } = useCart();
+
+  let { authUser, isLoggedIn, setIsLoggedIn } = useAuth();
+>>>>>>> 97d0153a69afeebed9a2d2dd99a3c2b60b8bfae8
   const navigate = useNavigate();
 
   //log out
@@ -53,6 +67,22 @@ const Navbar = () => {
               <NavLink to="/cart">
                 {/* Cart Icon */}
                 <FaCartShopping size={25} />
+
+                {totalItems ? (
+                  <></>
+                ) : (
+                  <span
+                    style={{
+                      padding: "0 2px",
+                      fontSize: "1rem",
+                      color: "white",
+                      borderRadius: "100%",
+                      backgroundColor: "red",
+                    }}
+                  >
+                    {totalItems}
+                  </span>
+                )}
               </NavLink>
             </li>
           )}

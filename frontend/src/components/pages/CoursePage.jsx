@@ -27,7 +27,7 @@ const CoursePage = () => {
       fetchCurrentCourse();
       console.log("useEffect Called");
     }
-  }, [isLoading, allCourses]);
+  }, [isLoading, allCourses, id]);
 
   return (
     <div className="container-fluid my-3 course-page">
@@ -51,15 +51,25 @@ const CoursePage = () => {
               <div className="row">
                 {/* <div className="col-sm-6">First</div>
                 <div className="col-sm-6">Second</div> */}
-                {currCourse.courseDTO && currCourse.courseDTO.description}
+                <p>
+                  {currCourse.courseDTO && currCourse.courseDTO.description}
+                </p>
               </div>
 
               <h3 className="mt-4">This course includes</h3>
               {currCourse.contentDTO &&
                 currCourse.contentDTO.map((each, index) => (
                   <div className="row" key={index}>
-                    <div className="col-sm-3">{each.contentName}</div>
-                    <div className="col-sm-9">{each.contentDescription}</div>
+                    <div className="col-sm-4">{each.contentName}</div>
+                    <div className="col-sm-8">
+                      {each.contentDescription
+                        .split(" ")
+                        .slice(0, 30)
+                        .join(" ")}
+                      {"..."}
+                      <br />
+                      <br />
+                    </div>
                   </div>
                 ))}
 
@@ -78,9 +88,9 @@ const CoursePage = () => {
               <div className="card course-card">
                 <img src={img} alt="John" style={{ width: "100%" }} />
                 <br />
-                <h2>
+                <h3>
                   {currCourse.courseDTO && currCourse.courseDTO.courseName}
-                </h2>
+                </h3>
                 {/* <p className="title course-title">CEO & Founder, Example</p>
                 <p>Harvard University</p> */}
 

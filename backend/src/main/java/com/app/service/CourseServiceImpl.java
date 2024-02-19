@@ -77,7 +77,7 @@ public class CourseServiceImpl implements CourseService {
 			courseDTO.setAverageRating(calculateAverageRating(course.getFeedbacks()));
 			
 			System.out.println(" in course serviceImpl- courseDTO: " + courseDTO+ " ");
-			 courseDetails.setCourseDTO(courseDTO);
+			 courseDetails.setCourseDTO(courseDTO) ;
 			courseDetails.setInstructorDTO(mapper.map(course.getInst(), InstructorDTO.class));
 			List<ContentDetailDTO> contentDTOs = course.getContents().stream()
 					.map(content -> mapper.map(content, ContentDetailDTO.class)).collect(Collectors.toList());

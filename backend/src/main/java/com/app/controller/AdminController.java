@@ -3,6 +3,7 @@ package com.app.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.app.dao.CourseStudentDetailsRepository;
+import com.app.dao.StudentCourseRepository;
 import com.app.dto.CourseRespDTO;
 import com.app.dto.InstructorCoursesDTO;
 import com.app.dto.StudentCoursesDTO;
@@ -27,28 +29,47 @@ public class AdminController {
 
     private final AdminService adminService;
     private final CourseService courseService;
-    @Autowired
-    private StudentCoursesService studentCourseService;
-
-    @Autowired
-    public AdminController(AdminService adminService, CourseService courseService) {
-        this.adminService = adminService;
-        this.courseService = courseService;
-
-    }
-
+   
+    private final StudentCoursesService studentCourseService;
     @Autowired
     private CourseStudentDetailsRepository courseStudentDetailsRepository;
+    
+   
+    private StudentCourseRepository studentCourseRepository;
+
+    @Autowired
+    public AdminController(AdminService adminService, CourseService courseService,StudentCoursesService studentCourseService,StudentCourseRepository studentCourseRepository) {
+        this.adminService = adminService;
+        this.courseService = courseService;
+        this.studentCourseService = studentCourseService;
+        this.studentCourseRepository=studentCourseRepository;
+    }
 
     @GetMapping("/enrolledStudents")
     public int getTotalStudents() {
         return adminService.getTotalStudents();
     }
 
+//    @GetMapping("/studentcourses")
+//    public List<StudentCoursesDTO> getStudentCourseDetails() {
+//        return studentCourseService.getStudentCourseDetails();
+//    }
+//    
     @GetMapping("/studentcourses")
-    public List<StudentCoursesDTO> getStudentCourseDetails() {
-        return studentCourseService.getStudentCourseDetails();
+    public ResponseEntity<List<StudentCoursesDTO>> getStudentCourses() {
+        List<StudentCoursesDTO> studentCourses = studentCourseService.getStudentCourseDetails();
+        return ResponseEntity.ok(studentCourses);
     }
+//    @GetMapping("/studentcourses")
+//    public ResponseEntity<List<StudentCoursesDTO>> getStudentCourses() {
+//        List<StudentCoursesDTO> studentCourses = studentCourseService.getStudentCourseDetails();
+//        return ResponseEntity.ok(studentCourses);
+//    }
+//    @GetMapping
+//    public ResponseEntity<List<StudentCoursesDTO>> getStudentCourses() {
+//        List<StudentCoursesDTO> studentCourses = studentCourseService.getStudentCourseDetails();
+//        return ResponseEntity.ok(studentCourses);
+//    }
 
     // get info only instructor info email, course name and published date
     @GetMapping("/instructorinfo")
@@ -75,6 +96,8 @@ public class AdminController {
     @DeleteMapping("/{courseId}/{studentId}")
     public ResponseEntity<String> deleteStudentFromCourse(@PathVariable Long courseId, @PathVariable Long studentId) {
         adminService.deleteStudentFromCourse(courseId, studentId);
-        return ResponseEntity.ok("Student deleted from course successfully");
+        System.out.println("checking Status code ");
+        System.out.println("Status code " + ResponseEntity.status(HttpStatus.OK));
+        return ResponseEntity.status(HttpStatus.OK).body("Student deleted from course successfully");
     }
 }

@@ -10,8 +10,9 @@ export const getAllContentsByCourseId = async (courseId, bearerToken) => {
       },
     });
     return response;
-  } catch (err) {
-    console.log(err);
+  } catch (error) {
+    console.log(error);
+    throw error;
   }
 };
 

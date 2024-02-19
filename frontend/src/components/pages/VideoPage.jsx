@@ -69,13 +69,13 @@ const VideoPage = () => {
     };
   }, [selectedVideo, isPlaying, startTime]);
 
-  //automatically play first video
-  useEffect(() => {
-    const videoElement = document.querySelector("video");
-    if (videoElement) {
-      videoElement.play(); // Programmatically play the video
-    }
-  }, []);
+  // automatically play first video
+  // useEffect(() => {
+  //   const videoElement = document.querySelector("video");
+  //   if (videoElement) {
+  //     videoElement.play(); // Programmatically play the video
+  //   }
+  // }, [selectedVideo]);
 
   // Function to handle video play/pause
   const handlePlayPause = () => {
@@ -94,7 +94,7 @@ const VideoPage = () => {
           <video
             controls
             autoPlay
-            muted // Add muted attribute to mute the video by default
+            // muted // Add muted attribute to mute the video by default
             style={{ width: "100%" }}
             key={selectedVideo}
             onPause={handlePlayPause}
