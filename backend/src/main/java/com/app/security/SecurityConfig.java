@@ -54,6 +54,7 @@ public class SecurityConfig {
 						"/students/delete/{studentId}",
 						"/courses/enrollCourse}",
 						"/courses/removeCourse",
+						"/contents/{courseId}", // added this for test purpose --smit
 						"/courses/student/{studentId}")
 				.hasRole("STUDENT")
 				.antMatchers("/instructors/{instructorId}",
@@ -64,7 +65,7 @@ public class SecurityConfig {
 						"/courses/delete/{courseId}",
 						"/contents",
 						"/contents/add",
-						"/contents/{courseId}",
+						// "/contents/{courseId}", // comment added --smit
 						"/contents/{courseId}/{contentId}",
 						"/contents/update/{contentId}",
 						"contents/delete/{contentId}")
