@@ -73,7 +73,7 @@ const StudentController = () => {
                 <td>{student.courseName}</td>
                 <td>{student.enrolledDate}</td>
                 <td>
-                  <button onClick={()=> handleRevoke(student.courseId, useAuth.id)}>Revoke</button>
+                  <button onClick={()=> handleRevoke(student.courseId, student.studentId)}>Revoke</button>
                 </td>
               </tr>
             ))}

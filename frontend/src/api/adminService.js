@@ -66,7 +66,7 @@ export const getStudentCourseDetails = async (bearerToken)=>{
                 Authorization: `Bearer ${bearerToken}`
             }
         })
-        console.log("studentcourses: ",response);
+        console.log("studentcourses: ",response.data);
         return response;
     } catch (error) {
         console.error("Error Fetching  Student Course Details : ", error);
