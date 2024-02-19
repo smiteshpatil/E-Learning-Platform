@@ -3,8 +3,6 @@ import "./CategoryList.css";
 import { Link } from "react-router-dom";
 
 function CategoryList() {
-  const [dropdownVisible, setDropdownVisible] = useState(false);
-
   const categories = [
     { name: "Development", link: "dev" },
     { name: "Finance & Accounting", link: "financeAndAcc" },
@@ -15,13 +13,9 @@ function CategoryList() {
     { name: "All Categories", link: "" },
   ];
 
-  const toggleDropdown = () => {
-    setDropdownVisible(!dropdownVisible);
-  };
-
   return (
     <React.Fragment>
-      <ul className={`category-list ${dropdownVisible ? "hidden" : ""}`}>
+      <ul className={`category-list`}>
         {categories.map((category, index) => (
           <li key={index}>
             <Link

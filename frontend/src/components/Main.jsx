@@ -40,7 +40,7 @@ const Main = () => {
   };
 
   return (
-    <div className="container-fluid my-5">
+    <div className="container my-5">
       <div className="title">
         <h1>Trending Courses</h1>
       </div>

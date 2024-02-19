@@ -47,9 +47,9 @@ export const AuthProvider = (props) => {
     const storedUser = localStorage.getItem("userObject");
     if (storedUser) {
       console.log("Stored user found:", storedUser);
-     } else {
+    } else {
       console.log("No stored user found, navigating to login...");
-      navigate("/login");
+      // navigate("/login");
     }
   }, [isLoggedIn, refresh, navigate]);
 
@@ -62,6 +62,12 @@ export const AuthProvider = (props) => {
     };
     fetchCourses();
   }, []);
+
+  // useEffect(() => {
+  //   if (!isLoggedIn) {
+  //     refreshContext();
+  //   }
+  // }, [isLoggedIn]);
 
   const syncCartWithUser = (userData) => {
     const storedCart = localStorage.getItem("cart");

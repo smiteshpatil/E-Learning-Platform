@@ -13,16 +13,9 @@ import { useCart } from "react-use-cart";
 
 const Navbar = () => {
   // useCart
-  const {
-    isEmpty,
-    totalItems,
-    items,
-    emptyCart,
-    updateItemQuantity,
-    removeItem,
-  } = useCart();
+  const { totalItems, items, emptyCart } = useCart();
 
-  let { authUser, isLoggedIn, setIsLoggedIn } = useAuth();
+  let { authUser, setIsLoggedIn } = useAuth();
   const navigate = useNavigate();
 
   //log out
@@ -30,10 +23,10 @@ const Navbar = () => {
     console.log("items len: " + items.length);
     //items.map(item => console.log("id: "+item.id));
     await syncCartToDB(authUser.email, localStorage.getItem("token"), items);
-    setIsLoggedIn(false);
     localStorage.removeItem("token");
     localStorage.removeItem("userObject");
     emptyCart();
+    setIsLoggedIn(false);
     navigate("/login");
   };
 

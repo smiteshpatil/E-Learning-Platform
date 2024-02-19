@@ -49,6 +49,7 @@ export const syncCartToDB = async (userEmail, bearerToken, cart) => {
   }
 };
 
+//POST: regeister new account
 export const signUp = async (user) => {
   try {
     console.log("signUP called");
@@ -122,5 +123,20 @@ export const updateStudentService = async (newDetails, token) => {
     return resp;
   } catch (error) {
     throw error;
+  }
+};
+
+//POST: upload photo
+export const uploadImage = async (baseUrl, type, id, formData) => {
+  try {
+    const url = `${baseUrl}/images/upload/${type}/${id}`;
+    const response = await axios.post(url, formData, {
+      headers: {
+        "Content-Type": "multipart/form-data", // Important for sending FormData
+      },
+    });
+    console.log("Image uploaded successfully:", response.data);
+  } catch (error) {
+    console.error("Error uploading image:", error.message);
   }
 };
