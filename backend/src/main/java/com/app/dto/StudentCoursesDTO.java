@@ -1,5 +1,4 @@
 package com.app.dto;
-
 import java.time.LocalDate;
 import java.util.List;
 
@@ -13,7 +12,6 @@ import com.fasterxml.jackson.annotation.JsonProperty.Access;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
-
 @Getter
 @Setter
 @ToString
@@ -30,15 +28,22 @@ public class StudentCoursesDTO {
 
 	private String password;
 
-	// New fields
-	private String courseName;
-	private LocalDate enrolledDate;
-
-	public StudentCoursesDTO(String email, String courseName, LocalDate enrolledDate) {
-		this.email = email;
-		this.courseName = courseName;
-		this.enrolledDate = enrolledDate;
-	}
+	
+    
+    // New fields
+    private String courseName;
+    private LocalDate enrolledDate;
+    private Long courseId;
+    private Long studentId;
+    
+    public StudentCoursesDTO(String email, Long courseId,Long studentId, String courseName, LocalDate enrolledDate) {
+        this.email = email;
+        this.courseId = courseId;
+        this.studentId=studentId;
+        this.courseName = courseName;
+        this.enrolledDate = enrolledDate;
+        
+    }
 
 	private String gender;
 

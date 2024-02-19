@@ -44,17 +44,7 @@ public class QnAServiceImpl implements QnAService {
 //	    return "Question submitted successfully.";
 //	}
 
-	@Override
-	public QnAddDTO addQuestion(QnAddDTO questionDTO, Long courseId) {
-		if (questionDTO == null || questionDTO.getQuestion() == null || questionDTO.getQuestion().isEmpty()) {
-			throw new IllegalArgumentException("Question cannot be null or empty.");
-		}
-//		questionDTO.setCourseId(courseId);
-//		QnA qna = mapper.map(questionDTO, QnA.class);
-//		qnARepository.save(qna);
-//		return mapper.map(qna, QnAddDTO.class);
-	return questionDTO;
-	}
+	
 
 	@Override
 	public List<QnADTO> getAllUnansweredQuestions(Long courseId) {
@@ -73,5 +63,28 @@ public class QnAServiceImpl implements QnAService {
 
 		return "Answer updated successfully.";
 	}
+
+    @Override
+    public void addQuestionToCourse(Long courseId, QnAddDTO qnAddDTO) {
+        // Ensure that the QnAddDTO object is not null and the question field is populated
+        if (qnAddDTO != null && qnAddDTO.getQuestion() != null && !qnAddDTO.getQuestion().isEmpty()) {
+            // Create a new QnA object
+            QnA qna = new QnA();
+            qna.setCourseId(courseId);
+            qna.setQuestion(qnAddDTO.getQuestion());
+            qna.setAnswered(false); // Assuming the question is not answered initially
+            qna.setAnswer(qnAddDTO.getAnswer()); // Assuming there's no answer initially
+
+            // Save the new QnA object to the database
+            qnARepository.save(qna);
+        } else {
+            // Handle the case where the question field is null or empty
+            throw new IllegalArgumentException("Question field is null or empty");
+        }
+    }
+	
+
+	
+
 
 }

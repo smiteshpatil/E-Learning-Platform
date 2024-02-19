@@ -14,7 +14,8 @@ const ProfilePhoto = () => {
   ); // State for image preview
 
   const handleImageChange = (e) => {
-    const selectedImage = e.target.files[0];
+    const selectedImage = e.target.files[0];    
+
     // Display image preview
     const reader = new FileReader();
     reader.onload = () => {
@@ -58,17 +59,17 @@ const ProfilePhoto = () => {
                 </div>
                 <div className="ud-image-upload-preview-wrapper mt-2 form-control">
                   <div>
-                    {authUser && authUser.picture && (
+                    {imagePreview && (
                       <img
                         src={imagePreview}
                         alt="Preview"
-                        height="200"
-                        width="200"
+                        height="200px"
+                        width="200px"
                         className="img-fluid lazy"
                         style={{
                           maxWidth: "100%",
                           maxHeight: "100%",
-                          borderRadius: "100%",
+                          // borderRadius: "50%",
                         }}
                       />
                     )}

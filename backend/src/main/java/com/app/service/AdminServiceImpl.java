@@ -34,8 +34,8 @@ import com.app.entities.Student;
 
 @Service
 @Transactional
-
 public class AdminServiceImpl implements AdminService {
+
     @Autowired
     private AdminRepository adminRepo;
 
@@ -153,13 +153,6 @@ public class AdminServiceImpl implements AdminService {
 
         return studentDetailsList;
     }
-
-    // @Override
-    // public void revokeStudentFromCourse(CourseStudent revokeStudentDTO) {
-    // // Find the CourseStudentDetails entity by courseId and studentId
-    // courseStudentDetailsRepository.deleteByCourseStudentId_CourseIdAndCourseStudentId_StudentId(
-    // revokeStudentDTO.getCourseId(), revokeStudentDTO.getStudentId());
-    // }
 
     @Override
     public void deleteStudentFromCourse(Long courseId, Long studentId) {

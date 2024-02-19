@@ -10,6 +10,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.MapsId;
 import javax.persistence.Table;
 
+import org.springframework.data.annotation.Transient;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import lombok.Getter;
@@ -25,6 +26,7 @@ public class CourseStudentDetails {
 	@EmbeddedId
 	private CourseStudentId courseStudentId = new CourseStudentId();
 
+	
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private LocalDate enrolledDate;
 

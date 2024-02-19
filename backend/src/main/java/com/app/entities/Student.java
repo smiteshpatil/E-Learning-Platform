@@ -10,6 +10,7 @@ import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.Lob;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -80,8 +81,8 @@ public class Student extends BaseEntity {
 	// courses.remove(c); //instructor -> course
 	// c.setStudent(null);//course -> student
 	// }
-	// @ManyToMany(mappedBy = "students")
-	// private List<Course> courses = new ArrayList<>();
-	//
+//	 @ManyToMany(mappedBy = "students")
+//	 private List<Course> courses = new ArrayList<>();
+//	
 
 }
