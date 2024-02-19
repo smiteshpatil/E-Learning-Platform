@@ -207,12 +207,23 @@ public class CourseServiceImpl implements CourseService {
 		return "Student Removed From Course " + courseId;
 	}
 
+	// Get all course Details from studentId
 	@Override
 	public List<CourseRespDTO> getAllCoursesFromStudent(Long studentId) {
-
 		List<Course> courseList = courseStudentRepo.findByStudentId(studentId);
-		return courseList.stream().map(course -> mapper.map(course, CourseRespDTO.class)).collect(Collectors.toList());
-
+		return courseList.stream()
+				.map(course -> {
+					CourseRespDTO courseRespDTO = mapper.map(course, CourseRespDTO.class);
+					// Get the course index from CourseStudentDetails and set it in the DTO
+					for (CourseStudentDetails courseStudentDetails : course.getCourseStudentDetails()) {
+						if (courseStudentDetails.getMyStudent().getId().equals(studentId)) {
+							courseRespDTO.setCourseIndex(courseStudentDetails.getCourseIndex());
+							break;
+						}
+					}
+					return courseRespDTO;
+				})
+				.collect(Collectors.toList());
 	}
 
 	@Override

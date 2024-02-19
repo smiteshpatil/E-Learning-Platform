@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 import "../css/Navbar.css";
 import logo from "../images/logo.png";
@@ -20,9 +20,11 @@ const Navbar = () => {
       console.log("items len: " + cart.length);
       await syncCartToDB(authUser.email, localStorage.getItem("token"), cart);
     }
+    localStorage.removeItem("cart");
     setIsLoggedIn(false);
     localStorage.removeItem("token");
     localStorage.removeItem("userObject");
+    
     navigate("/login");
   };
 
@@ -50,7 +52,7 @@ const Navbar = () => {
                 {/* Cart Icon */}
                 <FaCartShopping size={25} />
 
-                {cart.length ? (
+                {cart ? (
                   <span
                     style={{
                       padding: "0 5px",
