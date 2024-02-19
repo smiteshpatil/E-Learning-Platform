@@ -1,11 +1,24 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 import MyCourse from "./MyCourse";
 
 const MyLearning = () => {
+  useEffect(() => {}, []);
+
   return (
-    <div className="container-fluid my-3">
+    <div
+      className="px-auto text-center py-3"
+      style={{ backgroundColor: "beige" }}
+    >
       <h1>My Courses</h1>
+      <hr
+        style={{
+          borderTop: "5px solid black",
+          fontWeight: "bold",
+          width: "15%",
+          margin: "5px auto",
+        }}
+      />
       <div className="row">
         <div className="col col-md-3 col-sm-6">
           <MyCourse

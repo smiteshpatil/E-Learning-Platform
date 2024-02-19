@@ -50,6 +50,7 @@ public class SecurityConfig {
 						"/students/delete/{studentId}",
 						"/courses/enrollCourse",
 						"/courses/removeCourse",
+						"/contents/{courseId}",
 						"/courses/student/{studentId}")
 				.hasRole("STUDENT")
 				.antMatchers("/instructors/{instructorId}",
