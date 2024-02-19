@@ -13,16 +13,34 @@ function Cart1() {
     return (
       <>
       <h1>Cart ({cart.length})</h1>
-      <div className="course-content-section">
-          <div className="course-container">
-            {result.map((curr) => (
-              <div className="course-post" key={curr.courseDTO.id}>
-                <img className="cover-img" src={curr.courseDTO.imageUrl} alt="" />
-                <h2 className="title">{curr.courseDTO.courseName}</h2>
-                <p className="description">{curr.courseDTO.courseDescription}</p>
-                <button className="btn btn-danger" onClick={() => removeCourse(curr.courseDTO.id)}>&times;</button>
+      
+        <div className="container mt-5">
+          <div className="row">
+            <div className="col-sm-9">
+            <div className="course-content-section">
+                <div className="course-container">
+                    {result.map((curr) => (
+                    <div className="course-post" key={curr.courseDTO.id}>
+                        <h2 className="title">{curr.courseDTO.courseName}</h2>
+                        <button className="btn btn-danger" onClick={() => removeCourse(curr.courseDTO.id)}>&times;</button>
+                    </div>
+                    ))}
+                </div>
             </div>
-            ))}
+            </div>
+            <div className="col-sm-3 ">
+            <h1>Cart ({cart.length})</h1>
+              <div className="card course-card">
+              {result.map((curr) => (
+                <p>
+                  {curr.courseDTO.courseName}
+                  <button className="btn btn-danger" onClick={() => removeCourse(curr.courseDTO.id)}>&times;</button>
+                  <hr />
+                </p>
+                ))}
+              </div>
+              <button className="btn btn-success">Check Out</button>
+            </div>
           </div>
         </div>
       </>
