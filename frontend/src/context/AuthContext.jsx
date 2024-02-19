@@ -35,15 +35,27 @@ export const AuthProvider = (props) => {
       console.log("In authCotext: ", token);
     } else {
       console.log("No stored user found, navigating to login...");
-      navigate("/login");
+      // navigate("/login");
     }
   }, [isLoggedIn, refresh, navigate]);
+
+  useEffect(() => {
+    const handleAfterReload = () => {
+      setCart(localStorage.getItem("cart").split(","));
+      console.log("After Reload: cart="+cart+" local="+localStorage.getItem("cart"));
+      // Logic to execute after the page is fully loaded (after a reload)
+    };
+    window.addEventListener('load', handleAfterReload);
+    return () => {
+      window.removeEventListener('load', handleAfterReload);
+    };
+  }, []);
 
   //fetch all Course
   useEffect(() => {
     const fetchCourses = async () => {
       const response = await getAllCourses();
-      console.log(response.data);
+      //console.log(response.data);
       setAllCourses(response.data);
       setIsLoading(false);
     };

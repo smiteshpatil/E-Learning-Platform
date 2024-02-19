@@ -33,6 +33,10 @@ import InstructorController from "./components/admin/InstructorController";
 import UploadContentPage from "./components/instructor/UploadContentPage";
 import CreateContent from "./components/instructor/CreateContent";
 import { ToastContainer, Bounce } from "react-toastify";
+import PrivacyPolicy from "./components/PrivacyPolicy";
+import Help from "./components/Help";
+import Terms from "./components/Terms";
+import CategoryList from "./components/pages/CategoryList";
 function App() {
   return (
     <div className="App">
@@ -49,7 +53,7 @@ function App() {
         transition={Bounce}
       />
       <Navbar></Navbar>
-
+      <CategoryList />
       <Routes>
         {/* Home page route */}
         <Route path="/" element={<HomePage />}></Route>
@@ -101,6 +105,10 @@ function App() {
           <Route path="notes" element={<VideoNotes />} />
           <Route path="review" element={<VideoReview />} />
         </Route>
+
+        <Route path="/privacyPolicy"  element={<PrivacyPolicy/>} />
+        <Route path="/help"  element={<Help/>} />
+        <Route path="/term"  element={<Terms/>} />
       </Routes>
       <Footer />
     </div>

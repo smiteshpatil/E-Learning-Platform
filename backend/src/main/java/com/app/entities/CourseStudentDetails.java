@@ -26,6 +26,8 @@ public class CourseStudentDetails {
 	@EmbeddedId
 	private CourseStudentId courseStudentId = new CourseStudentId();
 
+	private int courseIndex;
+	
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private LocalDate enrolledDate;
 

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "../css/Carousel.css";
+
 import slide3 from "../images/carousel_img3.jpg";
 import slide4 from "../images/carousel_img4.jpg";
 import slide5 from "../images/carousel_img5.jpg";
@@ -8,10 +9,10 @@ import slide6 from "../images/carousel_img6.jpg";
 const Carousel = () => {
   const images = [slide3, slide4, slide5, slide6];
   const captions = [
-    "First slide label",
-    "Second slide label",
-    "Third slide label",
-    "Fourth slide label",
+    "Unlock Your Potential: Learn Anytime, Anywhere",
+    "Empower Yourself with Knowledge",
+    "Interactive Learning for Modern Minds",
+    "Join Our Community of Lifelong Learners",
   ];
 
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
