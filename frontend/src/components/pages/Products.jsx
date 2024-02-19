@@ -1,11 +1,16 @@
 import { useState, useEffect } from "react";
-import { CartProvider, useCart } from "react-use-cart";
+//import { CartProvider, useCart } from "react-use-cart";
 import { toast } from "react-toastify";
 import { useAuth } from "../../context/AuthContext";
 import "react-toastify/dist/ReactToastify.css";
+
 const Page = (props) => {
-  const { addItem } = useCart();
-  const { allCourses } = useAuth();
+  const { setCart, allCourses } = useAuth();
+  function handleAddToCart(id){
+    console.log("ID: "+id);
+    setCart(prevState => ([...prevState, id]));
+  }
+  //const { addItem } = useCart();
   console.log("In page comp", props.courses);
   const result = allCourses.map((each) => each.courseDTO);
   return (
@@ -39,7 +44,7 @@ const Page = (props) => {
               &nbsp;
               <button
                 className="btn btn-success"
-                onClick={() => addItem(currentCourse)}
+                onClick={() => {handleAddToCart(currentCourse.id);}}
               >
                 Add to cart
               </button>
@@ -74,9 +79,7 @@ function AppProducts() {
   }, [allCourses1]);
 
   return (
-    <CartProvider>
       <Page courses={allCourses} />
-    </CartProvider>
   );
 }
 export default AppProducts;

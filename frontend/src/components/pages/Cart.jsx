@@ -22,9 +22,6 @@ function Cart() {
               <h2 className="title">{currentCourse.title}</h2>
               <p className="description">{currentCourse.description}</p>
               
-              <button className="btn btn-warning" onClick={() => updateItemQuantity(currentCourse.id, currentCourse.quantity - 1)}>
-              -
-              </button>
               <button className="btn btn-danger" onClick={() => removeItem(currentCourse.id)}>&times;</button>
             </div>
           ))}
@@ -36,9 +33,6 @@ function Cart() {
         {items.map((item) => (
           <li key={item.id}>
           {item.quantity} x {item.title} &mdash;
-            <button onClick={() => updateItemQuantity(item.id, item.quantity - 1)}>
-              -
-            </button>
             <button onClick={() => removeItem(item.id)}>&times;</button>
           </li>
         ))}

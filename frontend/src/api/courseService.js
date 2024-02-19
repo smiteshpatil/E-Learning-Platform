@@ -14,6 +14,23 @@ export const getAllCourses = async () => {
   }
 };
 
+//GET: Course by courseId
+export const getCourseByCourseId = async (
+  courseId,
+  bearerToken
+) => {
+  try {
+    const response = await axios.get(baseUrl + `/courses/${courseId}`, {
+      headers: {
+        Authorization: `Bearer ${bearerToken}`,
+      },
+    });
+    return response;
+  } catch (err) {
+    console.table(err);
+  }
+};
+
 //GET: allCourses by instructorId
 export const getAllCoursesByInstructorId = async (
   instructorId,

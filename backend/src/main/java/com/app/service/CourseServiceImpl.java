@@ -221,6 +221,12 @@ public class CourseServiceImpl implements CourseService {
 
 		return "You have enrolled in all Courses";
 	}
+
+	@Override
+	public List<CourseRespDTO> getCourseByCourseId(Long courseId) {
+		List<Course> courseList = courseRepo.findByCourseId(courseId);
+		return courseList.stream().map(course -> mapper.map(course, CourseRespDTO.class)).collect(Collectors.toList());
+	}
 	
 	
 	///////////////

@@ -9,22 +9,24 @@ import { useNavigate } from "react-router-dom";
 import ProfileIcon from "./ProfileIcon";
 import { useAuth } from "../context/AuthContext";
 import { syncCartToDB } from "../api/userService";
-import { useCart } from "react-use-cart";
 
 const Navbar = () => {
-  const { items, emptyCart } = useCart();
-  let { authUser, isLoggedIn, setIsLoggedIn } = useAuth();
+  //const { items, emptyCart } = useCart();
+  let { authUser, isLoggedIn, setIsLoggedIn, cart } = useAuth();
   const navigate = useNavigate();
 
   //log out
   const logOut = async (e) => {
-    console.log("items len: " + items.length);
-    //items.map(item => console.log("id: "+item.id));
-    await syncCartToDB(authUser.email, localStorage.getItem("token"), items);
+    if(cart !== undefined){
+      console.log("items len: " + cart.length);
+
+    //cart.map(item => console.log("id: "+item.id));
+    await syncCartToDB(authUser.email, localStorage.getItem("token"), cart);
+    }
     setIsLoggedIn(false);
     localStorage.removeItem("token");
     localStorage.removeItem("userObject");
-    emptyCart();
+    //emptyCart();
     navigate("/login");
   };
 

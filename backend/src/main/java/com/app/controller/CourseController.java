@@ -63,6 +63,17 @@ public class CourseController {
 	}
 
 	// get all courses by Instructor Id
+		@GetMapping("/{courseId}")
+		public ResponseEntity<?> getCourseByCourseId(@PathVariable Long courseId) {
+			System.out.println("In get course from courseId " + courseId);
+			List<CourseRespDTO> list = courseService.getCourseByCourseId(courseId);
+			if (list.isEmpty())
+				return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+			// course not found
+			return ResponseEntity.ok(list);
+		}
+	
+	// get all courses by Instructor Id
 	@GetMapping("/{instructorId}")
 	public ResponseEntity<?> getCoursesByInstructorId(@PathVariable Long instructorId) {
 		System.out.println("In get courses from instructor" + instructorId);
