@@ -107,7 +107,7 @@ const ProfilePhoto = () => {
                 }}
               >
                 <Button
-                  onClick={{ uploadImage }}
+                  // onClick={{ uploadImage }}
                   variant="primary"
                   className="me-2"
                 >
