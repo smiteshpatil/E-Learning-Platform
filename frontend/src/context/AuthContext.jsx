@@ -35,7 +35,7 @@ export const AuthProvider = (props) => {
       console.log("In authCotext: ", token);
     } else {
       console.log("No stored user found, navigating to login...");
-      navigate("/login");
+      // navigate("/login");
     }
   }, [isLoggedIn, refresh, navigate]);
 

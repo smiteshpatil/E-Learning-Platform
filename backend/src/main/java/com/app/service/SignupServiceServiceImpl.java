@@ -44,16 +44,19 @@ public class SignupServiceServiceImpl implements SignupService {
 	public Signup registerNewUser(Signup request) {
 		if (request.getRole() == Role.ROLE_INSTRUCTOR) {
 			request.setPassword(encoder.encode(request.getPassword()));
+			request.setEmail(request.getEmail().toLowerCase());
 			Instructor persistentInstructor = instRepo.save(mapper.map(request, Instructor.class));
 			userRepo.save(new UserInfo(request.getEmail(), request.getPassword(), request.getRole().ROLE_INSTRUCTOR));
 			return mapper.map(persistentInstructor, Signup.class);
 		} else if (request.getRole() == Role.ROLE_STUDENT) {
 			request.setPassword(encoder.encode(request.getPassword()));
+			request.setEmail(request.getEmail().toLowerCase());
 			Student persistentStudent = studentRepo.save(mapper.map(request, Student.class));
 			userRepo.save(new UserInfo(request.getEmail(), request.getPassword(), request.getRole().ROLE_STUDENT));
 			return mapper.map(persistentStudent, Signup.class);
 		}
 		request.setPassword(encoder.encode(request.getPassword()));
+		request.setEmail(request.getEmail().toLowerCase());
 		Admin admin = adminRepo.save(mapper.map(request, Admin.class));
 		userRepo.save(new UserInfo(request.getEmail(), request.getPassword(), request.getRole().ROLE_ADMIN));
 		return mapper.map(admin, Signup.class);

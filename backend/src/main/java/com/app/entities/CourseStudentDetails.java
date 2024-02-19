@@ -29,12 +29,12 @@ public class CourseStudentDetails {
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private LocalDate enrolledDate;
 
-	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
 	@MapsId("courseId") // shared PK approach
 	@JoinColumn(name = "course_id")
 	private Course myCourse;
 
-	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
 	@MapsId("studentId") // shared PK approach
 	@JoinColumn(name = "student_id")
 	private Student myStudent;
