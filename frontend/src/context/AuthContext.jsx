@@ -23,11 +23,13 @@ export const AuthProvider = (props) => {
     setRefresh((prev) => !prev);
   };
 
+  // get authUser from localStorage
   useEffect(() => {
     const storedUser = localStorage.getItem("userObject");
     if (storedUser) {
       console.log("Stored user found:", storedUser);
-      setAuthUser(storedUser);
+      setAuthUser(JSON.parse(storedUser));
+      setIsLoading(false);
       setIsLoggedIn(true);
       token = localStorage.getItem("token");
       console.log("In authCotext: ", token);
@@ -37,6 +39,7 @@ export const AuthProvider = (props) => {
     }
   }, [isLoggedIn, refresh, navigate]);
 
+  //fetch all Course
   useEffect(() => {
     const fetchCourses = async () => {
       const response = await getAllCourses();

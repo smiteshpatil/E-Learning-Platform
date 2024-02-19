@@ -6,15 +6,19 @@ import { toast } from "react-toastify";
 const UserProfile = () => {
   let { authUser, refreshContext, isLoading } = useAuth();
 
-  const [newDetails, setNewDetails] = useState({
-    firstName: "",
-    lastName: "",
-    heading: "",
-    phoneNo: "",
-    gender: "",
-    linkedInLink: "",
-    gitHubLink: "",
-  });
+  const [newDetails, setNewDetails] = useState(
+    authUser
+      ? authUser
+      : {
+          firstName: "",
+          lastName: "",
+          heading: "",
+          phoneNo: "",
+          gender: "",
+          linkedInLink: "",
+          gitHubLink: "",
+        }
+  );
 
   const clearForm = () => {
     setNewDetails({
@@ -27,6 +31,18 @@ const UserProfile = () => {
       gitHubLink: "",
     });
   };
+
+  // fetchUserDeatails
+  useEffect(() => {
+    if (!isLoading) {
+      const fetchUser = () => {
+        console.log("in useEffect");
+        console.log(authUser);
+        setNewDetails(authUser);
+      };
+      fetchUser();
+    }
+  }, [isLoading, authUser]);
 
   // Update the state with the text from textarea
   const handleChange = (event) => {
@@ -50,17 +66,6 @@ const UserProfile = () => {
 
     refreshContext();
   };
-
-  // fetchUserDeatails
-  useEffect(() => {
-    console.log("in useEffect");
-    if (!isLoading) {
-      const fetchUser = () => {
-        setNewDetails(authUser);
-      };
-      fetchUser();
-    }
-  }, [isLoading, authUser]);
 
   return (
     <>
