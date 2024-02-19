@@ -46,9 +46,9 @@ const CourseController = () => {
               <tr key={index}>
                 <td>{index + 1}</td>
                 <td>{course.courseName}</td>
-                <td>{course.enrolledStudents}</td>
+                <td>{course.totalEnrolledStudents}</td>
                 <td>{course.price}</td>
-                <td>{course.rating}</td>
+                <td>{course.averageRating}</td>
               </tr>
             ))}
         </tbody>

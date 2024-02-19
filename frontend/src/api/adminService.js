@@ -61,21 +61,37 @@ export const getInstructors = async (bearerToken)=>{
 //get studentControllerDetails
 export const getStudentCourseDetails = async (bearerToken)=>{
     try {
-        const response = await axios.get(baseUrl + "/admin/studentCourse", {
+        const response = await axios.get(baseUrl + "/admin/studentcourses", {
             headers:{
                 Authorization: `Bearer ${bearerToken}`
             }
         })
+        console.log("studentcourses: ",response);
         return response;
     } catch (error) {
         console.error("Error Fetching  Student Course Details : ", error);
     }  
 }
 
+//delete a student from a particular course 
+export const revokeStudentFromCourse = async (courseId, studentId, bearerToken)=> {
+    try {
+        const response = await axios.delete(baseUrl + `/admin/${courseId}/${studentId}`, {
+            headers: {
+                Authorization:`Bearer ${bearerToken}`
+            }
+        })
+        console.log("In adminService of delete method response: ",response);
+        return response;
+    } catch (error) {
+        console.error("Error Deleting  User from the Course: ", error);
+    }
+}
+
 //get instructorControllerDetails
 export const getInstructorsDetails = async (bearerToken)=>{
     try {
-        const response = await axios.get(baseUrl + "/instructors", {
+        const response = await axios.get(baseUrl + "/admin/instructorinfo", {
             headers:{
                 Authorization: `Bearer ${bearerToken}`
             }
@@ -89,7 +105,7 @@ export const getInstructorsDetails = async (bearerToken)=>{
 //get courseControllerDetails
 export const getCourseDetails = async (bearerToken)=>{
     try {
-        const response = await axios.get(baseUrl + "/courses", {
+        const response = await axios.get(baseUrl + "/admin/coursedetails", {
             headers:{
                 Authorization: `Bearer ${bearerToken}`
             }
@@ -99,3 +115,4 @@ export const getCourseDetails = async (bearerToken)=>{
         console.error("Error Fetching  Student Course Details : ", error);
     }  
 }
+

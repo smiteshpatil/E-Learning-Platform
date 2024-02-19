@@ -1,6 +1,6 @@
 import React, { useState, useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-//import { getAllCourses } from "../api/courseService";
+import { getAllCourses } from "../api/courseService";
 
 const AuthContext = React.createContext();
 
@@ -21,20 +21,20 @@ export const AuthProvider = (props) => {
   };
 
   //set userState
-  useEffect(() => {
-    const storedUser = localStorage.getItem("userObject");
-    if (storedUser) {
-      console.log(storedUser);
-      setAuthUser(JSON.parse(storedUser));
-      setAllCourses(JSON.parse(storedUser));
-      syncCartWithUser(authUser);
-    } else {
-      localStorage.removeItem("userObject");
-      localStorage.removeItem("token");
-      localStorage.removeItem("cart");
-      navigate("/login");
-    }
-  }, [isLoggedIn]);
+  // useEffect(() => {
+  //   const storedUser = localStorage.getItem("userObject");
+  //   if (storedUser) {
+  //     console.log(storedUser);
+  //     setAuthUser(JSON.parse(storedUser));
+  //     setAllCourses(JSON.parse(storedUser));
+  //     syncCartWithUser(authUser);
+  //   } else {
+  //     localStorage.removeItem("userObject");
+  //     localStorage.removeItem("token");
+  //     localStorage.removeItem("cart");
+  //     navigate("/login");
+  //   }
+  // }, [isLoggedIn]);
 
   //set all courses in application level
   // useEffect(async () => {
@@ -46,8 +46,7 @@ export const AuthProvider = (props) => {
     const storedUser = localStorage.getItem("userObject");
     if (storedUser) {
       console.log("Stored user found:", storedUser);
-      setAuthUser(JSON.parse(storedUser));
-    } else {
+     } else {
       console.log("No stored user found, navigating to login...");
       navigate("/login");
       localStorage.removeItem("userObject");
