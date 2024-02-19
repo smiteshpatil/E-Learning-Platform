@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "../css/Carousel.css";
+
 import slide3 from "../images/carousel_img3.jpg";
 import slide4 from "../images/carousel_img4.jpg";
 import slide5 from "../images/carousel_img5.jpg";
