@@ -28,6 +28,11 @@ const CoursePage = () => {
       if (resp) {
         //   paymentId, orderId, courseId,studentId
         //  enroll student
+        Swal.fire({
+          title: "Good job!",
+          text: "You clicked the button!",
+          icon: "success",
+        });
       }
     } catch (error) {
       console.log(error);
