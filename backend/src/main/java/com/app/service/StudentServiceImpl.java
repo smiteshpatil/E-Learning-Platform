@@ -9,10 +9,13 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.app.custom_exceptions.ResourceNotFoundException;
+import com.app.dao.CourseStudentDetailsRepository;
 import com.app.dao.StudentRepository;
+import com.app.dao.UserRepository;
 import com.app.dto.StudentCoursesDTO;
 import com.app.dto.StudentDTO;
 import com.app.entities.Student;
+import com.app.entities.UserInfo;
 
 @Service
 @Transactional
@@ -20,6 +23,12 @@ public class StudentServiceImpl implements StudentService {
 
 	@Autowired
 	private StudentRepository studentRepo;
+
+	@Autowired
+	private CourseStudentDetailsRepository courseStudentRepo;
+
+	@Autowired
+	private UserRepository userRepo;
 
 	@Autowired
 	private ModelMapper mapper;
@@ -54,9 +63,17 @@ public class StudentServiceImpl implements StudentService {
 
 	@Override
 	public String deleteStudent(Long studentId) {
+		courseStudentRepo.deleteByMyStudentId(studentId);
+
 		Student student = studentRepo.findById(studentId)
 				.orElseThrow(() -> new ResourceNotFoundException("Invalid Student Id !!!!"));
+		String email = student.getEmail();
+
+		UserInfo user = userRepo.findByEmail(email).orElseThrow();
+		userRepo.delete(user);
+
 		studentRepo.delete(student);
+
 		return "Student Deleted SuccesFully " + student.getFirstName();
 	}
 
