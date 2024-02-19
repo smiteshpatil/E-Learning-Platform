@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.app.dto.StudentDTO;
@@ -71,12 +72,6 @@ public class StudentController {
 	// ResponseEntity.ok(studentService.getStudentAndCoursesDetails(studentId));
 	// }
 
-	@PostMapping("/enrollCourse/{studentId}/{courseId}")
-	public ResponseEntity<?> enrollCourse(@PathVariable Long studentId, @PathVariable Long courseId) {
-		System.out.println("in Enroll course " + studentId);
-		return ResponseEntity.ok(courseService.assignStudentToCourse(courseId, studentId));
-	}
-
 	@PostMapping("/enrollCourse/{studentEmail}")
 	public ResponseEntity<?> enrollMultipleCourses(@PathVariable String studentEmail,
 			@RequestBody List<Long> courseIds) {
@@ -93,4 +88,5 @@ public class StudentController {
 		List<Long> courseIds = cartService.getAllCourseIdFromCart(studentEmail);
 		return ResponseEntity.ok(courseIds);
 	}
+	
 }
