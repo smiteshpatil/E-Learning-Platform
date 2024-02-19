@@ -51,8 +51,12 @@ public class ForgotPasswordService {
 	@Autowired
 	private PasswordEncoder encoder;
 
+	// Map to store OTPs with email as key
+	private Map<String, String> otpMap = new HashMap<>();
+
 	public boolean sendOTP(String email, String userType) {
 		String otp = otpGenerator.generateOTP();
+		otpMap.put(email, otp); // Storing OTP in the map
 
 		switch (userType.toLowerCase()) {
 		case "student":
@@ -95,6 +99,7 @@ public class ForgotPasswordService {
 				stud.setPassword(encoder.encode(newPassword));
 				studentRepo.save(student);
 				userRepo.save(stud);
+				removeOTP(email); // Remove OTP after password update
 				return true;
 			}
 			break;
@@ -103,12 +108,12 @@ public class ForgotPasswordService {
 					.orElseThrow(() -> new ResourceNotFoundException("Invalid user type!!!!"));
 			UserInfo inst = userRepo.findByEmail(email)
 					.orElseThrow(() -> new ResourceNotFoundException("Instructor Not Found in User_Info table"));
-			System.out.println(instructor);
 			if (instructor != null && validateOTP(email, otp)) {
 				instructor.setPassword(newPassword);
 				inst.setPassword(encoder.encode(newPassword));
 				instructorRepository.save(instructor);
 				userRepo.save(inst);
+				removeOTP(email); // Remove OTP after password update
 				return true;
 			}
 			break;
@@ -122,6 +127,7 @@ public class ForgotPasswordService {
 				adm.setPassword(encoder.encode(newPassword));
 				adminRepository.save(admin);
 				userRepo.save(adm);
+				removeOTP(email); // Remove OTP after password update
 				return true;
 			}
 			break;
@@ -163,23 +169,19 @@ public class ForgotPasswordService {
 	}
 
 	private boolean validateOTP(String email, String otp) {
-		// Assuming you have a map to store OTPs with email as key
-		Map<String, String> otpMap = new HashMap<>(); // You should initialize this map at a higher scope, maybe in the
-														// service or a utility class
-		// Storing OTP in the map
-		otpMap.put(email, otp); // Assuming 'email' is the key and 'otp' is the OTP generated
-
 		// Retrieving OTP from the map
 		String storedOTP = otpMap.get(email);
-		System.out.println("Stored OTP: " + storedOTP);
 
-		// Check if the given OTP matches the stored OTP for the provided email
-		if (otpMap.containsKey(email) && otpMap.get(email).equals(otp)) {
-			// OTP is valid, remove it from the map (OTP should be used only once)
-			otpMap.remove(email);
-			System.out.println("In ValidateOTp method");
+		// Check if the stored OTP exists and matches the provided OTP
+		if (storedOTP != null && storedOTP.equals(otp)) {
+			System.out.println("In ValidateOTP method");
 			return true;
 		}
 		return false;
+	}
+
+	private void removeOTP(String email) {
+		// Remove OTP from the map
+		otpMap.remove(email);
 	}
 }

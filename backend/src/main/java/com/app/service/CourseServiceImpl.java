@@ -106,6 +106,7 @@ public class CourseServiceImpl implements CourseService {
 		return courseList.stream().map(course -> mapper.map(course, CourseRespDTO.class)).collect(Collectors.toList());
 	}
 
+	
 	@Override
 	public List<CourseRespDTO> getAllCourseByInstructorEmail(String email) {
 		List<Course> list = courseRepo.findByInstEmail(email);
