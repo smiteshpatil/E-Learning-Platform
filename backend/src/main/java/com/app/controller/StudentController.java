@@ -71,12 +71,6 @@ public class StudentController {
 	// ResponseEntity.ok(studentService.getStudentAndCoursesDetails(studentId));
 	// }
 
-	@PostMapping("/enrollCourse/{studentId}/{courseId}")
-	public ResponseEntity<?> enrollCourse(@PathVariable Long studentId, @PathVariable Long courseId) {
-		System.out.println("in Enroll course " + studentId);
-		return ResponseEntity.ok(courseService.assignStudentToCourse(courseId, studentId));
-	}
-
 	@PostMapping("/enrollCourse/{studentEmail}")
 	public ResponseEntity<?> enrollMultipleCourses(@PathVariable String studentEmail,
 			@RequestBody List<Long> courseIds) {
@@ -93,4 +87,5 @@ public class StudentController {
 		List<Long> courseIds = cartService.getAllCourseIdFromCart(studentEmail);
 		return ResponseEntity.ok(courseIds);
 	}
+	
 }

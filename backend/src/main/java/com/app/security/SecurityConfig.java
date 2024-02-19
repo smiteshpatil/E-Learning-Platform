@@ -34,7 +34,7 @@ public class SecurityConfig {
 				.exceptionHandling().authenticationEntryPoint(authEntry).and().authorizeRequests()
 				.antMatchers("/users/signup", "/users/signin", "/courses", "/courses/details",
 						"/password/sendOtp", "/password/updatePassword",
-						"/images/upload/{type}/{id}", "/images/download/{type}/{id}",
+						"/images/upload", "/images/download",
 						"/v*/api-doc*/**", "/swagger-ui/**", "/admin/instructorinfo",
 						"/admin/coursedetails", "/admin/students/{courseId}",
 						"/admin/{studentId}/{courseId}", "/payments/createOrder", "/payments/createOrder",
@@ -48,7 +48,7 @@ public class SecurityConfig {
 						"/students/{studentId}/courses",
 						"/students/update/{studentId}",
 						"/students/delete/{studentId}",
-						"/courses/enrollCourse}",
+						"/courses/enrollCourse",
 						"/courses/removeCourse",
 						"/courses/student/{studentId}")
 				.hasRole("STUDENT")

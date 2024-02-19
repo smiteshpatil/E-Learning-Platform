@@ -55,8 +55,6 @@ public class Instructor extends BaseEntity {
 	@Column(length = 10)
 	private String phoneNo;
 
-	@Pattern(regexp = "Male|Female|Other", message = "Invalid gender")
-	@Column(length = 10)
 	private String gender;
 
 	@Enumerated(EnumType.STRING)
