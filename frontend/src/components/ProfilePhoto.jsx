@@ -9,12 +9,10 @@ const ProfilePhoto = () => {
     authUser && authUser.picture
       ? authUser.picture
       : "https://via.placeholder.com/200"; // Placeholder image URL
-  const [imagePreview, setImagePreview] = useState(
-    "https://via.placeholder.com/200"
-  ); // State for image preview
+  const [imagePreview, setImagePreview] = useState(placeholderImage); // State for image preview
 
   const handleImageChange = (e) => {
-    const selectedImage = e.target.files[0];    
+    const selectedImage = e.target.files[0];
 
     // Display image preview
     const reader = new FileReader();
@@ -69,7 +67,6 @@ const ProfilePhoto = () => {
                         style={{
                           maxWidth: "100%",
                           maxHeight: "100%",
-                          // borderRadius: "50%",
                         }}
                       />
                     )}
@@ -109,7 +106,11 @@ const ProfilePhoto = () => {
                   paddingRight: "1rem",
                 }}
               >
-                <Button variant="primary" className="me-2">
+                <Button
+                  // onClick={{ uploadImage }}
+                  variant="primary"
+                  className="me-2"
+                >
                   Save
                 </Button>
                 <Button variant="outline-secondary">Cancel</Button>

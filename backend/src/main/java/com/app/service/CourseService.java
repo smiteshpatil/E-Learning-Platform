@@ -27,6 +27,9 @@ public interface CourseService {
 	CourseRespDTO updateCourse(Long courseId, CourseDTO dto);
 
 	CourseRespDTO getCourseDetails(Long instructorId, Long courseId);
+	
+	// get course by courseId
+	List<CourseRespDTO> getCourseByCourseId(Long courseId);
 
 	// get all courses : pagination
 	List<CourseRespDTO> getAllCourses(int pageNumber, int pageSize);

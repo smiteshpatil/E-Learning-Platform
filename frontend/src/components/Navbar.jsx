@@ -9,31 +9,20 @@ import { useNavigate } from "react-router-dom";
 import ProfileIcon from "./ProfileIcon";
 import { useAuth } from "../context/AuthContext";
 import { syncCartToDB } from "../api/userService";
-import { useCart } from "react-use-cart";
 
 const Navbar = () => {
-  // useCart
-  const {
-    isEmpty,
-    totalItems,
-    items,
-    emptyCart,
-    updateItemQuantity,
-    removeItem,
-  } = useCart();
-
-  let { authUser, isLoggedIn, setIsLoggedIn } = useAuth();
+  let { authUser, setIsLoggedIn, cart } = useAuth();
   const navigate = useNavigate();
 
   //log out
-  const logOut = async (e) => {
-    console.log("items len: " + items.length);
-    //items.map(item => console.log("id: "+item.id));
-    await syncCartToDB(authUser.email, localStorage.getItem("token"), items);
+  const logOut = async () => {
+    if (cart !== undefined) {
+      console.log("items len: " + cart.length);
+      await syncCartToDB(authUser.email, localStorage.getItem("token"), cart);
+    }
     setIsLoggedIn(false);
     localStorage.removeItem("token");
     localStorage.removeItem("userObject");
-    emptyCart();
     navigate("/login");
   };
 
@@ -61,20 +50,19 @@ const Navbar = () => {
                 {/* Cart Icon */}
                 <FaCartShopping size={25} />
 
-                {totalItems ? (
-                  <></>
-                ) : (
+                {cart.length ? (
                   <span
                     style={{
-                      padding: "0 2px",
-                      fontSize: "1rem",
+                      padding: "0 5px",
                       color: "white",
-                      borderRadius: "100%",
+                      borderRadius: "50%",
                       backgroundColor: "red",
                     }}
                   >
-                    {totalItems}
+                    {cart.length}
                   </span>
+                ) : (
+                  <></>
                 )}
               </NavLink>
             </li>
