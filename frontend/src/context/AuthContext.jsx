@@ -14,6 +14,7 @@ export const AuthProvider = (props) => {
   const [refresh, setRefresh] = useState(false);
   const [allCourses, setAllCourses] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [cart, setCart] = useState([]);
   const navigate = useNavigate();
 
   // refresh context
@@ -86,6 +87,8 @@ export const AuthProvider = (props) => {
     allCourses,
     setAllCourses,
     isLoading,
+    cart,
+    setCart
   };
   return (
     <AuthContext.Provider value={value}>{props.children}</AuthContext.Provider>

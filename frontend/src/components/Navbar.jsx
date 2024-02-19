@@ -9,24 +9,23 @@ import { useNavigate } from "react-router-dom";
 import ProfileIcon from "./ProfileIcon";
 import { useAuth } from "../context/AuthContext";
 import { syncCartToDB } from "../api/userService";
-import { useCart } from "react-use-cart";
 
 const Navbar = () => {
-  // useCart
-  const { totalItems, items, emptyCart } = useCart();
-
-  let { authUser, setIsLoggedIn } = useAuth();
+  let { authUser, isLoggedIn, setIsLoggedIn, cart } = useAuth();
   const navigate = useNavigate();
 
   //log out
   const logOut = async (e) => {
-    console.log("items len: " + items.length);
-    //items.map(item => console.log("id: "+item.id));
-    await syncCartToDB(authUser.email, localStorage.getItem("token"), items);
+    if (cart !== undefined) {
+      console.log("items len: " + cart.length);
+
+      //cart.map(item => console.log("id: "+item.id));
+      await syncCartToDB(authUser.email, localStorage.getItem("token"), cart);
+    }
+    setIsLoggedIn(false);
     localStorage.removeItem("token");
     localStorage.removeItem("userObject");
-    emptyCart();
-    setIsLoggedIn(false);
+    //emptyCart();
     navigate("/login");
   };
 
@@ -54,7 +53,7 @@ const Navbar = () => {
                 {/* Cart Icon */}
                 <FaCartShopping size={25} />
 
-                {totalItems ? (
+                {cart.length ? (
                   <></>
                 ) : (
                   <span
@@ -66,7 +65,7 @@ const Navbar = () => {
                       backgroundColor: "red",
                     }}
                   >
-                    {totalItems}
+                    {cart.length}
                   </span>
                 )}
               </NavLink>
