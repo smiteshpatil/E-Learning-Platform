@@ -1,15 +1,20 @@
 import { useState, useEffect } from "react";
-import { CartProvider, useCart } from "react-use-cart";
+//import { CartProvider, useCart } from "react-use-cart";
 import { toast } from "react-toastify";
 import { useAuth } from "../../context/AuthContext";
 import "react-toastify/dist/ReactToastify.css";
 import { Link } from "react-router-dom";
 const Page = (props) => {
-  const { addItem } = useCart();
-  const { allCourses } = useAuth();
+  const { cart, setCart, allCourses } = useAuth();
+
+  //handle add to cart
+  function handleAddToCart(id){
+    console.log("ID: "+id);
+    setCart(prevState => ([...prevState, id]));
+    localStorage.setItem("cart", cart);
+  }
+  
   console.log("In page comp", props.courses);
-  // const courseDTO = allCourses.map((each) => each.courseDTO);
-  // const instructorDTO = allCourses.map((curr)=>curr.instructorDTO)
   return (
     <>
       <div className="container course-content-section">
@@ -48,7 +53,8 @@ const Page = (props) => {
               &nbsp;
               <button
                 className="btn btn-success"
-                onClick={() => addItem(curr.courseDTO)}
+
+                onClick={() => {handleAddToCart(curr.courseDTO.id);}}
               >
                 Add to cart
               </button>
@@ -84,9 +90,7 @@ function AppProducts() {
   }, [allCourses1]);
 
   return (
-    <CartProvider>
       <Page courses={allCourses} />
-    </CartProvider>
   );
 }
 export default AppProducts;

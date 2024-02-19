@@ -18,7 +18,6 @@ import com.app.dao.CourseStudentDetailsRepository;
 import com.app.dao.FeedbackRepository;
 import com.app.dao.InstructorRepository;
 import com.app.dao.StudentRepository;
-import com.app.dto.ContentDTO;
 import com.app.dto.ContentDetailDTO;
 import com.app.dto.CourseDTO;
 import com.app.dto.CourseRespDTO;
@@ -46,9 +45,26 @@ public class CourseServiceImpl implements CourseService {
 
 	@Autowired
 	private CourseStudentDetailsRepository courseStudentRepo;
+
 	////////
 	private final CourseStudentDetailsRepository courseStudentDetailsRepository;
 	private final FeedbackRepository feedbackRepository;
+
+	@Override
+	public void saveOrderId(Long courseId, Long studentId, String orderId) {
+		// Create a new instance of CourseStudentDetails
+		CourseStudentDetails courseStudentDetails = new CourseStudentDetails();
+
+		// Set the courseId, studentId, and orderId
+		CourseStudentId courseStudentId = new CourseStudentId();
+		courseStudentId.setCourseId(courseId);
+		courseStudentId.setStudentId(studentId);
+		courseStudentDetails.setCourseStudentId(courseStudentId);
+		courseStudentDetails.setOrderId(orderId);
+
+		// Save the courseStudentDetails object to the database
+		courseStudentDetailsRepository.save(courseStudentDetails);
+	}
 
 	@Autowired
 	public CourseServiceImpl(CourseStudentDetailsRepository courseStudentDetailsRepository,
@@ -58,7 +74,6 @@ public class CourseServiceImpl implements CourseService {
 		this.courseRepo = courseRepo;
 	}
 
-	//////////
 	@Autowired
 	private ModelMapper mapper;
 
@@ -236,22 +251,27 @@ public class CourseServiceImpl implements CourseService {
 		return "You have enrolled in all Courses";
 	}
 
+	@Override
+	public List<CourseRespDTO> getCourseByCourseId(Long courseId) {
+		List<Course> courseList = courseRepo.findByCourseId(courseId);
+		return courseList.stream().map(course -> mapper.map(course, CourseRespDTO.class)).collect(Collectors.toList());
+	}
+	
 	///////////////
 
-	// @Override
-	// public int getTotalEnrolledStudents(Long courseId) {
-	// return
-	// courseStudentDetailsRepository.countByCourseStudentIdCourseId(courseId);
-	// }
-	//
-	// @Override
-	// public double getAverageRating(Long courseId) {
-	// List<Integer> ratings = feedbackRepository.findRatingsByCourseId(courseId);
-	// if (ratings.isEmpty()) {
-	// return 0.0;
-	// }
-	// return ratings.stream().mapToInt(Integer::intValue).average().getAsDouble();
-	// }
-	//
+//	 @Override
+//	    public int getTotalEnrolledStudents(Long courseId) {
+//	        return courseStudentDetailsRepository.countByCourseStudentIdCourseId(courseId);
+//	    }
+//
+//	    @Override
+//	    public double getAverageRating(Long courseId) {
+//	        List<Integer> ratings = feedbackRepository.findRatingsByCourseId(courseId);
+//	        if (ratings.isEmpty()) {
+//	            return 0.0;
+//	        }
+//	        return ratings.stream().mapToInt(Integer::intValue).average().getAsDouble();
+//	    }
+//	   
 
 }

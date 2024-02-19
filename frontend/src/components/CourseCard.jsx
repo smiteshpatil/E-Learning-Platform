@@ -1,13 +1,12 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import thumbnail from "../images/card1.jpg";
-import { useAuth } from "../context/AuthContext";
+// import { useAuth } from "../context/AuthContext";
 const CourseCard = (props) => {
   let currentCourse = props.currCourse.courseDTO;
   let author = props.currCourse.instructorDTO;
 
-  let { allCourses } = useAuth();
-  console.log(allCourses);
+  // let { allCourses } = useAuth();
 
   return (
     // <h1>{currentCourse.courseDTO.averageRating}</h1>
@@ -18,7 +17,10 @@ const CourseCard = (props) => {
         alt=""
       />
 
-      <Link to={`/courses/${currentCourse.id}`}>
+      <Link
+        style={{ textDecoration: "none" }}
+        to={`/courses/${currentCourse.id}`}
+      >
         <h2 className="title">{currentCourse.courseName}</h2>
       </Link>
 

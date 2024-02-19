@@ -63,6 +63,17 @@ public class CourseController {
 	}
 
 	// get all courses by Instructor Id
+		@GetMapping("/{courseId}")
+		public ResponseEntity<?> getCourseByCourseId(@PathVariable Long courseId) {
+			System.out.println("In get course from courseId " + courseId);
+			List<CourseRespDTO> list = courseService.getCourseByCourseId(courseId);
+			if (list.isEmpty())
+				return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+			// course not found
+			return ResponseEntity.ok(list);
+		}
+	
+	// get all courses by Instructor Id
 	@GetMapping("/{instructorId}")
 	public ResponseEntity<?> getCoursesByInstructorId(@PathVariable Long instructorId) {
 		System.out.println("In get courses from instructor" + instructorId);
@@ -95,19 +106,18 @@ public class CourseController {
 
 	// enroll student to Course
 	@PostMapping("/enrollCourse")
-	public ResponseEntity<?> enrollCourse(@RequestBody CourseStudent courseStudent) {
-		System.out.println("in Enroll course " + courseStudent);
-		return ResponseEntity
-				.ok(courseService.assignStudentToCourse(courseStudent.getCourseId(), courseStudent.getStudentId()));
+	public ResponseEntity<?> enrollCourse(@RequestParam Long studentId, @RequestParam Long courseId) {
+		System.out.println("in Enroll course " + studentId);
+		return ResponseEntity.ok(courseService.assignStudentToCourse(courseId, studentId));
 	}
-
-	// remove course from student
+	
 	@DeleteMapping("/removeCourse")
-	public ResponseEntity<?> removeStudentFromCourse(@RequestBody CourseStudent courseStudent) {
-		return ResponseEntity
-				.ok(courseService.removeStudentFromCourse(courseStudent.getCourseId(), courseStudent.getStudentId()));
+	public ResponseEntity<?> removeStduentFromCourse(@RequestParam Long studentId, @RequestParam Long courseId){
+		System.out.println("In remove Student From Course ");
+		return ResponseEntity.ok(courseService.removeStudentFromCourse(courseId, studentId));
 	}
 
+	
 	// get all courses by Student Id
 	@GetMapping("/student/{studentId}")
 	public ResponseEntity<?> getCoursesByStudentId(@PathVariable Long studentId) {

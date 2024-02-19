@@ -14,7 +14,7 @@ import {
 } from "../api/userService";
 import { toast } from "react-toastify";
 const LoginPage = () => {
-  const { setAuthUser, setIsLoggedIn } = useAuth();
+  const { setAuthUser, setCart, setIsLoggedIn } = useAuth();
   const navigate = useNavigate();
 
   // state for styling depending on the page
@@ -62,9 +62,14 @@ const LoginPage = () => {
           localStorage.setItem("token", jwt);
           localStorage.setItem("userObject", JSON.stringify(userDetails));
           setAuthUser(userDetails);
+         //get cart from db
           const cart = await syncCart(formDetails.email, jwt);
-          if (cart !== undefined) localStorage.setItem("cart", cart);
-
+          const uniqueArray = [...new Set(cart)];
+          console.log("In Login: "+uniqueArray); 
+          if (cart !== undefined) {
+            localStorage.setItem("cart", uniqueArray);
+            setCart(uniqueArray);
+          }
           toast.success("Signed in successfully");
           setIsLoggedIn(true);
           navigate("/");

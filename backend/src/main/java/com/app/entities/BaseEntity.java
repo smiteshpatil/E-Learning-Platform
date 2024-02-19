@@ -5,7 +5,7 @@ import javax.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
-@MappedSuperclass // to tell hib , not to create any tables n other entities will extend from it
+@MappedSuperclass
 @Getter
 @Setter
 public class BaseEntity {

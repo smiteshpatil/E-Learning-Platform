@@ -1,8 +1,8 @@
 import React from "react";
 import "./css/VideoQAndA.css";
-// import { courses } from "../../api/courseService";
 import QandASearchBar from "./QandASearchBar";
 import PublishQuestion from "./PublishQuestion";
+
 const VideoQAndA = () => {
   // let currentCourse = courses[0];
   return (

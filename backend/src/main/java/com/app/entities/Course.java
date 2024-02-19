@@ -59,8 +59,8 @@ public class Course extends BaseEntity {
 	private String imageUrl;
 
 	// many to one association(*courses -> 1 Instructor)
-	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE) // MERGE : NEW n INTERESTING !!!!!
-	@JoinColumn(name = "instructor_id") // Optional BUT reco , to specify the name of FK col.
+	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
+	@JoinColumn(name = "instructor_id")
 	private Instructor inst;
 
 	@OneToMany(mappedBy = "course", cascade = CascadeType.ALL, orphanRemoval = true /* , fetch = FetchType.EAGER */)
@@ -69,7 +69,7 @@ public class Course extends BaseEntity {
 	@OneToMany(mappedBy = "course", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private List<CartItem> cartItems = new ArrayList<>();
 
-	@OneToMany(mappedBy = "myCourse", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@OneToMany(mappedBy = "myCourse", cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
 	private List<CourseStudentDetails> courseStudentDetails = new ArrayList<>();
 
 	@OneToMany(mappedBy = "course", cascade = CascadeType.ALL, orphanRemoval = true)

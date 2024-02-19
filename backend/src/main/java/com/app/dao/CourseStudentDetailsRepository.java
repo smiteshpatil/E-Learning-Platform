@@ -21,12 +21,9 @@ public interface CourseStudentDetailsRepository extends JpaRepository<CourseStud
 
 	@Query("select c.myCourse from CourseStudentDetails c where c.myStudent.id=:studentId")
 	List<Course> findByStudentId(Long studentId);
-	
-
 
 	void deleteByCourseStudentId_CourseIdAndCourseStudentId_StudentId(Long courseId, Long studentId);
-	
 
-	
+	public CourseStudentDetails findByOrderId(String orderId);
 
 }

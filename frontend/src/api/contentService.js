@@ -47,3 +47,22 @@ export const deleteContent = async (contentId, token) => {
     throw error;
   }
 };
+
+// POST: publish new Question
+export const publishNewQuestion = async (courseId, question, token) => {
+  try {
+    const response = await axios.post(
+      baseUrl + `/qna/add/${courseId}`,
+      question,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+    console.log(response.data);
+    return response;
+  } catch (error) {
+    throw error;
+  }
+};

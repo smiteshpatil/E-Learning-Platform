@@ -17,7 +17,7 @@ import VideoOverview from "./components/pages/VideoOverview";
 import VideoPage from "./components/pages/VideoPage";
 import VideoQAndA from "./components/pages/VideoQAndA";
 import VideoReview from "./components/pages/VideoReview";
-import Cart from "./components/pages/Cart";
+import Cart1 from "./components/pages/Cart1";
 import Products from "./components/pages/Products";
 import Dashboard from "./components/instructor/Dashboard";
 import Courses from "./components/instructor/Courses";
@@ -52,7 +52,7 @@ function App() {
         transition={Bounce}
       />
       <Navbar></Navbar>
-
+      <CategoryList />
       <Routes>
         {/* Home page route */}
         <Route path="/" element={<HomePage />}></Route>
@@ -66,13 +66,16 @@ function App() {
           <Route path="profile" element={<UserProfile />} />
         </Route>
 
+        {/* Students Routes */}
+        {/* <Route path="/student" ></Route> */}
+
         {/* Courses */}
         <Route path="/courses/:id" element={<CoursePage />}></Route>
 
         {/* Cart */}
-        <Route path="/cart" element={<Cart />}></Route>
+        <Route path="/cart" element={<Cart1 />}></Route>
         {/* Cart */}
-        <Route path="/product" element={<Products />}></Route>
+        <Route path="/allCourses" element={<Products />}></Route>
         {/* Instructor */}
         <Route path="/user/instructor" element={<Dashboard />}>
           <Route path="" element={<Home />} />
