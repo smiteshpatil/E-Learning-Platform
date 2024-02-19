@@ -18,14 +18,11 @@ const Navbar = () => {
   const logOut = async (e) => {
     if (cart !== undefined) {
       console.log("items len: " + cart.length);
-
-      //cart.map(item => console.log("id: "+item.id));
       await syncCartToDB(authUser.email, localStorage.getItem("token"), cart);
     }
     setIsLoggedIn(false);
     localStorage.removeItem("token");
     localStorage.removeItem("userObject");
-    //emptyCart();
     navigate("/login");
   };
 
