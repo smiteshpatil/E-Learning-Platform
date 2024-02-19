@@ -49,7 +49,7 @@ public class Student extends BaseEntity {
 
 	@Enumerated(EnumType.STRING)
 	@Column(length = 30)
-	private Role role;
+	private Role role; 
 
 	@Column(unique = true)
 	private String LinkedInLink;
@@ -58,7 +58,7 @@ public class Student extends BaseEntity {
 	private String GitHubLink;
 
 	private String heading;
-
+	
 	@Lob // large object :col : longblob
 	private byte[] image; // This will be used for storing n restoring images in DB
 	private String imagePath;// This will be used for storing n restoring images in server side folder
@@ -81,8 +81,8 @@ public class Student extends BaseEntity {
 	// courses.remove(c); //instructor -> course
 	// c.setStudent(null);//course -> student
 	// }
-//	 @ManyToMany(mappedBy = "students")
-//	 private List<Course> courses = new ArrayList<>();
-//	
+	// @ManyToMany(mappedBy = "students")
+	// private List<Course> courses = new ArrayList<>();
+	//
 
 }

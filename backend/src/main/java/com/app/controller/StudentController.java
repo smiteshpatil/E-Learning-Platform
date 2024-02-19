@@ -88,7 +88,7 @@ public class StudentController {
 		return ResponseEntity.ok(cartService.addCoursesToCart(studentEmail, courseIds));
 	}
 
-	@GetMapping("/cartItems/{studentEmail}")
+	@GetMapping("/cartItems/{studentEmail}")  
 	public ResponseEntity<?> GetAllCartItems(@PathVariable String studentEmail) {
 		List<Long> courseIds = cartService.getAllCourseIdFromCart(studentEmail);
 		return ResponseEntity.ok(courseIds);
