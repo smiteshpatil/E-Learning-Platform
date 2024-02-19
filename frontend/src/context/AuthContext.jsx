@@ -22,34 +22,33 @@ export const AuthProvider = (props) => {
   };
 
   //set userState
-  useEffect(() => {
-    try {
-      const storedUser = localStorage.getItem("userObject");
-      if (storedUser) {
-        syncCartWithUser(authUser);
-      } else {
-        localStorage.removeItem("cart");
-        navigate("/login");
-      }
-    } catch (error) {
-      navigate("/login");
-    }
-  }, [isLoggedIn, authUser, navigate]);
+  // useEffect(() => {
+  //   const storedUser = localStorage.getItem("userObject");
+  //   if (storedUser) {
+  //     console.log(storedUser);
+  //     setAuthUser(JSON.parse(storedUser));
+  //     setAllCourses(JSON.parse(storedUser));
+  //     syncCartWithUser(authUser);
+  //   } else {
+  //     localStorage.removeItem("userObject");
+  //     localStorage.removeItem("token");
+  //     localStorage.removeItem("cart");
+  //     navigate("/login");
+  //   }
+  // }, [isLoggedIn]);
+
+  //set all courses in application level
+  // useEffect(async () => {
+  //  const response = await getAllCourses();
+  //  setAllCourses(response.data);
+  // }, []);
 
   useEffect(() => {
-    try {
-      const storedUser = localStorage.getItem("userObject");
-      if (storedUser) {
-        console.log("Stored user found:", storedUser);
-        setAuthUser(JSON.parse(storedUser));
-        setIsLoading(false);
-      } else {
-        console.log("User logged out, navigating to login...");
-        navigate("/login");
-        localStorage.removeItem("userObject");
-        localStorage.removeItem("token");
-      }
-    } catch (error) {
+    const storedUser = localStorage.getItem("userObject");
+    if (storedUser) {
+      console.log("Stored user found:", storedUser);
+     } else {
+      console.log("No stored user found, navigating to login...");
       navigate("/login");
     }
   }, [isLoggedIn, refresh, navigate]);

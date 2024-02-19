@@ -112,6 +112,7 @@ public class AdminServiceImpl implements AdminService {
             courseDetails.setCourseName(course.getCourseName());
             courseDetails.setTotalEnrolledStudents(course.getCourseStudentDetails().size());
             courseDetails.setAverageRating(calculateAverageRating(course.getFeedbacks()));
+            courseDetails.setPrice(course.getPrice());
             courseDetailsList.add(courseDetails);
         }
 

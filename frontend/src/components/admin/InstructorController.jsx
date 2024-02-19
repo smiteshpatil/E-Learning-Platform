@@ -45,8 +45,8 @@ const InstructorController = () => {
               <tr key={index}>
                 <td>{index + 1}</td>
                 <td>{instructor.email}</td>
-                <td>{instructor.courseName}</td>
-                <td>{instructor.enrolledDate}</td>
+                <td>{instructor.courseNames}</td>
+                <td>{instructor.publishedDates}</td>
                 
               </tr>
             ))}
