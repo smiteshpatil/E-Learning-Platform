@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 
 import ReactPaginate from "react-paginate";
 import "../css/Main.css";
-import { courses, getAllCourses } from "../api/courseService";
+import { getAllCourses } from "../api/courseService";
 import CourseCard from "./CourseCard";
 const Main = () => {
   const [trendingCourses, setTrendingCourses] = useState([]);

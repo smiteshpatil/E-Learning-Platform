@@ -11,11 +11,11 @@ import { useAuth } from "../context/AuthContext";
 import { syncCartToDB } from "../api/userService";
 
 const Navbar = () => {
-  let { authUser, isLoggedIn, setIsLoggedIn, cart } = useAuth();
+  let { authUser, setIsLoggedIn, cart } = useAuth();
   const navigate = useNavigate();
 
   //log out
-  const logOut = async (e) => {
+  const logOut = async () => {
     if (cart !== undefined) {
       console.log("items len: " + cart.length);
 
@@ -54,19 +54,18 @@ const Navbar = () => {
                 <FaCartShopping size={25} />
 
                 {cart.length ? (
-                  <></>
-                ) : (
                   <span
                     style={{
-                      padding: "0 2px",
-                      fontSize: "1rem",
+                      padding: "0 5px",
                       color: "white",
-                      borderRadius: "100%",
+                      borderRadius: "50%",
                       backgroundColor: "red",
                     }}
                   >
                     {cart.length}
                   </span>
+                ) : (
+                  <></>
                 )}
               </NavLink>
             </li>

@@ -1,68 +1,31 @@
 import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
-// import "../css/VideoPage.css";
-// import "../pages/css/";
+import MyCourse from "./MyCourse";
 
 const MyLearning = () => {
-  const [activeLink, setActiveLink] = useState(""); // State to store the active link
-
-  // change style on click
-  const toggleStyle = (link) => {
-    setActiveLink(link); // Update the active link state
-  };
-
   return (
-    <div
-      className="container mt-3"
-      style={{ color: "white", backgroundColor: "#2d2f31" }}
-    >
-      <h1>My Learning</h1>
-      <ul className="resource-section">
-        <li className="nav-item">
-          <NavLink
-            to="overview"
-            className={
-              "nav-link" + (activeLink === "overview" ? " active-link" : "")
+    <div className="container-fluid my-3">
+      <h1>My Courses</h1>
+      <div className="row">
+        <div className="col col-md-3 col-sm-6">
+          <MyCourse
+            courseName={"React Developer"}
+            progress={50}
+            imageUrl={
+              "https://www.dropbox.com/scl/fi/eqi93k54ejkxat2g8e4vz/coursePoster.png?rlkey=hiaw1cetvdcyl1wku1tchst7g&raw=1"
             }
-            // onClick={() => toggleStyle("overview")}
-          >
-            Overview
-          </NavLink>
-        </li>
-        <li className="nav-item">
-          <NavLink
-            to="qanda"
-            className={
-              "nav-link" + (activeLink === "qanda" ? " active-link" : "")
+          />
+        </div>
+        <div className="col col-md-3 col-sm-6">
+          <MyCourse
+            courseName={"React Developer"}
+            progress={50}
+            imageUrl={
+              "https://www.dropbox.com/scl/fi/0158j9jscpclhmlioxf8d/images.png?rlkey=ktk8sijpavw3qjj9k89np1n35&raw=1"
             }
-            // onClick={() => toggleStyle("qanda")}
-          >
-            Q&A
-          </NavLink>
-        </li>
-        <li className="nav-item">
-          <NavLink
-            to="notes"
-            className={
-              "nav-link" + (activeLink === "notes" ? " active-link" : "")
-            }
-            // onClick={() => toggleStyle("notes")}
-          >
-            Notes
-          </NavLink>
-        </li>
-        <li className="nav-item">
-          <NavLink
-            to="review"
-            className={
-              "nav-link" + (activeLink === "review" ? " active-link" : "")
-            }
-            // onClick={() => toggleStyle("review")}
-          >
-            Review
-          </NavLink>
-        </li>
-      </ul>
+          />
+        </div>
+      </div>
     </div>
   );
 };

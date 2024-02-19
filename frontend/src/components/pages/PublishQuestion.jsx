@@ -1,13 +1,20 @@
 import React, { useState } from "react";
-
+import { publishNewQuestion } from "../../api/contentService";
+import { toast } from "react-toastify";
 const PublishQuestion = () => {
   const [question, setQuestion] = useState("");
 
   const handlePublish = () => {
-    // Here you can implement logic to publish the question
-    alert(`Question "${question}" published!`);
-    // Clear the input after publishing
-    setQuestion("");
+    if (question !== "") {
+      toast.promise(publishNewQuestion(question), {
+        success: "your question is sent",
+        pending: "uploading...",
+        error: "error sending question",
+      });
+      setQuestion("");
+    } else {
+      toast.error("question cannot be empty");
+    }
   };
 
   return (

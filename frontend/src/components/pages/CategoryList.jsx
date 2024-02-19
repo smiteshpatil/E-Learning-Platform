@@ -19,7 +19,7 @@ function CategoryList() {
         {categories.map((category, index) => (
           <li key={index}>
             <Link
-              to={`/product/${category.link}`}
+              to={`/allCourses/${category.link}`}
               style={{ color: "white", textDecoration: "none" }}
             >
               {category.name}

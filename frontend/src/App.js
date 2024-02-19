@@ -63,13 +63,16 @@ function App() {
           <Route path="profile" element={<UserProfile />} />
         </Route>
 
+        {/* Students Routes */}
+        {/* <Route path="/student" ></Route> */}
+
         {/* Courses */}
         <Route path="/courses/:id" element={<CoursePage />}></Route>
 
         {/* Cart */}
         <Route path="/cart" element={<Cart1 />}></Route>
         {/* Cart */}
-        <Route path="/product" element={<Products />}></Route>
+        <Route path="/allCourses" element={<Products />}></Route>
         {/* Instructor */}
         <Route path="/user/instructor" element={<Dashboard />}>
           <Route path="" element={<Home />} />
