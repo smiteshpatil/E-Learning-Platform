@@ -43,8 +43,6 @@ public class CourseStudentDetails {
 
 	private String amount;
 
-	private String receipt;
-
 	private String status;
 
 	private String paymentId;

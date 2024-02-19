@@ -1,32 +1,18 @@
 package com.app.payment;
 
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
 public class PaymentConfirmationRequest {
 	private String paymentId;
+	private String orderId;
 	private Long courseId;
 	private Long studentId;
-
-	// Getters and setters
-	public String getPaymentId() {
-		return paymentId;
-	}
-
-	public void setPaymentId(String paymentId) {
-		this.paymentId = paymentId;
-	}
-
-	public Long getCourseId() {
-		return courseId;
-	}
-
-	public void setCourseId(Long courseId) {
-		this.courseId = courseId;
-	}
-
-	public Long getStudentId() {
-		return studentId;
-	}
-
-	public void setStudentId(Long studentId) {
-		this.studentId = studentId;
-	}
+	
+//	private String orderId;
+//	private String amount;
+//	private String receipt;
+//	private String status;
 }
