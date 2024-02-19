@@ -18,9 +18,9 @@ const Navbar = () => {
 
   //log out
   const logOut = async (e) => {
-    console.log("items len: "+items.length);
+    console.log("items len: " + items.length);
     //items.map(item => console.log("id: "+item.id));
-    await syncCartToDB(authUser.email, localStorage.getItem('token'), items);
+    await syncCartToDB(authUser.email, localStorage.getItem("token"), items);
     setIsLoggedIn(false);
     localStorage.removeItem("token");
     localStorage.removeItem("userObject");
@@ -50,17 +50,19 @@ const Navbar = () => {
             <li className="right">
               <NavLink to="/cart">
                 {/* Cart Icon */}
-                <FaCartShopping size={30} />
+                <FaCartShopping size={25} />
               </NavLink>
             </li>
           )}
           {authUser && localStorage.getItem("userObject") ? (
-            <TbLogout2
-              color="black"
-              size={30}
-              onClick={logOut}
-              className="logout"
-            />
+            <li className="right">
+              <TbLogout2
+                color="black"
+                size={30}
+                onClick={logOut}
+                className="logout"
+              />
+            </li>
           ) : (
             <li className="right login-link">
               <NavLink to="/login">LogIn/Register</NavLink>

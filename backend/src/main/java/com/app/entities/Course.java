@@ -31,7 +31,7 @@ import lombok.ToString;
 @ToString(exclude = { "inst", "contents" })
 public class Course extends BaseEntity {
 
-	@Column(length = 20, unique = true)
+	@Column(unique = true)
 	private String courseName;
 
 	@Column(length = 20)

@@ -6,6 +6,7 @@ const ContentCard = (props) => {
     id: props.currContentDetails.id, // requied for update
     contentName: props.currContentDetails.contentName,
     contentDescription: props.currContentDetails.contentDescription,
+    imageUrl: props.currContentDetails.imageUrl,
   });
 
   //clear uploaded file

@@ -1,6 +1,5 @@
 package com.app.dto;
 
-
 import java.time.LocalDate;
 import java.util.List;
 
@@ -30,16 +29,16 @@ public class StudentCoursesDTO {
 	private String email;
 
 	private String password;
-    
-    // New fields
-    private String courseName;
-    private LocalDate enrolledDate;
-    
-    public StudentCoursesDTO(String email, String courseName, LocalDate enrolledDate) {
-        this.email = email;
-        this.courseName = courseName;
-        this.enrolledDate = enrolledDate;
-    }
+
+	// New fields
+	private String courseName;
+	private LocalDate enrolledDate;
+
+	public StudentCoursesDTO(String email, String courseName, LocalDate enrolledDate) {
+		this.email = email;
+		this.courseName = courseName;
+		this.enrolledDate = enrolledDate;
+	}
 
 	private String gender;
 
@@ -49,6 +48,5 @@ public class StudentCoursesDTO {
 	private Role role;
 
 	private List<CourseDTO> courses;
-
 
 }

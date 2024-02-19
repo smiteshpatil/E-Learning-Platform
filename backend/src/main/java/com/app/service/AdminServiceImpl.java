@@ -34,8 +34,8 @@ import com.app.entities.Student;
 
 @Service
 @Transactional
-public class AdminServiceImpl implements AdminService {
 
+public class AdminServiceImpl implements AdminService {
     @Autowired
     private AdminRepository adminRepo;
 

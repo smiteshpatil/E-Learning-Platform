@@ -7,12 +7,22 @@ import CourseCard from "./CourseCard";
 const Main = () => {
   const [trendingCourses, setTrendingCourses] = useState([]);
   const [currentCourse, setcurrentCourse] = useState(1);
-  const [coursesPerPage] = useState(4);
+  const [coursesPerPage] = useState(3);
 
   useEffect(() => {
     const fetchTrendingCourses = async () => {
-      // setTrendingCourses(await getAllCourses());
-      setTrendingCourses(courses);
+      try {
+        const response = await getAllCourses();
+        const coursesData = response.data;
+        // Sort the courses based on their average rating
+        coursesData.sort(
+          (a, b) => b.courseDTO.averageRating - a.courseDTO.averageRating
+        );
+        // Update state with the sorted courses
+        setTrendingCourses(coursesData);
+      } catch (error) {
+        console.error("Error fetching trending courses:", error);
+      }
     };
 
     fetchTrendingCourses();
@@ -30,7 +40,7 @@ const Main = () => {
   };
 
   return (
-    <div className="container">
+    <div className="container-fluid my-5">
       <div className="title">
         <h1>Trending Courses</h1>
       </div>
@@ -38,7 +48,7 @@ const Main = () => {
         <div className="course-content-section">
           <div className="course-container">
             {currentCourses.map((currentCourse, index) => (
-              <CourseCard key={index} currentCourse={currentCourse} />
+              <CourseCard key={index} currCourse={currentCourse} />
             ))}
           </div>
           <ReactPaginate

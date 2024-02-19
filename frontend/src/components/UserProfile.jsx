@@ -1,31 +1,37 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Button, Container, Row, Col } from "react-bootstrap";
 import { useAuth } from "../context/AuthContext";
 import { updateStudentService } from "../api/userService";
 import { toast } from "react-toastify";
 const UserProfile = () => {
-  let { authUser, refreshContext } = useAuth();
+  let { authUser, refreshContext, isLoading } = useAuth();
 
-  const [newDetails, setNewDetails] = useState(
-    authUser
-      ? {
-          id: authUser.id,
-          email: authUser.email,
-          firstName: authUser.firstName,
-          lastName: authUser.lastName,
-          gender: authUser.gender,
-          phoneNo: authUser.phoneNo,
-          gitHubLink: authUser.gitHubLink,
-          heading: authUser.heading,
-          imageUrl: authUser.imageUrl,
-          linkedInLink: authUser.linkedInLink,
-        }
-      : {}
-  );
+  const [newDetails, setNewDetails] = useState({
+    firstName: "",
+    lastName: "",
+    heading: "",
+    phoneNo: "",
+    gender: "",
+    linkedInLink: "",
+    gitHubLink: "",
+  });
+
+  const clearForm = () => {
+    setNewDetails({
+      firstName: "",
+      lastName: "",
+      heading: "",
+      phoneNo: "",
+      gender: "",
+      linkedInLink: "",
+      gitHubLink: "",
+    });
+  };
 
   // Update the state with the text from textarea
   const handleChange = (event) => {
     let { name, value } = event.target;
+    console.log(name, value);
     setNewDetails({ ...newDetails, [name]: value });
   };
 
@@ -39,9 +45,22 @@ const UserProfile = () => {
         error: "Unexpected error occured",
       }
     );
-    refreshContext();
     console.log(resp.data);
+    localStorage.setItem("userObject", JSON.stringify(resp.data));
+
+    refreshContext();
   };
+
+  // fetchUserDeatails
+  useEffect(() => {
+    console.log("in useEffect");
+    if (!isLoading) {
+      const fetchUser = () => {
+        setNewDetails(authUser);
+      };
+      fetchUser();
+    }
+  }, [isLoading, authUser]);
 
   return (
     <>
@@ -121,7 +140,7 @@ const UserProfile = () => {
                           type="radio"
                           name="gender"
                           id="male"
-                          value={newDetails.gender}
+                          value="male"
                           onChange={handleChange}
                         />
                         <label
@@ -137,7 +156,7 @@ const UserProfile = () => {
                           type="radio"
                           name="gender"
                           id="female"
-                          value={newDetails.gender}
+                          value="female"
                           onChange={handleChange}
                         />
                         <label
@@ -169,7 +188,7 @@ const UserProfile = () => {
                       className="form-control"
                       id="basic-url"
                       aria-describedby="basic-addon3 basic-addon4"
-                      name="LinkedInLink"
+                      name="linkedInLink"
                       value={newDetails.linkedInLink}
                       onChange={handleChange}
                     />
@@ -189,7 +208,7 @@ const UserProfile = () => {
                       className="form-control"
                       id="basic-url"
                       aria-describedby="basic-addon3 basic-addon4"
-                      name="GitHubLink"
+                      name="gitHubLink"
                       value={newDetails.gitHubLink}
                       onChange={handleChange}
                     />
@@ -203,7 +222,9 @@ const UserProfile = () => {
                     >
                       Save
                     </Button>
-                    <Button variant="outline-secondary">Cancel</Button>
+                    <Button onClick={clearForm} variant="outline-secondary">
+                      Cancel
+                    </Button>
                   </div>
                 </div>
               </div>

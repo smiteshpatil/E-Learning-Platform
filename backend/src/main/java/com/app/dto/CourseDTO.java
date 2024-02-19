@@ -35,15 +35,17 @@ public class CourseDTO {
 
 	private Long price;
 
+	private String imageUrl;
+
 	private LocalDate publishedDate;
 
 	@Lob
 	private byte[] coursePoster;
 
 	private Long instructorId;
-	
+
 	@Min(0)
-    @Max(5)
-    private Double averageRating; 
-    
+	@Max(5)
+	private Double averageRating;
+
 }

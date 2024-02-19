@@ -38,14 +38,13 @@ public class StudentDTO {
 
 	private String imageUrl;
 
-	private String LinkedInLink;
+	private String linkedInLink;
 
-	private String GitHubLink;
+	private String gitHubLink;
 
 	private String heading;
-	
-	private int rating;
-	
-	private Role role;
 
+	private int rating;
+
+	private Role role;
 }

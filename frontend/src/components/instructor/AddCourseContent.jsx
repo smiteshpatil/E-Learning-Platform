@@ -12,6 +12,7 @@ const AddCourseContent = (props) => {
     <>
       <div className="col-lg-4 col-md-6 col-sm-12 px-2 py-2">
         <div className="card" style={{ width: "100%", height: "100%" }}>
+          {console.log(currCourse.imageUrl)}
           <img
             src={currCourse.imageUrl}
             className="card-img-top block"
@@ -20,7 +21,9 @@ const AddCourseContent = (props) => {
           />
           <div className="card-body">
             <h5 className="card-title">{currCourse.courseName}</h5>
-            <p className="card-text">{currCourse.description}</p>
+            <p className="card-text">
+              {currCourse.description.split(" ").slice(0, 30).join(" ")}
+            </p>
             <Link to={`/upload/${currCourse.id}`} className="btn btn-primary">
               Add content
             </Link>
