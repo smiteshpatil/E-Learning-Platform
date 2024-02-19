@@ -18,7 +18,6 @@ import com.app.dao.CourseStudentDetailsRepository;
 import com.app.dao.FeedbackRepository;
 import com.app.dao.InstructorRepository;
 import com.app.dao.StudentRepository;
-import com.app.dto.ContentDTO;
 import com.app.dto.ContentDetailDTO;
 import com.app.dto.CourseDTO;
 import com.app.dto.CourseRespDTO;
@@ -46,17 +45,35 @@ public class CourseServiceImpl implements CourseService {
 
 	@Autowired
 	private CourseStudentDetailsRepository courseStudentRepo;
+
 	////////
 	private final CourseStudentDetailsRepository courseStudentDetailsRepository;
-    private final FeedbackRepository feedbackRepository;
+	private final FeedbackRepository feedbackRepository;
 
-    @Autowired
-    public CourseServiceImpl(CourseStudentDetailsRepository courseStudentDetailsRepository, FeedbackRepository feedbackRepository,CourseRepository courseRepo) {
-        this.courseStudentDetailsRepository = courseStudentDetailsRepository;
-        this.feedbackRepository = feedbackRepository;
-        this.courseRepo = courseRepo;
-    }
-    //////////
+	@Override
+	public void saveOrderId(Long courseId, Long studentId, String orderId) {
+		// Create a new instance of CourseStudentDetails
+		CourseStudentDetails courseStudentDetails = new CourseStudentDetails();
+
+		// Set the courseId, studentId, and orderId
+		CourseStudentId courseStudentId = new CourseStudentId();
+		courseStudentId.setCourseId(courseId);
+		courseStudentId.setStudentId(studentId);
+		courseStudentDetails.setCourseStudentId(courseStudentId);
+		courseStudentDetails.setOrderId(orderId);
+
+		// Save the courseStudentDetails object to the database
+		courseStudentDetailsRepository.save(courseStudentDetails);
+	}
+
+	@Autowired
+	public CourseServiceImpl(CourseStudentDetailsRepository courseStudentDetailsRepository,
+			FeedbackRepository feedbackRepository, CourseRepository courseRepo) {
+		this.courseStudentDetailsRepository = courseStudentDetailsRepository;
+		this.feedbackRepository = feedbackRepository;
+		this.courseRepo = courseRepo;
+	}
+
 	@Autowired
 	private ModelMapper mapper;
 
@@ -75,9 +92,9 @@ public class CourseServiceImpl implements CourseService {
 			GetAllDetailsDTO courseDetails = new GetAllDetailsDTO();
 			CourseDTO courseDTO = mapper.map(course, CourseDTO.class);
 			courseDTO.setAverageRating(calculateAverageRating(course.getFeedbacks()));
-			
-			System.out.println(" in course serviceImpl- courseDTO: " + courseDTO+ " ");
-			 courseDetails.setCourseDTO(courseDTO) ;
+
+			System.out.println(" in course serviceImpl- courseDTO: " + courseDTO + " ");
+			courseDetails.setCourseDTO(courseDTO);
 			courseDetails.setInstructorDTO(mapper.map(course.getInst(), InstructorDTO.class));
 			List<ContentDetailDTO> contentDTOs = course.getContents().stream()
 					.map(content -> mapper.map(content, ContentDetailDTO.class)).collect(Collectors.toList());
@@ -88,25 +105,24 @@ public class CourseServiceImpl implements CourseService {
 	}
 
 	private Double calculateAverageRating(List<Feedback> feedbacks) {
-        if (feedbacks.isEmpty()) {
-            return 0.0;
-        }
+		if (feedbacks.isEmpty()) {
+			return 0.0;
+		}
 
-        double totalRating = 0;
-        for (Feedback feedback : feedbacks) {
-            totalRating += feedback.getRating();
-        }
-        System.out.println(" Avg rating: " + totalRating / feedbacks.size());
-        return totalRating / feedbacks.size();
-    }
-	
+		double totalRating = 0;
+		for (Feedback feedback : feedbacks) {
+			totalRating += feedback.getRating();
+		}
+		System.out.println(" Avg rating: " + totalRating / feedbacks.size());
+		return totalRating / feedbacks.size();
+	}
+
 	@Override
 	public List<CourseRespDTO> getAllCoursesFromInstructor(Long instructorId) {
 		List<Course> courseList = courseRepo.findByInstructorId(instructorId);
 		return courseList.stream().map(course -> mapper.map(course, CourseRespDTO.class)).collect(Collectors.toList());
 	}
 
-	
 	@Override
 	public List<CourseRespDTO> getAllCourseByInstructorEmail(String email) {
 		List<Course> list = courseRepo.findByInstEmail(email);
@@ -115,10 +131,11 @@ public class CourseServiceImpl implements CourseService {
 
 	@Override
 	public String deleteCourseDetails(Long courseId) {
-		//long noOfStudentsInCourses = courseStudentRepo.deleteByMyCourseId(courseId);
-		//System.out.println("deleted students " + noOfStudentsInCourses);
+		// long noOfStudentsInCourses = courseStudentRepo.deleteByMyCourseId(courseId);
+		// System.out.println("deleted students " + noOfStudentsInCourses);
 
-		Course course = courseRepo.findById(courseId).orElseThrow(()->new ResourceNotFoundException("Invalid Course id !!!"));
+		Course course = courseRepo.findById(courseId)
+				.orElseThrow(() -> new ResourceNotFoundException("Invalid Course id !!!"));
 		courseRepo.delete(course);
 		return "Course Deleted SuccessFully " + courseId + " " + course.getCourseName();
 	}
@@ -222,10 +239,9 @@ public class CourseServiceImpl implements CourseService {
 
 		return "You have enrolled in all Courses";
 	}
-	
-	
+
 	///////////////
-	
+
 //	 @Override
 //	    public int getTotalEnrolledStudents(Long courseId) {
 //	        return courseStudentDetailsRepository.countByCourseStudentIdCourseId(courseId);
@@ -241,7 +257,4 @@ public class CourseServiceImpl implements CourseService {
 //	    }
 //	   
 
-	
 }
-
-

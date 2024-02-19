@@ -10,6 +10,7 @@ import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.Lob;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Email;
@@ -79,4 +80,24 @@ public class Student extends BaseEntity {
 
 	@OneToMany(mappedBy = "student", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private List<CartItem> cartItems = new ArrayList<>();
+
+	// @OneToMany(mappedBy = "student",
+	// cascade = CascadeType.ALL,
+	// orphanRemoval = true /* , fetch = FetchType.EAGER */ )
+	// private List<Course> courses = new ArrayList<>();
+	//
+
+	// public void addCourseToStudent(Course c) {
+	// courses.add(c);
+	// c.setStudent(this); //course -> students
+	// }
+	//
+	// public void deleteCourse(Course c) {
+	// courses.remove(c); //instructor -> course
+	// c.setStudent(null);//course -> student
+	// }
+//	 @ManyToMany(mappedBy = "students")
+//	 private List<Course> courses = new ArrayList<>();
+//	
+
 }

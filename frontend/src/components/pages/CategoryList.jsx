@@ -1,52 +1,39 @@
-import React from "react";
+import React, { useState } from "react";
 import "./CategoryList.css";
 import { Link } from "react-router-dom";
 
 function CategoryList() {
+  const [dropdownVisible, setDropdownVisible] = useState(false);
+
   const categories = [
-    {
-      name: "Development",
-      subcategories: ["Subcategory", "Subcategory", "Subcategory"],
-    },
-    {
-      name: "Finance & Accounting",
-      subcategories: ["Subcategory", "Subcategory", "Subcategory"],
-    },
-    {
-      name: "Business",
-      subcategories: ["Subcategory", "Subcategory", "Subcategory"],
-    },
-    {
-      name: "Digital Marketing",
-      subcategories: ["Subcategory", "Subcategory", "Subcategory"],
-    },
-    {
-      name: "Graphics Design",
-      subcategories: ["Subcategory", "Subcategory", "Subcategory"],
-    },
-    {
-      name: "Entrepreneurship",
-      subcategories: ["Subcategory", "Subcategory", "Subcategory"],
-    },
-    {
-      name: "All Categories",
-      subcategories: [<Link to="/product">All Courses</Link>],
-    },
+    { name: "Development", link: "dev" },
+    { name: "Finance & Accounting", link: "financeAndAcc" },
+    { name: "Business", link: "business" },
+    { name: "Digital Marketing", link: "digitalMarketing" },
+    { name: "Graphics Design", link: "graphicsDesign" },
+    { name: "Entrepreneurship", link: "entrepreneurship" },
+    { name: "All Categories", link: "" },
   ];
 
+  const toggleDropdown = () => {
+    setDropdownVisible(!dropdownVisible);
+  };
+
   return (
-    <ul className="category-list">
-      {categories.map((category, index) => (
-        <li key={index}>
-          <span>{category.name}</span>
-          <ul className="subcategory-list">
-            {category.subcategories.map((subcategory, subIndex) => (
-              <li key={subIndex}>{subcategory}</li>
-            ))}
-          </ul>
-        </li>
-      ))}
-    </ul>
+    <React.Fragment>
+      <ul className={`category-list ${dropdownVisible ? "hidden" : ""}`}>
+        {categories.map((category, index) => (
+          <li key={index}>
+            <Link
+              to={`/product/${category.link}`}
+              style={{ color: "white", textDecoration: "none" }}
+            >
+              {category.name}
+            </Link>
+          </li>
+        ))}
+      </ul>
+    </React.Fragment>
   );
 }
 

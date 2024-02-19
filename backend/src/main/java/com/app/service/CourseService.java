@@ -46,6 +46,7 @@ public interface CourseService {
 
 	List<CourseRespDTO> getAllCourseByInstructorEmail(String email);
 	
+	public void saveOrderId(Long courseId, Long studentId, String orderId);
 	
 	
 	

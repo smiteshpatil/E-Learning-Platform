@@ -1,5 +1,7 @@
 package com.app.service;
 
+
+
 import java.util.List;
 
 import org.springframework.stereotype.Service;
@@ -13,7 +15,7 @@ import com.app.dto.InstructorCoursesDTO;
 import com.app.dto.InstructorDTO;
 import com.app.dto.StudentDTO;
 
-@Service
+//@Service
 public interface AdminService {
 	AdminDTO getAdminByEmail(String adminEmail);
 	int getTotalStudents();
@@ -27,7 +29,7 @@ public interface AdminService {
 	 List<StudentDTO> getStudentDetailsByCourseId(Long courseId);
 	 
 	 
-	 /////////////
+	
 	 void deleteStudentFromCourse(Long courseId, Long studentId);
 	 
 }

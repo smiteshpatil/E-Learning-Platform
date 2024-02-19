@@ -6,10 +6,10 @@ import { useAuth } from "../context/AuthContext";
 const ProfilePage = () => {
   let { authUser } = useAuth();
   return (
-    <div className="container form-control">
+    <div className="container form-control ">
       <div className="mt-4 mb-4">
         <Container
-          className="border-container mt-4 mb-4 "
+          className="border-container mt-2 mb-2 "
           style={{ margintop: "70px" }}
         >
           <Row>
