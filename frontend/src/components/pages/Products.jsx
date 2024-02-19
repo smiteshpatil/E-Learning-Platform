@@ -5,15 +5,16 @@ import { useAuth } from "../../context/AuthContext";
 import "react-toastify/dist/ReactToastify.css";
 import { Link } from "react-router-dom";
 const Page = (props) => {
-  const { setCart, allCourses } = useAuth();
+  const { cart, setCart, allCourses } = useAuth();
+
+  //handle add to cart
   function handleAddToCart(id){
     console.log("ID: "+id);
     setCart(prevState => ([...prevState, id]));
+    localStorage.setItem("cart", cart);
   }
-  //const { addItem } = useCart();
+  
   console.log("In page comp", props.courses);
-  // const courseDTO = allCourses.map((each) => each.courseDTO);
-  // const instructorDTO = allCourses.map((curr)=>curr.instructorDTO)
   return (
     <>
       <div className="container course-content-section">

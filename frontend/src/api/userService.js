@@ -34,9 +34,11 @@ export const syncCart = async (userEmail, bearerToken) => {
 
 export const syncCartToDB = async (userEmail, bearerToken, cart) => {
   try {
+    const uniqueArray = [...new Set(cart)];
+    //console.log("In useService: "+uniqueArray); 
     const response = await axios.post(
       baseURL + `/students/cartItems/${userEmail}`,
-      cart,
+      uniqueArray,
       {
         headers: {
           Authorization: `Bearer ${bearerToken}`,
