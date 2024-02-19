@@ -52,11 +52,8 @@ const Page = (props) => {
               &nbsp;
               <button
                 className="btn btn-success"
-<<<<<<< HEAD
-                onClick={() => {handleAddToCart(currentCourse.id);}}
-=======
-                onClick={() => addItem(curr.courseDTO)}
->>>>>>> 97d0153a69afeebed9a2d2dd99a3c2b60b8bfae8
+
+                onClick={() => {handleAddToCart(curr.courseDTO.id);}}
               >
                 Add to cart
               </button>
