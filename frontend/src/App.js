@@ -33,6 +33,7 @@ import InstructorController from "./components/admin/InstructorController";
 import UploadContentPage from "./components/instructor/UploadContentPage";
 import CreateContent from "./components/instructor/CreateContent";
 import { ToastContainer, Bounce } from "react-toastify";
+import CategoryList from "./components/pages/CategoryList";
 function App() {
   return (
     <div className="App">
@@ -49,7 +50,7 @@ function App() {
         transition={Bounce}
       />
       <Navbar></Navbar>
-
+      <CategoryList />
       <Routes>
         {/* Home page route */}
         <Route path="/" element={<HomePage />}></Route>

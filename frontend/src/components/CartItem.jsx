@@ -2,7 +2,7 @@ import React from "react";
 
 const CartItem = (props) => {
   return (
-    <div className="card mb-3" style={{ width: "540px" }}>
+    <div className="card mb-3">
       <div className="row g-0">
         <div className="col-md-4">
           <img src={props.course.imageUrl} className="img-fluid" alt="" />
