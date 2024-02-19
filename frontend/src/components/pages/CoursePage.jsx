@@ -4,8 +4,9 @@ import { useAuth } from "../../context/AuthContext";
 import img from "../../images/card1.jpg";
 import CourseContent from "./CourseContent";
 import "./CoursePage.css";
-import { createPaymentRequest } from "../../api/paymentService";
+import { handleOrderAndPayment } from "../../api/paymentService";
 import { toast } from "react-toastify";
+import Swal from "sweetalert2";
 
 const CoursePage = () => {
   const { authUser, allCourses, isLoading } = useAuth();
@@ -14,21 +15,22 @@ const CoursePage = () => {
 
   // function to handle create new Order
   const handleCreateOrder = async () => {
-    let orderDetails = {
-      courseId: id,
-      studentId: authUser.id,
-      amount: currCourse.price,
-    };
     try {
-      const resp = await toast.promise(createPaymentRequest(orderDetails), {
-        success: "Order created successfully!",
-        pending: "Hold On! Do not refresh this page",
-        error: "Error processing request",
-      });
-      console.log(resp.data);
+      const resp = await toast.promise(
+        handleOrderAndPayment(id, currCourse.courseDTO.price, authUser),
+        {
+          success: "Order created successfully!",
+          pending: "Hold On! Do not refresh this page",
+          error: "Error processing request",
+        }
+      );
+      // console.log(resp);
+      if (resp) {
+        //   paymentId, orderId, courseId,studentId
+        //  enroll student
+      }
     } catch (error) {
       console.log(error);
-      toast.error("Unexpected error occured !");
     }
   };
 
@@ -113,9 +115,9 @@ const CoursePage = () => {
                 </h3>
                 {/* <p className="title course-title">CEO & Founder, Example</p>
                 <p>Harvard University</p> */}
-
+                <h3>{currCourse.courseDTO && currCourse.courseDTO.price}</h3>
                 <button
-                  onClick={{ handleCreateOrder }}
+                  onClick={handleCreateOrder}
                   className="btn"
                   style={{ color: "white", backgroundColor: "#512da8" }}
                 >
