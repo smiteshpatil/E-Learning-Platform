@@ -256,7 +256,7 @@ public class CourseServiceImpl implements CourseService {
 		List<Course> courseList = courseRepo.findByCourseId(courseId);
 		return courseList.stream().map(course -> mapper.map(course, CourseRespDTO.class)).collect(Collectors.toList());
 	}
-	
+
 	///////////////
 
 //	 @Override
