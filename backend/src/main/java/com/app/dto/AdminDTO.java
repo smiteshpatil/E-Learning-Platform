@@ -42,8 +42,6 @@ public class AdminDTO {
 	private String GitHubLink;
 
 	private String Heading;
-	
 
 	private Role role;
-
 }

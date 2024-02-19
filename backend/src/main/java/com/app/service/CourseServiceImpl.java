@@ -2,7 +2,6 @@ package com.app.service;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -20,14 +19,15 @@ import com.app.dao.FeedbackRepository;
 import com.app.dao.InstructorRepository;
 import com.app.dao.StudentRepository;
 import com.app.dto.ContentDTO;
+import com.app.dto.ContentDetailDTO;
 import com.app.dto.CourseDTO;
 import com.app.dto.CourseRespDTO;
-import com.app.dto.FeedbackDTO;
 import com.app.dto.GetAllDetailsDTO;
 import com.app.dto.InstructorDTO;
 import com.app.entities.Course;
 import com.app.entities.CourseStudentDetails;
 import com.app.entities.CourseStudentId;
+import com.app.entities.Feedback;
 import com.app.entities.Instructor;
 import com.app.entities.Student;
 
@@ -59,8 +59,6 @@ public class CourseServiceImpl implements CourseService {
     //////////
 	@Autowired
 	private ModelMapper mapper;
-	
-	
 
 	@Override
 	public List<CourseRespDTO> getAllCourses() {
@@ -75,17 +73,33 @@ public class CourseServiceImpl implements CourseService {
 
 		for (Course course : courses) {
 			GetAllDetailsDTO courseDetails = new GetAllDetailsDTO();
-			courseDetails.setCourseDTO(mapper.map(course, CourseDTO.class));
+			CourseDTO courseDTO = mapper.map(course, CourseDTO.class);
+			courseDTO.setAverageRating(calculateAverageRating(course.getFeedbacks()));
+			
+			System.out.println(" in course serviceImpl- courseDTO: " + courseDTO+ " ");
+			 courseDetails.setCourseDTO(courseDTO) ;
 			courseDetails.setInstructorDTO(mapper.map(course.getInst(), InstructorDTO.class));
-			List<ContentDTO> contentDTOs = course.getContents().stream()
-					.map(content -> mapper.map(content, ContentDTO.class)).collect(Collectors.toList());
+			List<ContentDetailDTO> contentDTOs = course.getContents().stream()
+					.map(content -> mapper.map(content, ContentDetailDTO.class)).collect(Collectors.toList());
 			courseDetails.setContentDTO(contentDTOs);
 			allCourseDetails.add(courseDetails);
 		}
-
 		return allCourseDetails;
 	}
 
+	private Double calculateAverageRating(List<Feedback> feedbacks) {
+        if (feedbacks.isEmpty()) {
+            return 0.0;
+        }
+
+        double totalRating = 0;
+        for (Feedback feedback : feedbacks) {
+            totalRating += feedback.getRating();
+        }
+        System.out.println(" Avg rating: " + totalRating / feedbacks.size());
+        return totalRating / feedbacks.size();
+    }
+	
 	@Override
 	public List<CourseRespDTO> getAllCoursesFromInstructor(Long instructorId) {
 		List<Course> courseList = courseRepo.findByInstructorId(instructorId);

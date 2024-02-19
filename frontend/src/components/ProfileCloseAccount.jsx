@@ -14,8 +14,9 @@ export default function ProfileCloseAccount() {
             <div className="border-top text-center mb-4 mt-4">
               <div style={{ paddingBottom: "2rem", paddingTop: "2rem" }}>
                 <p className="text-start">
-                  <span style={{ color:"red" }}>Warning: </span>  If you close your account, you will be unsubscribed
-                  from all your 7 courses, and will lose access forever.
+                  <span style={{ color: "red" }}>Warning: </span> If you close
+                  your account, you will be unsubscribed from all your courses,
+                  and will lose access forever.
                 </p>
               </div>
               <div style={{ paddingBottom: "1rem" }}>

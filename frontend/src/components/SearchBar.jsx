@@ -1,54 +1,24 @@
 import React from "react";
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
-
+import { useAuth } from "../context/AuthContext";
+import "../css/Searchbar.css";
 const SearchBar = () => {
-  const searchBarStyle = {
-    display: "flex",
-    alignItems: "center",
-    width: "50%",
-    maxWidth: "700px",
-    margin: "0",
-    borderRadius: "25px",
-  };
-
-  const inputStyle = {
-    width: "100%",
-    margin: "7px",
-    borderRadius: "5px",
-    border: "1px solid #ccc",
-  };
-
-  const searchResultStyle = {
-    position: "absolute",
-    top: "9%",
-    left: "18.4%",
-    width: "52%",
-    backgroundColor: "rgba(0, 0, 0, 0.4)",
-    zIndex: "9999",
-    justifyContent: "center",
-    alignItems: "center",
-    color: "white",
-  };
+  const { allCourses } = useAuth();
 
   const [searchQuery, setSearchQuery] = useState("");
   const [searchResults, setSearchResults] = useState([]);
-
-  const staticData = [
-    "Apple",
-    "Banana",
-    "Orange",
-    "Pineapple",
-    "Mango",
-    "Grapes",
-  ];
+  const searchContainerRef = useRef(null);
 
   // Function to handle search
   const handleSearch = (query) => {
-    const result = staticData.filter((item) =>
-      item.toLowerCase().includes(query.toLowerCase())
+    const result = allCourses.map((each) => each.courseDTO);
+
+    const searchResult = result.filter((item) =>
+      item.courseName.toLowerCase().includes(query.toLowerCase())
     );
-    setSearchResults(result);
+
+    setSearchResults(searchResult);
   };
 
   // Function to clear search results when the search bar is empty
@@ -58,14 +28,31 @@ const SearchBar = () => {
     }
   };
 
+  // Function to handle click outside the search result container
+  const handleClickOutside = (event) => {
+    if (
+      searchContainerRef.current &&
+      !searchContainerRef.current.contains(event.target)
+    ) {
+      setSearchResults([]);
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+
   return (
     <>
-      <div style={searchBarStyle}>
+      <div className="searchBarStyle">
         <input
-          className="form-control"
+          id="searchInput"
+          className="form-control inputStyle"
           type="text"
           placeholder="Search..."
-          style={inputStyle}
           value={searchQuery}
           onChange={(e) => {
             setSearchQuery(e.target.value);
@@ -75,9 +62,16 @@ const SearchBar = () => {
         />
       </div>
       {searchQuery !== "" && ( // Only show search results if searchQuery is not empty
-        <div className="search-content" style={searchResultStyle}>
-          {searchResults.map((result, index) => (
-            <Link key={index}>{result}</Link>
+        <div
+          className={`searchResultStyle search-content ${
+            searchResults.length > 0 ? "show" : ""
+          }`}
+          ref={searchContainerRef}
+        >
+          {searchResults.map((currCourse, index) => (
+            <Link to={`/courses/${currCourse.id}`} key={index}>
+              {currCourse.courseName}
+            </Link>
           ))}
         </div>
       )}

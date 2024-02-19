@@ -10,12 +10,17 @@
   transition: transform 0.7s ease-in-out;
 }
 
+.carousel-item img {
+  object-fit: cover;
+  height: 100%; /* Ensure the image fills the container height */
+}
+
 .carousel-slide img {
   width: 100%;
   height: auto;
 }
 
-/* Media queries for responsiveness */
+/*Media queries for responsiveness */
 @media screen and (min-width: 768px) {
   .carousel-container {
     width: 80%;

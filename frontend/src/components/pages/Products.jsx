@@ -1,32 +1,36 @@
 import { useState, useEffect } from "react";
-import { getAllCourses } from "../../api/courseService";
-import { courses as currentCourses } from "../../api/courseService";
 import { CartProvider, useCart } from "react-use-cart";
 import { toast } from "react-toastify";
+import { useAuth } from "../../context/AuthContext";
 import "react-toastify/dist/ReactToastify.css";
+import { Link } from "react-router-dom";
 const Page = (props) => {
   const { addItem } = useCart();
+  const { allCourses } = useAuth();
   console.log("In page comp", props.courses);
-
+  // const courseDTO = allCourses.map((each) => each.courseDTO);
+  // const instructorDTO = allCourses.map((curr)=>curr.instructorDTO)
   return (
     <>
-      <div className="course-content-section">
+      <div className="container course-content-section">
         <div className="course-container">
-          {currentCourses.map((currentCourse) => (
-            <div className="course-post" key={currentCourse.id}>
-              <img className="cover-img" src={currentCourse.thumbnail} alt="" />
-              <h2 className="title">{currentCourse.title}</h2>
-              <p className="description">{currentCourse.description}</p>
+          {allCourses.map((curr) => (
+            <div className="course-post" key={curr.courseDTO.id}>
+              <img className="cover-img" src={curr.courseDTO.imageUrl} alt="" />
+              <h2 className="title">{curr.courseDTO.title}</h2>
+              <p className="description">
+                {curr.courseDTO.description.split(" ").slice(0, 25).join(" ")}
+              </p>
               <div className="card-details">
                 <div className="lh-details">
                   <img
                     className="author-img"
-                    src={currentCourse.author.profilePicture.url}
+                    src={curr.instructorDTO.imageUrl}
                     alt=""
                   />
                   <p className="date">
                     {new Date(
-                      `${currentCourse.datePublished}`
+                      `${curr.courseDTO.publishedDate}`
                     ).toLocaleDateString("en-us", {
                       year: "numeric",
                       month: "short",
@@ -35,11 +39,16 @@ const Page = (props) => {
                   </p>
                 </div>
               </div>
-              <button className="btn btn-info">View Course</button>
+              <Link
+                to={`/courses/${curr.courseDTO.id}`}
+                className="btn btn-info"
+              >
+                View Course
+              </Link>
               &nbsp;
               <button
                 className="btn btn-success"
-                onClick={() => addItem(currentCourse)}
+                onClick={() => addItem(curr.courseDTO)}
               >
                 Add to cart
               </button>
@@ -50,20 +59,21 @@ const Page = (props) => {
     </>
   );
 };
-function AppProducts() {
-  const [allCourses, setAllCourses] = useState(null);
 
+function AppProducts() {
+  const [allCourses1, setAllCourses] = useState(null);
+  const { allCourses } = useAuth();
   //populate all courses
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const coursesPromise = getAllCourses(); // Calling the getAllCourses function
-        toast.promise(coursesPromise, {
-          pending: "Loading courses...",
+        const courses = await allCourses; // Calling the getAllCourses function
+        toast.promise(courses, {
+          // pending: "Loading courses...",
           success: "Courses loaded",
           error: "Error fetching courses",
         });
-        const courses = await coursesPromise;
+        // const courses = await coursesPromise;
         setAllCourses(courses);
       } catch (error) {
         console.error("Error fetching courses:", error);
@@ -71,7 +81,7 @@ function AppProducts() {
     };
 
     fetchData();
-  }, []);
+  }, [allCourses1]);
 
   return (
     <CartProvider>

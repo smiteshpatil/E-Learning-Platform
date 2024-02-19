@@ -8,16 +8,32 @@ import { FaCartShopping } from "react-icons/fa6";
 import { useNavigate } from "react-router-dom";
 import ProfileIcon from "./ProfileIcon";
 import { useAuth } from "../context/AuthContext";
+import { syncCartToDB } from "../api/userService";
+import { useCart } from "react-use-cart";
 
 const Navbar = () => {
+  // useCart
+  const {
+    isEmpty,
+    totalItems,
+    items,
+    emptyCart,
+    updateItemQuantity,
+    removeItem,
+  } = useCart();
+
   let { authUser, isLoggedIn, setIsLoggedIn } = useAuth();
   const navigate = useNavigate();
 
   //log out
-  const logOut = (e) => {
+  const logOut = async (e) => {
+    console.log("items len: " + items.length);
+    //items.map(item => console.log("id: "+item.id));
+    await syncCartToDB(authUser.email, localStorage.getItem("token"), items);
     setIsLoggedIn(false);
     localStorage.removeItem("token");
     localStorage.removeItem("userObject");
+    emptyCart();
     navigate("/login");
   };
 
@@ -43,17 +59,35 @@ const Navbar = () => {
             <li className="right">
               <NavLink to="/cart">
                 {/* Cart Icon */}
-                <FaCartShopping size={30} />
+                <FaCartShopping size={25} />
+
+                {totalItems ? (
+                  <></>
+                ) : (
+                  <span
+                    style={{
+                      padding: "0 2px",
+                      fontSize: "1rem",
+                      color: "white",
+                      borderRadius: "100%",
+                      backgroundColor: "red",
+                    }}
+                  >
+                    {totalItems}
+                  </span>
+                )}
               </NavLink>
             </li>
           )}
           {authUser && localStorage.getItem("userObject") ? (
-            <TbLogout2
-              color="black"
-              size={30}
-              onClick={logOut}
-              className="logout"
-            />
+            <li className="right">
+              <TbLogout2
+                color="black"
+                size={30}
+                onClick={logOut}
+                className="logout"
+              />
+            </li>
           ) : (
             <li className="right login-link">
               <NavLink to="/login">LogIn/Register</NavLink>
@@ -61,7 +95,7 @@ const Navbar = () => {
           )}
 
           <li className="right">
-            {isLoggedIn === true && (
+            {authUser && localStorage.getItem("userObject") && (
               <NavLink to="/user/profile">
                 <ProfileIcon />
               </NavLink>

@@ -9,11 +9,12 @@ const ProfilePhoto = () => {
     authUser && authUser.picture
       ? authUser.picture
       : "https://via.placeholder.com/200"; // Placeholder image URL
-  const [imagePreview, setImagePreview] = useState(placeholderImage); // State for image preview
+  const [imagePreview, setImagePreview] = useState(
+    "https://via.placeholder.com/200"
+  ); // State for image preview
 
   const handleImageChange = (e) => {
     const selectedImage = e.target.files[0];
-
     // Display image preview
     const reader = new FileReader();
     reader.onload = () => {
@@ -43,7 +44,10 @@ const ProfilePhoto = () => {
                   paddingRight: "1rem",
                 }}
               >
-                <div className="text-start " style={{ paddingBottom: "1rem", paddingTop: "1rem" }}>
+                <div
+                  className="text-start "
+                  style={{ paddingBottom: "1rem", paddingTop: "1rem" }}
+                >
                   <label
                     htmlFor="image-preview"
                     className="ud-form-label ud-heading-sm"
@@ -52,7 +56,7 @@ const ProfilePhoto = () => {
                     Image preview
                   </label>
                 </div>
-                <div className="ud-image-upload-preview-wrapper mt-2 form-control" >
+                <div className="ud-image-upload-preview-wrapper mt-2 form-control">
                   <div>
                     {authUser && authUser.picture && (
                       <img
@@ -61,7 +65,11 @@ const ProfilePhoto = () => {
                         height="200"
                         width="200"
                         className="img-fluid lazy"
-                        style={{  maxWidth: "100%", maxHeight: "100%", borderRadius: "100%" }}
+                        style={{
+                          maxWidth: "100%",
+                          maxHeight: "100%",
+                          borderRadius: "100%",
+                        }}
                       />
                     )}
                   </div>
@@ -101,9 +109,9 @@ const ProfilePhoto = () => {
                 }}
               >
                 <Button variant="primary" className="me-2">
-                      Save
-                  </Button>
-                  <Button variant="outline-secondary">Cancel</Button>
+                  Save
+                </Button>
+                <Button variant="outline-secondary">Cancel</Button>
               </div>
             </form>
           </Col>

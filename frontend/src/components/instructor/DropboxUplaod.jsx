@@ -5,6 +5,12 @@ import { ToastContainer, toast } from "react-toastify";
 
 const DropboxUpload = (props) => {
   const [file, setFile] = useState(null);
+  const [refresh, setRefresh] = useState(false);
+
+  //refresh Page
+  const refreshPage = () => {
+    setRefresh((prev) => !prev);
+  };
 
   const handleChange = (event) => {
     setFile(event.target.files[0]);
@@ -20,8 +26,10 @@ const DropboxUpload = (props) => {
         error: "err uploading videos",
       });
       props.setUrl(url, path);
+      refreshPage();
     } catch (err) {
-      console.log("failed to upload video");
+      refreshPage();
+      toast.warning("failed to upload video");
     }
   };
 

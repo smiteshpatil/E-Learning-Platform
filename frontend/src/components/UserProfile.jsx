@@ -1,15 +1,66 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Button, Container, Row, Col } from "react-bootstrap";
 import { useAuth } from "../context/AuthContext";
-
+import { updateStudentService } from "../api/userService";
+import { toast } from "react-toastify";
 const UserProfile = () => {
-  const [text, setText] = useState("");
-  let { authUser } = useAuth();
+  let { authUser, refreshContext, isLoading } = useAuth();
+
+  const [newDetails, setNewDetails] = useState({
+    firstName: "",
+    lastName: "",
+    heading: "",
+    phoneNo: "",
+    gender: "",
+    linkedInLink: "",
+    gitHubLink: "",
+  });
+
+  const clearForm = () => {
+    setNewDetails({
+      firstName: "",
+      lastName: "",
+      heading: "",
+      phoneNo: "",
+      gender: "",
+      linkedInLink: "",
+      gitHubLink: "",
+    });
+  };
 
   // Update the state with the text from textarea
   const handleChange = (event) => {
-    setText(event.target.value);
+    let { name, value } = event.target;
+    console.log(name, value);
+    setNewDetails({ ...newDetails, [name]: value });
   };
+
+  // update student details
+  const handleUpdateStudent = async () => {
+    const resp = await toast.promise(
+      updateStudentService(newDetails, localStorage.getItem("token")),
+      {
+        pending: "Updating profile...",
+        success: "Profile updated successfully",
+        error: "Unexpected error occured",
+      }
+    );
+    console.log(resp.data);
+    localStorage.setItem("userObject", JSON.stringify(resp.data));
+
+    refreshContext();
+  };
+
+  // fetchUserDeatails
+  useEffect(() => {
+    console.log("in useEffect");
+    if (!isLoading) {
+      const fetchUser = () => {
+        setNewDetails(authUser);
+      };
+      fetchUser();
+    }
+  }, [isLoading, authUser]);
 
   return (
     <>
@@ -33,7 +84,8 @@ const UserProfile = () => {
                   name="firstName"
                   placeholder="First Name"
                   aria-label="First Name"
-                  value={authUser ? authUser.firstName : ""}
+                  value={newDetails.firstName}
+                  onChange={handleChange}
                 />
               </div>
               <div className="pb-3">
@@ -43,7 +95,8 @@ const UserProfile = () => {
                   name="lastName"
                   placeholder="Last Name"
                   aria-label="Last Name"
-                  value={authUser ? authUser.lastName : ""}
+                  value={newDetails.lastName}
+                  onChange={handleChange}
                 />
               </div>
 
@@ -54,12 +107,12 @@ const UserProfile = () => {
                 <textarea
                   className="form-control form-control-md"
                   type="textarea"
-                  value={text}
                   name="heading"
-                  onChange={handleChange}
                   rows={1}
                   placeholder="Heading"
                   aria-label="Heading"
+                  value={newDetails.heading}
+                  onChange={handleChange}
                 />
 
                 <div className="pb-2 mt-2">
@@ -70,11 +123,15 @@ const UserProfile = () => {
                     name="phoneNo"
                     placeholder="+91"
                     aria-label="Last Name"
-                    value={authUser ? authUser.phoneNo : ""}
+                    value={newDetails.phoneNo}
+                    onChange={handleChange}
                   />
-                  
+
                   <div className="mt-3">
-                    <div className="text-start mb-2" style={{ fontSize: "1.15rem", margin: "0" }}>
+                    <div
+                      className="text-start mb-2"
+                      style={{ fontSize: "1.15rem", margin: "0" }}
+                    >
                       Gender
                     </div>
                     <div className="d-flex flex-column flex-md-row align-items-md-center">
@@ -84,6 +141,7 @@ const UserProfile = () => {
                           name="gender"
                           id="male"
                           value="male"
+                          onChange={handleChange}
                         />
                         <label
                           htmlFor="male"
@@ -99,6 +157,7 @@ const UserProfile = () => {
                           name="gender"
                           id="female"
                           value="female"
+                          onChange={handleChange}
                         />
                         <label
                           htmlFor="female"
@@ -117,7 +176,7 @@ const UserProfile = () => {
                 <p className="text-start">Links</p>
 
                 <div className="pb-3 ">
-                <span className="form-text text-start" id="basic-addon4">
+                  <span className="form-text text-start" id="basic-addon4">
                     Your LinkedIn id
                   </span>
                   <div className="input-group ">
@@ -129,13 +188,15 @@ const UserProfile = () => {
                       className="form-control"
                       id="basic-url"
                       aria-describedby="basic-addon3 basic-addon4"
+                      name="linkedInLink"
+                      value={newDetails.linkedInLink}
+                      onChange={handleChange}
                     />
                   </div>
-                  
                 </div>
 
                 <div>
-                <span className="form-text text-start" id="basic-addon4">
+                  <span className="form-text text-start" id="basic-addon4">
                     Your github id
                   </span>
                   <div className="input-group">
@@ -147,14 +208,23 @@ const UserProfile = () => {
                       className="form-control"
                       id="basic-url"
                       aria-describedby="basic-addon3 basic-addon4"
+                      name="gitHubLink"
+                      value={newDetails.gitHubLink}
+                      onChange={handleChange}
                     />
                   </div>
 
                   <div className="mt-4 mb-2">
-                    <Button variant="primary" className="me-2">
+                    <Button
+                      onClick={handleUpdateStudent}
+                      variant="primary"
+                      className="me-2"
+                    >
                       Save
                     </Button>
-                    <Button variant="outline-secondary">Cancel</Button>
+                    <Button onClick={clearForm} variant="outline-secondary">
+                      Cancel
+                    </Button>
                   </div>
                 </div>
               </div>

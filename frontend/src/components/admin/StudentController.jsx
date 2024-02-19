@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { getStudentCourseDetails } from "../../api/adminService";
+import { getStudentCourseDetails, revokeStudentFromCourse } from "../../api/adminService"; 
 import "./Controller.css";
+import { toast } from "react-toastify";
+import { useAuth } from "../../context/AuthContext";
 
 const StudentController = () => {
   const [students, setStudents] = useState();
@@ -23,6 +25,28 @@ const StudentController = () => {
       );
     }
   };
+
+  // Function to handle revoking a student from a course
+  const handleRevoke = async (courseId, studentId) => {
+    try {
+      if(!courseId){
+        console.error("Invalid CourseId");
+      }
+
+      if(!studentId){
+        console.error("Invalid StudentId");
+      }
+
+      const response = await revokeStudentFromCourse(courseId, studentId, jwt);
+      if(response.status == 200 ){
+        fetchStudentDetails();
+        toast.success("student has been successfully removed from the course.");
+      }
+    } catch (error) {
+      console.error("Failed to revoke the student from course: ", error);
+      toast.error("Failed to revoke the student from course");
+    }
+  }
 
   return (
     <div className="table-container">
@@ -49,7 +73,7 @@ const StudentController = () => {
                 <td>{student.courseName}</td>
                 <td>{student.enrolledDate}</td>
                 <td>
-                  <button>Revoke</button>
+                  <button onClick={()=> handleRevoke(student.courseId, useAuth.id)}>Revoke</button>
                 </td>
               </tr>
             ))}

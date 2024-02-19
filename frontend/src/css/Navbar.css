@@ -1,7 +1,9 @@
 .topnav {
   background-color: white;
+  /* background-color: #582bd3; */
   overflow: hidden;
-  color: black;
+  /* color: black; */
+  color: white;
   position: sticky;
   top: 0%;
   z-index: 1000;
@@ -56,6 +58,7 @@
 .topnav a {
   display: block;
   color: black;
+  /* color: white; */
   text-align: center;
   /* padding: 10px 12px; */
   padding: 2px 4px;

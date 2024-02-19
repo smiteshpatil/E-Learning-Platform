@@ -3,6 +3,7 @@ package com.app.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -95,6 +96,8 @@ public class AdminController {
     @DeleteMapping("/{courseId}/{studentId}")
     public ResponseEntity<String> deleteStudentFromCourse(@PathVariable Long courseId, @PathVariable Long studentId) {
         adminService.deleteStudentFromCourse(courseId, studentId);
-        return ResponseEntity.ok("Student deleted from course successfully");
+        System.out.println("checking Status code ");
+        System.out.println("Status code " + ResponseEntity.status(HttpStatus.OK));
+        return ResponseEntity.status(HttpStatus.OK).body("Student deleted from course successfully");
     }
 }

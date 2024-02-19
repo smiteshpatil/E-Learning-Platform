@@ -21,5 +21,5 @@ public class FeedbackDTO {
 	private Long courseId;
 
 	private Long studentId;
-
+	
 }

@@ -1,10 +1,14 @@
 package com.app.dto;
 
 import java.time.LocalDate;
+import java.util.List;
 
 import javax.persistence.Lob;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 
+import com.app.entities.Feedback;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonProperty.Access;
 
@@ -31,13 +35,17 @@ public class CourseDTO {
 
 	private Long price;
 
+	private String imageUrl;
+
 	private LocalDate publishedDate;
 
 	@Lob
 	private byte[] coursePoster;
 
-	private String imageUrl;
-
 	private Long instructorId;
-	
+
+	@Min(0)
+	@Max(5)
+	private Double averageRating;
+
 }

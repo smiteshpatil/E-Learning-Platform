@@ -6,6 +6,7 @@ import { useParams } from "react-router-dom";
 const CreateContent = (props) => {
   let { courseId } = useParams();
   let token = localStorage.getItem("token");
+
   const [currContent, setCurrContent] = useState({
     courseId: courseId,
     contentNo: "",
@@ -29,6 +30,17 @@ const CreateContent = (props) => {
     }));
   };
 
+  // clear form
+  const clearForm = () => {
+    setCurrContent({
+      contentNo: "",
+      contentName: "",
+      contentDescription: "",
+      contentUrl: "",
+      contentPath: "",
+    });
+  };
+
   // save content to db
   const handleAddContent = async () => {
     try {
@@ -40,6 +52,7 @@ const CreateContent = (props) => {
         });
         //update the state in parent for rerender
         props.refresh();
+        clearForm();
       } else {
         toast.warning("Please upload video !");
       }
@@ -49,14 +62,8 @@ const CreateContent = (props) => {
   };
 
   const handleCancel = () => {
-    setCurrContent({
-      contentNo: "",
-      contentName: "",
-      contentDescription: "",
-      contentUrl: "",
-      contentPath: "",
-    });
     // call dropbox api to delete file with path=contentPath
+    clearForm();
   };
 
   return (
@@ -67,6 +74,7 @@ const CreateContent = (props) => {
         </label>
         <div className="col-sm-9">
           <input
+            type="number"
             className="form-control"
             id="contentNo"
             name="contentNo"
@@ -94,13 +102,14 @@ const CreateContent = (props) => {
           Description
         </label>
         <div className="col-sm-9">
-          <input
-            className="form-control"
-            id="contentDescription"
+          <textarea
             name="contentDescription"
+            id="contentDescription"
+            className="form-control"
+            placeholder="Description here..."
             value={currContent.contentDescription}
             onChange={handleChange}
-          />
+          ></textarea>
         </div>
       </div>
       <div className="row mb-3">
