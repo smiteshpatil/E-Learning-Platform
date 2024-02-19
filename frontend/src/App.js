@@ -36,6 +36,7 @@ import { ToastContainer, Bounce } from "react-toastify";
 import PrivacyPolicy from "./components/PrivacyPolicy";
 import Help from "./components/Help";
 import Terms from "./components/Terms";
+import CategoryList from "./components/pages/CategoryList";
 function App() {
   return (
     <div className="App">
