@@ -61,7 +61,7 @@ public class SecurityConfig {
 						"/courses/delete/{courseId}",
 						"/contents",
 						"/contents/add",
-						"/contents/{courseId}",
+						// "/contents/{courseId}",
 						"/contents/{courseId}/{contentId}",
 						"/contents/update/{contentId}",
 						"contents/delete/{contentId}")

@@ -1,32 +1,31 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import ProgressBar from "react-bootstrap/ProgressBar";
-import { FaRegPlayCircle } from "react-icons/fa";
 import { FaPlayCircle } from "react-icons/fa";
 import "bootstrap/dist/css/bootstrap.min.css";
 
-const MyCourse = ({ courseName, progress, imageUrl, videoUrl }) => {
-  const redirectToVideoPage = () => {
-    // Redirect to the course video page when the play button is clicked
-    // window.location.href = videoUrl;
-  };
+const MyCourse = (props) => {
+  let progress = 50;
+
+  const courseId = props.course.id;
 
   return (
     <div className="card" style={{ width: "300px" }}>
       <img
-        src={imageUrl}
+        src={props.course && props.course.imageUrl}
         className="card-img-top"
         alt="Course"
         style={{ height: "200px", objectFit: "cover" }}
       />
 
-      <h5 className="card-title">{courseName}</h5>
+      <h5 className="card-title">{props.course && props.course.courseName}</h5>
       <ProgressBar
         variant="success"
         now={progress}
         label={`${progress}%`}
         className="mx-2"
       />
-      <button
+      <Link
         className="btn play-btn"
         style={{
           position: "absolute",
@@ -35,12 +34,10 @@ const MyCourse = ({ courseName, progress, imageUrl, videoUrl }) => {
           transform: "translate(-50%, -50%)",
           opacity: "0.7",
         }}
-        onClick={redirectToVideoPage}
+        to={`/videos/${courseId}`}
       >
-        {/* <i className="bi bi-play-circle"></i> Play */}
-        {/* <FaRegPlayCircle size={40} color="white" /> */}
         <FaPlayCircle size={40} color="white" />
-      </button>
+      </Link>
     </div>
   );
 };

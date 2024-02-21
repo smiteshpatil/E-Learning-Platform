@@ -4,7 +4,10 @@ import { useAuth } from "../../context/AuthContext";
 import img from "../../images/card1.jpg";
 import CourseContent from "./CourseContent";
 import "./CoursePage.css";
-import { handleOrderAndPayment } from "../../api/paymentService";
+import {
+  handleOrderAndPayment,
+  confirmPaymentAndEnrollStudent,
+} from "../../api/paymentService";
 import { toast } from "react-toastify";
 import Swal from "sweetalert2";
 
@@ -24,15 +27,25 @@ const CoursePage = () => {
           error: "Error processing request",
         }
       );
-      // console.log(resp);
+      console.log("==>", resp);
       if (resp) {
-        //   paymentId, orderId, courseId,studentId
-        //  enroll student
         Swal.fire({
-          title: "Good job!",
-          text: "You clicked the button!",
+          title: "Congratulations !",
+          text: "your payment is sucessfull!",
           icon: "success",
         });
+        //   paymentId, orderId, courseId,studentId
+        //  enroll student
+        let paymentData = {
+          paymentId: resp.razorpay_payment_id,
+          orderId: resp.razorpay_order_id,
+          courseId: id,
+          studentId: authUser.id,
+        };
+        console.log("In coursePage:-->", paymentData);
+        const res = await confirmPaymentAndEnrollStudent(paymentData);
+      } else {
+        toast.error("unexpected error occured");
       }
     } catch (error) {
       console.log(error);

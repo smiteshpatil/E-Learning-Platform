@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { NavLink, Outlet } from "react-router-dom";
+import { NavLink, Outlet, useParams } from "react-router-dom";
 import PlayListDropdown from "./PlayListDropdown";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./css/VideoPage.css";
 
 const VideoPage = () => {
+  const { courseId } = useParams();
+
   const [selectedVideo, setSelectedVideo] = useState("");
   const [playtimeInSeconds, setPlaytimeInSeconds] = useState(0);
   const [watchedTime, setWatchedTime] = useState(0);
@@ -167,7 +169,7 @@ const VideoPage = () => {
           }}
         >
           <PlayListDropdown
-            // content={content}
+            currId={courseId}
             changeVideoUrl={handleVideoChange}
             currentVideoIndex={currentVideoIndex}
           />
