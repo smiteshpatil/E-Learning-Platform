@@ -1,16 +1,23 @@
 import React, { useState } from "react";
 import { publishNewQuestion } from "../../api/contentService";
 import { toast } from "react-toastify";
+import { useAuth } from "../../context/AuthContext";
+import { useParams } from "react-router-dom";
 const PublishQuestion = () => {
+  let { courseId } = useParams();
+  console.log(courseId);
   const [question, setQuestion] = useState("");
 
   const handlePublish = () => {
     if (question !== "") {
-      toast.promise(publishNewQuestion(question), {
-        success: "your question is sent",
-        pending: "uploading...",
-        error: "error sending question",
-      });
+      toast.promise(
+        publishNewQuestion(courseId, question, localStorage.getItem("token")),
+        {
+          success: "your question is sent",
+          pending: "uploading...",
+          error: "error sending question",
+        }
+      );
       setQuestion("");
     } else {
       toast.error("question cannot be empty");

@@ -1,8 +1,12 @@
 import React, { useState, useRef } from "react";
 import { FaStar } from "react-icons/fa";
 import Feedback from "./Feedback";
+import { reviewCourse } from "../../api/courseService";
+import { useParams } from "react-router-dom";
 
-const VideoReview = ({ onSubmit, onCancel }) => {
+const VideoReview = () => {
+  let { courseId } = useParams();
+
   const [rating, setRating] = useState(0);
   const [hoverRating, setHoverRating] = useState(0);
   const [visibleComments, setVisibleComments] = useState(3);
@@ -13,132 +17,6 @@ const VideoReview = ({ onSubmit, onCancel }) => {
       userName: "John Doe",
       comment: "This course is amazing! I learned so much.",
       rating: 5,
-    },
-    {
-      userProfile: "https://via.placeholder.com/200",
-      userName: "Jane Smith",
-      comment: "I really enjoyed the content. It was very informative.",
-      rating: 4,
-    },
-    {
-      userProfile: "https://via.placeholder.com/200",
-      userName: "Jane Smith",
-      comment: "I really enjoyed the content. It was very informative.",
-      rating: 4,
-    },
-    {
-      userProfile: "https://via.placeholder.com/200",
-      userName: "Jane Smith",
-      comment: "I really enjoyed the content. It was very informative.",
-      rating: 4,
-    },
-    {
-      userProfile: "https://via.placeholder.com/200",
-      userName: "Jane Smith",
-      comment: "I really enjoyed the content. It was very informative.",
-      rating: 4,
-    },
-    {
-      userProfile: "https://via.placeholder.com/200",
-      userName: "Jane Smith",
-      comment: "I really enjoyed the content. It was very informative.",
-      rating: 4,
-    },
-    {
-      userProfile: "https://via.placeholder.com/200",
-      userName: "Jane Smith",
-      comment: "I really enjoyed the content. It was very informative.",
-      rating: 4,
-    },
-    {
-      userProfile: "https://via.placeholder.com/200",
-      userName: "Jane Smith",
-      comment: "I really enjoyed the content. It was very informative.",
-      rating: 4,
-    },
-    {
-      userProfile: "https://via.placeholder.com/200",
-      userName: "Jane Smith",
-      comment: "I really enjoyed the content. It was very informative.",
-      rating: 4,
-    },
-    {
-      userProfile: "https://via.placeholder.com/200",
-      userName: "Jane Smith",
-      comment: "I really enjoyed the content. It was very informative.",
-      rating: 4,
-    },
-    {
-      userProfile: "https://via.placeholder.com/200",
-      userName: "Jane Smith",
-      comment: "I really enjoyed the content. It was very informative.",
-      rating: 4,
-    },
-    {
-      userProfile: "https://via.placeholder.com/200",
-      userName: "Jane Smith",
-      comment: "I really enjoyed the content. It was very informative.",
-      rating: 4,
-    },
-    {
-      userProfile: "https://via.placeholder.com/200",
-      userName: "Jane Smith",
-      comment: "I really enjoyed the content. It was very informative.",
-      rating: 4,
-    },
-    {
-      userProfile: "https://via.placeholder.com/200",
-      userName: "Jane Smith",
-      comment: "I really enjoyed the content. It was very informative.",
-      rating: 4,
-    },
-    {
-      userProfile: "https://via.placeholder.com/200",
-      userName: "Jane Smith",
-      comment: "I really enjoyed the content. It was very informative.",
-      rating: 4,
-    },
-    {
-      userProfile: "https://via.placeholder.com/200",
-      userName: "Jane Smith",
-      comment: "I really enjoyed the content. It was very informative.",
-      rating: 4,
-    },
-    {
-      userProfile: "https://via.placeholder.com/200",
-      userName: "Jane Smith",
-      comment: "I really enjoyed the content. It was very informative.",
-      rating: 4,
-    },
-    {
-      userProfile: "https://via.placeholder.com/200",
-      userName: "Jane Smith",
-      comment: "I really enjoyed the content. It was very informative.",
-      rating: 4,
-    },
-    {
-      userProfile: "https://via.placeholder.com/200",
-      userName: "Jane Smith",
-      comment: "I really enjoyed the content. It was very informative.",
-      rating: 4,
-    },
-    {
-      userProfile: "https://via.placeholder.com/200",
-      userName: "Jane Smith",
-      comment: "I really enjoyed the content. It was very informative.",
-      rating: 4,
-    },
-    {
-      userProfile: "https://via.placeholder.com/200",
-      userName: "Jane Smith",
-      comment: "I really enjoyed the content. It was very informative.",
-      rating: 4,
-    },
-    {
-      userProfile: "https://via.placeholder.com/200",
-      userName: "Jane Smith",
-      comment: "I really enjoyed the content. It was very informative.",
-      rating: 4,
     },
     {
       userProfile: "https://via.placeholder.com/200",
@@ -327,19 +205,18 @@ const VideoReview = ({ onSubmit, onCancel }) => {
     setHoverRating(0);
   };
 
-  const handleSubmit = () => {
-    //send it to the server
-    if (onSubmit) {
-      onSubmit(rating);
-    }
+  const handleSubmit = async () => {
+    const resp = await reviewCourse(
+      parseInt(courseId),
+      localStorage.getItem("token")
+    );
   };
 
-  const handleCancel = () => {
-    // Here you can cancel the review
-    if (onCancel) {
-      onCancel();
-    }
-  };
+  // const handleCancel = () => {
+  //   // Here you can cancel the review
+
+  //   }
+  // };
 
   return (
     <div
@@ -377,9 +254,7 @@ const VideoReview = ({ onSubmit, onCancel }) => {
         <button className="btn btn-warning" onClick={handleSubmit}>
           Submit
         </button>
-        <button className="btn btn-outline-secondary" onClick={handleCancel}>
-          Cancel
-        </button>
+        <button className="btn btn-outline-secondary">Cancel</button>
       </div>
       <div className="container my-3" style={{ border: "1px solid" }}>
         {/* Scrollable comments section */}

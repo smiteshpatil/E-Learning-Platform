@@ -113,6 +113,7 @@ const VideoPage = () => {
             <li className="nav-item">
               <NavLink
                 to="overview"
+                state={courseId}
                 className={
                   "nav-link" + (activeLink === "overview" ? " active-link" : "")
                 }
@@ -124,6 +125,7 @@ const VideoPage = () => {
             <li className="nav-item">
               <NavLink
                 to="qanda"
+                state={courseId}
                 className={
                   "nav-link" + (activeLink === "qanda" ? " active-link" : "")
                 }
@@ -135,6 +137,7 @@ const VideoPage = () => {
             <li className="nav-item">
               <NavLink
                 to="notes"
+                state={courseId}
                 className={
                   "nav-link" + (activeLink === "notes" ? " active-link" : "")
                 }
@@ -146,6 +149,7 @@ const VideoPage = () => {
             <li className="nav-item">
               <NavLink
                 to="review"
+                state={courseId}
                 className={
                   "nav-link" + (activeLink === "review" ? " active-link" : "")
                 }

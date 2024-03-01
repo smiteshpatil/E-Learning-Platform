@@ -11,10 +11,10 @@ const ProfileIcon = () => {
 
   return (
     <>
-      {authUser && authUser.picture ? (
-        <img src={authUser.picture} alt="Profile" style={profileIconStyle} />
+      {authUser && authUser.imageUrl ? (
+        <img src={authUser.imageUrl} alt="Profile" style={profileIconStyle} />
       ) : (
-        <FaUserCircle size={30} />
+        <FaUserCircle size={25} />
       )}
     </>
   );

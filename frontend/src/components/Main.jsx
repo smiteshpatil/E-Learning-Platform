@@ -9,6 +9,9 @@ const Main = () => {
   const [currentCourse, setcurrentCourse] = useState(1);
   const [coursesPerPage] = useState(3);
 
+  //  courses bought should not show view btn
+  const [myCourses, setMyCourses] = useState([]);
+
   useEffect(() => {
     const fetchTrendingCourses = async () => {
       try {

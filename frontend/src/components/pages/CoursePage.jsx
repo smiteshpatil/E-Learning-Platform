@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
 import img from "../../images/card1.jpg";
 import CourseContent from "./CourseContent";
+import { useNavigate } from "react-router-dom";
 import "./CoursePage.css";
 import {
   handleOrderAndPayment,
@@ -16,39 +17,46 @@ const CoursePage = () => {
   const { id } = useParams();
   const [currCourse, setCurrCourse] = useState({});
 
+  let navigate = useNavigate();
+
   // function to handle create new Order
   const handleCreateOrder = async () => {
-    try {
-      const resp = await toast.promise(
-        handleOrderAndPayment(id, currCourse.courseDTO.price, authUser),
-        {
-          success: "Order created successfully!",
-          pending: "Hold On! Do not refresh this page",
-          error: "Error processing request",
+    if (authUser) {
+      try {
+        const resp = await toast.promise(
+          handleOrderAndPayment(id, currCourse.courseDTO.price, authUser),
+          {
+            success: "Order created successfully!",
+            pending: "Hold On! Do not refresh this page",
+            error: "Error processing request",
+          }
+        );
+        console.log("==>", resp);
+        if (resp) {
+          Swal.fire({
+            title: "Congratulations !",
+            text: "your payment is sucessfull!",
+            icon: "success",
+          });
+          //   paymentId, orderId, courseId,studentId
+          //  enroll student
+          let paymentData = {
+            paymentId: resp.razorpay_payment_id,
+            orderId: resp.razorpay_order_id,
+            courseId: id,
+            studentId: authUser.id,
+          };
+          console.log("In coursePage:-->", paymentData);
+          const res = await confirmPaymentAndEnrollStudent(paymentData);
+        } else {
+          toast.error("unexpected error occured");
         }
-      );
-      console.log("==>", resp);
-      if (resp) {
-        Swal.fire({
-          title: "Congratulations !",
-          text: "your payment is sucessfull!",
-          icon: "success",
-        });
-        //   paymentId, orderId, courseId,studentId
-        //  enroll student
-        let paymentData = {
-          paymentId: resp.razorpay_payment_id,
-          orderId: resp.razorpay_order_id,
-          courseId: id,
-          studentId: authUser.id,
-        };
-        console.log("In coursePage:-->", paymentData);
-        const res = await confirmPaymentAndEnrollStudent(paymentData);
-      } else {
-        toast.error("unexpected error occured");
+      } catch (error) {
+        console.log(error);
       }
-    } catch (error) {
-      console.log(error);
+    } else {
+      toast("Please login to buy course !");
+      navigate("/login");
     }
   };
 

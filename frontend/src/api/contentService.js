@@ -1,6 +1,6 @@
 import axios from "axios";
-// const baseUrl = "http://localhost:8080";
-const baseUrl = "http://3.109.231.43:8080";
+const baseUrl = "http://localhost:8080";
+// const baseUrl = "http://3.109.231.43:8080";
 
 //GET: get all contents of a particular course
 export const getAllContentsByCourseId = async (courseId, bearerToken) => {
@@ -54,7 +54,10 @@ export const publishNewQuestion = async (courseId, question, token) => {
   try {
     const response = await axios.post(
       baseUrl + `/qna/add/${courseId}`,
-      question,
+      {
+        courseId: courseId,
+        question: question,
+      },
       {
         headers: {
           Authorization: `Bearer ${token}`,

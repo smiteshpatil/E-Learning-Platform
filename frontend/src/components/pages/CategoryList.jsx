@@ -4,13 +4,13 @@ import { Link } from "react-router-dom";
 
 const CategoryList = () => {
   const categories = [
-    { name: "Development", link: "dev" },
-    { name: "Finance & Accounting", link: "financeAndAcc" },
-    { name: "Business", link: "business" },
-    { name: "Digital Marketing", link: "digitalMarketing" },
-    { name: "Graphics Design", link: "graphicsDesign" },
-    { name: "Entrepreneurship", link: "entrepreneurship" },
-    { name: "All Categories", link: "" },
+    { name: "Development" },
+    { name: "Finance & Accounting" },
+    { name: "Business" },
+    { name: "Digital Marketing" },
+    { name: "Graphics Design" },
+    { name: "Entrepreneurship" },
+    { name: "All Categories" },
   ];
 
   return (
@@ -19,7 +19,7 @@ const CategoryList = () => {
         {categories.map((category, index) => (
           <li key={index}>
             <Link
-              to={`/allCourses/${category.link}`}
+              to={`/allCourses/${index}`}
               style={{ color: "white", textDecoration: "none" }}
             >
               {category.name}

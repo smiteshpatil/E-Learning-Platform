@@ -2,9 +2,9 @@ import React from "react";
 import "./css/VideoQAndA.css";
 import QandASearchBar from "./QandASearchBar";
 import PublishQuestion from "./PublishQuestion";
+import { useParams } from "react-router-dom";
 
 const VideoQAndA = () => {
-  // let currentCourse = courses[0];
   return (
     <>
       <div className="mx-3 mt-3" style={{ color: "black" }}>

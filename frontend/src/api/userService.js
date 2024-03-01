@@ -1,6 +1,6 @@
 import axios from "axios";
-// const baseURL = "http://localhost:8080";
-const baseURL = "http://3.109.231.43:8080";
+const baseURL = "http://localhost:8080";
+// const baseURL = "http://3.109.231.43:8080";
 
 //POST: signIn using email and pass
 export const signIn = async (userEmail, userPass) => {
@@ -130,16 +130,53 @@ export const updateStudentService = async (newDetails, token) => {
 };
 
 //POST: upload photo
-export const uploadImage = async (baseUrl, type, id, formData) => {
+export const uploadImage = async (file, type, id) => {
   try {
-    const url = `${baseUrl}/images/upload/${type}/${id}`;
-    const response = await axios.post(url, formData, {
+    const formData = new FormData();
+    formData.append("file", file);
+    formData.append("type", type);
+    formData.append("id", id);
+
+    const response = await axios.post(baseURL + "/images/upload", formData, {
       headers: {
-        "Content-Type": "multipart/form-data", // Important for sending FormData
+        "Content-Type": "multipart/form-data",
+        // Add any additional headers if needed
       },
     });
-    console.log("Image uploaded successfully:", response.data);
+
+    console.log(response.data);
+    // Handle success response here
   } catch (error) {
-    console.error("Error uploading image:", error.message);
+    console.error(
+      "Error uploading image:",
+      error.response ? error.response.data : error.message
+    );
+    // Handle error response here
+  }
+};
+
+export const downloadImage = async (type, id) => {
+  try {
+    const response = await axios.get(baseURL + "/images/download", {
+      params: {
+        type: type,
+        id: id,
+      },
+      responseType: "arraybuffer",
+    });
+
+    const imageBlob = new Blob([response.data], {
+      type: response.headers["content-type"],
+    });
+    const imageUrl = URL.createObjectURL(imageBlob);
+
+    // Set the src attribute of the img tag to the generated URL
+    return imageUrl;
+  } catch (error) {
+    console.error(
+      "Error downloading image:",
+      error.response ? error.response.data : error.message
+    );
+    // Handle error response here
   }
 };

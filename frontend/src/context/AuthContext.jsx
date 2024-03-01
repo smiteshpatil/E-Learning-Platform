@@ -1,7 +1,7 @@
 import React, { useState, useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { getAllCourses } from "../api/courseService";
-
+import { downloadImage } from "../api/userService";
 const AuthContext = React.createContext();
 
 export const useAuth = () => {
@@ -31,8 +31,39 @@ export const AuthProvider = (props) => {
       setAuthUser(JSON.parse(storedUser));
       setIsLoading(false);
       setIsLoggedIn(true);
-      token = localStorage.getItem("token");
-      console.log("In authCotext: ", token);
+      const token = localStorage.getItem("token"); // Assuming token is declared properly
+
+      // download user image
+      let type = "";
+      let userId = JSON.parse(storedUser).id;
+
+      if (JSON.parse(storedUser).role === "ROLE_STUDENT") {
+        type = "student";
+      } else if (JSON.parse(storedUser).role === "ROLE_INSTRUCTOR") {
+        type = "instructor";
+      } else {
+        type = "admin";
+      }
+
+      const fetchUserImage = async () => {
+        try {
+          const resp = await downloadImage(type, userId);
+          if (resp) {
+            // If image is downloaded successfully, update authUser with imageUrl
+            setAuthUser((prevState) => ({
+              ...prevState,
+              imageUrl: resp,
+            }));
+          }
+        } catch (error) {
+          console.log(error);
+        }
+      };
+
+      fetchUserImage(); // Call the function to download user image
+      //
+
+      console.log("In authContext: ", token);
     } else {
       console.log("No stored user found, navigating to login...");
       // navigate("/login");

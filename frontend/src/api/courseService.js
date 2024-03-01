@@ -1,7 +1,7 @@
 import axios from "axios";
 import thumbnail from "../images/card1.jpg";
-// const baseUrl = "http://localhost:8080";
-const baseUrl = "http://3.109.231.43:8080";
+const baseUrl = "http://localhost:8080";
+// const baseUrl = "http://3.109.231.43:8080";
 
 //GET: get all available courses
 export const getAllCourses = async () => {
@@ -70,6 +70,21 @@ export const deleteCourseById = async (courseId, bearerToken) => {
         },
       }
     );
+    console.log(response);
+    return response;
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+//POST: review course
+export const reviewCourse = async (courseId, bearerToken) => {
+  try {
+    const response = await axios.get(baseUrl + `/qna/${courseId}`, {
+      headers: {
+        Authorization: `Bearer ${bearerToken}`,
+      },
+    });
     console.log(response);
     return response;
   } catch (err) {

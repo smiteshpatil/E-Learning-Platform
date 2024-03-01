@@ -1,18 +1,22 @@
 import React, { useState } from "react";
 import { Container, Row, Col, Button } from "react-bootstrap";
 import { useAuth } from "../context/AuthContext";
+import { uploadImage } from "../api/userService";
+import { toast } from "react-toastify";
 
 const ProfilePhoto = () => {
-  const { authUser } = useAuth();
+  const { authUser, setAuthUser } = useAuth();
 
   const placeholderImage =
     authUser && authUser.imageUrl
       ? authUser.imageUrl
       : "https://via.placeholder.com/200"; // Placeholder image URL
   const [imagePreview, setImagePreview] = useState(placeholderImage); // State for image preview
+  const [photo, setPhoto] = useState(null);
 
   const handleImageChange = (e) => {
     const selectedImage = e.target.files[0];
+    setPhoto(selectedImage);
 
     // Display image preview
     const reader = new FileReader();
@@ -22,6 +26,26 @@ const ProfilePhoto = () => {
       }
     };
     reader.readAsDataURL(selectedImage);
+  };
+
+  // upload image to db
+
+  const handleUploadImage = async () => {
+    let type = "";
+    if (authUser.role == "ROLE_STUDENT") {
+      type = "STUDENT";
+    } else if (authUser.role == "ROLE_INSTRUCTOR") {
+      type = "INSTRUCTOR";
+    } else {
+      type = "ADMIN";
+    }
+
+    try {
+      const resp = await uploadImage(photo, type, authUser.id);
+      console.log(resp);
+    } catch (error) {
+      toast.error("unexpected error occured!");
+    }
   };
 
   return (
@@ -61,7 +85,7 @@ const ProfilePhoto = () => {
                       <img
                         src={imagePreview}
                         alt="Preview"
-                        height="200px"
+                        height="150px"
                         width="200px"
                         className="img-fluid lazy"
                         style={{
@@ -107,7 +131,7 @@ const ProfilePhoto = () => {
                 }}
               >
                 <Button
-                  // onClick={{ uploadImage }}
+                  onClick={handleUploadImage}
                   variant="primary"
                   className="me-2"
                 >

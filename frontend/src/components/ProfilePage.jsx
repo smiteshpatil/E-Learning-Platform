@@ -1,10 +1,13 @@
-import { default as React } from "react";
+import { default as React, useEffect } from "react";
 import { Col, Container, Image, Row } from "react-bootstrap";
 import { NavLink, Outlet } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
+import { downloadImage } from "../api/userService";
+import { toast } from "react-toastify";
 
 const ProfilePage = () => {
   let { authUser } = useAuth();
+
   return (
     <div className="container form-control ">
       <div className="mt-4 mb-4">
@@ -18,8 +21,8 @@ const ProfilePage = () => {
               <div className="text-center mb-4 ">
                 <Image
                   src={
-                    authUser && authUser.picture
-                      ? authUser.picture
+                    authUser && authUser.imageUrl
+                      ? authUser.imageUrl
                       : "https://via.placeholder.com/150"
                   }
                   roundedCircle

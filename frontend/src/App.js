@@ -36,7 +36,9 @@ import { ToastContainer, Bounce } from "react-toastify";
 import PrivacyPolicy from "./components/PrivacyPolicy";
 import Help from "./components/Help";
 import Terms from "./components/Terms";
+import { useAuth } from "./context/AuthContext";
 function App() {
+  let { authUser } = useAuth();
   return (
     <div className="App">
       <ToastContainer
@@ -52,6 +54,7 @@ function App() {
         transition={Bounce}
       />
       <Navbar></Navbar>
+
       <Routes>
         {/* Home page route */}
         <Route path="/" element={<HomePage />}></Route>
@@ -74,7 +77,7 @@ function App() {
         {/* Cart */}
         <Route path="/cart" element={<Cart1 />}></Route>
         {/* Cart */}
-        <Route path="/allCourses" element={<Products />}></Route>
+        <Route path="/allCourses/:index" element={<Products />}></Route>
         {/* Instructor */}
         <Route path="/user/instructor" element={<Dashboard />}>
           <Route path="" element={<Home />} />
@@ -83,15 +86,20 @@ function App() {
           <Route path="revenue" element={<Revenue />} />
         </Route>
         {/* Admin */}
-        <Route path="/user/admin" element={<AdminDashboard />}>
-          <Route path="" element={<AdminHome />} />
-          <Route path="courseController" element={<CourseController />} />
-          <Route path="studentController" element={<StudentController />} />
-          <Route
-            path="instructorController"
-            element={<InstructorController />}
-          />
-        </Route>
+
+        {authUser && authUser.role == "ROLE_ADMIN" ? (
+          <Route path="/user/admin" element={<AdminDashboard />}>
+            <Route path="" element={<AdminHome />} />
+            <Route path="courseController" element={<CourseController />} />
+            <Route path="studentController" element={<StudentController />} />
+            <Route
+              path="instructorController"
+              element={<InstructorController />}
+            />
+          </Route>
+        ) : (
+          <></>
+        )}
         {/* upload course content routes */}
         <Route path="/upload" element={<UploadContentPage />}>
           <Route path=":courseId" element={<CreateContent />} />
