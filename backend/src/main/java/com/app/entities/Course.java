@@ -69,23 +69,11 @@ public class Course extends BaseEntity {
 	@OneToMany(mappedBy = "course", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private List<CartItem> cartItems = new ArrayList<>();
 
-<<<<<<< HEAD
-	    @OneToMany(mappedBy = "course", cascade = CascadeType.ALL, orphanRemoval = true)
-	    private List<Feedback> feedbacks = new ArrayList<>();
-	    ///////////////////////////////////
-//
-//	@OneToMany(mappedBy = "myCourse", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-//	private List<CourseStudentDetails> courseStudentDetails = new ArrayList<>();
-//
-//	@OneToMany(mappedBy = "course", cascade = CascadeType.ALL, orphanRemoval = true)
-//	private List<Feedback> feedbacks = new ArrayList<>();
-=======
 	@OneToMany(mappedBy = "myCourse", cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
 	private List<CourseStudentDetails> courseStudentDetails = new ArrayList<>();
 
 	@OneToMany(mappedBy = "course", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<Feedback> feedbacks = new ArrayList<>();
->>>>>>> 8c6e2b75652769e12dd0f756b83a73d949eb48c4
 
 	public void addContent(Content c) {
 		contents.add(c);

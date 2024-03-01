@@ -15,25 +15,20 @@ public interface StudentCourseRepository extends JpaRepository<CourseStudentDeta
 
     @Query("SELECT COUNT(DISTINCT csd.courseStudentId.studentId) FROM CourseStudentDetails csd WHERE csd.myCourse IS NOT NULL")
     int getTotalStudentsEnrolledInCourses();
-<<<<<<< HEAD
 
-=======
->>>>>>> 8c6e2b75652769e12dd0f756b83a73d949eb48c4
-    
-//    @Query("SELECT new com.app.dto.StudentCoursesDTO(s.email,c.courseId, c.courseName, sc.enrolledDate) FROM CourseStudentDetails sc JOIN sc.myCourse c JOIN sc.myStudent s")
-//    List<StudentCoursesDTO> getStudentCourseDetails();
-    
-    /////////////////useful 
-//    @Query("SELECT new com.app.dto.StudentCoursesDTO(s.email, c.id, c.courseName, sc.enrolledDate) FROM CourseStudentDetails sc JOIN sc.myCourse c JOIN sc.myStudent s")
-//    List<StudentCoursesDTO> getStudentCourseDetails();
-    
+    // @Query("SELECT new com.app.dto.StudentCoursesDTO(s.email,c.courseId,
+    // c.courseName, sc.enrolledDate) FROM CourseStudentDetails sc JOIN sc.myCourse
+    // c JOIN sc.myStudent s")
+    // List<StudentCoursesDTO> getStudentCourseDetails();
+
+    ///////////////// useful
+    // @Query("SELECT new com.app.dto.StudentCoursesDTO(s.email, c.id, c.courseName,
+    // sc.enrolledDate) FROM CourseStudentDetails sc JOIN sc.myCourse c JOIN
+    // sc.myStudent s")
+    // List<StudentCoursesDTO> getStudentCourseDetails();
+
     ///////////////
     @Query("SELECT new com.app.dto.StudentCoursesDTO(s.email, c.id, s.id, c.courseName, sc.enrolledDate) FROM CourseStudentDetails sc JOIN sc.myCourse c JOIN sc.myStudent s")
-<<<<<<< HEAD
-
-=======
->>>>>>> 8c6e2b75652769e12dd0f756b83a73d949eb48c4
     List<StudentCoursesDTO> getStudentCourseDetails();
-    
 
 }
