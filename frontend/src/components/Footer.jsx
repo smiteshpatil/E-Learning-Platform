@@ -55,47 +55,29 @@ const Footer = () => {
 
             <MDBCol md="2" lg="2" xl="2" className="mx-auto mb-4">
               <h6 className="text-uppercase fw-bold mb-4">Products</h6>
-              <p>
-                <a href="#!" className="text-reset">
-                  Angular
-                </a>
-              </p>
-              <p>
-                <a href="#!" className="text-reset">
-                  React
-                </a>
-              </p>
-              <p>
-                <a href="#!" className="text-reset">
-                  Vue
-                </a>
-              </p>
-              <p>
-                <a href="#!" className="text-reset">
-                  Laravel
-                </a>
-              </p>
+              <p>Angular</p>
+              <p>React</p>
+              <p>Vue</p>
+              <p>Laravel</p>
             </MDBCol>
 
             <MDBCol md="3" lg="2" xl="2" className="mx-auto mb-4">
               <h6 className="text-uppercase fw-bold mb-4">Useful links</h6>
               <p>
-                <a href="#!" className="text-reset">
-                  Pricing
+                <a href="#!" className="text-reset"></a>
+              </p>
+              <p>
+                <a href="/term" className="text-reset">
+                  Terms
                 </a>
               </p>
               <p>
-                <a href="#!" className="text-reset">
-                  Refund Policy
-                </a>
-              </p>
-              <p>
-                <a href="#!" className="text-reset">
+                <a href="/PrivacyPolicy" className="text-reset">
                   Privacy policy
                 </a>
               </p>
               <p>
-                <a href="#!" className="text-reset">
+                <a href="/help" className="text-reset">
                   Help
                 </a>
               </p>

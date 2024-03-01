@@ -17,7 +17,7 @@ import VideoOverview from "./components/pages/VideoOverview";
 import VideoPage from "./components/pages/VideoPage";
 import VideoQAndA from "./components/pages/VideoQAndA";
 import VideoReview from "./components/pages/VideoReview";
-import Cart from "./components/pages/Cart";
+import Cart1 from "./components/pages/Cart1";
 import Products from "./components/pages/Products";
 import Dashboard from "./components/instructor/Dashboard";
 import Courses from "./components/instructor/Courses";
@@ -33,6 +33,9 @@ import InstructorController from "./components/admin/InstructorController";
 import UploadContentPage from "./components/instructor/UploadContentPage";
 import CreateContent from "./components/instructor/CreateContent";
 import { ToastContainer, Bounce } from "react-toastify";
+import PrivacyPolicy from "./components/PrivacyPolicy";
+import Help from "./components/Help";
+import Terms from "./components/Terms";
 function App() {
   return (
     <div className="App">
@@ -49,7 +52,6 @@ function App() {
         transition={Bounce}
       />
       <Navbar></Navbar>
-
       <Routes>
         {/* Home page route */}
         <Route path="/" element={<HomePage />}></Route>
@@ -63,13 +65,16 @@ function App() {
           <Route path="profile" element={<UserProfile />} />
         </Route>
 
+        {/* Students Routes */}
+        {/* <Route path="/student" ></Route> */}
+
         {/* Courses */}
         <Route path="/courses/:id" element={<CoursePage />}></Route>
 
         {/* Cart */}
-        <Route path="/cart" element={<Cart />}></Route>
+        <Route path="/cart" element={<Cart1 />}></Route>
         {/* Cart */}
-        <Route path="/product" element={<Products />}></Route>
+        <Route path="/allCourses" element={<Products />}></Route>
         {/* Instructor */}
         <Route path="/user/instructor" element={<Dashboard />}>
           <Route path="" element={<Home />} />
@@ -92,12 +97,16 @@ function App() {
           <Route path=":courseId" element={<CreateContent />} />
         </Route>
         {/* Video Routes demo */}
-        <Route path="/videos" element={<VideoPage />}>
+        <Route path="/videos/:courseId" element={<VideoPage />}>
           <Route path="overview" element={<VideoOverview />} />
           <Route path="qanda" element={<VideoQAndA />} />
           <Route path="notes" element={<VideoNotes />} />
           <Route path="review" element={<VideoReview />} />
         </Route>
+
+        <Route path="/privacyPolicy" element={<PrivacyPolicy />} />
+        <Route path="/help" element={<Help />} />
+        <Route path="/term" element={<Terms />} />
       </Routes>
       <Footer />
     </div>

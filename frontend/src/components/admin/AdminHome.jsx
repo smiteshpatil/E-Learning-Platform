@@ -2,9 +2,9 @@ import React, { useEffect, useState } from "react";
 import {
   BsFillArchiveFill,
   BsFillBellFill,
-  BsFillGrid3X3GapFill,
-  BsPeopleFill,
+  BsPeopleFill
 } from "react-icons/bs";
+import { FaChalkboardTeacher } from "react-icons/fa";
 import { getAllCourses, getAllStudents, getEnrolledStudents, getInstructors } from "../../api/adminService";
 
 const AdminHome = () => {
@@ -71,37 +71,30 @@ const AdminHome = () => {
         <div className="card-outer">
           <div className="card-inner">
             <h3>Total Students</h3>
-            <BsFillArchiveFill className="card_icon" />
+            <BsFillBellFill className="card_icon" />
           </div>
           <h1>{totalStudents}</h1>
         </div>
         <div className="card-outer">
           <div className="card-inner">
             <h3>Enrolled Students</h3>
-            <BsFillGrid3X3GapFill className="card_icon" />
+            <BsPeopleFill className="card_icon" />
           </div>
           <h1>{totalEnrolledStudents}</h1>
         </div>
         <div className="card-outer">
           <div className="card-inner">
             <h3>Total Courses</h3>
-            <BsPeopleFill className="card_icon" />
+            <BsFillArchiveFill className="card_icon" />
           </div>
           <h1>{totalCourses}</h1>
         </div>
         <div className="card-outer">
           <div className="card-inner">
             <h3>Total Instructors</h3>
-            <BsFillBellFill className="card_icon" />
+            <FaChalkboardTeacher className="card_icon" />
           </div>
           <h1>{totalInstructors}</h1>
-        </div>
-        <div className="card-outer">
-          <div className="card-inner">
-            <h3>Fees Collection</h3>
-            <BsFillBellFill className="card_icon" />
-          </div>
-          <h1>15,000</h1>
         </div>
       </div>
     </main>

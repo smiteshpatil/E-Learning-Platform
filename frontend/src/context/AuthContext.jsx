@@ -14,6 +14,8 @@ export const AuthProvider = (props) => {
   const [refresh, setRefresh] = useState(false);
   const [allCourses, setAllCourses] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [cart, setCart] = useState([]);
+  let token = "";
   const navigate = useNavigate();
 
   // refresh context
@@ -21,56 +23,45 @@ export const AuthProvider = (props) => {
     setRefresh((prev) => !prev);
   };
 
-  //set userState
-  // useEffect(() => {
-  //   const storedUser = localStorage.getItem("userObject");
-  //   if (storedUser) {
-  //     console.log(storedUser);
-  //     setAuthUser(JSON.parse(storedUser));
-  //     setAllCourses(JSON.parse(storedUser));
-  //     syncCartWithUser(authUser);
-  //   } else {
-  //     localStorage.removeItem("userObject");
-  //     localStorage.removeItem("token");
-  //     localStorage.removeItem("cart");
-  //     navigate("/login");
-  //   }
-  // }, [isLoggedIn]);
-
-  //set all courses in application level
-  // useEffect(async () => {
-  //  const response = await getAllCourses();
-  //  setAllCourses(response.data);
-  // }, []);
-
+  // get authUser from localStorage
   useEffect(() => {
     const storedUser = localStorage.getItem("userObject");
     if (storedUser) {
       console.log("Stored user found:", storedUser);
-     } else {
+      setAuthUser(JSON.parse(storedUser));
+      setIsLoading(false);
+      setIsLoggedIn(true);
+      token = localStorage.getItem("token");
+      console.log("In authCotext: ", token);
+    } else {
       console.log("No stored user found, navigating to login...");
-      navigate("/login");
+      // navigate("/login");
     }
   }, [isLoggedIn, refresh, navigate]);
 
   useEffect(() => {
+    const handleAfterReload = () => {
+      setCart(localStorage.getItem("cart").split(","));
+      console.log("After Reload: cart="+cart+" local="+localStorage.getItem("cart"));
+      // Logic to execute after the page is fully loaded (after a reload)
+    };
+    window.addEventListener('load', handleAfterReload);
+    return () => {
+      window.removeEventListener('load', handleAfterReload);
+    };
+  }, []);
+
+  //fetch all Course
+  useEffect(() => {
     const fetchCourses = async () => {
       const response = await getAllCourses();
-      console.log(response.data);
+      //console.log(response.data);
       setAllCourses(response.data);
       setIsLoading(false);
     };
     fetchCourses();
   }, []);
 
-  const syncCartWithUser = (userData) => {
-    const storedCart = localStorage.getItem("cart");
-    if (storedCart) {
-      // Update the user's cart with the cart data from local storage // You may need to implement merging logic if necessary
-      // For simplicity, this example assumes the user's cart is overridden
-      localStorage.setItem("cart", storedCart);
-    }
-  };
   const value = {
     authUser,
     setAuthUser,
@@ -80,6 +71,8 @@ export const AuthProvider = (props) => {
     allCourses,
     setAllCourses,
     isLoading,
+    cart,
+    setCart,
   };
   return (
     <AuthContext.Provider value={value}>{props.children}</AuthContext.Provider>

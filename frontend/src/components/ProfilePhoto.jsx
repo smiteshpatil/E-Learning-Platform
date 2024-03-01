@@ -6,15 +6,14 @@ const ProfilePhoto = () => {
   const { authUser } = useAuth();
 
   const placeholderImage =
-    authUser && authUser.picture
-      ? authUser.picture
+    authUser && authUser.imageUrl
+      ? authUser.imageUrl
       : "https://via.placeholder.com/200"; // Placeholder image URL
-  const [imagePreview, setImagePreview] = useState(
-    "https://via.placeholder.com/200"
-  ); // State for image preview
+  const [imagePreview, setImagePreview] = useState(placeholderImage); // State for image preview
 
   const handleImageChange = (e) => {
     const selectedImage = e.target.files[0];
+
     // Display image preview
     const reader = new FileReader();
     reader.onload = () => {
@@ -58,17 +57,16 @@ const ProfilePhoto = () => {
                 </div>
                 <div className="ud-image-upload-preview-wrapper mt-2 form-control">
                   <div>
-                    {authUser && authUser.picture && (
+                    {imagePreview && (
                       <img
                         src={imagePreview}
                         alt="Preview"
-                        height="200"
-                        width="200"
+                        height="200px"
+                        width="200px"
                         className="img-fluid lazy"
                         style={{
                           maxWidth: "100%",
                           maxHeight: "100%",
-                          borderRadius: "100%",
                         }}
                       />
                     )}
@@ -108,7 +106,11 @@ const ProfilePhoto = () => {
                   paddingRight: "1rem",
                 }}
               >
-                <Button variant="primary" className="me-2">
+                <Button
+                  // onClick={{ uploadImage }}
+                  variant="primary"
+                  className="me-2"
+                >
                   Save
                 </Button>
                 <Button variant="outline-secondary">Cancel</Button>

@@ -5,6 +5,7 @@ import "../css/LoginPage.css";
 import { useEffect } from "react";
 import { useAuth } from "../context/AuthContext";
 import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 import {
   signIn,
   signUp,
@@ -13,8 +14,9 @@ import {
   syncCart,
 } from "../api/userService";
 import { toast } from "react-toastify";
+import { icon, text } from "@fortawesome/fontawesome-svg-core";
 const LoginPage = () => {
-  const { setAuthUser, setIsLoggedIn } = useAuth();
+  const { setAuthUser, setCart, setIsLoggedIn } = useAuth();
   const navigate = useNavigate();
 
   // state for styling depending on the page
@@ -62,9 +64,14 @@ const LoginPage = () => {
           localStorage.setItem("token", jwt);
           localStorage.setItem("userObject", JSON.stringify(userDetails));
           setAuthUser(userDetails);
+          //get cart from db
           const cart = await syncCart(formDetails.email, jwt);
-          if (cart !== undefined) localStorage.setItem("cart", cart);
-
+          const uniqueArray = [...new Set(cart)];
+          console.log("In Login: " + uniqueArray);
+          if (cart !== undefined) {
+            localStorage.setItem("cart", uniqueArray);
+            setCart(uniqueArray);
+          }
           toast.success("Signed in successfully");
           setIsLoggedIn(true);
           navigate("/");
@@ -88,12 +95,19 @@ const LoginPage = () => {
     console.log("In handleSignUp ", formDetails);
 
     if (firstName !== "" && email !== "" && password !== "" && role !== "") {
-      try {
-        await signUp(formDetails);
-        toast.success("Signed up successfully"); // Show success toast on successful sign up
-        setIsActive(false);
-      } catch (error) {
-        toast.error("Unexpected error occured!"); // Show error toast on sign up error
+      if (password.length < 8) {
+        toast.warning("Password must be at least 8 characters");
+      }
+      if (/[A-Z]/.test(password) && /[$&+,:;=?@#|'<>.^*()%!-]/.test(password)) {
+        try {
+          await signUp(formDetails);
+          toast.success("Signed up successfully"); // Show success toast on successful sign up
+          setIsActive(false);
+        } catch (error) {
+          toast.error("Unexpected error occured!"); // Show error toast on sign up error
+        }
+      } else {
+        toast.warning("Weak Password");
       }
     } else {
       toast.error("All fields are compulsory");

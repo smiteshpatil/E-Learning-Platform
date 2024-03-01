@@ -1,0 +1,19 @@
+.terms-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  
+  .terms-container h1 {
+    text-align: center;
+  }
+  
+  .terms-container h2 {
+    margin-top: 20px;
+    margin-bottom: 10px;
+  }
+  
+  .terms-container p {
+    margin-bottom: 20px;
+  }
+  

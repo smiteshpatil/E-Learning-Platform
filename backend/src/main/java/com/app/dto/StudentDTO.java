@@ -28,7 +28,6 @@ public class StudentDTO {
 	@Email
 	private String email;
 
-	// @JsonIgnore
 	@JsonProperty(access = Access.WRITE_ONLY)
 	private String password;
 
@@ -47,4 +46,6 @@ public class StudentDTO {
 	private int rating;
 
 	private Role role;
+	
+	private Long courseIndex;
 }

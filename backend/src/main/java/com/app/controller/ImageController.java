@@ -9,7 +9,6 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -39,9 +38,9 @@ public class ImageController {
 	@Autowired
 	private CourseRepository courseRepository;
 
-	@PostMapping("/upload/{type}/{id}")
-	public ResponseEntity<?> uploadImage(@RequestParam("file") MultipartFile file, @PathVariable("type") String type,
-			@PathVariable("id") Long id) {
+	@PostMapping("/upload")
+	public ResponseEntity<?> uploadImage(@RequestParam("file") MultipartFile file, @RequestParam("type") String type,
+			@RequestParam("id") Long id) {
 		if (file.isEmpty()) {
 			return ResponseEntity.badRequest().body("Please select a file to upload.");
 		}
@@ -51,7 +50,6 @@ public class ImageController {
 
 			switch (type.toLowerCase()) {
 			case "admin":
-
 				Optional<Admin> adminOptional = adminRepo.findById(id);
 				if (adminOptional.isPresent()) {
 					Admin admin = adminOptional.get();
@@ -68,6 +66,7 @@ public class ImageController {
 					instructorRepository.save(instructor);
 				}
 				break;
+
 			case "student":
 				Optional<Student> studentOptional = studentRepository.findById(id);
 				if (studentOptional.isPresent()) {
@@ -76,6 +75,7 @@ public class ImageController {
 					studentRepository.save(student);
 				}
 				break;
+
 			case "course":
 				Optional<Course> courseOptional = courseRepository.findById(id);
 				if (courseOptional.isPresent()) {
@@ -84,6 +84,7 @@ public class ImageController {
 					courseRepository.save(course);
 				}
 				break;
+
 			default:
 				return ResponseEntity.badRequest().body("Invalid type specified.");
 			}
@@ -94,8 +95,8 @@ public class ImageController {
 		}
 	}
 
-	@GetMapping("/download/{type}/{id}")
-	public ResponseEntity<byte[]> downloadImage(@PathVariable("type") String type, @PathVariable("id") Long id) {
+	@GetMapping("/download")
+	public ResponseEntity<byte[]> downloadImage(@RequestParam("type") String type, @RequestParam("id") Long id) {
 		byte[] imageData = null;
 
 		switch (type.toLowerCase()) {

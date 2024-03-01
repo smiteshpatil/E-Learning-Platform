@@ -28,7 +28,7 @@ public class StudentCoursesDTO {
 
 	private String password;
 
-
+	
     
     // New fields
     private String courseName;

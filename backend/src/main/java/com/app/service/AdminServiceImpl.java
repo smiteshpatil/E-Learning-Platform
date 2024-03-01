@@ -34,10 +34,14 @@ import com.app.entities.Student;
 
 @Service
 @Transactional
+<<<<<<< HEAD
 
 public class AdminServiceImpl implements AdminService{
 
 
+=======
+public class AdminServiceImpl implements AdminService {
+>>>>>>> 8c6e2b75652769e12dd0f756b83a73d949eb48c4
 
     @Autowired
     private AdminRepository adminRepo;
@@ -156,7 +160,10 @@ public class AdminServiceImpl implements AdminService{
 
         return studentDetailsList;
     }
+<<<<<<< HEAD
 
+=======
+>>>>>>> 8c6e2b75652769e12dd0f756b83a73d949eb48c4
 
     @Override
     public void deleteStudentFromCourse(Long courseId, Long studentId) {
