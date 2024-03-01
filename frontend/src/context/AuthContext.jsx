@@ -41,13 +41,22 @@ export const AuthProvider = (props) => {
 
   useEffect(() => {
     const handleAfterReload = () => {
-      setCart(localStorage.getItem("cart").split(","));
-      console.log("After Reload: cart="+cart+" local="+localStorage.getItem("cart"));
+      try {
+        setCart(localStorage.getItem("cart").split(","));
+        console.log(
+          "After Reload: cart=" +
+            cart +
+            " local=" +
+            localStorage.getItem("cart")
+        );
+      } catch (error) {
+        console.log(error);
+      }
       // Logic to execute after the page is fully loaded (after a reload)
     };
-    window.addEventListener('load', handleAfterReload);
+    window.addEventListener("load", handleAfterReload);
     return () => {
-      window.removeEventListener('load', handleAfterReload);
+      window.removeEventListener("load", handleAfterReload);
     };
   }, []);
 

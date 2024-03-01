@@ -1,30 +1,40 @@
-import React, { useState } from "react";
-import { NavLink } from "react-router-dom";
+import React, { useEffect, useState } from "react";
 import MyCourse from "./MyCourse";
-
+import { getAllEnrolledCoursesByStudentId } from "../../api/studentService";
+import { useAuth } from "../../context/AuthContext";
 const MyLearning = () => {
+  let { authUser } = useAuth();
+  const [myCourses, setMyCourses] = useState([]);
+
+  useEffect(() => {
+    const fetchMyCourses = async () => {
+      const resp = await getAllEnrolledCoursesByStudentId(
+        authUser.id,
+        localStorage.getItem("token")
+      );
+      if (resp) {
+        setMyCourses(resp.data);
+        console.log(resp.data);
+      }
+    };
+    fetchMyCourses();
+  }, []);
+
   return (
-    <div className="container-fluid my-3">
+    <div
+      className="px-auto text-center py-3"
+      style={{ backgroundColor: "beige" }}
+    >
       <h1>My Courses</h1>
-      <div className="row">
-        <div className="col col-md-3 col-sm-6">
-          <MyCourse
-            courseName={"React Developer"}
-            progress={50}
-            imageUrl={
-              "https://www.dropbox.com/scl/fi/eqi93k54ejkxat2g8e4vz/coursePoster.png?rlkey=hiaw1cetvdcyl1wku1tchst7g&raw=1"
-            }
-          />
-        </div>
-        <div className="col col-md-3 col-sm-6">
-          <MyCourse
-            courseName={"React Developer"}
-            progress={50}
-            imageUrl={
-              "https://www.dropbox.com/scl/fi/0158j9jscpclhmlioxf8d/images.png?rlkey=ktk8sijpavw3qjj9k89np1n35&raw=1"
-            }
-          />
-        </div>
+
+      <div className="row mx-auto">
+        {myCourses &&
+          myCourses.map((each, index) => (
+            <div className="col col-md-3 col-sm-6">
+              <MyCourse key={index} course={each} />
+              <br />
+            </div>
+          ))}
       </div>
     </div>
   );

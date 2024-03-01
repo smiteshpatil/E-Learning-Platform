@@ -26,7 +26,7 @@ const Carousel = () => {
   }, [images.length]);
 
   return (
-    <div className="carousel-container" style={{ height: "50vh" }}>
+    <div className="carousel">
       <div id="carouselExampleCaptions" className="carousel slide">
         <div className="carousel-indicators">
           {images.map((_, index) => (

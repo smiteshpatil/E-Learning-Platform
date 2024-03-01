@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "./CategoryList.css";
 import { Link } from "react-router-dom";
 
-function CategoryList() {
+const CategoryList = () => {
   const categories = [
     { name: "Development", link: "dev" },
     { name: "Finance & Accounting", link: "financeAndAcc" },
@@ -29,6 +29,6 @@ function CategoryList() {
       </ul>
     </React.Fragment>
   );
-}
+};
 
 export default CategoryList;

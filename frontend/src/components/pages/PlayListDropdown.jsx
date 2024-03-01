@@ -4,11 +4,10 @@ import { getAllContentsByCourseId } from "../../api/contentService";
 import { toast } from "react-toastify";
 
 const PlaylistDropdown = (props) => {
+  console.log(props.currId);
   //current playlist containing content Objects
   const [playlist, setPlaylist] = useState([]);
 
-  //hardcode the courseId for test
-  let courseId = 3;
   const token = localStorage.getItem("token");
 
   const handleItemClick = (videoUrl, index) => {
@@ -20,12 +19,13 @@ const PlaylistDropdown = (props) => {
     const fetchPlaylist = async () => {
       try {
         const resp = await toast.promise(
-          getAllContentsByCourseId(courseId, token),
+          getAllContentsByCourseId(props.currId, token),
           {
             pending: "loading...",
             error: "unexpected error occured",
           }
         );
+        console.log(resp.data);
         setPlaylist(resp.data);
       } catch (error) {
         toast.error("an unexpected error occured!");

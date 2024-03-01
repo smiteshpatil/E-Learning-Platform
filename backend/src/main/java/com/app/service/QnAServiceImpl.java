@@ -73,7 +73,7 @@ public class QnAServiceImpl implements QnAService {
             qna.setCourseId(courseId);
             qna.setQuestion(qnAddDTO.getQuestion());
             qna.setAnswered(false); // Assuming the question is not answered initially
-            qna.setAnswer(qnAddDTO.getAnswer()); // Assuming there's no answer initially
+//            qna.setAnswer(qnAddDTO.getAnswer()); // Assuming there's no answer initially
 
             // Save the new QnA object to the database
             qnARepository.save(qna);

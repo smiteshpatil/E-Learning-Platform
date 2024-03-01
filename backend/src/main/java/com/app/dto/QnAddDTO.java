@@ -37,7 +37,7 @@ public class QnAddDTO
     private Long courseId;
     @NotBlank
     private String question;
-    private boolean answered;
-    private String answer;
+//    private boolean answered;
+//    private String answer;
     
 }
