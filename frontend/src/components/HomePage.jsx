@@ -5,12 +5,12 @@ import MyLearning from "./student/MyLearning";
 import { useAuth } from "../context/AuthContext";
 import CategoryList from "./pages/CategoryList";
 const HomePage = () => {
-  let { isLoggedIn } = useAuth();
+  let { isLoggedIn, authUser } = useAuth();
   return (
     <div>
       <CategoryList />
       <Carousel />
-      {isLoggedIn && <MyLearning />}
+      {isLoggedIn && authUser.role == "ROLE_STUDENT" && <MyLearning />}
       <Main />
     </div>
   );

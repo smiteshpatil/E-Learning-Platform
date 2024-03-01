@@ -1,6 +1,7 @@
 import axios from "axios";
 
-const baseUrl = "http://localhost:8080";
+// const baseUrl = "http://localhost:8080";
+const baseUrl = "http://3.109.231.43:8080";
 
 //GET: Create order
 export const createOrder = async (data) => {

@@ -28,12 +28,13 @@ const MyLearning = () => {
       <h1>My Courses</h1>
 
       <div className="row mx-auto">
-        {myCourses.map((each, index) => (
-          <div className="col col-md-3 col-sm-6">
-            <MyCourse key={index} course={each} />
-            <br />
-          </div>
-        ))}
+        {myCourses &&
+          myCourses.map((each, index) => (
+            <div className="col col-md-3 col-sm-6">
+              <MyCourse key={index} course={each} />
+              <br />
+            </div>
+          ))}
       </div>
     </div>
   );

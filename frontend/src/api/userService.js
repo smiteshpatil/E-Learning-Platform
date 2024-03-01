@@ -1,5 +1,6 @@
 import axios from "axios";
-const baseURL = "http://localhost:8080";
+// const baseURL = "http://localhost:8080";
+const baseURL = "http://3.109.231.43:8080";
 
 //POST: signIn using email and pass
 export const signIn = async (userEmail, userPass) => {
@@ -35,7 +36,7 @@ export const syncCart = async (userEmail, bearerToken) => {
 export const syncCartToDB = async (userEmail, bearerToken, cart) => {
   try {
     const uniqueArray = [...new Set(cart)];
-    //console.log("In useService: "+uniqueArray); 
+    //console.log("In useService: "+uniqueArray);
     const response = await axios.post(
       baseURL + `/students/cartItems/${userEmail}`,
       uniqueArray,

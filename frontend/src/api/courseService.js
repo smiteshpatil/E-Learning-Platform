@@ -1,6 +1,7 @@
 import axios from "axios";
 import thumbnail from "../images/card1.jpg";
-const baseUrl = "http://localhost:8080";
+// const baseUrl = "http://localhost:8080";
+const baseUrl = "http://3.109.231.43:8080";
 
 //GET: get all available courses
 export const getAllCourses = async () => {
