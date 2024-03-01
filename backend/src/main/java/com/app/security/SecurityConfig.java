@@ -28,6 +28,57 @@ public class SecurityConfig {
 	public SecurityFilterChain authorizeRequests(HttpSecurity http) throws Exception {
 		// URL based authorization rules
 		http.cors()
+<<<<<<< HEAD
+
+		.and().
+		//disable CSRF token generation n verification
+		csrf()	.disable()
+		.exceptionHandling().authenticationEntryPoint(authEntry).
+		and().
+		authorizeRequests()
+		.antMatchers("/users/signup","/users/signin","/courses","/courses/details",
+				"/password/sendOtp","/password/updatePassword",
+				"/images/upload/{type}/{id}","/images/download/{type}/{id}",
+				"/v*/api-doc*/**","/swagger-ui/**","/admin/instructorinfo","/admin/coursedetails","/admin/students/{courseId}","/admin/{studentId}/{courseId}").permitAll()
+		// only required for JS clnts (react / angular) : for the pre flight requests
+		.antMatchers(HttpMethod.OPTIONS).permitAll()
+		.antMatchers(
+				"/feedback/add",
+				"/students/{studentId}",
+				"/students/{studentId}/courses",
+				"/students/update/{studentId}",
+				"/students/delete/{studentId}",
+				"/courses/enrollCourse}",
+				"/courses/removeCourse",
+				"/courses/student/{studentId}")
+		.hasRole("STUDENT")
+		.antMatchers("/instructors/{instructorId}",
+				"/instructors/{instructorId}/courses",
+				"/courses/{instructorId}",
+				"/courses/add",
+				"/courses/update/{courseId}",
+				"/courses/delete/{courseId}",
+				"/contents",
+				"/contents/add",
+				"/contents/{courseId}",
+				"/contents/{courseId}/{contentId}",
+				"/contents/update/{contentId}",
+				"contents/delete/{contentId}")
+		.hasRole("INSTRUCTOR")
+		
+		.antMatchers("/instructors","/students","studentcourses","/admin/enrolledStudents")
+		.hasRole("ADMIN")
+		.anyRequest().authenticated()
+		.and()
+		//to tell spring sec : not to use HttpSession to store user's auth details
+		.sessionManagement()
+		.sessionCreationPolicy(SessionCreationPolicy.STATELESS).
+		and()
+		//inserting jwt filter before sec filter
+		.addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
+	
+
+=======
 				.and().
 				// disable CSRF token generation n verification
 				csrf().disable()
@@ -76,6 +127,7 @@ public class SecurityConfig {
 				.sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
 				// inserting jwt filter before sec filter
 				.addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
+>>>>>>> 8c6e2b75652769e12dd0f756b83a73d949eb48c4
 
 		return http.build();
 	}

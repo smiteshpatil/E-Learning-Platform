@@ -29,4 +29,8 @@ public class CourseRespDTO {
     private int totalEnrolledStudents;
     private double averageRating;
 
+<<<<<<< HEAD
+
+=======
+>>>>>>> 8c6e2b75652769e12dd0f756b83a73d949eb48c4
 }
