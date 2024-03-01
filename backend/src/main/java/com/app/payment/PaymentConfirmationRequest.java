@@ -11,8 +11,4 @@ public class PaymentConfirmationRequest {
 	private Long courseId;
 	private Long studentId;
 	
-//	private String orderId;
-//	private String amount;
-//	private String receipt;
-//	private String status;
 }
