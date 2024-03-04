@@ -1,5 +1,6 @@
 import axios from "axios";
-const baseUrl = "http://localhost:8080";
+// const baseUrl = "http://localhost:8080";
+const baseUrl = "http://e-learning-platform.online:8080";
 // const baseUrl = "http://3.109.231.43:8080";
 
 //GET: get all contents of a particular course
@@ -18,9 +19,10 @@ export const getAllContentsByCourseId = async (courseId, bearerToken) => {
 };
 
 //POST: add new content by courseId
-export const addNewContent = async (newContent, bearerToken) => {
+export const addNewContent = async (courseId, newContent, bearerToken) => {
+  let newContents = { ...newContent, courseId: courseId };
   try {
-    const response = await axios.post(baseUrl + "/contents/add", newContent, {
+    const response = await axios.post(baseUrl + "/contents/add", newContents, {
       headers: {
         Authorization: `Bearer ${bearerToken}`,
       },

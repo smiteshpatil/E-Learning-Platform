@@ -32,7 +32,7 @@ public class SecurityConfig {
 				// disable CSRF token generation n verification
 				csrf().disable()
 				.exceptionHandling().authenticationEntryPoint(authEntry).and().authorizeRequests()
-				.antMatchers("/users/signup", "/users/signin", "/courses", "/courses/details",
+				.antMatchers("/users/test", "/users/signup", "/users/signin", "/courses", "/courses/details",
 						"/password/sendOtp", "/password/updatePassword",
 						"/images/upload", "/images/download",
 						"/v*/api-doc*/**", "/swagger-ui/**", "/admin/instructorinfo",

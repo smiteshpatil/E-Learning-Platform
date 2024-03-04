@@ -1,6 +1,6 @@
 import axios from "axios";
-const baseURL = "http://localhost:8080";
-// const baseURL = "http://3.109.231.43:8080";
+// const baseURL = "http://localhost:8080";
+const baseURL = "http://e-learning-platform.online:8080";
 
 //POST: signIn using email and pass
 export const signIn = async (userEmail, userPass) => {

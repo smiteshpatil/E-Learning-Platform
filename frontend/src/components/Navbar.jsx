@@ -9,7 +9,7 @@ import { useNavigate } from "react-router-dom";
 import ProfileIcon from "./ProfileIcon";
 import { useAuth } from "../context/AuthContext";
 import { syncCartToDB } from "../api/userService";
-
+import { MdDashboard } from "react-icons/md";
 const Navbar = () => {
   let { authUser, setIsLoggedIn, cart } = useAuth();
   const navigate = useNavigate();
@@ -44,6 +44,13 @@ const Navbar = () => {
           {authUser && authUser.role === "ROLE_INSTRUCTOR" && (
             <li className="right">
               <NavLink to="/user/instructor">Instructor</NavLink>
+            </li>
+          )}
+          {authUser && authUser.role === "ROLE_ADMIN" && (
+            <li className="right">
+              <NavLink to="/user/admin">
+                <MdDashboard size={30} />
+              </NavLink>
             </li>
           )}
           {authUser && authUser.role === "ROLE_STUDENT" && (

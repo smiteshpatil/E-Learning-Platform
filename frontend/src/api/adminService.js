@@ -1,5 +1,6 @@
 import axios from "axios";
-const baseUrl = "http://localhost:8080";
+// const baseUrl = "http://localhost:8080";
+const baseUrl = "http://e-learning-platform.online:8080";
 // const baseUrl = "http://3.109.231.43:8080";
 
 // Get All Students

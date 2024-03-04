@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
-import img from "../../images/card1.jpg";
+// import img from "../../images/card1.jpg";
 import CourseContent from "./CourseContent";
 import { useNavigate } from "react-router-dom";
 import "./CoursePage.css";
@@ -38,6 +38,7 @@ const CoursePage = () => {
             text: "your payment is sucessfull!",
             icon: "success",
           });
+          navigate("/");
           //   paymentId, orderId, courseId,studentId
           //  enroll student
           let paymentData = {
@@ -134,7 +135,11 @@ const CoursePage = () => {
             </div>
             <div className="col-sm-4 ">
               <div className="card course-card">
-                <img src={img} alt="John" style={{ width: "100%" }} />
+                <img
+                  src={currCourse.courseDTO && currCourse.courseDTO.imageUrl}
+                  alt="image"
+                  style={{ width: "100%" }}
+                />
                 <br />
                 <h3>
                   {currCourse.courseDTO && currCourse.courseDTO.courseName}

@@ -1,14 +1,14 @@
 import axios from "axios";
 
 const acessToken =
-  "sl.BwlakAZmWoL3a_r9mHcEMaaKwkzCFILfdyqDEmFbT2z5d_T0JMobMBy4VtwVFCL2Rj9vLPPucG1z7lGqHYVm3KHuiHVGTCF2CJODHy_zdq72wp2su-gCJzJ82nJj09VAkjrHt4TfF1OoIvQ";
+  "sl.BwsvOdhgSpCIZiuzn0UrUfqVPqitpXUhkXeSB-4POINAdnaSOr8ji29D4g6aaiLGZDMPYqmOyra-y6nAjCs8cLOm4ZtxDu4ZoUUVjxprfgMvKvZxqcaY3RjFEHlH0UlIgFZTbjCYCSOe17k";
 
 export const uploadFileToDropbox = async (file) => {
   if (!file) {
     console.error("No file selected.");
     return;
   }
-
+  console.log(acessToken);
   try {
     const response = await axios.post(
       "https://content.dropboxapi.com/2/files/upload",

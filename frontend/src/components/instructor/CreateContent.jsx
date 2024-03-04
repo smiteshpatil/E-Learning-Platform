@@ -45,7 +45,7 @@ const CreateContent = (props) => {
   const handleAddContent = async () => {
     try {
       if (currContent.contentUrl !== "") {
-        await toast.promise(addNewContent(currContent, token), {
+        await toast.promise(addNewContent(courseId, currContent, token), {
           success: "Lecture added successfully !",
           pending: "adding video...",
           error: "err adding video",

@@ -25,7 +25,7 @@ import com.app.service.StudentService;
 @RestController
 @RequestMapping("/students")
 @Validated
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = {"http://localhost:3000","http://65.1.87.251/","http://65.1.87.251/80" ,"http://e-learning-platform.online/","http://e-learning-platform.online/80",})
 public class StudentController {
 	@Autowired
 	private StudentService studentService;

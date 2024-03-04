@@ -24,7 +24,9 @@ import com.app.service.StudentCoursesService;
 
 @RestController
 @RequestMapping("/admin")
-@CrossOrigin(origins = "http://localhost:3000")
+
+@CrossOrigin(origins = {"http://localhost:3000","http://65.1.87.251/","http://65.1.87.251/80" ,"http://e-learning-platform.online/","http://e-learning-platform.online/80",})
+
 public class AdminController {
 
     private final AdminService adminService;
